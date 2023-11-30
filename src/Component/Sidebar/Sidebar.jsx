@@ -21,6 +21,7 @@ import {
   AccordionIcon,
   useToast,
   Flex,
+  Stack,
 } from "@chakra-ui/react";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -41,12 +42,24 @@ import {
   BsChevronRight,
 } from "react-icons/bs";
 import { CiLogout, CiMoneyBill } from "react-icons/ci";
+import { useState } from "react";
 
 //   import { useAuth } from "../context/AuthContext";
 
 export default function SideBar() {
+
+  const [showDashboard, setShowDashboard] = useState(true);
+
+  const handleDashboardClick = () => {
+    // Toggle the value of showDashboard when the Dashboard is clicked
+    setShowDashboard(!showDashboard);
+  };
+
+
+
   return (
     <>
+    
       <List p="10px" bg="">
         <ListItem className="listItem" p="10px" borderRadius="10px">
           <Flex alignItems="center">
@@ -71,12 +84,13 @@ export default function SideBar() {
             </NavLink>
           </Flex>
         </ListItem>
-
         <Divider
           style={{ marginTop: "1.5rem" }}
           borderWidth="2px"
           borderColor={"gray"}
-        />
+          />
+           {showDashboard && (
+          <Stack>
         <Accordion allowToggle width={"90%"}>
           <ListItem className="listItem" p="0px" borderRadius="10px" m="0px">
             <NavLink to="user">
@@ -87,8 +101,8 @@ export default function SideBar() {
                       <AccordionButton>
                         <AccountCircleIcon
                           style={{
-                            background:"black",
-                            borderRadius:"50%",
+                            background: "black",
+                            borderRadius: "50%",
                             width: "3.5rem",
                             height: "3rem",
                             textAlign: "center",
@@ -105,17 +119,13 @@ export default function SideBar() {
                         </Text>
 
                         {isExpanded ? (
-                          <MinusIcon 
-                          color={'black'}
-                          ml="10px" />
+                          <MinusIcon color={"black"} ml="10px" />
                         ) : (
                           <AccordionIcon ml="10px" />
                         )}
                       </AccordionButton>
                     </h2>
-                    <AccordionPanel 
-                  
-                    pb={4}>
+                    <AccordionPanel pb={4}>
                       <ListItem
                         className="listItem"
                         p="5px"
@@ -204,6 +214,7 @@ export default function SideBar() {
           </ListItem>
         </Accordion>
 
+
         <ListItem
           style={{ marginTop: "2rem" }}
           className="listItem"
@@ -285,6 +296,125 @@ export default function SideBar() {
             </Text>
           </NavLink>
         </ListItem>
+         </Stack>
+          )}
+        {/* User Data */}
+       <Stack   onClick={handleDashboardClick}>
+        <Accordion allowToggle width={"90%"}>
+          <ListItem className="listItem" p="0px" borderRadius="10px" m="0px">
+            <AccordionItem _hover={{ bg: "#F0F0F0" }}>
+              {({ isExpanded }) => (
+                <>
+                  <h2>
+                    <AccordionButton>
+                      <AccountCircleIcon
+                        style={{
+                          background: "black",
+                          borderRadius: "50%",
+                          width: "3.5rem",
+                          height: "3rem",
+                          textAlign: "center",
+                        }}
+                      />
+                      <NavLink to="/assignment">
+                      <Text
+                        as="span"
+                        color="black"
+                        fontSize="1.5rem"
+                        marginLeft={"0.7rem"}
+                        // Remove the hover red color
+                      >
+                        Assignment
+                      </Text>
+                      </NavLink>
+
+                      {isExpanded ? (
+                        <MinusIcon color={"black"} ml="10px" />
+                      ) : (
+                        <AccordionIcon ml="10px" />
+                      )}
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+                    <ListItem className="listItem" p="5px" borderRadius="10px">
+                      <ListIcon as={BsAmd} color="gray.500" ml="10px" />
+                     <NavLink to="/newassignment">
+                      <Text
+                        as="span"
+                        pl="10px"
+                        fontSize={{ base: "0.6rem", md: "1rem" }}
+                        color="black"
+                      >
+                        New Assignment
+                      </Text>
+                      </NavLink>
+                    </ListItem>
+
+                    <ListItem className="listItem" p="5px" borderRadius="10px">
+                      <ListIcon
+                        as={BsFileEarmarkSpreadsheet}
+                        color="gray.500"
+                        ml="10px"
+                      />
+
+                      <Text
+                        as="span"
+                        pl="10px"
+                        fontSize={{ base: "0.6rem", md: "1rem" }}
+                        color="black"
+                      >
+                        Filled Assignment
+                      </Text>
+                    </ListItem>
+
+                    <Divider borderWidth="1px" borderColor={"gray"} />
+                  </AccordionPanel>
+                </>
+              )}
+            </AccordionItem>
+          </ListItem>
+        </Accordion>
+
+        <ListItem
+          style={{ marginTop: "2rem" }}
+          className="listItem"
+          p="10px"
+          borderRadius="10px"
+        >
+          <PersonOffIcon className="sidebaricon" />
+
+          <Text
+            as="span"
+            color="black"
+            fontSize="rem"
+            marginLeft="8px" // Add some margin for spacing between icon and text
+            _hover={{ textDecoration: "underline" }}
+          >
+            Assignment Report
+          </Text>
+        </ListItem>
+
+        <ListItem
+          style={{ marginTop: "1.5rem" }}
+          className="listItem"
+          p="10px"
+          borderRadius="10px"
+        >
+          <MovingIcon className="sidebaricon" />
+
+          <Text
+            as="span"
+            color="black"
+            fontSize="rem"
+            marginLeft="8px" // Add some margin for spacing between icon and text
+            _hover={{ textDecoration: "underline" }}
+          >
+            SignOut
+          </Text>
+        </ListItem>
+        
+        <Divider borderWidth="1px" borderColor={"gray"} />
+        </Stack>
       </List>
     </>
   );
