@@ -30,6 +30,11 @@ import RegistrationForm from "./Component/Dashboard/Registration/RegistrationFor
 import ReportForm from "./Component/Dashboard/Report/ReportForm";
 import UserLogin from "./Component/Login/UserLogin";
 import UserSidebar from "./Component/Dashboard/UserSidebar/UserSidebar";
+import UserDashBoard from "./Component/Dashboard/UserSidebar/UserDashBoard";
+
+import NewAssignment from "./Component/Dashboard/UserSidebar/Assignment/Newassignment";
+import AssignmentReport from "./Component/Dashboard/UserSidebar/Assignment/AssignmentReport";
+import Assignment from "./Component/Dashboard/UserSidebar/Assignment/Assignment";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,6 +45,8 @@ const router = createBrowserRouter(
       <Route path="/ForgetPassword" element={<ForgetPassword />} />
 
       <Route path="/" element={<RootLayout />}>
+
+        {/* ADMIN PART */}
         <Route
           path="dashboard"
           element={<ProtectedRoute element={<Dashboard />} />}
@@ -65,10 +72,22 @@ const router = createBrowserRouter(
         <Route path="recovery" element={<Recovery />} />
         <Route path="employees" element={<Employees />} />
         <Route path="employeeprofileedit" element={<EmployeeProfileEdit />} />
-        <Route path="employeeform" element ={<EmployeeForm />} />
+        <Route path="employeeform" element={<EmployeeForm />} />
+        <Route index element={<UserDashBoard />} />
+        <Route path="assignment" element={<Assignment />} />
+        <Route path="newassignment" element={<NewAssignment />} />
+        <Route path="assignmentreport" element={<AssignmentReport />} />
+     
+      {/* <Route
+        path="usersidebar"
+        element={<ProtectedRoute element={<Dashboard />} />}
+      > */}
+        {/* Add routes specific to the user dashboard */}
+       
+     
       </Route>
-      {/* // user sidebar */}
-      <Route path="usersidebar" element ={<UserSidebar />} />
+
+      {/* <Route path="" element={<UserSidebar />} /> */}
     </Route>
   )
 );

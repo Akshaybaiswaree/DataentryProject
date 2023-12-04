@@ -14,8 +14,11 @@
     "@chakra-ui/react": "^2.8.2",
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
+    "axios": "^1.6.2",
+    "cors": "^2.8.5",
     "framer-motion": "^10.16.5",
     "react": "^18.2.0",
+    "react-data-table-component": "^7.5.4",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
     "react-router-dom": "^6.19.0"

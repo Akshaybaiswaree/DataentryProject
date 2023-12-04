@@ -22,9 +22,12 @@ const UserLogin = () => {
         marginY="20px"
       >
         <Image width={"13rem"} src={logo} alt="" />
+      
+
         <Heading color="#000" fontFamily="Poppins, serif" size="lg">
           User Login
         </Heading>
+        
       </Box>
 
       <Flex
@@ -72,11 +75,13 @@ const UserLogin = () => {
             Forget the password?
           </NavLink>
         </Box>
+        <NavLink to ="/usersidebar">
         <Button height={"3rem"} style={buttonStyle}>
           
             Login
           
         </Button>
+        </NavLink>
       </Flex>
     </Box>
   );
