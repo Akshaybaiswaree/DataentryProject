@@ -21,14 +21,9 @@ const Registration = () => {
 
   const [getdata, setGetData] = useState([]);
   const [search , setSearch] =useState("");
-;
 
-// xyz here call on each element of object matlab ye har element me jaake check krr rha hu..
-  const filteredList = getdata.filter((xyz) =>
-  //M.tolowercase===m
-  //includes predefined function hai jo checkkrra hai har isme jaake
-    xyz.name.toLowerCase().includes(search.toLowerCase())
-  );
+
+
 
  
   useEffect(() => {
@@ -44,6 +39,14 @@ const Registration = () => {
     console.log("get user ", GetUserApiResponse.data.User);
     setGetData(GetUserApiResponse.data.User);
   };
+
+
+  // xyz here call on each element of object matlab ye har element me jaake check krr rha hu..
+  const filteredList = getdata.filter((xyz) =>
+  //M.tolowercase===m
+  //includes predefined function hai jo checkkrra hai har isme jaake
+    xyz.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <>
