@@ -52,6 +52,7 @@ const SignUp = () => {
         console.error('Signup failed. HTTP Status:', response.status);
       }
       console.log("userdata", userData);
+
     } catch (error) {
       console.error('Error during signup:', error);
     }
@@ -98,8 +99,12 @@ const SignUp = () => {
       <Center>
       <Box>
         <Image src={Logo}></Image>
-        <Box p={8} maxWidth="400px" borderWidth={1} borderRadius={8} boxShadow="lg">
-          <VStack spacing={4}>
+        <Box 
+        
+        p={8} maxWidth="400px" borderWidth={1} borderRadius={8} boxShadow="lg">
+          <VStack 
+           height={'15rem'}
+          spacing={4}>
             <FormControl id="firstName">
               <FormLabel>First Name</FormLabel>
               <Input type="text" 
