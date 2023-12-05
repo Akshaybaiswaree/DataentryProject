@@ -14,7 +14,7 @@ import React, { useEffect, useRef } from "react";
 // import "./EmployeeProfileEdit.css";
 import { useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const RegistrationForm = () => {
   const [name, setName] = useState("");
@@ -26,8 +26,15 @@ const RegistrationForm = () => {
 
 
   const formRef = useRef(null);
+  // const navigate = useNavigate();
+
+  // const Previouspage = () => {
+  //   navigate("/user/registration");
+  // };
 
   const AddUser = async () => {
+   
+
     //to get the data from input in frontend part
     try {
       const userDataPayLoad = {
@@ -48,21 +55,18 @@ const RegistrationForm = () => {
         data: userDataPayLoad, // kya bhejna hai wo bhej rhe hai
       };
 
+
       const AdduserApiResponse = await axios(config);
 
       console.log("add", AdduserApiResponse);
+
+      formRef.current.reset();
+ 
+
+      // navigate("/user/registration");
     } catch (err) {
       console.log(err);
     }
-
-    formRef.current.reset();
-
-  };
-
-  const Navigate = useNavigate();
-
-  const Previouspage = () => {
-    Navigate("/user/registration");
   };
 
   return (
@@ -163,9 +167,10 @@ const RegistrationForm = () => {
           </Box>
         </Stack>
       </form>
-   
+     <NavLink to="/user/registration">
       <Button
-        onClick={AddUser}
+         onClick={AddUser}
+       
         // removeinputnames()
         className="employee-btn"
         colorScheme="teal"
@@ -173,6 +178,7 @@ const RegistrationForm = () => {
       >
         Save
       </Button>
+      </NavLink>
     </Box>
   );
 };

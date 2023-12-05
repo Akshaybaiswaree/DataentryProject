@@ -35,11 +35,13 @@ import UserDashBoard from "./Component/Dashboard/UserSidebar/UserDashBoard";
 import NewAssignment from "./Component/Dashboard/UserSidebar/Assignment/Newassignment";
 import AssignmentReport from "./Component/Dashboard/UserSidebar/Assignment/AssignmentReport";
 import Assignment from "./Component/Dashboard/UserSidebar/Assignment/Assignment";
+import SignUp from "./Component/Login/SignUP";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route index element={<Login />} />
+      <Route index element={<SignUp />} />
+      <Route path="/Login" element={<Login />} />
       <Route path="/admin" element={<LoginAdmin />} />
       <Route path="/userlogin" element={<UserLogin />} />
       <Route path="/ForgetPassword" element={<ForgetPassword />} />

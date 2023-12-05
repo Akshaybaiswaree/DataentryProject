@@ -20,7 +20,17 @@ const Registration = () => {
   // use effect isiliye taaki page load hote hi data show ho
 
   const [getdata, setGetData] = useState([]);
+  const [search , setSearch] =useState("");
+;
 
+// xyz here call on each element of object matlab ye har element me jaake check krr rha hu..
+  const filteredList = getdata.filter((xyz) =>
+  //M.tolowercase===m
+  //includes predefined function hai jo checkkrra hai har isme jaake
+    xyz.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+ 
   useEffect(() => {
     ShowData();
   }, []);
@@ -58,11 +68,14 @@ const Registration = () => {
           pointerEvents="none"
           children={<SearchIcon color="gray.300" />}
         />
-        <Input width={"400px"} type="text" placeholder="Search..." />
+        <Input width={"400px"} type="text" placeholder="Search..." 
+        value={search}
+        onChange={(e)=>{setSearch(e.target.value)}}
+        />
       </InputGroup>
       <div
         className="table"
-        style={{
+        style={{  
           marginTop: "1rem",
           justifyContent: "center",
           alignItems: "center",
@@ -73,12 +86,9 @@ const Registration = () => {
         <div className="head">
           <h5>Name </h5>
           <h5>Mobile</h5>
-          <h5>Mail</h5>
+          <h5>Mail</h5> 
         </div>
-        {getdata.map((items) => {
-          {
-            console.log("itemsshow=", items);
-          }
+        {filteredList.map((items) => {
           return (
             <>
               <div className="details">
