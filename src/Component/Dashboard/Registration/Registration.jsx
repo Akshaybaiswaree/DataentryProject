@@ -42,11 +42,16 @@ const Registration = () => {
 
 
   // xyz here call on each element of object matlab ye har element me jaake check krr rha hu..
-  const filteredList = getdata.filter((xyz) =>
-  //M.tolowercase===m
-  //includes predefined function hai jo checkkrra hai har isme jaake
-    xyz.name.toLowerCase().includes(search.toLowerCase())
-  );
+  // const filteredList = getdata.filter((xyz) =>
+  // //M.tolowercase===m
+  // //includes predefined function hai jo checkkrra hai har isme jaake
+  //   xyz.name.toLowerCase().includes(search.toLowerCase())
+  // );
+
+  const filteredList = getdata.filter((item) =>
+  item?.name?.toLowerCase().includes(search.toLowerCase())
+);
+
 
   return (
     <>
@@ -90,6 +95,7 @@ const Registration = () => {
           <h5>Name </h5>
           <h5>Mobile</h5>
           <h5>Mail</h5> 
+          <h5>Status</h5> 
         </div>
         {filteredList.map((items) => {
           return (
@@ -99,7 +105,7 @@ const Registration = () => {
                   <p>{items.name}</p>
                   <h5>{items.mobile}</h5>
                   <p>{items.email}</p>
-                  <NavLink to="/employeeprofileedit">
+                  <NavLink to="/user/registeruserdetail">
                     <button style={{ background: "black", width: "8.3rem" }}>
                       View Detail
                     </button>

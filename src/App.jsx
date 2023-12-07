@@ -36,6 +36,8 @@ import NewAssignment from "./Component/Dashboard/UserSidebar/Assignment/Newassig
 import AssignmentReport from "./Component/Dashboard/UserSidebar/Assignment/AssignmentReport";
 import Assignment from "./Component/Dashboard/UserSidebar/Assignment/Assignment";
 import SignUp from "./Component/Login/SignUP";
+import EditRegistration from "./Component/Dashboard/Registration/EditRegistration";
+import RegisterUserDetail from "./Component/Dashboard/Registration/RegisterUserdetails";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -63,6 +65,8 @@ const router = createBrowserRouter(
           <Route index element={<User />} />
           <Route path="registration" element={<Registration />} />
           <Route path="registrationform" element={<RegistrationForm />} />
+          <Route path="editregistration" element={<EditRegistration />} />
+          <Route path="registeruserdetail" element={<RegisterUserDetail/>} />
           <Route path="pending" element={<Pending />} />
           <Route path="pendingform" element={<PendingForm />} />
           <Route path="plan" element={<Plan />} />
