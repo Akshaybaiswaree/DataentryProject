@@ -13,10 +13,11 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 // import "./EmployeeProfileEdit.css";
 import { useState } from "react";
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { NavLink, useNavigate } from "react-router-dom";
 
-const RegistrationForm = () => {
+const RegisterUserDetail = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
@@ -24,51 +25,46 @@ const RegistrationForm = () => {
   const [plan, setPlan] = useState("");
   const [caller, setCaller] = useState("");
 
-
-  const formRef = useRef(null);
+  // const formRef = useRef(null);
   // const navigate = useNavigate();
 
   // const Previouspage = () => {
   //   navigate("/user/registration");
   // };
 
-  const AddUser = async () => {
-   
+  // const AddUser = async () => {
 
-    //to get the data from input in frontend part
-    try {
-      const userDataPayLoad = 
-      {
-        name: name,
-        email: email,
-        mobile: number,
-        address: address,
-        plan: plan,
-        caller: caller,
-      };
+  //   //to get the data from input in frontend part
+  //   try {
+  //     const userDataPayLoad = {
+  //       name: name,
+  //       email: email,
+  //       mobile: number,
+  //       address: address,
+  //       plan: plan,
+  //       caller: caller,
+  //     };
 
-      //ab backend me pahuchana hai
-      console.log("data", userDataPayLoad);
+  //     //ab backend me pahuchana hai
+  //     console.log("data", userDataPayLoad);
 
-      const config = {
-        method: "POST",
-        url: "http://localhost:5000/user/add_user",
-        data: userDataPayLoad, // kya bhejna hai wo bhej rhe hai
-      };
+  //     const config = {
+  //       method: "POST",
+  //       url: "http://localhost:5000/user/add_user",
+  //       data: userDataPayLoad, // kya bhejna hai wo bhej rhe hai
+  //     };
 
+  //     const AdduserApiResponse = await axios(config);
 
-      const AdduserApiResponse = await axios(config);
+  //     console.log("add", AdduserApiResponse);
 
-      console.log("add", AdduserApiResponse);
+  //     formRef.current.reset();
 
-      formRef.current.reset();
- 
-
-      // navigate("/user/registration");
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     // navigate("/user/registration");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <Box className="employee-form-container">
@@ -167,21 +163,41 @@ const RegistrationForm = () => {
             </FormControl>
           </Box>
         </Stack>
+
+        <Stack direction={"row"}>
+          <Box>
+            <FormControl className="employee-form-group">
+              <FormLabel>Status</FormLabel>
+              <Input width={"400px"} type="text" placeholder="kaveri@2023" />
+            </FormControl>
+          </Box>
+          <Box>
+            <FormControl className="employee-form-group">
+              <FormLabel>Login Status</FormLabel>
+              <Input width={"400px"} type="text" placeholder="Address" />
+            </FormControl>
+          </Box>
+        </Stack>
       </form>
-     {/* <NavLink to="/user/registration"> */}
-      <Button
-         onClick={AddUser}
-       
-        // removeinputnames()
-        className="employee-btn"
-        colorScheme="teal"
-        mt="4"
-      >
-        Save
-      </Button>
-      {/* </NavLink> */}
+
+      <NavLink to="/user/editregistration">
+        <DeleteIcon />
+      </NavLink>
+      <EditIcon />
+      {/* <NavLink to="/user/registration">
+        <Button
+           onClick={AddUser}
+         
+          // removeinputnames()
+          className="employee-btn"
+          colorScheme="teal"
+          mt="4"
+        >
+          Save
+        </Button>
+        </NavLink> */}
     </Box>
   );
 };
 
-export default RegistrationForm;
+export default RegisterUserDetail;
