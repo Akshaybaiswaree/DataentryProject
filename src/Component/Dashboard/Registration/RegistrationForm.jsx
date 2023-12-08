@@ -37,8 +37,7 @@ const RegistrationForm = () => {
 
     //to get the data from input in frontend part
     try {
-      const userDataPayLoad = 
-      {
+      const userDataPayLoad = {
         name: name,
         email: email,
         mobile: number,
