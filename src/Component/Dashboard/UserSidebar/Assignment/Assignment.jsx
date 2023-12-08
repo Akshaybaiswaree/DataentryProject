@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
+import axios from "axios";
 
 const Assignment = () => {
-  const boxColorsSet1 = [" #ffe6ff", "#EBE9EB", "#e6ffe6"];
+  // for data
+  const [data, setData] = useState();
 
-  const boxContentSet1 = [
-    "Entire Assignment",
-    "Submitted Assignment",
-    "Pending Assignment",
-  ];
+  //  for fetch total assingment details in Dashboard
+  useEffect(() => {
+    fetchDetails();
+  }, []);
 
+  // fetchDetails of assingment
+  const fetchDetails = async () => {
+    const response = await axios.get(
+      `http://localhost:5000/user/get_totalAssignment`
+    );
+    const data = response.data;
+    console.log(data);
+    setData(data);
+    // console.log(data?.total);
+  };
   return (
     <Flex alignItems="center">
       {/* Total Assingment */}
@@ -37,7 +48,7 @@ const Assignment = () => {
               marginRight: "0%",
             }}
           >
-            100
+            {data?.total}
           </span>
           <p
             style={{
@@ -79,7 +90,7 @@ const Assignment = () => {
               marginRight: "0%",
             }}
           >
-            100
+            {data?.submitted}
           </span>
           <p
             style={{
@@ -121,7 +132,7 @@ const Assignment = () => {
               marginRight: "0%",
             }}
           >
-            100
+            {data?.pending}
           </span>
           <p
             style={{
