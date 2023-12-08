@@ -1,8 +1,11 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
 import { Box, Flex } from "@chakra-ui/react"; // Import Box and Flex from Chakra UI
-//import {useState} from 'react'
+
+import Navbar from "../Navbar/Navbar";
+import { Outlet } from "react-router-dom";
 import SideBar from "../Sidebar/Sidebar";
+
+//import {useState} from 'react'
+
 //import UserSidebar from "../Dashboard/UserSidebar/UserSidebar"; 
 
 function RootLayout() {
@@ -37,6 +40,7 @@ function RootLayout() {
 
         {/* Main Content */}
         <Box
+        bg={'#d1cebd'}
         marginLeft={'1rem'}
         flexBasis={{ base: "100%", md: "80%" }}>
           <Outlet 

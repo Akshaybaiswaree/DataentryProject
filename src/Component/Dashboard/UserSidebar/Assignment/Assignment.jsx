@@ -1,43 +1,62 @@
-import React from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
-const Assignment = () => {
-  const boxColorsSet1 = [" #ffe6ff", "#EBE9EB", "#e6ffe6"];
+import React from "react";
 
-  const boxContentSet1 = [
-    "Entire Assignment",
-    "Submitted Assignment",
-    "Pending Assignment",
+const Assignment = () => {
+  const assignmentData = [
+    { color: "#ffcab0", label: "Total Assignment" },
+    { color: "#c7b198", label: "Submitted Assignment" },
+    { color: "#cadefc", label: "Pending Assignment" },
   ];
 
   return (
-    <Flex  alignItems="center" >
-      <Flex gap="15%" textAlign="center">
-        {boxColorsSet1.map((color, index) => (
-          <Box
-            key={index}
-            backgroundColor={color}
-            border="#ebe9eb"
-            margin="20px"
-            padding="40px"
-            fontWeight="800"
-            borderRadius="10px"
-            width="150px"
-            height="150px"
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
+    <Flex
+      alignItems="center"
+      width="100%"
+      justifyContent="space-between"
+      marginLeft="auto"
+      marginRight="auto"
+    >
+      {assignmentData.map((assignment, index) => (
+        <Box
+          key={index}
+          backgroundColor={assignment.color}
+          border="#ebe9eb"
+          margin="20px"
+          padding="10px"
+          width="50%"
+          maxWidth="300px"
+          height="150px"
+          fontWeight="600"
+          borderRadius="10px"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          color="#333"
+        >
+          <span
+            style={{
+              fontSize: "24px",
+              background: assignment.color, // Use the color from assignmentData
+              padding: "5px",
+              borderRadius: "5px",
+            }}
           >
-            <span style={{ marginTop: "5px", marginBottom: "5px", height: "10px", fontSize: "20px", marginRight: "0%" }}>
-              100
-            </span>
-            <p style={{ color: "gray", fontWeight: "600", flexDirection: "row", marginLeft: "0px", textAlign: "center", marginTop: "10px" }}>
-              {boxContentSet1[index]}
-            </p>
-          </Box>
-        ))}
-      </Flex>
+            100
+          </span>
+          <p
+            style={{
+              fontSize: "18px",
+              padding: "10px",
+              borderRadius: "5px",
+              marginTop: "10px",
+            }}
+          >
+            {assignment.label}
+          </p>
+        </Box>
+      ))}
     </Flex>
   );
 };

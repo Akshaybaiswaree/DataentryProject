@@ -1,20 +1,19 @@
 import {
   Box,
   Button,
-  Flex,
   FormControl,
   FormLabel,
   Input,
   Select,
   Stack,
-  StackDivider,
 } from "@chakra-ui/react";
+
+import { NavLink } from "react-router-dom";
 import axios from "axios";
-import React, { useEffect, useRef } from "react";
-// import "./EmployeeProfileEdit.css";
+import { useRef } from "react";
 import { useState } from "react";
 
-import { NavLink, useNavigate } from "react-router-dom";
+// import "./EmployeeProfileEdit.css";
 
 const RegistrationForm = () => {
   const [name, setName] = useState("");
@@ -24,7 +23,6 @@ const RegistrationForm = () => {
   const [plan, setPlan] = useState("");
   const [caller, setCaller] = useState("");
 
-
   const formRef = useRef(null);
   // const navigate = useNavigate();
 
@@ -33,8 +31,6 @@ const RegistrationForm = () => {
   // };
 
   const AddUser = async () => {
-   
-
     //to get the data from input in frontend part
     try {
       const userDataPayLoad = {
@@ -55,13 +51,11 @@ const RegistrationForm = () => {
         data: userDataPayLoad, // kya bhejna hai wo bhej rhe hai
       };
 
-
       const AdduserApiResponse = await axios(config);
 
       console.log("add", AdduserApiResponse);
 
       formRef.current.reset();
- 
 
       // navigate("/user/registration");
     } catch (err) {
@@ -70,114 +64,100 @@ const RegistrationForm = () => {
   };
 
   return (
-    <Box className="employee-form-container">
+    <Box className="employee-form-container" mt="8" mx="auto" width="50%">
+      <Box marginBottom={"1rem"} fontSize={"2rem"} fontWeight={"700"}>
+        Add User
+      </Box>
       <form className="employee-form">
-        <Stack direction={"row"}>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>Name</FormLabel>
-              <Input
-                value={name}
-                onChange={(e) => console.log(setName(e.target.value))}
-                width={"400px"}
-                type="text"
-                placeholder="Kaveri Kappor"
-              />
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>email</FormLabel>
-              <Input
-                value={email}
-                onChange={(e) => console.log(setEmail(e.target.value))}
-                width={"400px"}
-                type="email"
-                placeholder="kaveri@gmail.com"
-              />
-            </FormControl>
-          </Box>
-        </Stack>
-        <Stack direction={"row"}>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>Mobile Number</FormLabel>
-              <Input
-                value={number}
-                onChange={(e) => {
-                  setNumber(e.target.value);
-                }}
-                width={"400px"}
-                type="number"
-                placeholder="kaveri@2023"
-              />
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>Address</FormLabel>
-              <Input
-                value={address}
-                onChange={(e) => {
-                  setAddress(e.target.value);
-                }}
-                width={"400px"}
-                type="text"
-                placeholder="Address"
-              />
-            </FormControl>
-          </Box>
-        </Stack>
-        <Stack direction={"row"}>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>Plan</FormLabel>
-              <Select
-                value={plan}
-                onChange={(e) => {
-                  setPlan(e.target.value);
-                }}
-                width={"400px"}
-                placeholder="Select option"
-              >
-                <option value="option1">Plan 1</option>
-                <option value="option2">Plan 2</option>
-                <option value="option3">Plan 3</option>
-                <option value="option3">Plan 4</option>
-              </Select>
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>Caller</FormLabel>
-              <Select
-                value={caller}
-                onChange={(e) => {
-                  setCaller(e.target.value);
-                }}
-                width={"400px"}
-                placeholder="Select option"
-              >
-                <option value="option1">Caller 1</option>
-                <option value="option2">Caller 2</option>
-                <option value="option3">Caller 3</option>
-                <option value="option3">Caller 4</option>
-              </Select>
-            </FormControl>
-          </Box>
+        <Stack spacing={4}>
+          <FormControl>
+            <FormLabel>Name</FormLabel>
+            <Input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+              placeholder="Kaveri Kappor"
+              _hover={{ borderColor: "teal.500" }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Email</FormLabel>
+            <Input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              placeholder="kaveri@gmail.com"
+              _hover={{ borderColor: "teal.500" }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Mobile Number</FormLabel>
+            <Input
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
+              type="number"
+              placeholder="kaveri@2023"
+              _hover={{ borderColor: "teal.500" }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Address</FormLabel>
+            <Input
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              type="text"
+              placeholder="Address"
+              _hover={{ borderColor: "teal.500" }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Plan</FormLabel>
+            <Select
+              value={plan}
+              onChange={(e) => setPlan(e.target.value)}
+              placeholder="Select option"
+              _hover={{ borderColor: "teal.500" }}
+            >
+              <option value="option1">Plan 1</option>
+              <option value="option2">Plan 2</option>
+              <option value="option3">Plan 3</option>
+              <option value="option4">Plan 4</option>
+            </Select>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Caller</FormLabel>
+            <Select
+              value={caller}
+              onChange={(e) => setCaller(e.target.value)}
+              placeholder="Select option"
+              _hover={{ borderColor: "teal.500" }}
+            >
+              <option value="option1">Caller 1</option>
+              <option value="option2">Caller 2</option>
+              <option value="option3">Caller 3</option>
+              <option value="option4">Caller 4</option>
+            </Select>
+          </FormControl>
         </Stack>
       </form>
-     <NavLink to="/user/registration">
-      <Button
-         onClick={AddUser}
-       
-        // removeinputnames()
-        className="employee-btn"
-        colorScheme="teal"
-        mt="4"
-      >
-        Save
-      </Button>
+      <NavLink to={"/user/registration"}>
+        <Button
+          onClick={AddUser}
+          className="employee-btn"
+          colorScheme="teal"
+          mt="4"
+          mx="auto"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          _hover={{ bgColor: "teal.600" }}
+          fontSize="lg"
+          fontWeight="bold"
+          p={4}
+          width="30%" // Set the width to 100%
+        >
+          Save
+        </Button>
       </NavLink>
     </Box>
   );
