@@ -8,6 +8,7 @@ import {
   Stack,
   StackDivider,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useState } from "react";
 // import "./EmployeeProfileEdit.css";
 
@@ -25,7 +26,7 @@ const Employeeform = () => {
     try {
       const EmployeepayLoad = {
         name: name,
-        number: number,
+        mobile: number,
         email: email,
         address: address,
         designation: designation,
@@ -35,15 +36,23 @@ const Employeeform = () => {
 
 
       const config={
-        method:POST,
-        url:"http://localhost:10000/user/add_employee",
+        method:"POST",
+        url:"http://localhost:5000/user/add_employee",
         data: EmployeepayLoad,
       }
+       console.log("config",config)
+
+      const ApiResponse= await axios(config)
+      console.log("apiresponse" , ApiResponse)
+                        
       console.log("data",data);
 
 
       console.log("employee=", EmployeepayLoad);
-    } catch {}
+    } catch(err) {
+
+      console.log(err);
+    }
   };
 
   // const Navigate=useNavigate()
