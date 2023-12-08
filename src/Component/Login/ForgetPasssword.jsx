@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import logo from "../../Images/logo.png";
 import { NavLink } from "react-router-dom";
+import OtpInput from "react-otp-input";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
@@ -63,68 +64,52 @@ const ForgetPassword = () => {
       />
 
       <Box width={"100%"} marginTop="1rem">
-        <Button  color={'white'}
-        bg={'black'} onClick={handleGetOtp}>
+        <Button color={"white"} bg={"black"} onClick={handleGetOtp}>
           Get OTP
         </Button>
       </Box>
-      <Input
-        marginTop={"1rem"}
-        padding={"1rem"}
-        width={"30%"}
-        mx="auto"
-        background="#ebe9eb"
-        height="3rem"
-        type="text"
-        placeholder="Enter Passowrd"
-        onFocus={(e) => (e.target.style.outline = "none")}
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        marginTop={"1rem"}
-        padding={"1rem"}
-        width={"30%"}
-        mx="auto"
-        background="#ebe9eb"
-        height="3rem"
-        type="text"
-        placeholder="Confirm password"
-        onFocus={(e) => (e.target.style.outline = "none")}
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-    
-       
-     <Box width={"100%"} marginTop="1rem">
-        <NavLink to="/dashboard">
-        <Button colorScheme="blue" onClick={handleGetOtp}>
-          Submit
-        </Button>
-        </NavLink>
-      </Box>
-     
+
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent bg={"whitesmoke"}>
+        <ModalContent
+          bg={"whitesmoke"}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <ModalHeader>Enter OTP</ModalHeader>
           <ModalCloseButton bg={"gray"} />
-          <ModalBody>
-            <InputGroup>
-              <Input
-                type="text"
-                placeholder="Enter OTP"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-              />
-              <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={handleVerifyOtp}>
-                  Verify
-                </Button>
-              </InputRightElement>
-            </InputGroup>
+          <ModalBody
+            style={{ width: "90%", display: "flex", justifyContent: "center" }}
+          >
+            <OtpInput
+              value={otp}
+              onChange={setOtp}
+              numInputs={6}
+              renderSeparator={<span style={{ padding: "3px" }}>-</span>}
+              renderInput={(props) => (
+                <input
+                  {...props}
+                  style={{
+                    width: "30px",
+                    border: "2px solid black",
+                    display: "flex",
+                    textAlign: "center",
+                  }}
+                />
+              )}
+            />
           </ModalBody>
-          <ModalFooter></ModalFooter>
+          <ModalFooter>
+            <Box width={"100%"} marginTop="1rem">
+              <Button color={"white"} bg={"black"} onClick={handleGetOtp}>
+                Verify OTP
+              </Button>
+            </Box>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </Flex>
