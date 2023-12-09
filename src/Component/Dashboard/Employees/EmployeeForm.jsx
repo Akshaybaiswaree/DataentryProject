@@ -1,162 +1,156 @@
 import {
   Box,
   Button,
-  Flex,
   FormControl,
   FormLabel,
   Input,
   Stack,
-  StackDivider,
 } from "@chakra-ui/react";
-import axios from "axios";
-import React, { useState } from "react";
-// import "./EmployeeProfileEdit.css";
+import { useRef, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 const Employeeform = () => {
   const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
   const [address, setAddress] = useState("");
   const [designation, setDesignation] = useState("");
   const [salary, setSalary] = useState("");
 
+  const formRef = useRef(null);
 
-
-  const navigate=useNavigate()
-  
   const AddEmployee = async () => {
     try {
-      const EmployeepayLoad = {
+      const employeesDataPayload = {
         name: name,
-        mobile: number,
         email: email,
+        mobile: number,
         address: address,
         designation: designation,
         salary: salary,
       };
 
+      console.log("data", employeesDataPayload);
 
+      const config = {
+        method: "POST",
+        url: "http://localhost:5000/user/add_employee",
+        data: employeesDataPayload,
+      };
 
-      const config={
-        method:"POST",
-        url:"http://localhost:5000/user/add_employee",
-        data: EmployeepayLoad,
+      const AddEmployeeApiResponse = await axios(config);
 
+      console.log("add", AddEmployeeApiResponse);
+
+      if (formRef.current) {
+        formRef.current.reset();
       }
-       console.log("config",config)
-
-      const ApiResponse= await axios(config)
-      console.log("apiresponse" , ApiResponse)
-                        
-      console.log("apir", ApiResponse);
-
-      
-      navigate("/employees");
-      console.log("employee=", EmployeepayLoad);
-    } catch(err) {
-
+    } catch (err) {
       console.log(err);
     }
   };
 
-  // const Navigate=useNavigate()
-
-  // const handlelogout=()=>{
-  //   Navigate("/employees");
-  // }
-
   return (
-    <Box className="employee-form-container">
+    <Box className="employee-form-container" textAlign="center">
+      <Box marginBottom={"1rem"} fontSize={"2rem"} fontWeight={"700"}>
+        Add Employees
+      </Box>
       <form className="employee-form">
-        <Stack direction={"row"}>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>Name</FormLabel>
-              <Input
-                value={name}
-                onChange={(e) => console.log(setName(e.target.value))}
-                width={"400px"}
-                type="text"
-                placeholder="Kaveri Kappor"
-              />
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>Mobile</FormLabel>
-              <Input
-                value={number}
-                onChange={(e) => {
-                  setNumber(e.target.value);
-                }}
-                width={"400px"}
-                type="number"
-                placeholder="7654654654"
-              />
-            </FormControl>
-          </Box>
-        </Stack>
-        <Stack direction={"row"}>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>email</FormLabel>
-              <Input
-                value={email}
-                onChange={(e) => console.log(setEmail(e.target.value))}
-                width={"400px"}
-                type="email"
-                placeholder="kaveri@2023"
-              />
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>Address</FormLabel>
-              <Input 
-               value={address}
-               onChange={(e) => {
-                 setAddress(e.target.value);
-               }}
-              width={"400px"} type="text" placeholder="Address" />
-            </FormControl>
-          </Box>
-        </Stack>
-        <Stack direction={"row"}>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>Designation</FormLabel>
-              <Input 
+        <Stack spacing={4} position="relative">
+          <FormControl>
+            <FormLabel textAlign="top" width="50%">
+              Name
+            </FormLabel>
+            <Input
+              width="50%"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+              placeholder="Kaveri Kapoor"
+              _hover={{ borderColor: "teal.500" }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel textAlign="top" width="50%">
+              Mobile
+            </FormLabel>
+            <Input
+              width="50%"
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
+              type="number"
+              placeholder="9647523148"
+              _hover={{ borderColor: "teal.500" }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel textAlign="top" width="50%">
+              Email
+            </FormLabel>
+            <Input
+              width="50%"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              placeholder="kaveri@gmail.com"
+              _hover={{ borderColor: "teal.500" }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel textAlign="top" width="50%">
+              Address
+            </FormLabel>
+            <Input
+              width="50%"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              type="text"
+              placeholder="Address"
+              _hover={{ borderColor: "teal.500" }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel textAlign="top" width="50%">
+              Designation
+            </FormLabel>
+            <Input
+              width="50%"
               value={designation}
-              onChange={(e) =>{setDesignation(e.target.value)}}
-              width={"400px"} type="text" placeholder="designation" />
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>Salary</FormLabel>
-              <Input
+              onChange={(e) => setDesignation(e.target.value)}
+              type="text"
+              placeholder="Designation"
+              _hover={{ borderColor: "teal.500" }}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel textAlign="top" width="50%">
+              Salary
+            </FormLabel>
+            <Input
+              width="50%"
               value={salary}
-              onChange={(e)=>{setSalary(e.target.value)}}
-                width={"400px"}
-                type="number"
-                placeholder="Salary"
-              />
-            </FormControl>
-          </Box>
+              onChange={(e) => setSalary(e.target.value)}
+              type="number"
+              placeholder="Enter Salary"
+              _hover={{ borderColor: "teal.500" }}
+            />
+          </FormControl>
         </Stack>
       </form>
-
-      <Button
-
-        onClick={AddEmployee}
-        className="employee-btn"
-        colorScheme="teal"
-        mt="4"
-      >
-        Save
-      </Button>
+      <NavLink to="/employees">
+        <Button
+          onClick={AddEmployee}
+          className="employee-btn"
+          colorScheme="teal"
+          mt="4"
+          _hover={{ bgColor: "teal.600" }}
+          width="30%"
+        >
+          Save
+        </Button>
+      </NavLink>
     </Box>
   );
 };

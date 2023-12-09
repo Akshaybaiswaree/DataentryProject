@@ -110,45 +110,41 @@
 
 
 import {
-  createBrowserRouter,
-  createRoutesFromElements,
   Route,
   RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
 } from "react-router-dom";
 
-import RootLayout from "./Component/Layout/Rootlayout";
-import User from "./Component/Dashboard/User/User";
-import Registration from "./Component/Dashboard/Registration/Registration";
-import Pending from "./Component/Dashboard/Pending/Pending";
-import Plan from "./Component/Dashboard/Plan/Plan";
-import Cancel from "./Component/Dashboard/Cancel/Cancel";
+import Assignment from "./Component/Dashboard/UserSidebar/Assignment/Assignment";
+import AssignmentReport from "./Component/Dashboard/UserSidebar/Assignment/AssignmentReport";
 import BlockedUser from "./Component/Dashboard/Blocked User/BlockedUser";
-import Report from "./Component/Dashboard/Report/Report";
-import Employees from "./Component/Dashboard/Employees/Employees";
-import Recovery from "./Component/Dashboard/Recovery/Recovery";
-import DashboardOverview from "./Component/Dashboard/DashboardOverview/DashboardOverview";
+import Cancel from "./Component/Dashboard/Cancel/Cancel";
 import Dashboard from "./Component/Dashboard/Dashboard";
+import DashboardOverview from "./Component/Dashboard/DashboardOverview/DashboardOverview";
+import EmployeeForm from "./Component/Dashboard/Employees/EmployeeForm";
+import EmployeeProfileEdit from "./Component/Dashboard/Employees/EmployessProfileEdit";
+import Employees from "./Component/Dashboard/Employees/Employees";
+import ForgetPassword from "./Component/Login/ForgetPasssword";
 import Login from "./Component/Login/Login";
 import LoginAdmin from "./Component/Login/LoginAdmin";
-
-import ForgetPassword from "./Component/Login/ForgetPasssword";
-import UserOutlet from "./Component/Dashboard/User/UserOutlet";
-import ProtectedRoute from "./Component/ProtectedRoute/ProtectedRoute";
-import EmployeeProfileEdit from "./Component/Dashboard/Employees/EmployessProfileEdit";
-import EmployeeForm from "./Component/Dashboard/Employees/EmployeeForm";
-import PendingForm from "./Component/Dashboard/Pending/PendingForm";
-import RegistrationForm from "./Component/Dashboard/Registration/RegistrationForm";
-import ReportForm from "./Component/Dashboard/Report/ReportForm";
-import UserLogin from "./Component/Login/UserLogin";
-import UserSidebar from "./Component/Dashboard/UserSidebar/UserSidebar";
-import UserDashBoard from "./Component/Dashboard/UserSidebar/UserDashBoard";
-
 import NewAssignment from "./Component/Dashboard/UserSidebar/Assignment/Newassignment";
-import AssignmentReport from "./Component/Dashboard/UserSidebar/Assignment/AssignmentReport";
-import Assignment from "./Component/Dashboard/UserSidebar/Assignment/Assignment";
+import Pending from "./Component/Dashboard/Pending/Pending";
+import PendingForm from "./Component/Dashboard/Pending/PendingForm";
+import Plan from "./Component/Dashboard/Plan/Plan";
+import ProtectedRoute from "./Component/ProtectedRoute/ProtectedRoute";
+import Recovery from "./Component/Dashboard/Recovery/Recovery";
+import Registration from "./Component/Dashboard/Registration/Registration";
+import RegistrationForm from "./Component/Dashboard/Registration/RegistrationForm";
+import Report from "./Component/Dashboard/Report/Report";
+import ReportForm from "./Component/Dashboard/Report/ReportForm";
+import RootLayout from "./Component/Layout/Rootlayout";
 import SignUp from "./Component/Login/SignUP";
-import EditRegistration from "./Component/Dashboard/Registration/EditRegistration";
-import RegisterUserDetail from "./Component/Dashboard/Registration/RegisterUserdetails";
+import User from "./Component/Dashboard/User/User";
+import UserDashBoard from "./Component/Dashboard/UserSidebar/UserDashBoard";
+import UserLogin from "./Component/Login/UserLogin";
+import UserOutlet from "./Component/Dashboard/User/UserOutlet";
+import UserSidebar from "./Component/Dashboard/UserSidebar/UserSidebar";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
