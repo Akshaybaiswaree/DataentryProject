@@ -22,6 +22,10 @@ const Employeeform = () => {
   const [designation, setDesignation] = useState("");
   const [salary, setSalary] = useState("");
 
+
+
+  const navigate=useNavigate()
+  
   const AddEmployee = async () => {
     try {
       const EmployeepayLoad = {
@@ -39,15 +43,17 @@ const Employeeform = () => {
         method:"POST",
         url:"http://localhost:5000/user/add_employee",
         data: EmployeepayLoad,
+
       }
        console.log("config",config)
 
       const ApiResponse= await axios(config)
       console.log("apiresponse" , ApiResponse)
                         
-      console.log("data",data);
+      console.log("apir", ApiResponse);
 
-
+      
+      navigate("/employees");
       console.log("employee=", EmployeepayLoad);
     } catch(err) {
 
@@ -143,6 +149,7 @@ const Employeeform = () => {
       </form>
 
       <Button
+
         onClick={AddEmployee}
         className="employee-btn"
         colorScheme="teal"

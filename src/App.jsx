@@ -193,7 +193,7 @@ const router = createBrowserRouter(
         <Route path="reportform" element={<ReportForm />} />
         <Route path="recovery" element={<Recovery />} />
         <Route path="employees" element={<Employees />} />
-        <Route path="employeeprofileedit" element={<EmployeeProfileEdit />} />
+        <Route path="employeeprofileedit/:userId" element={<EmployeeProfileEdit />} />
         <Route path="employeeform" element={<EmployeeForm />} />
         <Route index element={<UserDashBoard />} />
         <Route path="assignment" element={<Assignment />} />

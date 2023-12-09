@@ -9,7 +9,6 @@
 // const Employees = () => {
 //   const [getdata, setGetdata] = useState([]);
 
-
 //   useEffect(() =>{
 //     showdata
 //   } ,[])
@@ -111,7 +110,6 @@
 
 // export default Employees;
 
-
 import {
   Box,
   Button,
@@ -191,29 +189,36 @@ const Employees = () => {
         <Box fontWeight="bold">Name</Box>
         <Box fontWeight="bold">Mobile</Box>
         <Box fontWeight="bold">Mail</Box>
-        <Box></Box> {/* Empty box for the View Details button column */}
-        {getdata && getdata.length > 0 ? (
-          getdata?.map((item) => (
-            <React.Fragment key={item.id}>
-              <Box>{item.name}</Box>
-              <Box>{item.mobile}</Box>
-              <Box>{item.email}</Box>
-              <Box>
-                <NavLink to="/employeeprofileedit" style={{ color: "white" }}>
-                  <Button
-                    colorScheme="blackAlpha"
-                    backgroundColor="black"
-                    width="100%"
-                  >
-                    View Detail
-                  </Button>
-                </NavLink>
-              </Box>
-            </React.Fragment>
-          ))
-        ) : (
+        {/* <Box fontWeight="bold">Details</Box> */}
+        <Box fontWeight="bold">Details</Box>{" "}
+        {/* Empty box for the View Details button column */}
+        {/* {getdata && getdata.length > 0 ? (
+
+          getdata?.map((item) => ( */}
+        {filteredList.map((item) => (
+          <React.Fragment key={item.id}>
+            <Box>{item.name}</Box>
+            <Box>{item.mobile}</Box>
+            <Box>{item.email}</Box>
+            {/* <Box>{item.status}</Box> */}
+            <Box>
+              {" "}
+              {/* <NavLink to="/employeeprofileedit"> */}
+              <NavLink to={`/employeeprofileedit/${item._id}`}>
+                <Button
+                  colorScheme="blackAlpha"
+                  backgroundColor="black"
+                  width="100%"
+                >
+                  View Detail
+                </Button>
+              </NavLink>
+            </Box>
+          </React.Fragment>
+        ))}
+        {/* ) : (
           <p>No data available</p>
-        )}
+        )} */}
       </Grid>
       {/* </div> */}
     </>
@@ -221,4 +226,3 @@ const Employees = () => {
 };
 
 export default Employees;
-
