@@ -85,8 +85,9 @@ const Employees = () => {
               <Box>{item.mobile}</Box>
               <Box>{item.email}</Box>
               <Box>
-                <NavLink to="/employeeprofileedit" style={{ color: "white" }}>
+                <NavLink  to={`/employeeprofileedit/${item._id}`} >
                   <Button
+                  style={{ color: "white" }}
                     colorScheme="blackAlpha"
                     backgroundColor="black"
                     width="80%"

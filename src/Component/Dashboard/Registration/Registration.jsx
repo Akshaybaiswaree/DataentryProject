@@ -96,7 +96,7 @@ const Registration = () => {
             <Box>{items.mobile}</Box>
             <Box>{items.email}</Box>
             <Box>
-              <NavLink to="/employeeprofileedit">
+            <NavLink to={`/user/registeruserdetail/${items._id}`}>
                 <Button
                   colorScheme="blackAlpha"
                   backgroundColor="black"
