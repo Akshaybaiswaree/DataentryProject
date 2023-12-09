@@ -282,7 +282,7 @@ import {
   
       setInputField({
         ...prevValue,
-        [name]: value,
+        [name]: value, 
       });
     };
   

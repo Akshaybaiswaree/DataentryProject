@@ -1,18 +1,19 @@
-import Dataentry from "../../Images/logo.png";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {
+  Avatar,
   Box,
   Flex,
   HStack,
   Heading,
-  Spacer,
-  Text,
-  Avatar,
   Icon,
   Image,
+  Spacer,
+  Text,
   WrapItem,
 } from "@chakra-ui/react";
+
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { BellIcon } from "@chakra-ui/icons";
+import Dataentry from "../../Images/logo.png";
 
 // import { ChevronDownIcon } from '@chakra-ui/icons'
 // import { useAuth } from "../context/AuthContext";
@@ -30,7 +31,7 @@ export default function Navbar() {
             src={Dataentry}
             width="100px"
           />
-          <Heading fontSize={"3rem"} marginLeft="2rem">
+          <Heading fontSize={"3rem"} marginLeft="10.5rem">
             Dashboard
           </Heading>
         </Box>
