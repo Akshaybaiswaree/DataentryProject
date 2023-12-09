@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import logo from "../../Images/logo.png";
 import { NavLink } from "react-router-dom";
-import OtpInput from "react-otp-input";
+//import OtpInput from "react-otp-input";
 import axios from "axios";
 
 const ForgetPassword = () => {

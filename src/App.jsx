@@ -145,6 +145,8 @@ import UserDashBoard from "./Component/Dashboard/UserSidebar/UserDashBoard";
 import UserLogin from "./Component/Login/UserLogin";
 import UserOutlet from "./Component/Dashboard/User/UserOutlet";
 import UserSidebar from "./Component/Dashboard/UserSidebar/UserSidebar";
+import EditRegistration from "./Component/Dashboard/Registration/EditRegistration";
+import RegisterUserDetail from "./Component/Dashboard/Registration/RegisterUserdetails";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
