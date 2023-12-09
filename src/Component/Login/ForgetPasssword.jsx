@@ -20,6 +20,7 @@ import {
 import logo from "../../Images/logo.png";
 import { NavLink } from "react-router-dom";
 import OtpInput from "react-otp-input";
+import axios from "axios";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
@@ -34,6 +35,26 @@ const ForgetPassword = () => {
   const handleVerifyOtp = () => {
     // Perform logic to verify the entered OTP
     onClose();
+  };
+
+  // function to submit email oncick
+  const submitEmail = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/user/forgot-password`,
+        email,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response);
+      alert("Saved successfully.");
+      onOpen();
+    } catch (error) {
+      console.log(`Error is ${error}`);
+    }
   };
 
   return (
@@ -64,7 +85,7 @@ const ForgetPassword = () => {
       />
 
       <Box width={"100%"} marginTop="1rem">
-        <Button color={"white"} bg={"black"} onClick={handleGetOtp}>
+        <Button color={"white"} bg={"black"} onClick={submitEmail}>
           Get OTP
         </Button>
       </Box>
