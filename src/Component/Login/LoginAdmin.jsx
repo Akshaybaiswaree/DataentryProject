@@ -43,8 +43,9 @@ const LoginAdmin = () => {
       const decodedToken = jwtDecode(token);
       const email = decodedToken.email;
       console.log(email);
-      localStorage.setItem("userEmail", email);
-      alert("Saved successfully.");
+      // localStorage.setItem("userEmail", email);
+      localStorage.setItem("token", JSON.stringify(decodedToken));
+      alert("Login successfully.");
       // navigate("/");
     } catch (error) {
       console.log(`Error is ${error}`);
