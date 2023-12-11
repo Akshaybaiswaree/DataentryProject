@@ -39,14 +39,15 @@ const LoginAdmin = () => {
         }
       );
       console.log(response);
+      // ectracting token from response
       const token = response.data.token;
+      // decodint the token
       const decodedToken = jwtDecode(token);
-      const email = decodedToken.email;
-      console.log(email);
-      // localStorage.setItem("userEmail", email);
+      // save the token in localstorage
       localStorage.setItem("token", JSON.stringify(decodedToken));
-      alert("Login successfully.");
-      // navigate("/");
+      // alert("Login successfully.");
+      //  Navigate to dahboard after login
+      navigate("/dashboard");
     } catch (error) {
       console.log(`Error is ${error}`);
     }
