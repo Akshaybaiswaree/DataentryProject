@@ -77,52 +77,57 @@ const NewAssignment = () => {
     }
   };
 
-  const Previouspage = () => {
-    Navigate("/assignment");
-  };
-
   return (
     <Box className="employee-form-container">
       <Box
         display="grid"
         gridTemplateColumns="repeat(4, 1fr)"
         gap={4}
-        p="4"
+        p="7"
         borderWidth="1px"
         borderRadius="md"
         mb="4"
         color="#393e46"
       >
         <Box>
-          <Text fontSize="xl">Kaveri Kappor</Text>
+          <Text fontSize="xl">Name : Kaveri Kappor</Text>
         </Box>
         <Box>
-          <Text fontSize="xl">4d Apply Ridge Road</Text>
+          <Text fontSize="xl">Address : 4d Apply Ridge Road</Text>
         </Box>
         <Box>
-          <Text fontSize="xl">440018</Text>
+          <Text fontSize="xl">Pin Code : 440018</Text>
         </Box>
         <Box>
-          <Text fontSize="xl">Vice President</Text>
+          <Text fontSize="xl">Job Function : Vice President</Text>
         </Box>
 
         <Divider gridColumn="span 4" my="2" />
 
         <Box>
-          <Text fontSize="xl">0000000000</Text>
+          <Text fontSize="xl">Mobile : 1234567890</Text>
         </Box>
         <Box>
-          <Text fontSize="xl">$6 Billion</Text>
+          <Text fontSize="xl">Annual Revenue : $6 Billion</Text>
         </Box>
         <Box>
-          <Text fontSize="xl">CD5B32r3rA9eFPH</Text>
+          <Text fontSize="xl">Client Code : CD5B32r3rA9eFPH</Text>
         </Box>
       </Box>
-      <Box marginBottom={"1rem"} fontSize={"2rem"} fontWeight={"700"}>
+      <Box
+        marginBottom={"1rem"}
+        fontSize={"2rem"}
+        fontWeight={"700"}
+        p={"20px"}
+      >
         New Assignment
       </Box>
 
-      <form className="employee-form" onSubmit={handleSubmit}>
+      <form
+        className="employee-form"
+        onSubmit={handleSubmit}
+        style={{ padding: "20px" }}
+      >
         <Stack direction={"row"}>
           <Box>
             <FormControl isRequired className="employee-form-group">
@@ -215,28 +220,35 @@ const NewAssignment = () => {
           </FormControl>
         </Box>
 
-        <Button
-          // onClick={Previouspage}
-          className="employee-btn"
-          colorScheme="teal"
-          mt="4"
-          type="submit"
-        >
-          Submit
-        </Button>
-
-        <Button
-          // onClick={Previouspage}
-          className="employee-btn"
-          colorScheme="teal"
-          mt="4"
+        <Box
           style={{
-            marginLeft: "50px",
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "30px",
           }}
-          onClick={fetchAssingements}
         >
-          Reload
-        </Button>
+          <Button
+            className="employee-btn"
+            colorScheme="teal"
+            mt="4"
+            type="submit"
+          >
+            Submit
+          </Button>
+
+          <Button
+            // onClick={Previouspage}
+            className="employee-btn"
+            colorScheme="teal"
+            mt="4"
+            style={{
+              marginLeft: "50px",
+            }}
+            onClick={fetchAssingements}
+          >
+            Reload
+          </Button>
+        </Box>
       </form>
     </Box>
   );
