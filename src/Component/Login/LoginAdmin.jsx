@@ -5,6 +5,7 @@ import React, { useState } from "react";
 
 import axios from "axios";
 import logo from "../../Images/logo.png";
+import { jwtDecode } from "jwt-decode";
 
 const LoginAdmin = () => {
   const navigate = useNavigate();
@@ -38,8 +39,13 @@ const LoginAdmin = () => {
         }
       );
       console.log(response);
+      const token = response.data.token;
+      const decodedToken = jwtDecode(token);
+      const email = decodedToken.email;
+      console.log(email);
+      localStorage.setItem("userEmail", email);
       alert("Saved successfully.");
-      navigate("/");
+      // navigate("/");
     } catch (error) {
       console.log(`Error is ${error}`);
     }
@@ -125,7 +131,7 @@ const LoginAdmin = () => {
               style={{ textDecoration: "none", color: "#fff" }}
               // to="/ForgetPassword"
             > */}
-              Login
+            Login
             {/* </Link> */}
           </Button>
         </Flex>
