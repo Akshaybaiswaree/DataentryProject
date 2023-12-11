@@ -64,20 +64,18 @@ const NewAssignment = () => {
   };
 
   // handle to get assingment from backend
-  // useEffect(() => {
-  //   const fetchAssingements =async () =>{
-  //     try {
-  //       const response = await axios.get(``)
-  //       console.log(response)
+  useEffect(() => {
+    fetchAssingements();
+  }, []);
 
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-
-  //   fetchAssingements();
-
-  // }, []);
+  const fetchAssingements = async () => {
+    try {
+      const response = await axios.get(``);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const Previouspage = () => {
     Navigate("/assignment");
@@ -225,6 +223,19 @@ const NewAssignment = () => {
           type="submit"
         >
           Submit
+        </Button>
+
+        <Button
+          // onClick={Previouspage}
+          className="employee-btn"
+          colorScheme="teal"
+          mt="4"
+          style={{
+            marginLeft: "50px",
+          }}
+          onClick={fetchAssingements}
+        >
+          Reload
         </Button>
       </form>
     </Box>
