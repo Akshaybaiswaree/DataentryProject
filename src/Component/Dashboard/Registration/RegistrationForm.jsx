@@ -108,6 +108,7 @@ const RegistrationForm = () => {
                   setNumber(e.target.value);
                 }}
                 width={"400px"}
+                
                 type="number"
                 placeholder="kaveri@2023"
               />

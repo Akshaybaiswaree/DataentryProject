@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Box, Image, Input, Flex, Button, Heading } from "@chakra-ui/react";
 import { FaEnvelope, FaLock } from "react-icons/fa"; // Icons from react-icons library
 import logo from "../../Images/logo.png";
+import axios from "axios";
 
 const UserLogin = () => {
+
+  const [userId , setUserID] = useState('')
+  const [password , setPassword] = useState('')
+
+  const handleSubmit = async()=>{
+      try{
+          const userDataPayLoad = {
+            email : userId,
+            password : password
+          }
+          const config = {
+            methode : "post",
+            url : "http://localhost:10000/user/signin",
+            data : userDataPayLoad
+          }
+          const usarLogInApi = await axios (config)
+          console.log(usarLogInApi, "userLogIn");
+      }
+      catch(err){
+        console.error(err)
+      }
+  }
+
+
   return (
     <Box
       width={"100%"}
@@ -75,11 +100,9 @@ const UserLogin = () => {
             Forget the password?
           </NavLink>
         </Box>
-        <NavLink to ="/usersidebar">
-        <Button height={"3rem"} style={buttonStyle}>
-          
+        <NavLink to ="/">
+        <Button height={"3rem"} style={buttonStyle} onClick={handleSubmit}>
             Login
-          
         </Button>
         </NavLink>
       </Flex>

@@ -25,6 +25,8 @@ const ForgetPassword = () => {
   const [otp, setOtp] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  
+
   const handleGetOtp = () => {
     // Perform logic to send OTP to the email address
     onOpen();

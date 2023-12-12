@@ -19,9 +19,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState(''); 
 
   const handleSignup = async () => {
-    //saari value store/get krne ke liye
     const userData = {
-      //backend:frontend
       firstname: firstName,
       lastname: lastName,
       email:email,
@@ -30,18 +28,13 @@ const SignUp = () => {
     };
 
     try {
-        //  fetch we return promise and it will wait to be resolved , agar await nhi likhe toh fetch function ko pata nhi kaha rukhna
-        
       const response = await fetch('http://localhost:5000/user/signup',
        {
         method: 'POST',
-        //header isiliye q ki fetch use kiya
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),
- 
-        //"firstname" : "firstname" key value pair pe aagaya
       });
         console.log("res",response)
       if (response.ok) {
