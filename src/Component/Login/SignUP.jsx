@@ -36,7 +36,7 @@ const SignUp = () => {
        {
         method: 'POST',
         //header isiliye q ki fetch use kiya
-        headers: {
+        headers: { 
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),

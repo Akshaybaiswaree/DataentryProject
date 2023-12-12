@@ -360,7 +360,7 @@ const EmployeeProfileEdit = () => {
               <FormLabel>Mobile</FormLabel>
               <Input
                 value={mobile}
-                onChange={(e) => setNumber(e.target.value)}
+                onChange={(e) => setMobile(e.target.value)}
                 width={"400px"}
                 type="text"
                 placeholder="9647523148"
