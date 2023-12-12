@@ -47,7 +47,11 @@ const LoginAdmin = () => {
       localStorage.setItem("token", JSON.stringify(decodedToken));
       // alert("Login successfully.");
       //  Navigate to dahboard after login
-      navigate("/dashboard");
+      if (response.status === 200) {
+        navigate("/dashboard");
+      } else {
+        alert("Invalid credentials ");
+      }
     } catch (error) {
       console.log(`Error is ${error}`);
     }
