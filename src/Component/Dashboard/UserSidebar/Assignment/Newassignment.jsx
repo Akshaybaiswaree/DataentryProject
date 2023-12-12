@@ -143,7 +143,6 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { CameraswitchSharp } from "@mui/icons-material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -154,96 +153,62 @@ import { useNavigate } from "react-router-dom";
 // import "./EmployeeProfileEdit.css";
 
 const NewAssignment = () => {
-  // const Navigate = useNavigate();
-  // // state hook to take input from form
-  // const [inputFields, setInputFields] = useState({
-  //   name: "",
-  //   address: "",
-  //   pinCode: "",
-  //   jobFunction: "",
-  //   mobile: "",
-  //   annualRevenue: "",
-  //   clientCode: "",
-  // });
+  const Navigate = useNavigate();
+  // state hook to take input from form
+  const [inputFields, setInputFields] = useState({
+    name: "",
+    address: "",
+    pinCode: "",
+    jobFunction: "",
+    mobile: "",
+    annualRevenue: "",
+    clientCode: "",
+  });
 
-  // // on change capture the input from frontsnd handler
-  // const onChangehandler = (e) => {
-  //   const { name, value } = e.target;
-  //   setInputFields((prev) => {
-  //     return {
-  //       ...prev,
-  //       [name]: value,
-  //     };
-  //   });
-  // };
-
-  // // handle to submit form data
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   console.log(inputFields);
-  //   // try {
-  //   //   const response = await axios.post(
-  //   //     `http://localhost:8000/employee`,
-  //   //     inputFields,
-  //   //     {
-  //   //       headers: {
-  //   //         "Content-Type": "application/json",
-  //   //       },
-  //   //     }
-  //   //   );
-  //   //   console.log(response);
-  //   //   alert("Saved successfully.");
-  //   // } catch (error) {
-  //   //   console.log(error);
-  //   // }
-  // };
-
-  // // handle to get assingment from backend
-
-  // useEffect(() => {
-  //   fetchAssingements();
-  // }, []);
-
-  // const fetchAssingements = async () => {
-  //   try {
-  //     const response = await axios.get(``);
-  //     console.log(response);
-  //   } catch (error);
-  //   }
-  // };
-
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [pincode, , setPincodde] = useState("");
-  const [jobFunction, setJobFunction] = useState("");
-  const [number, setNumber] = useState("");
-  const [annualRevenue, setAnnualRevenue] = useState("");
-  const [clientCode, setClientCode] = useState("");
-
-  const GetDetails = async () => {
-    try {
-      // const payloads = {
-      //   firstName: name,
-      //   address: address,
-      //   pincode: pincode,
-      //   jobFunctional: jobFunction,
-      //   phone: number,
-      //   annualRevenue: annualRevenue,
-      //   cleanCode: clientCode,
-      // };
-
-      const config = {
-        method: "GET",
-        url: "http://localhost:5000/user/get_assignment_details",
-        //  data: payloads,
+  // on change capture the input from frontsnd handler
+  const onChangehandler = (e) => {
+    const { name, value } = e.target;
+    setInputFields((prev) => {
+      return {
+        ...prev,
+        [name]: value,
       };
+    });
+  };
 
-      const fetchingdetails = await axios(config);
+  // handle to submit form data
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-      console.log("fetchingdetails", fetchingdetails);
-    } catch(err) {
-      console.log("error in fetching",err);
+    console.log(inputFields);
+    // try {
+    //   const response = await axios.post(
+    //     `http://localhost:8000/employee`,
+    //     inputFields,
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    //   console.log(response);
+    //   alert("Saved successfully.");
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+  // handle to get assingment from backend
+  useEffect(() => {
+    fetchAssingements();
+  }, []);
+
+  const fetchAssingements = async () => {
+    try {
+      const response = await axios.get(``);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -295,7 +260,7 @@ const NewAssignment = () => {
 
       <form
         className="employee-form"
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         style={{ padding: "20px" }}
       >
         <Stack direction={"row"}>
@@ -307,7 +272,7 @@ const NewAssignment = () => {
                 type="text"
                 placeholder="Kaveri Kappor"
                 name="name"
-                // onChange={onChangehandler}
+                onChange={onChangehandler}
               />
             </FormControl>
           </Box>
@@ -319,7 +284,7 @@ const NewAssignment = () => {
                 type="text"
                 placeholder="4d Apply Ridge Road"
                 name="address"
-                // onChange={onChangehandler}
+                onChange={onChangehandler}
               />
             </FormControl>
           </Box>
@@ -333,7 +298,7 @@ const NewAssignment = () => {
                 type="number"
                 placeholder="440018"
                 name="pinCode"
-                // onChange={onChangehandler}
+                onChange={onChangehandler}
               />
             </FormControl>
           </Box>
@@ -345,7 +310,7 @@ const NewAssignment = () => {
                 type="text"
                 placeholder="Vice President"
                 name="jobFunction"
-                // onChange={onChangehandler}
+                onChange={onChangehandler}
               />
             </FormControl>
           </Box>
@@ -359,7 +324,7 @@ const NewAssignment = () => {
                 type="number"
                 placeholder="0000000000"
                 name="mobile"
-                // onChange={onChangehandler}
+                onChange={onChangehandler}
               />
             </FormControl>
           </Box>
@@ -371,7 +336,7 @@ const NewAssignment = () => {
                 type="text"
                 placeholder="$6 Billion"
                 name="annualRevenue"
-                // onChange={onChangehandler}
+                onChange={onChangehandler}
               />
             </FormControl>
           </Box>
@@ -385,7 +350,7 @@ const NewAssignment = () => {
               type="text"
               placeholder="CD5B32r3rA9eFPH"
               name="clientCode"
-              // onChange={onChangehandler}
+              onChange={onChangehandler}
             />
           </FormControl>
         </Box>
@@ -402,7 +367,6 @@ const NewAssignment = () => {
             colorScheme="teal"
             mt="4"
             type="submit"
-            onClick={GetDetails}
           >
             Submit
           </Button>
@@ -415,7 +379,7 @@ const NewAssignment = () => {
             style={{
               marginLeft: "50px",
             }}
-            // onClick={fetchAssingements}
+            onClick={fetchAssingements}
           >
             Reload
           </Button>
