@@ -38,7 +38,7 @@ const LoginAdmin = () => {
           },
         }
       );
-      console.log(response);
+      console.log(response , "response");
       // ectracting token from response
       const token = response.data.token;
       // decodint the token
