@@ -17,7 +17,7 @@ import {
   InputGroup,
   InputRightElement,
 } from "@chakra-ui/react";
-import logo from "../../Images/logo.png";
+import logo from "../../Images/Group 1000004815.svg";
 import { NavLink } from "react-router-dom";
 //import OtpInput from "react-otp-input";
 import axios from "axios";

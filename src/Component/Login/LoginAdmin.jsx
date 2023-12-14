@@ -4,7 +4,8 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 import axios from "axios";
-import logo from "../../Images/logo.png";
+// import logo from "../../Images/logo.png";
+import logo from "../../Images/Group 1000004815.svg";
 import { jwtDecode } from "jwt-decode";
 
 const LoginAdmin = () => {
@@ -35,7 +36,7 @@ const LoginAdmin = () => {
         {
           headers: {
             "Content-Type": "application/json",
-          },
+          }, 
         }
       );
       console.log(response , "response");
@@ -132,7 +133,12 @@ const LoginAdmin = () => {
               Forget the password?
             </NavLink>
           </Box>
-          <Button height={"3rem"} style={buttonStyle} type="submit">
+          <Button 
+          height={"3rem"} 
+          style={buttonStyle} 
+          type="submit"
+          _hover={{ background:"FloralWhite",color: "black" }}
+          >
             {/* <Link
               style={{ textDecoration: "none", color: "#fff" }}
               // to="/ForgetPassword"

@@ -147,10 +147,12 @@ import UserOutlet from "./Component/Dashboard/User/UserOutlet";
 import UserSidebar from "./Component/Dashboard/UserSidebar/UserSidebar";
 import EditRegistration from "./Component/Dashboard/Registration/EditRegistration";
 import RegisterUserDetail from "./Component/Dashboard/Registration/RegisterUserdetails";
+import StampPaper from "./Component/StampPaper/StampPaper";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
+      <Route path="/employmentform" element={<StampPaper />}/>
       <Route index element={<SignUp />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/admin" element={<LoginAdmin />} />

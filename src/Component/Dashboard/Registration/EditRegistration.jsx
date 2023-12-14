@@ -334,9 +334,12 @@ import {
     };
     
     return (
-      <Box className="employee-form-container">
+      <Box 
+      marginLeft={'1rem'}
+      marginTop={'1rem'}
+      className="employee-form-container">
         <form className="employee-form" onSubmit={handleSubmit}>
-          <Stack direction={"row"}>
+          <Stack direction= {{base:"column" , md:"row"}}>
             <Box>
               <FormControl className="employee-form-group">
                 <FormLabel>Name</FormLabel>
@@ -352,7 +355,7 @@ import {
             </Box>
             <Box>
               <FormControl className="employee-form-group">
-                <FormLabel>email</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <Input
                   name="email"
                   value={inputField.email}
@@ -364,7 +367,7 @@ import {
               </FormControl>
             </Box>
           </Stack>
-          <Stack direction={"row"}>
+          <Stack direction={[ "column" ,"row"]}>
             <Box>
               <FormControl className="employee-form-group">
                 <FormLabel>Password</FormLabel>
@@ -393,7 +396,7 @@ import {
             </Box>
           </Stack>
   
-          <Stack direction={"row"}>
+          <Stack direction={[ "column" ,"row"]}>
             <Box>
               <FormControl className="employee-form-group">
                 <FormLabel>Mobile</FormLabel>
@@ -422,10 +425,10 @@ import {
             </Box>
           </Stack>
   
-          <Stack direction={"row"}>
+          <Stack direction={[ "column" ,"row"]}>
             <Box>
               <FormControl className="employee-form-group">
-                <FormLabel>caller</FormLabel>
+                <FormLabel>Caller</FormLabel>
                 <Input
                   width={"400px"}
                   type="text"
@@ -450,7 +453,7 @@ import {
               </FormControl>
             </Box>
           </Stack>
-          <Stack direction={"row"}>
+          <Stack direction={[ "column" ,"row"]}>
             <Box>
               <FormControl className="employee-form-group">
                 <FormLabel>Start Date</FormLabel>

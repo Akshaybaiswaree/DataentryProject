@@ -1,5 +1,6 @@
 import React from "react";
-import logo from "../../Images/logo.png";
+// import logo from "../../Images/logo.png";
+import logo from "../../Images/Group 1000004815.svg";
 import { NavLink } from "react-router-dom";
 import { Box, Button, Image } from "@chakra-ui/react";
 
@@ -45,6 +46,7 @@ height={'3rem'}
             fontWeight={700}
             fontFamily='"Poppins", sans-serif'
             mt="20px"
+            _hover={{ background:"FloralWhite",color: "black" }}
           >
             Login as Admin
           </Button>
@@ -60,6 +62,7 @@ height={'3rem'}
           fontWeight={700}
           fontFamily='"Poppins", sans-serif'
           mt="20px"
+          _hover={{ background:"FloralWhite",color: "black" }}
         >
           Login as User
         </Button>

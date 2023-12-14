@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import { SearchIcon } from "@chakra-ui/icons";
 
 const Employees = () => {
   const [getdata, setGetData] = useState([]);
@@ -36,30 +37,55 @@ const Employees = () => {
 
   return (
     <>
-      <Flex>
-        <Box marginBottom={"1rem"} fontSize={"2rem"} fontWeight={"700"}>
+      <Flex direction="column" align="center">
+        <Box
+          color="#DD372D"
+          ml={["1rem", "0rem"]}
+          mt={["1rem", "0"]}
+          mb="1rem"
+          fontSize={["1.5rem", "2rem"]}
+          fontWeight="700"
+        >
           Employee
         </Box>
         <NavLink to="/employeeform">
           <Button
-            marginTop={"15px"}
-            marginLeft={"670px"}
+            mt="1rem"
+            mb={"1rem"}
             _hover={{ background: "white", color: "gray" }}
-            padding={"1rem"}
-            color={"white"}
-            bg={"black"}
+            p="1rem"
+            color="white"
+            bg="black"
+            width={"8rem"}
           >
             Add Employee
           </Button>
         </NavLink>
       </Flex>
-      <InputGroup marginLeft="6.5rem">
+      {/* <InputGroup marginLeft="6.5rem">
+
         <InputLeftElement
           pointerEvents="none"
           // children={<SearchIcon color="gray.300" />}
         />
         <Input
           width={"400px"}
+          type="text"
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
+      </InputGroup> */}
+      <InputGroup mt="1rem" ml={["1rem", "6.5rem"]} width={["90%", "400px"]}>
+        <InputLeftElement
+          pointerEvents="none"
+          children={<SearchIcon color="gray.300" />}
+        />
+        <Input
+          border="1px solid green"
+          width="100%"
           type="text"
           placeholder="Search..."
           value={search}
@@ -85,9 +111,9 @@ const Employees = () => {
               <Box>{item.mobile}</Box>
               <Box>{item.email}</Box>
               <Box>
-                <NavLink  to={`/employeeprofileedit/${item._id}`} >
+                <NavLink to={`/employeeprofileedit/${item._id}`}>
                   <Button
-                  style={{ color: "white" }}
+                    style={{ color: "white" }}
                     colorScheme="blackAlpha"
                     backgroundColor="black"
                     width="80%"

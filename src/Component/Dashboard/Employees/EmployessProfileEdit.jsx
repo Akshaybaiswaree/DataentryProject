@@ -205,6 +205,7 @@ import {
   AlertDialogOverlay,
   Box,
   Button,
+  Center,
   Flex,
   FormControl,
   FormLabel,
@@ -303,12 +304,12 @@ const EmployeeProfileEdit = () => {
   };
 
   return (
-    <Box className="employee-form-container">
+    <Box ml={"1rem"} mt={"1rem"} className="employee-form-container">
       <Box as="h3" fontSize="xl" mb="4">
         Edit User Detail
       </Box>
       <form className="employee-form">
-        <Stack direction={"row"}>
+        <Stack direction={["column", "row"]}>
           <Box>
             <FormControl className="employee-form-group">
               <FormLabel>Name</FormLabel>
@@ -334,27 +335,8 @@ const EmployeeProfileEdit = () => {
             </FormControl>
           </Box>
         </Stack>
-        {/* <Stack direction={"row"}>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>P</FormLabel>
-              <Input
-              value={email}
-              onChange={(e)=>(setEmail(e.target.value))}
-                width={"400px"}
-                type="password"
-                placeholder="kaveri@2023"
-              />
-            </FormControl>
-          </Box>
-          <Box>
-            <FormControl className="employee-form-group">
-              <FormLabel>Access Code</FormLabel>
-              <Input width={"400px"} type="text" placeholder="******" />
-            </FormControl>
-          </Box>
-        </Stack> */}
-        <Stack direction={"row"}>
+
+        <Stack direction={["column", "row"]}>
           <Box>
             <FormControl className="employee-form-group">
               <FormLabel>Mobile</FormLabel>
@@ -380,7 +362,7 @@ const EmployeeProfileEdit = () => {
             </FormControl>
           </Box>
         </Stack>
-        <Stack direction={"row"}>
+        <Stack direction={["column", "row"]}>
           <Box>
             {" "}
             <FormControl className="employee-form-group">
@@ -407,7 +389,7 @@ const EmployeeProfileEdit = () => {
             </FormControl>
           </Box>
         </Stack>
-        <Stack direction={"row"}>
+        <Stack direction={["column", "row"]}>
           <Box>
             {" "}
             <FormControl className="employee-form-group">
@@ -436,11 +418,26 @@ const EmployeeProfileEdit = () => {
         </Stack>
       </form>
 
-      <Link to={`/employeeprofileedit/${userId}`}>
+      {/* <Link to={`/employeeprofileedit/${userId}`}>
         <EditIcon />
+      </Link> */}
+
+      <Link to={`/employeeprofileedit/${userId}`}>
+        <Button marginTop={"1rem"} colorScheme="blue">
+          Edit
+        </Button>
       </Link>
 
-      <DeleteIcon onClick={onOpen} />
+      {/* <DeleteIcon onClick={onOpen} /> */}
+      <Button
+      ml={'1rem'}
+        marginTop={"1rem"}
+        _hover={{ background: "white", color: "gray" }}
+        onClick={onOpen}
+        bg={"red"}
+      >
+        Delete
+      </Button>
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
@@ -461,20 +458,23 @@ const EmployeeProfileEdit = () => {
                 Cancel
               </Button>
               <Button
-                colorScheme="red"
+                colorScheme="green"
                 onClick={() => {
                   onClose();
                   DeleteUser(userId);
                 }}
                 ml={3}
               >
-                Delete
+                YES
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
+      <br/>
+
       <Button
+    
         onClick={UpdatedValue}
         className="employee-btn"
         colorScheme="teal"
@@ -482,6 +482,7 @@ const EmployeeProfileEdit = () => {
       >
         Save
       </Button>
+     
     </Box>
   );
 };
