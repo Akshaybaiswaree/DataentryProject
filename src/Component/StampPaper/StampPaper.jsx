@@ -13,11 +13,44 @@ import {
 } from "@chakra-ui/react";
 // import image from "./SVG STAM.svg";
 import image from "../../Images/SVG STAM.svg";
+import { useState } from "react";
+import axios from "axios";
 
 const StampPaper = () => {
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [photo, setPhoto] = useState(null);
+  const [signature, setSignature] = useState(null);
+
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData();
+
+      formData.append("name", name);
+      formData.append("address", address);
+      formData.append("email", email);
+      formData.append("signature", signature);
+      formData.append("photo", photo);
+
+      const config = {
+        method: "post",
+        url: "http://localhost:5000/user/add_terms",
+        data: formData,
+      };
+
+      const response = await axios(config);
+      console.log(response, "resp");
+    } catch (err) {
+      console.log("err in fetching", err);
+    }
+  };
+
   return (
     <>
-      <Box m={["1rem", "7rem"]}>
+      <Box m={["1rem", "7rem"]} 
+        textJustify="inter-word"
+         >
         <Box textAlign="center">
           <Image
             mx="auto" // Center the image horizontally
@@ -26,7 +59,7 @@ const StampPaper = () => {
             src={image}
             alt="Description of the image"
             mb={{ base: "2", lg: "0" }}
-          /> 
+          />
 
           <Heading as="h2" mb={{ base: "2", lg: "4" }}>
             Legal Employment Contract 2023
@@ -37,7 +70,7 @@ const StampPaper = () => {
             Eleven Months From 2023-11-30 BETWEEN:
           </Text>
 
-          <Text fontSize={'1.5rem'}>
+          <Text fontSize={"1.5rem"}>
             <strong>Zemex Service of </strong>
           </Text>
           <Text>
@@ -45,7 +78,7 @@ const StampPaper = () => {
             INDIA(IN), 302031 of
           </Text>
 
-          <Text fontSize={'1.5rem'}>
+          <Text fontSize={"1.5rem"}>
             <strong>(The "Employer")</strong>
           </Text>
 
@@ -96,6 +129,7 @@ const StampPaper = () => {
         {/* Commencement Date and Term Section */}
         <Box>
           <Heading as="h3" mb={4}>
+            <br />
             Commencement Date and Term
           </Heading>
           <Text>
@@ -116,6 +150,7 @@ const StampPaper = () => {
         {/* Job Title and Description Section */}
         <Box>
           <Heading as="h3" mb={4}>
+            <br />
             1. Job Title and Description
           </Heading>
           <Text>
@@ -152,6 +187,7 @@ const StampPaper = () => {
         {/* Employee Remuneration Section */}
         <Box>
           <Heading as="h3" mb={4}>
+            <br />
             2. Employee Remuneration
           </Heading>
           <Text>
@@ -200,7 +236,7 @@ const StampPaper = () => {
             Incomplete Submission Only.
             <br />
             <br />
-            <br /> <br />
+            <br />
             {/* ... (rest of the Employee Remuneration section) */}
           </Text>
         </Box>
@@ -281,6 +317,7 @@ const StampPaper = () => {
         {/* Termination of Employment Section */}
         <Box>
           <Heading as="h3" mb={4}>
+            <br />
             4. Termination of Employment
           </Heading>
           <Text>
@@ -420,7 +457,9 @@ const StampPaper = () => {
           </Text>
         </Box>
         <Box>
-          <Text fontWeight="bold">IN WITNESS WHEREOF</Text>
+          <Text fontSize={"1.3rem"} fontWeight="bold">
+            IN WITNESS WHEREOF
+          </Text>
           <Text>
             The Parties Hereto Have Executed These Presents On the Date Herein
             Before Written :-
@@ -440,25 +479,31 @@ const StampPaper = () => {
             B. Employee : -
           </Text>
         </Box>
-        <FormControl   w={["350px" ,'400px']}>
+        <FormControl w={["350px", "400px"]}>
           <FormLabel>Name</FormLabel>
           <Input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             type="text"
             placeholder="Enter Name"
             _hover={{ borderColor: "teal.500" }}
           />
-        </FormControl >
-        <FormControl w={["350px" ,'400px']}>
+        </FormControl>
+        <FormControl w={["350px", "400px"]}>
           <FormLabel>Email</FormLabel>
           <Input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             placeholder="Enter Your Email "
             _hover={{ borderColor: "teal.500" }}
           />
         </FormControl>
-        <FormControl w={["350px" ,'400px']}>
+        <FormControl w={["350px", "400px"]}>
           <FormLabel>Address</FormLabel>
           <Input
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
             type="text"
             placeholder="Enter your Address"
             _hover={{ borderColor: "teal.500" }}
@@ -466,27 +511,32 @@ const StampPaper = () => {
         </FormControl>
 
         {/* Upload Signature and Photo Section */}
-        <Table 
-        w={["300px" ,'700px']}
-        style={{ marginTop: "20px" }}>
+        <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
           <Tr>
             <Td>Upload Signature</Td>
             <Td>
-              <Input type="file" />
+              <Input
+                onChange={(e) => setSignature(e.target.files[0])}
+                type="file"
+              />
             </Td>
           </Tr>
           <Tr>
             <Td>Upload Your Photo</Td>
             <Td>
-              <Input type="file" />
+              <Input
+                onChange={(e) => setPhoto(e.target.files[0])}
+                type="file"
+              />
             </Td>
           </Tr>
         </Table>
         <Button
+          onClick={handleSubmit}
           mt={"1rem"}
           ml={"1.6rem"}
           bg={"#DD372D"}
-          _hover={{ background:"gray",color: "white" }}
+          _hover={{ background: "gray", color: "white" }}
         >
           Submit
         </Button>

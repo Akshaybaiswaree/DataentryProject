@@ -16,7 +16,7 @@
 //   const [lastName, setLastName] = useState('');
 //   const [email, setEmail] = useState('');
 //   const [password, setPassword] = useState('');
-//   const [confirmPassword, setConfirmPassword] = useState(''); 
+//   const [confirmPassword, setConfirmPassword] = useState('');
 
 //   const handleSignup = async () => {
 //     //saari value store/get krne ke liye
@@ -31,16 +31,16 @@
 
 //     try {
 //         //  fetch we return promise and it will wait to be resolved , agar await nhi likhe toh fetch function ko pata nhi kaha rukhna
-        
+
 //       const response = await fetch('http://localhost:5000/user/signup',
 //        {
 //         method: 'POST',
 //         //header isiliye q ki fetch use kiya
-//         headers: { 
+//         headers: {
 //           'Content-Type': 'application/json',
 //         },
 //         body: JSON.stringify(userData),
- 
+
 //         //"firstname" : "firstname" key value pair pe aagaya
 //       });
 //         console.log("res",response)
@@ -66,7 +66,7 @@
 //       <VStack spacing={4}>
 //         <FormControl id="firstName">
 //           <FormLabel>First Name</FormLabel>
-//           <Input type="text" 
+//           <Input type="text"
 //           value={firstName}
 //           onChange={(e) => setFirstName(e.target.value)} />
 //         </FormControl>
@@ -99,15 +99,15 @@
 //       <Center>
 //       <Box>
 //         <Image src={Logo}></Image>
-//         <Box 
-        
+//         <Box
+
 //         p={8} maxWidth="400px" borderWidth={1} borderRadius={8} boxShadow="lg">
-//           <VStack 
+//           <VStack
 //            height={'15rem'}
 //           spacing={4}>
 //             <FormControl id="firstName">
 //               <FormLabel>First Name</FormLabel>
-//               <Input type="text" 
+//               <Input type="text"
 //                 value={firstName}
 //                 onChange={(e) => setFirstName(e.target.value)} />
 //             </FormControl>
@@ -144,9 +144,7 @@
 
 // export default SignUp;
 
-
-
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -159,6 +157,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Logo from "../../Images/Group 1000004815.svg";
+import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   // Move the useState hooks outside the handleSignup function
   const [firstName, setFirstName] = useState("");
@@ -166,6 +165,10 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const formRef = useRef(null);
 
   const handleSignup = async () => {
     const userData = {
@@ -187,6 +190,7 @@ const SignUp = () => {
       console.log("res", response);
       if (response.ok) {
         const responseData = await response.json();
+        navigate("./Login");
         console.log("Signup successfully. Response:", responseData);
       } else {
         console.error("Signup failed. HTTP Status:", response.status);
@@ -195,73 +199,73 @@ const SignUp = () => {
     } catch (error) {
       console.error("Error during signup:", error);
     }
+    formRef.current.reset();
   };
 
   return (
     <>
       <Center>
-      <Box mt="1" w={{ base: "80%", md: "400px" }}>
-        <Center>
-          <Image h="70px" src={Logo} mb="2" />
-        </Center>
-        <Box
-          p={8}
-          maxWidth="400px"
-          borderWidth={1}
-          borderRadius={8}
-          boxShadow="lg"
-        >
-          <VStack spacing={4}>
-            <FormControl id="firstName">
-              <FormLabel>First Name</FormLabel>
-              <Input
-                type="text"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </FormControl>
-            <FormControl id="lastName">
-              <FormLabel>Last Name</FormLabel>
-              <Input
-                type="text"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </FormControl>
-            <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormControl>
-            <FormControl id="confirmPassword">
-              <FormLabel>Confirm Password</FormLabel>
-              <Input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </FormControl>
-            <Button colorScheme="blue" w="100%" onClick={handleSignup}>
-              Sign Up
-            </Button>
-          </VStack>
+        <Box mt="1" w={{ base: "80%", md: "400px" }}>
+          <Center>
+            <Image h="70px" src={Logo} mb="2" />
+          </Center>
+          <Box
+            p={8}
+            maxWidth="400px"
+            borderWidth={1}
+            borderRadius={8}
+            boxShadow="lg"
+          >
+            <VStack spacing={4}>
+              <FormControl id="firstName">
+                <FormLabel>First Name</FormLabel>
+                <Input
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </FormControl>
+              <FormControl id="lastName">
+                <FormLabel>Last Name</FormLabel>
+                <Input
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </FormControl>
+              <FormControl id="email">
+                <FormLabel>Email address</FormLabel>
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </FormControl>
+              <FormControl id="password">
+                <FormLabel>Password</FormLabel>
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </FormControl>
+              <FormControl id="confirmPassword">
+                <FormLabel>Confirm Password</FormLabel>
+                <Input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </FormControl>
+              <Button colorScheme="blue" w="100%" onClick={handleSignup}>
+                Sign Up
+              </Button>
+            </VStack>
+          </Box>
         </Box>
-      </Box>
-    </Center>
+      </Center>
     </>
   );
 };
 
 export default SignUp;
-

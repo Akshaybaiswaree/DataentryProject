@@ -172,14 +172,14 @@ export default function SideBar() {
                         borderRadius="10px"
                       >
                         <ListIcon as={CiMoneyBill} color="gray.500" ml="10px" />
-                        <NavLink to="/user/cancel">
+                        <NavLink to="/user/userAgreement">
                           <Text
                             as="span"
                             pl="10px"
                             fontSize={{ base: "0.6rem", md: "1rem" }}
                             color="black"
                           >
-                            Cancel
+                           User Agreement
                           </Text>
                         </NavLink>
                       </ListItem>

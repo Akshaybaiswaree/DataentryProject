@@ -144,6 +144,38 @@ const UserLogin = () => {
   };
 
   // handle submit login button
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   console.log(inputFields);
+  //   try {
+  //     const response = await axios.post(
+  //       `http://localhost:5000/user/signin`,
+  //       inputFields, // Pass inputFields directly as the request body
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         }, 
+  //       }
+  //     );
+  //     console.log(response , "response");
+  //     // ectracting token from response
+  //     const token = response.data.token;
+  //     // decodint the token
+  //     const decodedToken = jwtDecode(token);
+  //     // save the token in localstorage
+  //     localStorage.setItem("token", JSON.stringify(decodedToken));
+  //     // alert("Login successfully.");
+  //     //  Navigate to dahboard after login
+  //     if (response.status === 200) {
+        
+  //       navigate("/dashboard");
+  //     } else {
+  //       alert("Invalid credentials ");
+  //     }
+  //   } catch (error) {
+  //     console.log(`Error is ${error}`);
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(inputFields);
@@ -157,6 +189,12 @@ const UserLogin = () => {
           }, 
         }
       );
+
+   if(!response.data.isStamp){
+    navigate("/employmentform");
+    return true
+   }
+
       console.log(response , "response");
       // ectracting token from response
       const token = response.data.token;
@@ -195,7 +233,7 @@ const UserLogin = () => {
         >
           <Image width={"13rem"} src={logo} alt="" />
           <Heading color="#000" fontFamily="Poppins, serif" size="lg">
-            Admin Login
+          User Login
           </Heading>
         </Box>
 
