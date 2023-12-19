@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import { ChevronLeftIcon, SearchIcon } from "@chakra-ui/icons";
+import axios from "axios";
 
 function UserAgreement() {
   const [getdata, setGetData] = useState([]);
@@ -17,16 +18,17 @@ function UserAgreement() {
 
   useEffect(() => {
     ShowData();
-  }, []);
+  }, [setGetData]);
 
   const ShowData = async () => {
     const config = {
       method: "GET",
-      url: `http://localhost:5000/user/get_terms?email=${email}`,
+      url: "http://localhost:5000/user/get_terms",
     };
     const GetEmplyeesApiResponse = await axios(config);
-    console.log("get user ", GetEmplyeesApiResponse.data.Employee);
-    setGetData(GetEmplyeesApiResponse.data.Employee);
+    console.log("get user ", GetEmplyeesApiResponse.data);
+    setGetData(GetEmplyeesApiResponse.data);
+    console.log(getdata, "getdata");
   };
 
   const filteredList = getdata?.filter((item) =>
@@ -35,7 +37,7 @@ function UserAgreement() {
 
   return (
     <>
-      <Flex>
+      {/* <Flex>
         <Box fontSize={"2rem"} fontWeight={"700"}>
           User Agreement Details
         </Box>
@@ -59,7 +61,7 @@ function UserAgreement() {
           width={"400px"}
           type="text"
           placeholder="Search..."
-          // value={searchQuary}
+          // value={name}
           // onChange={(e) => setSearchQuary(e.target.value)}
         />
 
@@ -102,7 +104,78 @@ function UserAgreement() {
         ) : (
           <p>No data available</p>
         )}
-      </div>
+      </div> */}
+      <Box margin={"1rem"}>
+        <Box fontSize={"2rem"} fontWeight={"700"}>
+          User Agreement Details
+        </Box>
+
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<SearchIcon color="gray.300" />}
+          />
+          <Input
+            width={"400px"}
+            type="text"
+            placeholder="Search..."
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+        </InputGroup>
+        <div
+          className="table"
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            width: "80%",
+            padding: "1rem",
+          }}
+        >
+          {getdata && getdata.length > 0 ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Email</th>
+                  <th>Signature</th>
+                  <th>Photo</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredList.map((item) => (
+                  <tr key={item.id}>
+                    <td>{item.name}</td>
+                    <td>{item.address}</td>
+                    <td>{item.email}</td>
+                    <td>{item.signature}</td>
+                    <td>{item.photo}</td>
+                    <td>
+                      <Box>
+                        <NavLink to={`/employmentformdetails/${item._id}`}>
+                          <Button
+                            colorScheme="blackAlpha"
+                            backgroundColor="black"
+                            width="80%"
+                          >
+                            View Detail
+                          </Button>
+                        </NavLink>
+                      </Box>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No data available</p>
+          )}
+        </div>
+      </Box>
     </>
   );
 }

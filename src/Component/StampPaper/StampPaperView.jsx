@@ -13,44 +13,84 @@ import {
 } from "@chakra-ui/react";
 // import image from "./SVG STAM.svg";
 import image from "../../Images/SVG STAM.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
-const StampPaper = () => {
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [photo, setPhoto] = useState(null);
-  const [signature, setSignature] = useState(null);
+const StampPaperView = () => {
+  const { userId } = useParams();
+  console.log(userId, "userId");
+const appUrl = "http://localhost:5000/";
+  const [inputField, setInputField] = useState({
+    name: "",
+    email: "",
 
-  const handleSubmit = async () => {
-    try {
-      const formData = new FormData();
+    address: "",
 
-      formData.append("name", name);
-      formData.append("address", address);
-      formData.append("email", email);
-      formData.append("signature", signature);
-      formData.append("photo", photo);
+    photo: "",
+    signature: "",
+  });
 
-      const config = {
-        method: "post",
-        url: "http://localhost:5000/user/add_terms",
-        data: formData,
+  // useEffect to call
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/user/get_terms_by_id/${userId}`
+        );
+        const data = response.data;
+        console.log(data , "data hai ye");
+        console.log(data?.User);
+        console.log(`${appUrl} `+ data?.signature)
+        setInputField({
+          name: data?.name,
+          email: data?.email,
+         
+          address: data?.address,
+          signature:data?.signature,
+          photo:data?.photo,
+        });
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    fetchUserDetails();
+  }, [userId]);
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+
+    setInputField({
+      ...prevValue,
+      [name]: value,
+    });
+  };
+  console.log("onChangeHandler", onChangeHandler);
+
+
+
+  const handleFileChange = (e, field) => {
+    const file = e.target.files[0];
+
+    // Check if a file is selected
+    if (file) {
+      // Read the file as a data URL
+      const reader = new FileReader();
+      reader.onload = () => {
+        setInputField({
+          ...inputField,
+          [field]: reader.result,
+        });
       };
-
-      const response = await axios(config);
-      console.log(response, "resp");
-    } catch (err) {
-      console.log("err in fetching", err);
+      reader.readAsDataURL(file);
     }
   };
 
+
   return (
     <>
-      <Box m={["1rem", "7rem"]} 
-      
-         >
+      <Box m={["1rem", "7rem"]}>
         <Box textAlign="center">
           <Image
             mx="auto" // Center the image horizontally
@@ -482,8 +522,9 @@ const StampPaper = () => {
         <FormControl w={["350px", "400px"]}>
           <FormLabel>Name</FormLabel>
           <Input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            onChange={onChangeHandler}
+            value={inputField.name}
             type="text"
             placeholder="Enter Name"
             _hover={{ borderColor: "teal.500" }}
@@ -492,8 +533,11 @@ const StampPaper = () => {
         <FormControl w={["350px", "400px"]}>
           <FormLabel>Email</FormLabel>
           <Input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            //   value={email}
+            //   onChange={(e) => setEmail(e.target.value)}
+            value={inputField.email}
+            onChange={onChangeHandler}
             type="email"
             placeholder="Enter Your Email "
             _hover={{ borderColor: "teal.500" }}
@@ -502,8 +546,9 @@ const StampPaper = () => {
         <FormControl w={["350px", "400px"]}>
           <FormLabel>Address</FormLabel>
           <Input
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            name="address"
+            value={inputField.address}
+            onChange={onChangeHandler}
             type="text"
             placeholder="Enter your Address"
             _hover={{ borderColor: "teal.500" }}
@@ -511,13 +556,14 @@ const StampPaper = () => {
         </FormControl>
 
         {/* Upload Signature and Photo Section */}
-        <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
+        {/* <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
           <Tr>
             <Td>Upload Signature</Td>
             <Td>
               <Input
-                onChange={(e) => setSignature(e.target.files[0])}
-                type="file"
+             name="signature"
+             value={inputField.signature}
+             onChange={onChangeHandler}
               />
             </Td>
           </Tr>
@@ -525,24 +571,45 @@ const StampPaper = () => {
             <Td>Upload Your Photo</Td>
             <Td>
               <Input
-                onChange={(e) => setPhoto(e.target.files[0])}
-                type="file"
+            name="photo"
+            value={inputField.photo}
+            onChange={onChangeHandler}
+        
               />
             </Td>
           </Tr>
-        </Table>
-        <Button
-          onClick={handleSubmit}
-          mt={"1rem"}
-          ml={"1.6rem"}
-          bg={"#DD372D"}
-          _hover={{ background: "gray", color: "white" }}
-        >
-          Submit
-        </Button>
+        </Table> */}
+        <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
+        <Tr>
+          <Td>Upload Signature</Td>
+          <Td>
+          
+            {inputField.signature && (
+              <img
+                src={`${appUrl} `+ inputField?.signature}
+                alt="Signature Preview"
+                style={{ maxWidth: '100px', marginTop: '10px' }}
+              />
+            )}
+          </Td>
+        </Tr>
+        <Tr>
+          <Td>Upload Your Photo</Td>
+          <Td>
+           
+            {inputField.photo && (
+              <img
+                src={inputField.photo}
+                alt="Photo Preview"
+                style={{ maxWidth: '100px', marginTop: '10px' }}
+              />
+            )}
+          </Td>
+        </Tr>
+      </Table>
       </Box>
     </>
   );
 };
 
-export default StampPaper;
+export default StampPaperView;

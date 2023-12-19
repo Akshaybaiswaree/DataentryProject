@@ -1,13 +1,86 @@
-import React from "react";
-// import logo from "../../Images/logo.png";
-import logo from "../../Images/Group 1000004815.svg";
-import { NavLink } from "react-router-dom";
-import { Box, Button, Image } from "@chakra-ui/react";
+// import React from "react";
+// // import logo from "../../Images/logo.png";
+// import logo from "../../Images/Group 1000004815.svg";
+// import { NavLink } from "react-router-dom";
+// import { Box, Button, Image } from "@chakra-ui/react";
 
-const Login = () => {
+// const Login = () => {
 
 
   
+//   return (
+//     <Box
+//       display="flex"
+//       flexDirection="column"
+//       alignItems="center"
+//       justifyContent="center"
+//       height="100vh" // Center content vertically on the page
+//     >
+//         <Box 
+       
+//        p={4} borderRadius="md">
+//         {/* Adjusted the Image component */}
+//         <Image 
+//        width={'15rem'}
+//        height="auto" src={logo} alt="Logo Image" />
+//       </Box>
+
+//       <Box
+     
+//         display="flex"
+//         flexDirection="column"
+//         alignItems="center"
+        
+        
+//         maxWidth="400px" // Set a maximum width for responsiveness
+//         width="100%" // Take up full width on smaller screens
+//       >
+//         <NavLink to="/admin-user" style={{ textDecoration: "none", width: "100%" }}>
+//           <Button
+// height={'3rem'}
+//             width="100%"
+//             borderRadius="25px"
+//             border="2px solid black"
+//             color="#fff"
+//             background="black"
+//             fontWeight={700}
+//             fontFamily='"Poppins", sans-serif'
+//             mt="20px"
+//             _hover={{ background:"FloralWhite",color: "black" }}
+//           >
+//             Login
+//           </Button>
+//         </NavLink>
+//         {/* <NavLink to="/userlogin" style={{ textDecoration: "none", width: "100%" }}>
+//         <Button
+//         height={'3rem'}
+//           width="100%"
+//           borderRadius="25px"
+//           border="2px solid black"
+//           color="#fff"
+//           background="black"
+//           fontWeight={700}
+//           fontFamily='"Poppins", sans-serif'
+//           mt="20px"
+//           _hover={{ background:"FloralWhite",color: "black" }}
+//         >
+//           Login as User
+//         </Button>
+//        </NavLink> */}
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default Login;
+
+import React, { useState } from "react";
+import logo from "../../Images/Group 1000004815.svg";
+import { NavLink } from "react-router-dom";
+import { Box, Button, Image } from "@chakra-ui/react";
+// Admin Login 
+
+const Login = () => {
   return (
     <Box
       display="flex"
@@ -16,28 +89,21 @@ const Login = () => {
       justifyContent="center"
       height="100vh" // Center content vertically on the page
     >
-        <Box 
-       
-       p={4} borderRadius="md">
+      <Box p={4} borderRadius="md">
         {/* Adjusted the Image component */}
-        <Image 
-       width={'15rem'}
-       height="auto" src={logo} alt="Logo Image" />
+        <Image width={"15rem"} height="auto" src={logo} alt="Logo Image" />
       </Box>
 
       <Box
-     
         display="flex"
         flexDirection="column"
         alignItems="center"
-        
-        
         maxWidth="400px" // Set a maximum width for responsiveness
         width="100%" // Take up full width on smaller screens
       >
         <NavLink to="/admin" style={{ textDecoration: "none", width: "100%" }}>
           <Button
-height={'3rem'}
+            height={"3rem"}
             width="100%"
             borderRadius="25px"
             border="2px solid black"
@@ -51,25 +117,30 @@ height={'3rem'}
             Login as Admin
           </Button>
         </NavLink>
-        <NavLink to="/userlogin" style={{ textDecoration: "none", width: "100%" }}>
-        <Button
-        height={'3rem'}
-          width="100%"
-          borderRadius="25px"
-          border="2px solid black"
-          color="#fff"
-          background="black"
-          fontWeight={700}
-          fontFamily='"Poppins", sans-serif'
-          mt="20px"
-          _hover={{ background:"FloralWhite",color: "black" }}
+        <NavLink
+          to="/userlogin"
+          style={{ textDecoration: "none", width: "100%" }}
         >
-          Login as User
-        </Button>
-       </NavLink>
+          <Button
+            height={"3rem"}
+            width="100%"
+            borderRadius="25px"
+            border="2px solid black"
+            color="#fff"
+            background="black"
+            fontWeight={700}
+            fontFamily='"Poppins", sans-serif'
+            mt="20px"
+            _hover={{ background:"FloralWhite",color: "black" }}
+            
+          >
+            Login as User
+          </Button>
+        </NavLink>
       </Box>
     </Box>
   );
 };
 
 export default Login;
+

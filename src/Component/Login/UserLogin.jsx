@@ -7,7 +7,6 @@
 
 // const UserLogin = () => {
 
-
 //   return (
 //     <Box
 //       width={"100%"}
@@ -25,12 +24,11 @@
 //         marginY="20px"
 //       >
 //         <Image width={"13rem"} src={logo} alt="" />
-      
 
 //         <Heading color="#000" fontFamily="Poppins, serif" size="lg">
 //           User Login
 //         </Heading>
-        
+
 //       </Box>
 
 //       <Flex
@@ -80,9 +78,9 @@
 //         </Box>
 //         <NavLink to ="/usersidebar">
 //         <Button height={"3rem"} style={buttonStyle}>
-          
+
 //             Login
-          
+
 //         </Button>
 //         </NavLink>
 //       </Flex>
@@ -143,39 +141,6 @@ const UserLogin = () => {
     });
   };
 
-  // handle submit login button
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   console.log(inputFields);
-  //   try {
-  //     const response = await axios.post(
-  //       `http://localhost:5000/user/signin`,
-  //       inputFields, // Pass inputFields directly as the request body
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         }, 
-  //       }
-  //     );
-  //     console.log(response , "response");
-  //     // ectracting token from response
-  //     const token = response.data.token;
-  //     // decodint the token
-  //     const decodedToken = jwtDecode(token);
-  //     // save the token in localstorage
-  //     localStorage.setItem("token", JSON.stringify(decodedToken));
-  //     // alert("Login successfully.");
-  //     //  Navigate to dahboard after login
-  //     if (response.status === 200) {
-        
-  //       navigate("/dashboard");
-  //     } else {
-  //       alert("Invalid credentials ");
-  //     }
-  //   } catch (error) {
-  //     console.log(`Error is ${error}`);
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(inputFields);
@@ -186,16 +151,16 @@ const UserLogin = () => {
         {
           headers: {
             "Content-Type": "application/json",
-          }, 
+          },
         }
       );
 
-   if(!response.data.isStamp){
-    navigate("/employmentform");
-    return true
-   }
+      if (!response.data.isStamp) {
+        navigate("/employmentform");
+        return true;
+      }
 
-      console.log(response , "response");
+      console.log(response, "response");
       // ectracting token from response
       const token = response.data.token;
       // decodint the token
@@ -204,8 +169,12 @@ const UserLogin = () => {
       localStorage.setItem("token", JSON.stringify(decodedToken));
       // alert("Login successfully.");
       //  Navigate to dahboard after login
+    if(response.data.status === "freeze"){
+      navigate("/qccheck")
+    }
+
+
       if (response.status === 200) {
-        
         navigate("/dashboard");
       } else {
         alert("Invalid credentials ");
@@ -233,7 +202,7 @@ const UserLogin = () => {
         >
           <Image width={"13rem"} src={logo} alt="" />
           <Heading color="#000" fontFamily="Poppins, serif" size="lg">
-          User Login
+            User Login
           </Heading>
         </Box>
 
@@ -290,11 +259,11 @@ const UserLogin = () => {
               Forget the password?
             </NavLink>
           </Box>
-          <Button 
-          height={"3rem"} 
-          style={buttonStyle} 
-          type="submit"
-          _hover={{ background:"FloralWhite",color: "black" }}
+          <Button
+            height={"3rem"}
+            style={buttonStyle}
+            type="submit"
+            _hover={{ background: "FloralWhite", color: "black" }}
           >
             {/* <Link
               style={{ textDecoration: "none", color: "#fff" }}
@@ -335,4 +304,3 @@ const buttonStyle = {
 };
 
 export default UserLogin;
-

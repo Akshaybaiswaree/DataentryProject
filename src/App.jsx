@@ -38,11 +38,19 @@ import EditRegistration from "./Component/Dashboard/Registration/EditRegistratio
 import RegisterUserDetail from "./Component/Dashboard/Registration/RegisterUserdetails";
 import StampPaper from "./Component/StampPaper/StampPaper";
 import UserAgreement from "./Component/Dashboard/UserAgreement/UserAgreement";
+import StampPaperView from "./Component/StampPaper/StampPaperView";
+import QcCheck from "./Component/Login/Qccheck";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/employmentform" element={<StampPaper />} />
+      <Route
+            path="employmentformdetails/:userId"
+            element={<StampPaperView />}
+          />
+           <Route path="qccheck" element={<QcCheck />} />
       <Route index element={<SignUp />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/admin" element={<LoginAdmin />} />
@@ -55,6 +63,7 @@ const router = createBrowserRouter(
           path="dashboard"
           element={<ProtectedRoute element={<Dashboard />} />}
         >
+
           <Route index element={<DashboardOverview />} />
         </Route>
 
