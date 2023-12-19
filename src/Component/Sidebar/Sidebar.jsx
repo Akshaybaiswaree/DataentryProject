@@ -62,7 +62,7 @@ export default function SideBar() {
   return (
     <>
     
-      <List p="10px" bg="">
+    <List p="10px" bg="">
         <ListItem className="listItem" p="10px" borderRadius="10px">
           <Flex alignItems="center">
             <DashboardIcon style={{ marginTop: "0rem" }} />

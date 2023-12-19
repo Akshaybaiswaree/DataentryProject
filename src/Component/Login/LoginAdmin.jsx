@@ -210,11 +210,16 @@ import { jwtDecode } from "jwt-decode";
 
 // Admin Login Page
 const LoginAdmin = () => {
+
+  const [userrole , setUserrole] =useState("")
+
+
   const navigate = useNavigate();
   const [inputFields, setInputFields] = useState({
-    email: "",
+    email: "",       
     password: "",
   });
+  
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -225,11 +230,11 @@ const LoginAdmin = () => {
       };
     });
   };
-
+  
   // handle submit login button
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputFields);
+    console.log(inputFields , "inputFields")
     try {
       const response = await axios.post(
         ` http://localhost:5000/user/adminsignin`,
@@ -241,6 +246,9 @@ const LoginAdmin = () => {
         }
       );
       console.log(response,"Admin Ka Email and Password");
+
+      setUserrole(response.data.role)
+      console.log(response.data.role , "response.data.role")
       // extracting token from response
       const token = response.data.token;
       // decodint the token

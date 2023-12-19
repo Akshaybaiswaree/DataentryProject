@@ -146,7 +146,7 @@ const UserLogin = () => {
     console.log(inputFields);
     try {
       const response = await axios.post(
-        `http://localhost:5000/user/signin`,
+        `http://localhost:5000/user/userlogin`,
         inputFields, // Pass inputFields directly as the request body
         {
           headers: {
@@ -155,12 +155,16 @@ const UserLogin = () => {
         }
       );
 
-      if (!response.data.isStamp) {
-        navigate("/employmentform");
-        return true;
-      }
+      // if (!response.data.isStamp) {
+      //   navigate("/employmentform");
+      //   return true;
+      // }
 
       console.log(response, "response");
+      if(response.data.status === "Freeze"){
+        navigate("/qccheck")
+      }
+     console.log(response.data.status , "response.data.status")
       // ectracting token from response
       const token = response.data.token;
       // decodint the token
@@ -169,10 +173,7 @@ const UserLogin = () => {
       localStorage.setItem("token", JSON.stringify(decodedToken));
       // alert("Login successfully.");
       //  Navigate to dahboard after login
-    if(response.data.status === "freeze"){
-      navigate("/qccheck")
-    }
-
+    
 
       if (response.status === 200) {
         navigate("/dashboard");
