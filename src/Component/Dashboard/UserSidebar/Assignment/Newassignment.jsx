@@ -111,26 +111,7 @@ const NewAssignment = () => {
     }
   };
 
-  // const getDataAssignmentSave = async()=>{
-  //   const payLodeHandle = {
-  //     name : name,
-  //     address : address,
-  //     pinCode : pinCode,
-  //     jobFunctional : jobFunction,
-  //     phone : mobile,
-  //     annualRevenue : annualRevenue,
-  //     cleanCode : clientCode
-  //   }
-
-  //   const config = {
-  //     method : "POST",
-  //     url : "http://localhost:5000/user/add_assignment",
-  //     data : payLodeHandle
-  //   }
-
-  //   const responce = await axios(config)
-  //   console.log(responce, "New Assinmnet ki Detail");
-  // }
+  
  
 
   return (
