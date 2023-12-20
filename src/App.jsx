@@ -52,13 +52,8 @@ const router = createBrowserRouter(
         element={<StampPaperView />}
       />
       <Route path="qccheck" element={<QcCheck />} />
-      <Route
-        path="employmentformdetails/:userId"
-        element={<StayPrimaryLandscape />}
-      />
-
-      <Route index element={<SignUp />} />
-      <Route path="/Login" element={<Login />} />
+      <Route index element={<Login />} />
+       <Route path="/signup" element={<SignUp />} /> 
       <Route path="/admin" element={<LoginAdmin />} />
       <Route path="/userlogin" element={<UserLogin />} />
       <Route path="/ForgetPassword" element={<ForgetPassword />} />
