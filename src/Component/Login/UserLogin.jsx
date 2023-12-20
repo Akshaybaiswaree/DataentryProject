@@ -7,7 +7,6 @@
 
 // const UserLogin = () => {
 
-
 //   return (
 //     <Box
 //       width={"100%"}
@@ -25,12 +24,11 @@
 //         marginY="20px"
 //       >
 //         <Image width={"13rem"} src={logo} alt="" />
-      
 
 //         <Heading color="#000" fontFamily="Poppins, serif" size="lg">
 //           User Login
 //         </Heading>
-        
+
 //       </Box>
 
 //       <Flex
@@ -80,9 +78,9 @@
 //         </Box>
 //         <NavLink to ="/usersidebar">
 //         <Button height={"3rem"} style={buttonStyle}>
-          
+
 //             Login
-          
+
 //         </Button>
 //         </NavLink>
 //       </Flex>
@@ -148,8 +146,8 @@ const UserLogin = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/user/userlogin",
-        inputFields,
+        `http://localhost:5000/user/userlogin`,
+        inputFields, // Pass inputFields directly as the request body
         {
           headers: {
             "Content-Type": "application/json",
@@ -157,20 +155,25 @@ const UserLogin = () => {
         }
       );
 
-      if (!response.data.isStamp) {
-        navigate("/employmentform");
-        return;
-      }
+      // if (!response.data.isStamp) {
+      //   navigate("/employmentform");
+      //   return true;
+      // }
 
       console.log(response, "response");
-
+      if(response.data.status === "Freeze"){
+        navigate("/qccheck")
+      }
+     console.log(response.data.status , "response.data.status")
+      // ectracting token from response
       const token = response.data.token;
       const decodedToken = jwtDecode(token);
       localStorage.setItem("token", JSON.stringify(decodedToken));
+      // alert("Login successfully.");
+      //  Navigate to dahboard after login
+    
 
-      if (response.data.status === "freeze") {
-        navigate("/qcCkack");
-      } else if (response.data.status === "success") {
+      if (response.status === 200) {
         navigate("/dashboard");
       } else {
         alert("Invalid credentials");
@@ -199,7 +202,7 @@ const UserLogin = () => {
         >
           <Image width={"13rem"} src={logo} alt="" />
           <Heading color="#000" fontFamily="Poppins, serif" size="lg">
-          User Login
+            User Login
           </Heading>
         </Box>
 
@@ -256,11 +259,11 @@ const UserLogin = () => {
               Forget the password?
             </NavLink>
           </Box>
-          <Button 
-          height={"3rem"} 
-          style={buttonStyle} 
-          type="submit"
-          _hover={{ background:"FloralWhite",color: "black" }}
+          <Button
+            height={"3rem"}
+            style={buttonStyle}
+            type="submit"
+            _hover={{ background: "FloralWhite", color: "black" }}
           >
             {/* <Link
               style={{ textDecoration: "none", color: "#fff" }}
@@ -301,4 +304,3 @@ const buttonStyle = {
 };
 
 export default UserLogin;
-

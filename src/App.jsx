@@ -19,7 +19,7 @@ import Login from "./Component/Login/Login";
 import LoginAdmin from "./Component/Login/LoginAdmin";
 import NewAssignment from "./Component/Dashboard/UserSidebar/Assignment/Newassignment";
 import Pending from "./Component/Dashboard/Pending/Pending";
-import PendingForm from "./Component/Dashboard/Pending/PendingForm";
+
 import Plan from "./Component/Dashboard/Plan/Plan";
 import ProtectedRoute from "./Component/ProtectedRoute/ProtectedRoute";
 import Recovery from "./Component/Dashboard/Recovery/Recovery";
@@ -38,12 +38,20 @@ import EditRegistration from "./Component/Dashboard/Registration/EditRegistratio
 import RegisterUserDetail from "./Component/Dashboard/Registration/RegisterUserdetails";
 import StampPaper from "./Component/StampPaper/StampPaper";
 import UserAgreement from "./Component/Dashboard/UserAgreement/UserAgreement";
+import StampPaperView from "./Component/StampPaper/StampPaperView";
+import QcCheck from "./Component/Login/Qccheck";
+import PendingDetails from "./Component/Dashboard/Pending/PendingDetails";
 import { StayPrimaryLandscape } from "@mui/icons-material";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/employmentform" element={<StampPaper />} />
+      <Route
+        path="employmentformdetails/:userId"
+        element={<StampPaperView />}
+      />
+      <Route path="qccheck" element={<QcCheck />} />
       <Route
         path="employmentformdetails/:userId"
         element={<StayPrimaryLandscape />}
@@ -59,9 +67,9 @@ const router = createBrowserRouter(
         {/* {/ ADMIN PART /} */}
         <Route
           path="dashboard"
-          element={<ProtectedRoute element={<Dashboard />} />}
+          element={<ProtectedRoute element={<Dashboard />} />}  //OUTLET
         >
-          <Route index element={<DashboardOverview />} />
+          <Route index element={<DashboardOverview />} /> 
         </Route>
 
         <Route
@@ -80,7 +88,8 @@ const router = createBrowserRouter(
             element={<RegisterUserDetail />}
           />
           <Route path="pending" element={<Pending />} />
-          <Route path="pendingform" element={<PendingForm />} />
+      
+          <Route path ="pendingformDetails/:userId" element={< PendingDetails />} />
           <Route path="plan" element={<Plan />} />
           <Route path="userAgreement" element={<UserAgreement />} />
         </Route>

@@ -9,7 +9,7 @@ import SideBar from "../Sidebar/Sidebar";
 //import UserSidebar from "../Dashboard/UserSidebar/UserSidebar"; 
 
 function RootLayout() {
-  // const [currentSidebar, setCurrentSidebar] = useState(null);
+  // const [currentSidebar, setCurrentSidebar] = useState();
 
   // const toggleSidebar = (role) => {
   //   setCurrentSidebar(role);
@@ -22,6 +22,9 @@ function RootLayout() {
   // } else if (currentSidebar === "admin") {
   //   SidebarComponent = SideBar;
   // }
+
+  
+
 
 
   return (

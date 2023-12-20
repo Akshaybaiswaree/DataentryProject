@@ -48,19 +48,21 @@ import { useState } from "react";
 
 export default function SideBar() {
 
-  const [showDashboard, setShowDashboard] = useState(true);
+ 
 
-  const handleDashboardClick = () => {
-    // Toggle the value of showDashboard when the Dashboard is clicked
-    setShowDashboard(!showDashboard);
-  };
+  // const [showDashboard, setShowDashboard] = useState(true);
+
+  // const handleDashboardClick = () => {
+  //   // Toggle the value of showDashboard when the Dashboard is clicked
+  //   setShowDashboard(!showDashboard);
+  // };
 
 
 
   return (
     <>
     
-      <List p="10px" bg="">
+    <List p="10px" bg="">
         <ListItem className="listItem" p="10px" borderRadius="10px">
           <Flex alignItems="center">
             <DashboardIcon style={{ marginTop: "0rem" }} />
@@ -89,7 +91,7 @@ export default function SideBar() {
           borderWidth="2px"
           borderColor={"gray"}
           />
-           {showDashboard && (
+           {/* {showDashboard && ( */}
           <Stack>
         <Accordion allowToggle width={"90%"}>
           <ListItem className="listItem" p="0px" borderRadius="10px" m="0px">
@@ -297,9 +299,9 @@ export default function SideBar() {
           </NavLink>
         </ListItem>
          </Stack>
-          )}
+          {/* )} */}
         {/* User Data */}
-       <Stack   onClick={handleDashboardClick}>
+       <Stack  >
         <Accordion allowToggle width={"90%"}>
           <ListItem className="listItem" p="0px" borderRadius="10px" m="0px">
             <AccordionItem _hover={{ bg: "#F0F0F0" }}>

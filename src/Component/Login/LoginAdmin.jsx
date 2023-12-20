@@ -1,15 +1,22 @@
-// import { Box, Button, Flex, Heading, Image, Input } from "@chakra-ui/react";
+
+
+
+// import { Box, Button, Flex, Heading, Image, Input, Toast } from "@chakra-ui/react";
 // import { FaEnvelope, FaLock } from "react-icons/fa"; // Icons from react-icons library
 // import { Link, NavLink, useNavigate } from "react-router-dom";
 // import React, { useState } from "react";
 
 // import axios from "axios";
-// // import logo from "../../Images/logo.png";
 // import logo from "../../Images/Group 1000004815.svg";
 // import { jwtDecode } from "jwt-decode";
+// import { toast, ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import { useToast } from '@chakra-ui/react';
 
+// // Admin Login Page
 // const LoginAdmin = () => {
 //   const navigate = useNavigate();
+//   const toast = useToast();
 //   const [inputFields, setInputFields] = useState({
 //     email: "",
 //     password: "",
@@ -31,29 +38,44 @@
 //     console.log(inputFields);
 //     try {
 //       const response = await axios.post(
-//         `http://localhost:5000/user/signin`,
+//         ` http://localhost:5000/user/adminsignin`,
 //         inputFields, // Pass inputFields directly as the request body
 //         {
 //           headers: {
 //             "Content-Type": "application/json",
-//           }, 
+//           },
 //         }
 //       );
-//       console.log(response , "response");
-//       // ectracting token from response
+//       console.log(response,"Admin Ka Email and Password");
+//       // extracting token from response
 //       const token = response.data.token;
 //       // decodint the token
 //       const decodedToken = jwtDecode(token);
-//       // save the token in localstorage
+//       // save the token in localstorage-
 //       localStorage.setItem("token", JSON.stringify(decodedToken));
 //       // alert("Login successfully.");
 //       //  Navigate to dahboard after login
 //       if (response.status === 200) {
+//         toast({
+//           title: 'Login Successfully',
+//           status: 'success',
+//           duration: 3000,
+//           isClosable: true,
+//           position: 'top',
+//         });
 //         navigate("/dashboard");
-//       } else {
+//       }else {
+//         console.log("fail");
 //         alert("Invalid credentials ");
 //       }
 //     } catch (error) {
+//       toast({
+//         title: 'Invalid Credential',
+//         status: 'error',    
+//         duration: 3000,
+//         isClosable: true,
+//         position: 'top',
+//       });
 //       console.log(`Error is ${error}`);
 //     }
 //   };
@@ -133,18 +155,15 @@
 //               Forget the password?
 //             </NavLink>
 //           </Box>
-//           <Button 
-//           height={"3rem"} 
-//           style={buttonStyle} 
-//           type="submit"
-//           _hover={{ background:"FloralWhite",color: "black" }}
-//           >
+//           <Button height={"3rem"} style={buttonStyle} type="submit">
 //             {/* <Link
 //               style={{ textDecoration: "none", color: "#fff" }}
 //               // to="/ForgetPassword"
 //             > */}
+            
+//             <ToastContainer />
 //             Login
-//             {/* </Link> */}
+//             {/* {/ </Link> /} */}
 //           </Button>
 //         </Flex>
 //       </Box>
@@ -191,11 +210,16 @@ import { jwtDecode } from "jwt-decode";
 
 // Admin Login Page
 const LoginAdmin = () => {
+
+  const [userrole , setUserrole] =useState("")
+
+
   const navigate = useNavigate();
   const [inputFields, setInputFields] = useState({
-    email: "",
+    email: "",       
     password: "",
   });
+  
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -206,11 +230,11 @@ const LoginAdmin = () => {
       };
     });
   };
-
+  
   // handle submit login button
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputFields);
+    console.log(inputFields , "inputFields")
     try {
       const response = await axios.post(
         ` http://localhost:5000/user/adminsignin`,
@@ -222,6 +246,9 @@ const LoginAdmin = () => {
         }
       );
       console.log(response,"Admin Ka Email and Password");
+
+      setUserrole(response.data.role)
+      console.log(response.data.role , "response.data.role")
       // extracting token from response
       const token = response.data.token;
       // decodint the token
@@ -321,7 +348,7 @@ const LoginAdmin = () => {
               // to="/ForgetPassword"
             > */}
             Login
-            {/* {/ </Link> /} */}
+            {/* </Link> */}
           </Button>
         </Flex>
       </Box>
@@ -355,3 +382,4 @@ const buttonStyle = {
 };
 
 export default LoginAdmin;
+

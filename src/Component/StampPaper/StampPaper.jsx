@@ -49,7 +49,7 @@ const StampPaper = () => {
   return (
     <>
       <Box m={["1rem", "7rem"]} 
-        textJustify="inter-word"
+      
          >
         <Box textAlign="center">
           <Image
