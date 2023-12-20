@@ -38,11 +38,17 @@ import EditRegistration from "./Component/Dashboard/Registration/EditRegistratio
 import RegisterUserDetail from "./Component/Dashboard/Registration/RegisterUserdetails";
 import StampPaper from "./Component/StampPaper/StampPaper";
 import UserAgreement from "./Component/Dashboard/UserAgreement/UserAgreement";
+import { StayPrimaryLandscape } from "@mui/icons-material";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/employmentform" element={<StampPaper />} />
+      <Route
+        path="employmentformdetails/:userId"
+        element={<StayPrimaryLandscape />}
+      />
+
       <Route index element={<SignUp />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/admin" element={<LoginAdmin />} />

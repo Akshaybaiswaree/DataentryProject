@@ -153,7 +153,7 @@ const Pending = () => {
     try {
       const config = {
         methode: "GET",
-        url: `http://localhost:5000/user/user_pagination?page=${currentPage}`,
+        url: `http://localhost:5000/user/user_pagination?page=${currentPage}&status=Pending`,
         data: {
           status : "Pending"
         }

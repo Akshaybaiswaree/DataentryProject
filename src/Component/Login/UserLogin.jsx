@@ -143,75 +143,41 @@ const UserLogin = () => {
     });
   };
 
-  // handle submit login button
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   console.log(inputFields);
-  //   try {
-  //     const response = await axios.post(
-  //       `http://localhost:5000/user/signin`,
-  //       inputFields, // Pass inputFields directly as the request body
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         }, 
-  //       }
-  //     );
-  //     console.log(response , "response");
-  //     // ectracting token from response
-  //     const token = response.data.token;
-  //     // decodint the token
-  //     const decodedToken = jwtDecode(token);
-  //     // save the token in localstorage
-  //     localStorage.setItem("token", JSON.stringify(decodedToken));
-  //     // alert("Login successfully.");
-  //     //  Navigate to dahboard after login
-  //     if (response.status === 200) {
-        
-  //       navigate("/dashboard");
-  //     } else {
-  //       alert("Invalid credentials ");
-  //     }
-  //   } catch (error) {
-  //     console.log(`Error is ${error}`);
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputFields);
+
     try {
       const response = await axios.post(
-        `http://localhost:5000/user/signin`,
-        inputFields, // Pass inputFields directly as the request body
+        "http://localhost:5000/user/userlogin",
+        inputFields,
         {
           headers: {
             "Content-Type": "application/json",
-          }, 
+          },
         }
       );
 
-   if(!response.data.isStamp){
-    navigate("/employmentform");
-    return true
-   }
+      if (!response.data.isStamp) {
+        navigate("/employmentform");
+        return;
+      }
 
-      console.log(response , "response");
-      // ectracting token from response
+      console.log(response, "response");
+
       const token = response.data.token;
-      // decodint the token
       const decodedToken = jwtDecode(token);
-      // save the token in localstorage
       localStorage.setItem("token", JSON.stringify(decodedToken));
-      // alert("Login successfully.");
-      //  Navigate to dahboard after login
-      if (response.status === 200) {
-        
+
+      if (response.data.status === "freeze") {
+        navigate("/qcCkack");
+      } else if (response.data.status === "success") {
         navigate("/dashboard");
       } else {
-        alert("Invalid credentials ");
+        alert("Invalid credentials");
       }
     } catch (error) {
       console.log(`Error is ${error}`);
+      // Handle error appropriately, e.g., show a user-friendly error message
     }
   };
   return (
