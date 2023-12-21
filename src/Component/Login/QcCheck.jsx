@@ -5,7 +5,7 @@ function QcCheck() {
   return (
     <div>
           <div style={{
-        fontSize: "2rem",
+        fontSize: "4rem",
         textAlign: 'center', paddingTop: '100px', fontWeight: "700", color: "gray"
       }}>
         <motion.h1

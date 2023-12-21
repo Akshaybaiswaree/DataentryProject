@@ -14,13 +14,14 @@ import {
 // import image from "./SVG STAM.svg";
 import image from "../../Images/SVG STAM.svg";
 import { useEffect, useState } from "react";
+import notri from "../../Images/notriimage.svg";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import LeaseAgreement from "../../Images/leaseagreement.jpeg"
 const StampPaperView = () => {
   const { userId } = useParams();
   console.log(userId, "userId");
-const appUrl = "http://localhost:5000/";
+  const appUrl = "http://localhost:5000/";
   const [inputField, setInputField] = useState({
     name: "",
     email: "",
@@ -39,16 +40,16 @@ const appUrl = "http://localhost:5000/";
           `http://localhost:5000/user/get_terms_by_id/${userId}`
         );
         const data = response.data;
-        console.log(data , "data hai ye");
+        console.log(data, "data hai ye");
         console.log(data?.User);
-        console.log(`${appUrl} `+ data?.signature)
+        console.log(`${appUrl} ` + data?.signature);
         setInputField({
           name: data?.name,
           email: data?.email,
-         
+
           address: data?.address,
-          signature:data?.signature,
-          photo:data?.photo,
+          signature: data?.signature,
+          photo: data?.photo,
         });
       } catch (error) {
         console.error("Error fetching user details:", error);
@@ -68,8 +69,6 @@ const appUrl = "http://localhost:5000/";
   };
   console.log("onChangeHandler", onChangeHandler);
 
-
-
   const handleFileChange = (e, field) => {
     const file = e.target.files[0];
 
@@ -87,7 +86,6 @@ const appUrl = "http://localhost:5000/";
     }
   };
 
-
   return (
     <>
       <Box m={["1rem", "7rem"]}>
@@ -101,35 +99,47 @@ const appUrl = "http://localhost:5000/";
             mb={{ base: "2", lg: "0" }}
           />
 
-          <Heading as="h2" mb={{ base: "2", lg: "4" }}>
-            Legal Employment Contract 2023
-          </Heading>
+          <Box display="flex" justifyContent="space-evenly">
+            <Box mb={{ base: "2", lg: "0" }}>
+              <Image
+                w={{ base: "100%", lg: "150px" }}
+                h={{ base: "auto", lg: "350px" }}
+                src={notri}
+                alt="Dan Abramov"
+              />
+            </Box>
+            <Box textAlign="center">
+              <Heading as="h2" mb={{ base: "2", lg: "4" }}>
+                Legal Employment Contract 2023
+              </Heading>
 
-          <Text>
-            THIS DIGITAL EMPLOYMENT CONTRACT (this "Agreement") Valid Till
-            Eleven Months From 2023-11-30 BETWEEN:
-          </Text>
+              <Text>
+                THIS DIGITAL EMPLOYMENT CONTRACT (this "Agreement") Valid Till
+                Eleven Months From 2023-11-30 BETWEEN:
+              </Text>
 
-          <Text fontSize={"1.5rem"}>
-            <strong>Zemex Service of </strong>
-          </Text>
-          <Text>
-            KASTURI WADI INDRA BAZAR GHANSHAM APARTMENT JAIPUR, RAJASTHAN (RJ),
-            INDIA(IN), 302031 of
-          </Text>
+              <Text fontSize={"1.5rem"}>
+                <strong>Zemex Service of </strong>
+              </Text>
+              <Text>
+                KASTURI WADI INDRA BAZAR GHANSHAM APARTMENT JAIPUR, RAJASTHAN
+                (RJ), INDIA(IN), 302031 of
+              </Text>
 
-          <Text fontSize={"1.5rem"}>
-            <strong>(The "Employer")</strong>
-          </Text>
+              <Text fontSize={"1.5rem"}>
+                <strong>(The "Employer")</strong>
+              </Text>
 
-          <Text ml={{ base: "0", lg: "40em" }}>OF THE FIRST PARTY </Text>
+              <Text ml={{ base: "0", lg: "10%" }}>OF THE FIRST PARTY </Text>
 
-          <Text>-AND-</Text>
-          <Text>
-            S/O &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;...
-            <strong>(The "Employee")</strong>
-          </Text>
-          <Text ml={{ base: "0", lg: "43em" }}>OF THE SECOND PARTY</Text>
+              <Text>-AND-</Text>
+              <Text>
+                S/O &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;...
+                <strong>(The "Employee")</strong>
+              </Text>
+              <Text ml={{ base: "0", lg: "10%" }}>OF THE SECOND PARTY</Text>
+            </Box>
+          </Box>
         </Box>
 
         <Box>
@@ -519,6 +529,8 @@ const appUrl = "http://localhost:5000/";
             B. Employee : -
           </Text>
         </Box>
+        <Box display="flex" justifyContent="space-between">
+          <Box>
         <FormControl w={["350px", "400px"]}>
           <FormLabel>Name</FormLabel>
           <Input
@@ -555,58 +567,42 @@ const appUrl = "http://localhost:5000/";
           />
         </FormControl>
 
-        {/* Upload Signature and Photo Section */}
-        {/* <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
+       
+        <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
           <Tr>
             <Td>Upload Signature</Td>
             <Td>
-              <Input
-             name="signature"
-             value={inputField.signature}
-             onChange={onChangeHandler}
-              />
+              {inputField.signature && (
+                <img
+                  src={`${appUrl}${inputField?.signature}`}
+                  alt="Signature Preview"
+                  style={{ maxWidth: "100px", marginTop: "10px" }}
+                />
+              )}
             </Td>
           </Tr>
           <Tr>
             <Td>Upload Your Photo</Td>
             <Td>
-              <Input
-            name="photo"
-            value={inputField.photo}
-            onChange={onChangeHandler}
-        
-              />
+              {inputField.photo && (
+                <img
+                  src={`${appUrl}${inputField.photo}`}
+                  alt="Photo Preview"
+                  style={{
+                    maxWidth: "100px",
+                    marginTop: "10px",
+                    background: "red",
+                  }}
+                />
+              )}
             </Td>
           </Tr>
-        </Table> */}
-        <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
-        <Tr>
-          <Td>Upload Signature</Td>
-          <Td>
-          
-            {inputField.signature && (
-              <img
-                src={`${appUrl} `+ inputField?.signature}
-                alt="Signature Preview"
-                style={{ maxWidth: '100px', marginTop: '10px' }}
-              />
-            )}
-          </Td>
-        </Tr>
-        <Tr>
-          <Td>Upload Your Photo</Td>
-          <Td>
-           
-            {inputField.photo && (
-              <img
-                src={inputField.photo}
-                alt="Photo Preview"
-                style={{ maxWidth: '100px', marginTop: '10px' }}
-              />
-            )}
-          </Td>
-        </Tr>
-      </Table>
+        </Table>
+        </Box>
+        <Box boxSize="sm">
+          <Image src={LeaseAgreement} alt="Stamp" />
+        </Box>
+        </Box>
       </Box>
     </>
   );

@@ -15,6 +15,7 @@ import {
 import image from "../../Images/SVG STAM.svg";
 import { useState } from "react";
 import axios from "axios";
+import notri from "../../Images/notriimage.svg";
 
 const StampPaper = () => {
   const [name, setName] = useState("");
@@ -48,9 +49,7 @@ const StampPaper = () => {
 
   return (
     <>
-      <Box m={["1rem", "7rem"]} 
-      
-         >
+      <Box m={["1rem", "7rem"]}>
         <Box textAlign="center">
           <Image
             mx="auto" // Center the image horizontally
@@ -60,70 +59,48 @@ const StampPaper = () => {
             alt="Description of the image"
             mb={{ base: "2", lg: "0" }}
           />
-
-          <Heading as="h2" mb={{ base: "2", lg: "4" }}>
-            Legal Employment Contract 2023
-          </Heading>
-
-          <Text>
-            THIS DIGITAL EMPLOYMENT CONTRACT (this "Agreement") Valid Till
-            Eleven Months From 2023-11-30 BETWEEN:
-          </Text>
-
-          <Text fontSize={"1.5rem"}>
-            <strong>Zemex Service of </strong>
-          </Text>
-          <Text>
-            KASTURI WADI INDRA BAZAR GHANSHAM APARTMENT JAIPUR, RAJASTHAN (RJ),
-            INDIA(IN), 302031 of
-          </Text>
-
-          <Text fontSize={"1.5rem"}>
-            <strong>(The "Employer")</strong>
-          </Text>
-
-          <Text ml={{ base: "0", lg: "40em" }}>OF THE FIRST PARTY </Text>
-
-          <Text>-AND-</Text>
-          <Text>
-            S/O &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;...
-            <strong>(The "Employee")</strong>
-          </Text>
-          <Text ml={{ base: "0", lg: "43em" }}>OF THE SECOND PARTY</Text>
         </Box>
 
-        <Box>
-          <Heading as="h3" mb={4}>
-            Background
-          </Heading>
-          <Text>
-            A. The Employer Is Of The Opinion That The Employee Has The
-            Necessary Qualifications, Experience, And Abilities To Assist And
-            Benefit The Employer In Requisiting Skills And Infrastructure For
-            Successful Execution Of Form Filling Projects.
-            <br />
-            <br />
-            B. The Employer Desires To Employ The Employee, And The Employee Has
-            Agreed To Accept And Enter Such Employment Upon The Terms And
-            Conditions Set Out In This Agreement.
-            {/* ... (rest of the Background section) */}
-          </Text>
-          <Text>
-            <br />
-            Presently It Is In A Position To Procure The Business For Form
-            Filling More Meaningfully Described In The Column Scope Of Work,
-            Through Their Principals. The Current Project Is Carried Out Under
-            The Cost Of Client And Not An Assignment As Such Acquired By
-            Employee. and where as The Employee Is Engaged Inter Alias, In The
-            Business Of Providing A Wide Spectrum Of Software Solutions &
-            Services.
-            <br />
-            <br />
-            IN CONSIDERATION OF The Matters Described Above and of The Mutual
-            Benefits and Obligations Set Forth In This Agreement, The Receipt
-            And Sufficiency of Which Consideration Is Hereby Acknowledged, The
-            Parties To This Agreement Agree As Follows:
-          </Text>
+        <Box display="flex" justifyContent="space-evenly">
+          <Box mb={{ base: "2", lg: "0" }}>
+            <Image
+              w={{ base: "100%", lg: "150px" }}
+              h={{ base: "auto", lg: "350px" }}
+              src={notri}
+              alt="Dan Abramov"
+            />
+          </Box>
+          <Box textAlign="center">
+            <Heading as="h2" mb={{ base: "2", lg: "4" }}>
+              Legal Employment Contract 2023
+            </Heading>
+
+            <Text>
+              THIS DIGITAL EMPLOYMENT CONTRACT (this "Agreement") Valid Till
+              Eleven Months From 2023-11-30 BETWEEN:
+            </Text>
+
+            <Text fontSize={"1.5rem"}>
+              <strong>Zemex Service of </strong>
+            </Text>
+            <Text>
+              KASTURI WADI INDRA BAZAR GHANSHAM APARTMENT JAIPUR, RAJASTHAN
+              (RJ), INDIA(IN), 302031 of
+            </Text>
+
+            <Text fontSize={"1.5rem"}>
+              <strong>(The "Employer")</strong>
+            </Text>
+
+            <Text ml={{ base: "0", lg: "10%" }}>OF THE FIRST PARTY </Text>
+
+            <Text>-AND-</Text>
+            <Text>
+              S/O &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;...
+              <strong>(The "Employee")</strong>
+            </Text>
+            <Text ml={{ base: "0", lg: "10%" }}>OF THE SECOND PARTY</Text>
+          </Box>
         </Box>
 
         {/* Commencement Date and Term Section */}
