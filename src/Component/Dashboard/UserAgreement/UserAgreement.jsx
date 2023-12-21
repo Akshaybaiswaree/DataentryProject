@@ -94,7 +94,7 @@ function UserAgreement() {
             placeholder="Search..."
             value={searchQuary}
             onChange={(e) => {
-              setSearch(e.target.value);
+              setSearchQuary(e.target.value);
             }}
           />
           <Button
