@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import logo from "../../Images/Group 1000004815.svg";
 import { NavLink } from "react-router-dom";
-//import OtpInput from "react-otp-input";
+import OtpInput from "react-otp-input";
 import axios from "axios";
 
 const ForgetPassword = () => {
@@ -39,6 +39,7 @@ const ForgetPassword = () => {
 
   // function to submit email oncick
   const submitEmail = async () => {
+    alert("send otp on mail")
     const apiUrl = import.meta.env.VITE_APP_API_URL;
     try {
       const response = await axios.post(
