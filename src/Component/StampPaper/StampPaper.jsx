@@ -17,6 +17,8 @@ import { useState } from "react";
 import axios from "axios";
 
 const StampPaper = () => {
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
+
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
@@ -35,7 +37,7 @@ const StampPaper = () => {
 
       const config = {
         method: "post",
-        url: "http://localhost:5000/user/add_terms",
+        url: `${apiUrl}/user/add_terms`,
         data: formData,
       };
 

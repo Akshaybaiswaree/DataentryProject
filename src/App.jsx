@@ -41,6 +41,7 @@ import UserAgreement from "./Component/Dashboard/UserAgreement/UserAgreement";
 import StampPaperView from "./Component/StampPaper/StampPaperView";
 import QcCheck from "./Component/Login/Qccheck";
 import PendingDetails from "./Component/Dashboard/Pending/PendingDetails";
+import { StayPrimaryLandscape } from "@mui/icons-material";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

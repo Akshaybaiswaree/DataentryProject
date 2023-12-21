@@ -39,9 +39,10 @@ const ForgetPassword = () => {
 
   // function to submit email oncick
   const submitEmail = async () => {
+    const apiUrl = import.meta.env.VITE_APP_API_URL;
     try {
       const response = await axios.post(
-        `http://localhost:5000/user/forgot-password`,
+        `${apiUrl}/user/forgot-password`,
         email,
         {
           headers: {
