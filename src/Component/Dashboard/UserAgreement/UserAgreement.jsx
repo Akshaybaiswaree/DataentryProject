@@ -9,102 +9,75 @@ import {
   InputLeftElement,
 } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
-import { ChevronLeftIcon, SearchIcon } from "@chakra-ui/icons";
+import { ChevronLeftIcon, SearchIcon,ChevronRightIcon } from "@chakra-ui/icons";
+
 import axios from "axios";
 
 function UserAgreement() {
-  const [getdata, setGetData] = useState([]);
-  const [search, setSearch] = useState("");
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
+  
+  const [searchQuary, setSearchQuary] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totlePage, setTotlePage] = useState(1);
+  const [userData , setUserData] = useState([])
 
   useEffect(() => {
-    ShowData();
-  }, [setGetData]);
+    fetchData();
+  }, [currentPage]);
 
-  const ShowData = async () => {
+  const fetchData = async () => {
+    
     const config = {
       method: "GET",
-      url: "http://localhost:5000/user/get_terms",
+      url: `${apiUrl}/user/get_terms?page=${currentPage}`,
     };
     const GetEmplyeesApiResponse = await axios(config);
     console.log("get user ", GetEmplyeesApiResponse.data);
-    setGetData(GetEmplyeesApiResponse.data);
-    console.log(getdata, "getdata");
+    setTotlePage(GetEmplyeesApiResponse.data.totalPages);
+    setUserData(GetEmplyeesApiResponse.data.allAgreements)
   };
 
-  const filteredList = getdata?.filter((item) =>
-    item?.name?.toLowerCase().includes(search.toLowerCase())
-  );
+  const handleSearch = () => {
+    if(searchQuary){
+      searchResponse()
+      setCurrentPage(1);
+      setSearchQuary("")
+    }else{
+      fetchData()
+    }
+  };
+
+  const searchResponse = async () => {
+    try {
+      const handlePaylode = {
+        name: searchQuary,
+        data: {
+          status : "Pending"
+        }
+      };
+      console.log(searchQuary,"BackEnd Search Feild");
+
+      const config = {
+        method: "POST",
+        url: `${apiUrl}/user/search_agreement`,
+        data: handlePaylode,
+      };
+
+      const responces = await axios(config);
+      console.log(responces, "Search Result");
+      setUserData(responces.data.users);
+    } catch (error) {
+      console.log(error, "Error");
+    }
+  };
+
+  const handlePaggination = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <>
-      {/* <Flex>
-        <Box fontSize={"2rem"} fontWeight={"700"}>
-          User Agreement Details
-        </Box>
 
-        <Button
-          ml={"1rem"}
-          _hover={{ background: "white", color: "gray" }}
-          padding={"1rem"}
-          color={"white"}
-          bg={"black"}
-        >
-          Add User
-        </Button>
-      </Flex>
-      <InputGroup>
-        <InputLeftElement
-          pointerEvents="none"
-          children={<SearchIcon color="gray.300" />}
-        />
-        <Input
-          width={"400px"}
-          type="text"
-          placeholder="Search..."
-          // value={name}
-          // onChange={(e) => setSearchQuary(e.target.value)}
-        />
-
-        <Button
-          ml={"1rem"}
-          className="employee-btn"
-          colorScheme="teal"
-          mt="4"
-          //onClick={handleSearch}
-        >
-          Search
-        </Button>
-      </InputGroup>
-      <div
-        className="table"
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          width: "80%",
-          padding: "1rem",
-        }}
-      >
-        <div className="head">
-          <h5>Name</h5>
-          <h5>Address</h5>
-          <h5>EMail</h5>
-          <h5>Signature</h5>
-          <h5>Photo</h5>
-        </div>
-        {getdata && getdata.length > 0 ? (
-          getdata?.map((item) => (
-            <React.Fragment key={item.id}>
-              <Box>{item.name}</Box>
-              <Box>{item.mobile}</Box>
-              <Box>{item.email}</Box>
-              <Box>{item.signature}</Box>
-              <Box>{item.photo}</Box>
-            </React.Fragment>
-          ))
-        ) : (
-          <p>No data available</p>
-        )}
-      </div> */}
       <Box margin={"1rem"}>
         <Box fontSize={"2rem"} fontWeight={"700"}>
           User Agreement Details
@@ -119,11 +92,19 @@ function UserAgreement() {
             width={"400px"}
             type="text"
             placeholder="Search..."
-            value={search}
+            value={searchQuary}
             onChange={(e) => {
               setSearch(e.target.value);
             }}
           />
+          <Button
+          className="employee-btn"
+          colorScheme="teal"
+          mt="4"
+          onClick={handleSearch}
+        >
+          Search
+        </Button>
         </InputGroup>
         <div
           className="table"
@@ -134,7 +115,7 @@ function UserAgreement() {
             padding: "1rem",
           }}
         >
-          {getdata && getdata.length > 0 ? (
+          {userData && userData.length > 0 ? (
             <table>
               <thead>
                 <tr>
@@ -147,7 +128,7 @@ function UserAgreement() {
                 </tr>
               </thead>
               <tbody>
-                {filteredList.map((item) => (
+                {userData.map((item) => (
                   <tr key={item.id}>
                     <td>{item.name}</td>
                     <td>{item.address}</td>
@@ -176,6 +157,19 @@ function UserAgreement() {
           )}
         </div>
       </Box>
+      <div className="numbers">
+          <ChevronLeftIcon />
+          {Array.from({ length: totlePage }, (_, index) => (
+            <span
+              key={index + 1}
+              className="num"
+              onClick={() => handlePaggination(index + 1)}
+            >
+              {index + 1}
+            </span>
+          ))}
+          <ChevronRightIcon />
+        </div>
     </>
   );
 }

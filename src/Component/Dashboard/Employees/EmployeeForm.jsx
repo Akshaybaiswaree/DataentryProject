@@ -7,46 +7,37 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
-
-import { NavLink } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useForm, Controller } from "react-hook-form"
+
 
 const Employeeform = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
-  const [address, setAddress] = useState("");
-  const [designation, setDesignation] = useState("");
-  const [salary, setSalary] = useState("");
-
+  const { handleSubmit, register, reset, formState: { errors } } = useForm();
+  const navigate = useNavigate()
   const formRef = useRef(null);
 
-  const AddEmployee = async () => {
+  const onSubmit = async (data) => {
     try {
-      const employeesDataPayload = {
-        name: name,
-        email: email,
-        mobile: number,
-        address: address,
-        designation: designation,
-        salary: salary,
-      };
+      const employeesDataPayload = {...data}
 
       console.log("data", employeesDataPayload);
+      const apiUrl = import.meta.env.VITE_APP_API_URL;
 
       const config = {
         method: "POST",
-        url: "http://localhost:5000/user/add_employee",
+        url: `${apiUrl}/user/add_employee`,
         data: employeesDataPayload,
       };
 
       const AddEmployeeApiResponse = await axios(config);
 
       console.log("add", AddEmployeeApiResponse);
-
+      navigate('/employees');
       if (formRef.current) {
         formRef.current.reset();
       }
+      
     } catch (err) {
       console.log(err);
     }
@@ -57,100 +48,113 @@ const Employeeform = () => {
       <Box marginBottom={"1rem"} fontSize={"2rem"} fontWeight={"700"}>
         Add Employees
       </Box>
-      <form className="employee-form">
+      <form className="employee-form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={4} position="relative">
           <FormControl>
             <FormLabel textAlign="top" width="50%">
               Name
             </FormLabel>
-            <Input
-              width="50%"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              type="text"
-              placeholder="Kaveri Kapoor"
+           <Input
+            width="50%"
+            name="name"
+            id="name"
+            type="text"
+              {...register("name", { required: 'Name is Requird',message: "invalid input", })}
+              placeholder="Enter Name"
               _hover={{ borderColor: "teal.500" }}
             />
+            {errors.name && <Box color="red">{errors.name.message}</Box>}
           </FormControl>
           <FormControl>
             <FormLabel textAlign="top" width="50%">
               Mobile
             </FormLabel>
             <Input
-              width="50%"
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
+             width="50%"
               type="number"
-              placeholder="9647523148"
+              id="mobile"
+              name="mobile"
+              {...register("mobile", { required: "Mobile number is required" })}
+              placeholder="Enter Mobile No"
               _hover={{ borderColor: "teal.500" }}
             />
+            {errors.mobile && <Box color="red">{errors.mobile.message}</Box>}
           </FormControl>
           <FormControl>
             <FormLabel textAlign="top" width="50%">
               Email
             </FormLabel>
             <Input
-              width="50%"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+             width="50%"
+              id="email"
               type="email"
-              placeholder="kaveri@gmail.com"
+              name='email'
+              {...register("email", { required: "Email is required" })}
+              placeholder=".......@gmail.com"
               _hover={{ borderColor: "teal.500" }}
             />
+            {errors.email && <Box color="red">{errors.email.message}</Box>}
           </FormControl>
           <FormControl>
             <FormLabel textAlign="top" width="50%">
               Address
             </FormLabel>
             <Input
-              width="50%"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              type="text"
-              placeholder="Address"
+             width="50%"
+              id="address"
+              type="address"
+              name='address'
+              {...register("address", { required: "address is required" })}
+              placeholder="Add You Adress"
               _hover={{ borderColor: "teal.500" }}
             />
+            {errors.address && <Box color="red">{errors.address.message}</Box>}
           </FormControl>
           <FormControl>
             <FormLabel textAlign="top" width="50%">
               Designation
             </FormLabel>
             <Input
-              width="50%"
-              value={designation}
-              onChange={(e) => setDesignation(e.target.value)}
-              type="text"
-              placeholder="Designation"
+             width="50%"
+              id="designation"
+              type="designation"
+              name='designation'
+              {...register("designation", { required: "designation is required" })}
+              placeholder="Enter Your Designation"
               _hover={{ borderColor: "teal.500" }}
             />
+            {errors.email && <Box color="red">{errors.email.message}</Box>}
           </FormControl>
           <FormControl>
             <FormLabel textAlign="top" width="50%">
               Salary
             </FormLabel>
             <Input
-              width="50%"
-              value={salary}
-              onChange={(e) => setSalary(e.target.value)}
-              type="number"
-              placeholder="Enter Salary"
+             width="50%"
+              id="salary"
+              type="salary"
+              name='salary'
+              {...register("salary", { required: "salary is required" })}
+              placeholder="Enter Your Salary"
               _hover={{ borderColor: "teal.500" }}
             />
+            {errors.email && <Box color="red">{errors.email.message}</Box>}
           </FormControl>
         </Stack>
-      </form>
-      <NavLink to="/employees">
+      
+   
         <Button
-          onClick={AddEmployee}
           className="employee-btn"
           colorScheme="teal"
           mt="4"
           _hover={{ bgColor: "teal.600" }}
           width="30%"
+          type="submit"
         >
           Save
         </Button>
-      </NavLink>
+     
+      </form>
     </Box>
   );
 };

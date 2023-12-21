@@ -13,10 +13,12 @@ import {
   import React, { useEffect, useRef } from "react";
   // import "./EmployeeProfileEdit.css";
   import { useState } from "react";
+  import { useForm, Controller } from "react-hook-form"
   
   import { Link, useNavigate, useParams } from "react-router-dom";
   
   const EditRegistration = () => {
+    const apiUrl = import.meta.env.VITE_APP_API_URL;
     // getting id from params
     const { userId } = useParams();
     const navigate = useNavigate();
@@ -37,9 +39,10 @@ import {
     // useEffect to call
     useEffect(() => {
       const fetchUserDetails = async () => {
+        
         try {
           const response = await axios.get(
-            `http://localhost:5000/user/getuser_by_id/${userId}`
+            `${apiUrl}/user/getuser_by_id/${userId}`
           );
           const data = response.data;
           console.log(data?.User.name);
@@ -88,7 +91,7 @@ import {
       console.log(inputField);
       try {
         const response = await axios.put(
-          `http://localhost:5000/user/edit_user/${userId}`,
+          `${apiUrl}/user/edit_user/${userId}`,
           inputField,
           {
             headers: { "Content-Type": "application/json" },

@@ -13,8 +13,9 @@ const Assignment = () => {
 
   // fetchDetails of assingment
   const fetchDetails = async () => {
+    const apiUrl = import.meta.env.VITE_APP_API_URL;
     const response = await axios.get(
-      `http://localhost:5000/user/get_totalAssignment`
+      `${apiUrl}/user/get_totalAssignment`
     );
     const data = response.data;
     console.log(data);
