@@ -59,9 +59,9 @@ const UserLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validationForm()) {
-      return; // If validation fails, don't proceed with submission
-    }
+    // if (!validationForm()) {
+    //   return; // If validation fails, don't proceed with submission
+    // }
     try {
       const response = await axios.post(
         `${apiUrl}/user/userlogin`,
@@ -76,6 +76,14 @@ const UserLogin = () => {
       if (response.data.status === "Freeze") {
         navigate("/qccheck");
       }
+
+
+      else if (response.status === 200) {
+        navigate("/assignment");
+      } else {
+        alert("Invalid credentials");
+      }
+      
       console.log(response.data.status, "response.data.status");
       // ectracting token from response
       const token = response.data.token;
@@ -84,11 +92,7 @@ const UserLogin = () => {
       // alert("Login successfully.");
       //  Navigate to dahboard after login
 
-      if (response.status === 200) {
-        navigate("/dashboard");
-      } else {
-        alert("Invalid credentials");
-      }
+     
     } catch (error) {
       console.log(`Error is ${error}`);
       // Handle error appropriately, e.g., show a user-friendly error message
