@@ -24,27 +24,29 @@ const NewAssignment = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
 
   const token = JSON.parse(localStorage.getItem("token"));
   const { email, _id } = token;
   const Navigate = useNavigate();
   const [data, setData] = useState("");
-  const [inputFields, setInputFields] = useState({
-    name: "",
-    address: "",
-    pinCode: "",
-    jobFunctional: "",
-    phone: "",
-    annualRevenue: "",
-    cleanCode: "",
-  });
+  // const [inputFields, setInputFields] = useState({
+  //   name: "",
+  //   address: "",
+  //   pinCode: "",
+  //   jobFunctional: "",
+  //   phone: "",
+  //   annualRevenue: "",
+  //   cleanCode: "",
+  // });
+  
   useEffect(() => {
     getDataAssignment();
   }, [email]);
   console.log(email);
 
   const getDataAssignment = async () => {
-    const apiUrl = import.meta.env.VITE_APP_API_URL;
+  
     try {
       const config = {
         method: "POST",
@@ -53,24 +55,24 @@ const NewAssignment = () => {
       };
 
       const response = await axios(config);
-      console.log("Get response:", response.data);
+      console.log("Get response:", response);
       // Assuming you have a state variable setData to store the response
       setData(response?.data?.assignmentDetail);
     } catch (error) {
       console.error("Error:", error);
     }
   };
-  // console.log(data, "Get Data");
+  console.log(data, "Get Data");
 
   // console.log(data?._id ,"Assingment ID");
   const RelodeHandle = async () => {
     try {
       const config = {
         method: "GET",
-        url: `http://localhost:5000/user/refresh_assignment_detail/${data?._id}`,
+        url: `${apiUrl}/user/refresh_assignment_detail/${data?._id}`,
       };
       const responce = await axios(config);
-      // console.log(responce , "Relode ");
+      console.log(responce , "Relode ");
       getDataAssignment();
     } catch (err) {
       console.log("error", err);
@@ -80,7 +82,6 @@ const NewAssignment = () => {
 
   // handle to submit form data
   const onSubmit = async (data) => {
-    // e.preventDefault();
 
     // console.log(inputFields);
     console.log(data,"Data ");
@@ -255,15 +256,16 @@ const NewAssignment = () => {
           <FormControl  className="employee-form-group">
             <FormLabel>Client Code</FormLabel>
             <Input
-            width='50%'
+              width="50%"
               type="number"
               id="cleanCode"
               name="cleanCode"
-              {...register("cleanCode", { required: "cleanCode number is required" })}
-              placeholder="Enter cleanCode No"
+              {...register("cleanCode", { required: "Clean Code is required" })}
+              placeholder="Enter Clean Code"
               _hover={{ borderColor: "teal.500" }}
             />
             {errors.cleanCode && <Box color="red">{errors.cleanCode.message}</Box>}
+
           </FormControl>
         </Box>
 

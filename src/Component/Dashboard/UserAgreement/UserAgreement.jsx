@@ -26,7 +26,6 @@ function UserAgreement() {
   }, [currentPage]);
 
   const fetchData = async () => {
-    
     const config = {
       method: "GET",
       url: `${apiUrl}/user/get_terms?page=${currentPage}`,
@@ -94,7 +93,7 @@ function UserAgreement() {
             placeholder="Search..."
             value={searchQuary}
             onChange={(e) => {
-              setSearch(e.target.value);
+              setSearchQuary(e.target.value);
             }}
           />
           <Button
