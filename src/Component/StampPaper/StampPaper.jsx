@@ -24,6 +24,22 @@ const StampPaper = () => {
   const [email, setEmail] = useState("");
   const [photo, setPhoto] = useState(null);
   const [signature, setSignature] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [signaturePreview, setSignaturePreview] = useState(null);
+
+
+
+  const handlePhotoChange = (e) => {
+    const selectedPhoto = e.target.files[0];
+    setPhoto(selectedPhoto);
+    setPhotoPreview(URL.createObjectURL(selectedPhoto));
+  };
+
+  const handleSignatureChange = (e) => {
+    const selectedSignature = e.target.files[0];
+    setSignature(selectedSignature);
+    setSignaturePreview(URL.createObjectURL(selectedSignature));
+  };
 
   const handleSubmit = async () => {
     try {
@@ -516,21 +532,37 @@ const StampPaper = () => {
         <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
           <Tr>
             <Td>Upload Signature</Td>
-            <Td>
+            {/* <Td>
               <Input
                 onChange={(e) => setSignature(e.target.files[0])}
                 type="file"
               />
-            </Td>
+            </Td> */}
+             <Td>
+            <Input onChange={handleSignatureChange} type="file" />
+            {signaturePreview && (
+              <Image 
+              width={'4rem'}
+              height={'4rem'}
+              src={signaturePreview} alt="Signature Preview" />
+            )}
+          </Td>
           </Tr>
           <Tr>
             <Td>Upload Your Photo</Td>
-            <Td>
+            {/* <Td>
               <Input
                 onChange={(e) => setPhoto(e.target.files[0])}
                 type="file"
               />
-            </Td>
+            </Td> */}
+             <Td>
+            <Input onChange={handlePhotoChange} type="file" />
+            {photoPreview && <Image
+             width={'4rem'}
+             height={'4rem'}
+            src={photoPreview} alt="Photo Preview" />}
+          </Td>
           </Tr>
         </Table>
         <Button

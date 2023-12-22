@@ -38,7 +38,7 @@ const LoginAdmin = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
   
-  const validationForm = () => {
+  const  validationForm = () => {
     const newError = {};
     if (!inputFields.email.match(emailRegex)) {
       newError.email = "Invalid Email Address";
@@ -53,7 +53,7 @@ const LoginAdmin = () => {
   // handle submit login button
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!validationForm()){
+    if(validationForm()){
       return
     }
     console.log(inputFields , "inputFields")
