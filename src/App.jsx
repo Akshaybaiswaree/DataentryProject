@@ -27,7 +27,7 @@ import Registration from "./Component/Dashboard/Registration/Registration";
 import RegistrationForm from "./Component/Dashboard/Registration/RegistrationForm";
 import Report from "./Component/Dashboard/Report/Report";
 import ReportForm from "./Component/Dashboard/Report/ReportForm";
-import RootLayout from "./Component/Layout/Rootlayout";
+import RootLayout from "./Component/Layout/RootLayout";
 import SignUp from "./Component/Login/SignUP";
 import User from "./Component/Dashboard/User/User";
 import UserDashBoard from "./Component/Dashboard/UserSidebar/UserDashBoard";
@@ -39,7 +39,7 @@ import RegisterUserDetail from "./Component/Dashboard/Registration/RegisterUserd
 import StampPaper from "./Component/StampPaper/StampPaper";
 import UserAgreement from "./Component/Dashboard/UserAgreement/UserAgreement";
 import StampPaperView from "./Component/StampPaper/StampPaperView";
-import QcCheck from "./Component/Login/Qccheck";
+import QcCheck from "./Component/Login/QcCheck";
 import PendingDetails from "./Component/Dashboard/Pending/PendingDetails";
 import { StayPrimaryLandscape } from "@mui/icons-material";
 

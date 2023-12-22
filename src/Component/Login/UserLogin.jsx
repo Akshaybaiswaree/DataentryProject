@@ -19,8 +19,10 @@ import axios from "axios";
 // import logo from "../../Images/logo.png";
 import logo from "../../Images/Group 1000004815.svg";
 import { jwtDecode } from "jwt-decode";
+import { useUserContext } from "../Context/UserContext";
 
 const UserLogin = () => {
+  const { setUserContext } = useUserContext();
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_APP_API_URL;
 
@@ -77,14 +79,16 @@ const UserLogin = () => {
         navigate("/qccheck");
       }
 
-
+      
       else if (response.status === 200) {
+        console.log(response);
         navigate("/assignment");
       } else {
         alert("Invalid credentials");
       }
       
-      console.log(response.data.status, "response.data.status");
+      console.log(response.data, "response.data.status");
+      setUserContext(response.data.role);
       // ectracting token from response
       const token = response.data.token;
       const decodedToken = jwtDecode(token);

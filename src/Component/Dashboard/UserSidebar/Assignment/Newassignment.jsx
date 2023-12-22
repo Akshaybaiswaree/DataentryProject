@@ -315,7 +315,7 @@ import { useNavigate } from "react-router-dom";
 const NewAssignment = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   const { email , _id} = token;
-  // console.log(email, "Get Email");
+  console.log(email, "Get Email");
   // console.log(_id, "Get ID");
   const Navigate = useNavigate();
   // state hook to take input from form
@@ -337,7 +337,7 @@ const NewAssignment = () => {
     try {
       const config = {
         method: "POST",
-        url: "http://localhost:5000/user/get_assignment_details",
+        url: "http://localhost:8000/user/get_assignment_details",
         data: { email: email }, // Pass the email as part of the request body
       };
       const response = await axios(config);

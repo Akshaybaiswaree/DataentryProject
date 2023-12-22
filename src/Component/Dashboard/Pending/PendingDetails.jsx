@@ -146,7 +146,7 @@ const RegisterUserDetail = () => {
                 value={inputField.name}
                 width={"400px"}
                 type="text"
-                placeholder="Kaveri Kappor"
+                placeholder="Enter Name"
               />
             </FormControl>
           </Box>
@@ -159,7 +159,7 @@ const RegisterUserDetail = () => {
                 onChange={onChangeHandler}
                 width={"400px"}
                 type="email"
-                placeholder="kaveri@gmail.com"
+                placeholder="enter email"
               />
             </FormControl>
           </Box>
@@ -300,9 +300,7 @@ const RegisterUserDetail = () => {
         </AlertDialogOverlay>
       </AlertDialog>
 
-      <Button 
-    //   onClick={fetchUserDetails}
-    onClick={SendEmail(userId)}
+      <Button onClick={()=>SendEmail(userId)}
       marginTop={"1rem"} marginLeft={"1rem"} colorScheme="blue"
       >
         Gmail

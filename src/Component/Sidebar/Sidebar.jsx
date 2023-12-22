@@ -43,11 +43,32 @@ import {
 } from "react-icons/bs";
 import { CiLogout, CiMoneyBill } from "react-icons/ci";
 import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
-//   import { useAuth } from "../context/AuthContext";
+  import { useUserContext } from "../Context/UserContext";
+
 
 export default function SideBar() {
-
+  const { getUser } = useUserContext();
+  const userRole = getUser();
+  console.log(userRole);
+  const isAdmin = userRole === "Admin" ? true : false;
+  const isUser = userRole === "User" ? true : false;
+  console.log(isAdmin, isUser);
+  const toast = useToast();
+  const navigate = useNavigate();
+  const handleSignout = () => {
+    localStorage.clear();
+    toast({
+      title: 'Logout Success.',
+      // description: "We've created your account for you.",
+      position : "top",
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    })
+    navigate("/")
+  }
  
 
   // const [showDashboard, setShowDashboard] = useState(true);
@@ -92,7 +113,9 @@ export default function SideBar() {
           borderColor={"gray"}
           />
            {/* {showDashboard && ( */}
+           { isAdmin &&
           <Stack>
+          
         <Accordion allowToggle width={"90%"}>
           <ListItem className="listItem" p="0px" borderRadius="10px" m="0px">
             <NavLink to="user">
@@ -298,9 +321,12 @@ export default function SideBar() {
             </Text>
           </NavLink>
         </ListItem>
+
          </Stack>
+                        }
           {/* )} */}
         {/* User Data */}
+        {isUser && 
        <Stack  >
         <Accordion allowToggle width={"90%"}>
           <ListItem className="listItem" p="0px" borderRadius="10px" m="0px">
@@ -396,7 +422,12 @@ export default function SideBar() {
           </Text>
         </ListItem>
 
-        <ListItem
+       
+        
+        <Divider borderWidth="1px" borderColor={"gray"} />
+        </Stack>
+        }
+         <ListItem
           style={{ marginTop: "1.5rem" }}
           className="listItem"
           p="10px"
@@ -410,13 +441,11 @@ export default function SideBar() {
             fontSize="rem"
             marginLeft="8px" // Add some margin for spacing between icon and text
             _hover={{ textDecoration: "underline" }}
+            onClick= {handleSignout}
           >
             SignOut
           </Text>
         </ListItem>
-        
-        <Divider borderWidth="1px" borderColor={"gray"} />
-        </Stack>
       </List>
     </>
   );
