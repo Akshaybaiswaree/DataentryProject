@@ -11,9 +11,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import logo from "../../Images/Group 1000004815.svg";
 import { jwtDecode } from "jwt-decode";
+import { useUserContext } from "../Context/UserContext";
 
 // Admin Login Page
 const LoginAdmin = () => {
+  const { setUserContext } = useUserContext();
 
   const [userrole , setUserrole] =useState("")
 
@@ -38,23 +40,28 @@ const LoginAdmin = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
   
-  const validationForm = () => {
+  const validationForm = (inputFields) => {
+    // console.log(inputFields);
     const newError = {};
     if (!inputFields.email.match(emailRegex)) {
       newError.email = "Invalid Email Address";
     }
-
+    // console.log("email success");
     if(!inputFields.password.match(passwordRegex)){
       newError.password = "Invalid Password "
     }
     setErrors(newError);
-    return;
+    // console.log(" success");
+    return true;
   };
   // handle submit login button
   const handleSubmit = async (e) => {
+    console.log("called");
     e.preventDefault();
-    if(!validationForm()){
-      return
+    const validate = validationForm(inputFields);
+    console.log(validate);
+       if(!validate){
+      return alert("fields are not valid")
     }
     console.log(inputFields , "inputFields")
  
@@ -69,9 +76,10 @@ const LoginAdmin = () => {
           },
         }
       );
-      console.log(response,"Admin Ka Email and Password");
+      // console.log(response,"Admin Ka Email and Password");
 
       setUserrole(response.data.role)
+      setUserContext(response.data.role);
       console.log(response.data.role , "response.data.role")
       // extracting token from response
       const token = response.data.token;
@@ -91,7 +99,7 @@ const LoginAdmin = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form >
       <Box
         width={"100%"}
         height={"100vh"}
@@ -176,11 +184,7 @@ const LoginAdmin = () => {
               Forget the password?
             </NavLink>
           </Box>
-          <Button height={"3rem"} style={buttonStyle} type="submit">
-            {/* <Link
-              style={{ textDecoration: "none", color: "#fff" }}
-              // to="/ForgetPassword"
-            > */}
+          <Button height={"3rem"} style={buttonStyle} type="submit" onClick={handleSubmit}>
             Login
             {/* </Link> */}
           </Button>

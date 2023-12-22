@@ -47,7 +47,7 @@ const SignUp = () => {
       console.log("res", response);
       if (response.ok) {
         const responseData = await response.json();
-        navigate("./Login");
+        navigate("/userlogin");
         console.log("Signup successfully. Response:", responseData);
       } else {
         console.error("Signup failed. HTTP Status:", response.status);
