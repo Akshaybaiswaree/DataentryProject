@@ -21,7 +21,7 @@ import LeaseAgreement from "../../Images/leaseagreement.jpeg"
 const StampPaperView = () => {
   const { userId } = useParams();
   console.log(userId, "userId");
-  const appUrl = "http://localhost:5000/";
+  const appUrl =import.meta.env.VITE_APP_API_URL;
   const [inputField, setInputField] = useState({
     name: "",
     email: "",
@@ -31,6 +31,25 @@ const StampPaperView = () => {
     photo: "",
     signature: "",
   });
+
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [signaturePreview, setSignaturePreview] = useState(null);
+  console.log(photoPreview);
+
+
+
+  const handlePhotoChange = (e) => {
+    const selectedPhoto = e.target.files[0];
+    setPhoto(selectedPhoto);
+    setPhotoPreview(URL.createObjectURL(selectedPhoto));
+  };
+
+  const handleSignatureChange = (e) => {
+    const selectedSignature = e.target.files[0];
+    setSignature(selectedSignature);
+    setSignaturePreview(URL.createObjectURL(selectedSignature));
+  };
+
 
   // useEffect to call
   useEffect(() => {
@@ -42,7 +61,7 @@ const StampPaperView = () => {
         const data = response.data;
         console.log(data, "data hai ye");
         console.log(data?.User);
-        console.log(`${appUrl} ` + data?.signature);
+        console.log(`${appUrl} / data?.signature`);
         setInputField({
           name: data?.name,
           email: data?.email,
@@ -51,6 +70,8 @@ const StampPaperView = () => {
           signature: data?.signature,
           photo: data?.photo,
         });
+        setPhotoPreview(data?.photo ? `${appUrl}+${data?.photo}` : null);
+        setSignaturePreview(data?.signature ? `${appUrl}${data?.signature}` : null);
       } catch (error) {
         console.error("Error fetching user details:", error);
       }
@@ -103,7 +124,7 @@ const StampPaperView = () => {
             <Box mb={{ base: "2", lg: "0" }}>
               <Image
                 w={{ base: "100%", lg: "150px" }}
-                h={{ base: "auto", lg: "350px" }}
+                h={{ base: "550px", lg: "350px" }}
                 src={notri}
                 alt="Dan Abramov"
               />
@@ -568,7 +589,7 @@ const StampPaperView = () => {
         </FormControl>
 
        
-        <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
+        {/* <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
           <Tr>
             <Td>Upload Signature</Td>
             <Td>
@@ -597,7 +618,39 @@ const StampPaperView = () => {
               )}
             </Td>
           </Tr>
-        </Table>
+        </Table> */}
+         <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
+        <Tr>
+          
+          <Td>
+           
+            {signaturePreview && (
+              <Image
+                src={signaturePreview}
+                alt="Signature Preview"
+                style={{ maxWidth: "100px", marginTop: "10px" }}
+              />
+            )}
+          </Td>
+        </Tr>
+        <Tr>
+         
+          <Td>
+
+            {photoPreview && (
+              <Image
+                src={photoPreview}
+                alt="Photo Preview"
+                style={{
+                  maxWidth: "100px",
+                  marginTop: "10px",
+                
+                }}
+              />
+            )}
+          </Td>
+        </Tr>
+      </Table>
         </Box>
         <Box boxSize="sm">
           <Image src={LeaseAgreement} alt="Stamp" />
