@@ -5,14 +5,16 @@ import {
     Input,
     Button,
     Link,
-    Text,
+    Flex,
     VStack,
     Center,
     Heading,
+    Image,
   } from "@chakra-ui/react";
   import axios from "axios";
   import React, { useState } from "react";
   import { useNavigate } from "react-router-dom";
+  import logo from "../../Images/Group 1000004815.svg";
   
   const SetPassword = () => {
     const navigate = useNavigate();
@@ -44,8 +46,8 @@ import {
   
         const responce = await axios(config);
         navigate("/userlogin");
-      //   setPassword(responce);
-      //   setConformPassword(responce);
+        //   setPassword(responce);
+        //   setConformPassword(responce);
         console.log(responce, "Forgot Password");
       } catch (error) {
         console.log(error);
@@ -54,8 +56,14 @@ import {
     return (
       <>
         <Center height="100vh">
+              
           <VStack spacing={4} width="300px">
+       <Flex direction="column" alignItems="center" fontFamily="Poppins">
+          <Image src={logo} alt="" />
+        
+        </Flex>
             <FormControl>
+  
               <Heading p="0.5rem">SET PASSWORD</Heading>
               <FormLabel>Password</FormLabel>
               <Input
@@ -76,7 +84,9 @@ import {
               />
             </FormControl>
             <Button
-              colorScheme="teal"
+            bg={"black"}
+            color={'white'}
+            _hover={{bg:"lightgray",color:"black"}}
               size="lg"
               width="100%"
               onClick={passwordIntegrate}
@@ -90,5 +100,4 @@ import {
   };
   
   export default SetPassword;
-    
   
