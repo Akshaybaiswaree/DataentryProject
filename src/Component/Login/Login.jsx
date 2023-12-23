@@ -76,6 +76,7 @@ const Login = () => {
   >
     <NavLink to="/signup" style={{ textDecoration: "none", width: "100%" }}>
     <Button
+    borderRadius={'1rem'}
      _hover={{ background: "FloralWhite", color: "black" }}
     w={'200px'}>
     Create an Account

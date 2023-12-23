@@ -42,6 +42,7 @@ import StampPaperView from "./Component/StampPaper/StampPaperView";
 import QcCheck from "./Component/Login/QcCheck";
 import PendingDetails from "./Component/Dashboard/Pending/PendingDetails";
 import { StayPrimaryLandscape } from "@mui/icons-material";
+import SetPassword from "./Component/Login/SetPassword";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -57,7 +58,7 @@ const router = createBrowserRouter(
       <Route path="/admin" element={<LoginAdmin />} />
       <Route path="/userlogin" element={<UserLogin />} />
       <Route path="/ForgetPassword" element={<ForgetPassword />} />
-
+      <Route path="/setPassword" element={<SetPassword />} />
       <Route path="/" element={<RootLayout />}>
         {/* {/ ADMIN PART /} */}
         <Route

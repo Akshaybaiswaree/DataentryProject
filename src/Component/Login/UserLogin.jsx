@@ -104,15 +104,19 @@ const UserLogin = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <Box
-        width={"100%"}
-        height={"100vh"}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        padding="20px"
-        bg="#ebe9eb"
+      <Box  
+     
+     width={{ base: "100%", md: "100%", lg: "100%", xl: "100%" }} // Adjust width based on screen size
+     marginX="auto" // Center horizontally
+     minHeight="100vh" // Ensure full height even if content is not enough
+     display="flex"
+     flexDirection="column"
+     alignItems="center"
+     justifyContent={"center"}
+     padding="20px"
+     bg="#ebe9eb"
       >
+        
         <Box
           display="flex"
           flexDirection="column"
