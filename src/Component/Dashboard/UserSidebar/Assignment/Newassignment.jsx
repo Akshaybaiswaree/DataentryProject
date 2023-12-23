@@ -62,7 +62,7 @@ const NewAssignment = () => {
         url: `http://localhost:5000/user/refresh_assignment_detail/${data?._id}`,
       };
       const responce = await axios(config);
-      // console.log(responce , "Relode ");
+       console.log(responce , "Relode ");
       getDataAssignment();
     } catch (err) {
       console.log("error", err);
@@ -99,6 +99,7 @@ const NewAssignment = () => {
       // console.log(response);
       alert("Saved successfully.");
       getDataAssignment();
+      Navigate("/assignment")
     } catch (error) {
       console.log(error);
     }
@@ -258,7 +259,7 @@ const NewAssignment = () => {
             className="employee-btn"
             colorScheme="teal"
             mt="4"
-            type="submit"
+           onClick={handleSubmit}
           >
             Submit
           </Button>
