@@ -84,6 +84,7 @@ export default function SideBar() {
     <>
     
     <List p="10px" bg="">
+    { isAdmin &&
         <ListItem className="listItem" p="10px" borderRadius="10px">
           <Flex alignItems="center">
             <DashboardIcon style={{ marginTop: "0rem" }} />
@@ -106,8 +107,9 @@ export default function SideBar() {
               </Text>
             </NavLink>
           </Flex>
-        </ListItem>
+        </ListItem>}
         <Divider
+        
           style={{ marginTop: "1.5rem" }}
           borderWidth="2px"
           borderColor={"gray"}
@@ -403,6 +405,14 @@ export default function SideBar() {
           </ListItem>
         </Accordion>
 
+        
+
+       
+        
+        <Divider borderWidth="1px" borderColor={"gray"} />
+        </Stack>
+        }
+       { isAdmin &&
         <ListItem
           style={{ marginTop: "2rem" }}
           className="listItem"
@@ -421,12 +431,7 @@ export default function SideBar() {
             Assignment Report
           </Text>
         </ListItem>
-
-       
-        
-        <Divider borderWidth="1px" borderColor={"gray"} />
-        </Stack>
-        }
+      }
          <ListItem
           style={{ marginTop: "1.5rem" }}
           className="listItem"
