@@ -124,7 +124,9 @@ const UserLogin = () => {
           marginY="20px"
         >
           <Image width={"13rem"} src={logo} alt="" />
-          <Heading color="#000" fontFamily="Poppins, serif" size="lg">
+          <Heading
+          marginTop={'1rem'}
+          color="#000" fontFamily="Poppins, serif" size="lg">
             User Login
           </Heading>
         </Box>
@@ -132,7 +134,7 @@ const UserLogin = () => {
         <Flex
           direction="column"
           width={["90%", "70%", "50%", "40%"]}
-          marginY="10px"
+         
         >
           <Flex alignItems="center" bg="white" borderRadius="30px" p="10px">
             <FaEnvelope style={{ width: "4%", marginLeft: "20px" }} />
