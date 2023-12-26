@@ -51,11 +51,13 @@ const Employeeform = () => {
       <form className="employee-form" onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={4} position="relative">
           <FormControl>
-            <FormLabel textAlign="top" width="50%">
+            <FormLabel textAlign="top"
+            
+            width={{base:"33%" , md:"55%"}}>
               Name
             </FormLabel>
            <Input
-            width="50%"
+            width={{base:"80%", md:"50%"}}
             name="name"
             id="name"
             type="text"
@@ -66,11 +68,13 @@ const Employeeform = () => {
             {errors.name && <Box color="red">{errors.name.message}</Box>}
           </FormControl>
           <FormControl>
-            <FormLabel textAlign="top" width="50%">
+            <FormLabel 
+             width={{base:"33%" , md:"55%"}}
+            textAlign="top">
               Mobile
             </FormLabel>
             <Input
-             width="50%"
+            width={{base:"80%", md:"50%"}}
               type="number"
               id="mobile"
               name="mobile"
@@ -81,11 +85,13 @@ const Employeeform = () => {
             {errors.mobile && <Box color="red">{errors.mobile.message}</Box>}
           </FormControl>
           <FormControl>
-            <FormLabel textAlign="top" width="50%">
+            <FormLabel 
+             width={{base:"33%" , md:"55%"}}
+            textAlign="top" >
               Email
             </FormLabel>
             <Input
-             width="50%"
+             width={{base:"80%", md:"50%"}}
               id="email"
               type="email"
               name='email'
@@ -96,11 +102,13 @@ const Employeeform = () => {
             {errors.email && <Box color="red">{errors.email.message}</Box>}
           </FormControl>
           <FormControl>
-            <FormLabel textAlign="top" width="50%">
+            <FormLabel
+             width={{base:"40%" , md:"57%"}}
+            textAlign="top" >
               Address
             </FormLabel>
             <Input
-             width="50%"
+             width={{base:"80%", md:"50%"}}
               id="address"
               type="address"
               name='address'
@@ -111,11 +119,13 @@ const Employeeform = () => {
             {errors.address && <Box color="red">{errors.address.message}</Box>}
           </FormControl>
           <FormControl>
-            <FormLabel textAlign="top" width="50%">
+            <FormLabel
+             width={{base:"45%" , md:"60%"}}
+            textAlign="top">
               Designation
             </FormLabel>
             <Input
-             width="50%"
+             width={{base:"80%", md:"50%"}}
               id="designation"
               type="designation"
               name='designation'
@@ -126,11 +136,13 @@ const Employeeform = () => {
             {errors.email && <Box color="red">{errors.email.message}</Box>}
           </FormControl>
           <FormControl>
-            <FormLabel textAlign="top" width="50%">
+            <FormLabel 
+             width={{base:"33%" , md:"55%"}}
+            textAlign="top">
               Salary
             </FormLabel>
             <Input
-             width="50%"
+             width={{base:"80%", md:"50%"}}
               id="salary"
               type="salary"
               name='salary'
