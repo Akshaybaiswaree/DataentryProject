@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import {
   Box,
@@ -39,29 +37,30 @@ const ForgetPassword = () => {
     onOpen();
     forOtpIntegration()
   };
-
-  const forOtpIntegration = async ()=>{
-// console.log("OTP Mil raha");
-    const handlePaylode = {
-      passwordResetOTP : otp
-    }
+const forOtpIntegration = async () => {
+  try {
+    const handlePayload = {
+      passwordResetOTP: otp,
+    };
 
     const config = {
-      method : "POST",
-      url :  `${apiUrl}/user/verify_otp`,
-      data : handlePaylode
-    }
-    const responce = await axios(config)
-    setOtp(responce)
-   navigate=("/setPassword")
-    console.log(responce,"For Otp ");
+      method: "POST",
+      url: `${apiUrl}/user/verify_otp`,
+      data: handlePayload,
+    };
+
+    const response = await axios(config);
+    // Assuming the actual OTP value is available in the response
+    const verifiedOtp = response.data.otp; // Adjust this based on your API response
+
+    setOtp(verifiedOtp);
+    onClose(); // Close the modal after OTP verification
+    navigate("/setPassword"); // Correct the navigation syntax
+    console.log(response, "For Otp ");
+  } catch (error) {
+    console.error(error);
   }
-
-  const handleVerifyOtp = () => {
-    // Perform logic to verify the entered OTP
-    onClose();
-  };
-
+};
   // function to submit email oncick
   const submitEmail = async () => {
 
