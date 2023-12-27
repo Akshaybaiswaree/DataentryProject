@@ -23,6 +23,7 @@ import Pending from "./Component/Dashboard/Pending/Pending";
 import Plan from "./Component/Dashboard/Plan/Plan";
 import ProtectedRoute from "./Component/ProtectedRoute/ProtectedRoute";
 import Recovery from "./Component/Dashboard/Recovery/Recovery";
+import RecoveryProfile from "./Component/Dashboard/Recovery/RecoveryProfile";
 import Registration from "./Component/Dashboard/Registration/Registration";
 import RegistrationForm from "./Component/Dashboard/Registration/RegistrationForm";
 import Report from "./Component/Dashboard/Report/Report";
@@ -93,6 +94,8 @@ const router = createBrowserRouter(
         <Route path="report" element={<Report />} />
         <Route path="reportform" element={<ReportForm />} />
         <Route path="recovery" element={<Recovery />} />
+        <Route path="recoveryprofile/:userId" element={<RecoveryProfile />} />
+        
         <Route path="employees" element={<Employees />} />
         <Route
           path="employeeprofileedit/:userId"
