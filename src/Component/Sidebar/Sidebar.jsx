@@ -193,6 +193,50 @@ export default function SideBar() {
                         </NavLink>
                       </ListItem>
 
+                      {/* Active User */}
+                      <ListItem
+                        className="listItem"
+                        p="5px"
+                        borderRadius="10px"
+                      >
+                        <ListIcon
+                          as={BsFileEarmarkSpreadsheet}
+                          color="gray.500"
+                          ml="10px"
+                        />
+                        <NavLink to="/user/activeUser">
+                          <Text
+                            as="span"
+                            pl="10px"
+                            fontSize={{ base: "0.6rem", md: "1rem" }}
+                            color="black"
+                          >
+                          Active User
+                          </Text>
+                        </NavLink>
+                      </ListItem>
+                          
+                      <ListItem
+                        className="listItem"
+                        p="5px"
+                        borderRadius="10px"
+                      >
+                        <ListIcon
+                          as={BsFileEarmarkSpreadsheet}
+                          color="gray.500"
+                          ml="10px"
+                        />
+                        <NavLink to="/user/frezzuser">
+                          <Text
+                            as="span"
+                            pl="10px"
+                            fontSize={{ base: "0.6rem", md: "1rem" }}
+                            color="black"
+                          >
+                            Frezz User
+                          </Text>
+                        </NavLink>
+                      </ListItem>
                       <ListItem
                         className="listItem"
                         p="5px"

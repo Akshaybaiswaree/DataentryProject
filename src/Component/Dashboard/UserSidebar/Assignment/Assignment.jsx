@@ -13,14 +13,20 @@ const Assignment = () => {
 
   // fetchDetails of assingment
   const fetchDetails = async () => {
-    const apiUrl = import.meta.env.VITE_APP_API_URL;
-    const response = await axios.get(
-      `${apiUrl}/user/get_totalAssignment`
-    );
-    const data = response.data;
-    console.log(data);
-    setData(data);
-    // console.log(data?.total);
+    try{
+      const apiUrl = import.meta.env.VITE_APP_API_URL;
+      const response = await axios.get(
+        `${apiUrl}/user/get_totalAssignment`
+      );
+      const data = response.data;
+      console.log(data);
+      setData(data);
+      // console.log(data?.total);
+    }
+    catch(error){
+      console.log("error",error);
+    }
+   
   };
   return (
     <Flex alignItems="center">

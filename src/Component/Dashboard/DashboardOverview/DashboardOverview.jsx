@@ -3,39 +3,51 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const DashboardOverview = () => {
-  // const [data, setData] = useState();
-
-  // //  for fetch total assingment details in Dashboard
-  // useEffect(() => {
-  //   fetchDetails();
-  // }, []);
-
-  // // fetchDetails of assingment
-  // const fetchDetails = async () => {
-  //   const apiUrl = import.meta.env.VITE_APP_API_URL;
-  //   const response = await axios.get(
-  //     `${apiUrl}/user/get_totalAssignment`
-  //   );
-  //   const data = response.data;
-  //   console.log(data);
-  //   setData(data);
-  // };
-
-  const [data, setData] = useState();
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
+  const [data, setData] = useState(0);
+  const [activeUsers, setActive] = useState(0);
+  const [registerUsers, setRegisterUsers] = useState(0);
+  const [pendingUsers, setPendingUsers] = useState(0);
+  const [FrezzUsers, setFrezzUsers] = useState(0);
+  // const [data, setData] = useState(0);
 
   useEffect(() => {
     fetchDetails();
+    totlalActiveUser();
+    totlalRegistrationUser();
+    totlalPendingUser();
+    totlalFrezzUser();
   }, []);
 
   const fetchDetails = async () => {
-    const apiUrl = import.meta.env.VITE_APP_API_URL;
     const response = await axios.get(`${apiUrl}/user/get_all_user`);
     const totalData = response.data;
-    console.log(totalData);
-    setData(totalData);
-    
+    setData(totalData)
   };
 
+  const totlalActiveUser = async () => {
+    const response = await axios.get(`${apiUrl}/user/user_pagination?status=Active`);
+    const totalActiveUserData = response.data.totalUsers;
+    setActive(totalActiveUserData)
+  };
+
+  const totlalRegistrationUser = async () => {
+    const response = await axios.get(`${apiUrl}/user/user_pagination?status=Registered`);
+    const totalRigistraUserData = response.data.totalUsers;
+    setRegisterUsers(totalRigistraUserData)
+  }
+
+  const totlalPendingUser = async () => {
+    const response = await axios.get(`${apiUrl}/user/user_pagination?status=Pending`);
+    const totalPendingUser = response.data.totalUsers;
+    setPendingUsers(totalPendingUser)
+  };
+
+  const totlalFrezzUser = async () => {
+    const response = await axios.get(`${apiUrl}/user/user_pagination?status=Freeze`);
+    const totalFrezzUser = response.data.totalUsers;
+    setFrezzUsers(totalFrezzUser)
+  };
 
   return (
     <>  
@@ -107,7 +119,7 @@ const DashboardOverview = () => {
             marginRight: "0%",
           }}
         >
-          {data?.tota}
+          {registerUsers}
         </span>
         <p
           style={{
@@ -149,7 +161,7 @@ const DashboardOverview = () => {
             marginRight: "0%",
           }}
         >
-          {data?.pending}
+          {activeUsers}
         </span>
         <p
           style={{
@@ -189,7 +201,7 @@ const DashboardOverview = () => {
             marginRight: "0%",
           }}
         >
-          {data?.pending}
+          {FrezzUsers}
         </span>
         <p
           style={{
@@ -233,7 +245,7 @@ const DashboardOverview = () => {
             marginRight: "0%",
           }}
         >
-          {data?.total}
+          {pendingUsers}
         </span>
         <p
           style={{

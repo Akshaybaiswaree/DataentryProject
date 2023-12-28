@@ -26,7 +26,7 @@ import axios from "axios";
 
 const ForgetPassword = () => {
 
-  const navigate = useNavigate();
+  let navigate = useNavigate();
 
   const apiUrl = import.meta.env.VITE_APP_API_URL;
   const [email, setEmail] = useState("");

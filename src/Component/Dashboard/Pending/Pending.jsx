@@ -30,7 +30,7 @@ const Pending = () => {
     try {
       const config = {
         methode: "GET",
-        url: `${apiUrl}/user/user_pagination?page=${currentPage}`,
+        url: `${apiUrl}/user/user_pagination?page=${currentPage}&status=Pending&limit=10`,
       };
       const responce = await axios(config);
       console.log(responce)

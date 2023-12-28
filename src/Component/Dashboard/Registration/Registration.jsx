@@ -1,6 +1,3 @@
-
-
-
 import {
   Box,
   Button,
@@ -23,48 +20,47 @@ const Registration = () => {
   const [searchQuary, setSearchQuary] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totlePage, setTotlePage] = useState(1);
-  const [userData , setUserData] = useState([])
+  const [userData, setUserData] = useState([]);
   useEffect(() => {
     fetchData();
   }, [currentPage]);
 
   const fetchData = async () => {
-    
     try {
       const config = {
         methode: "GET",
-        url: `${apiUrl}/user/user_pagination?page=${currentPage}`,
+        url: `${apiUrl}/user/user_pagination?page=${currentPage}&status=Registered&limit=10`,
       };
       const responce = await axios(config);
-      console.log(responce)
+      console.log(responce,"Registration");
       setTotlePage(responce.data?.totalPages);
-      setUserData(responce?.data?.users)
+      setUserData(responce?.data?.users);
     } catch (error) {
       console.log(error, "error");
     }
   };
   const handleSearch = () => {
-    if(searchQuary){
-      searchResponse()
+    if (searchQuary) {
+      searchResponse();
       setCurrentPage(1);
-      setSearchQuary("")
-    }else{
-      fetchData()
+      setSearchQuary("");
+    } else {
+      fetchData();
     }
   };
   const searchResponse = async () => {
     try {
       const handlePaylode = {
         name: searchQuary,
-        data: {
-          status : "Pending"
-        }
+        // data: {
+        //   status: "Register",
+        // },
       };
-      console.log(searchQuary,"BackEnd Search Feild");
+      console.log(searchQuary, "BackEnd Search Feild");
 
       const config = {
         method: "POST",
-        url:  `${apiUrl}/user/search_user_by_name`,
+        url: `${apiUrl}/user/search_user_by_name?status=Registered`,
         data: handlePaylode,
       };
 
@@ -95,12 +91,12 @@ const Registration = () => {
         <NavLink to="/user/Registrationform">
           <Button
             mt="1rem"
-            mb={'1rem'}
+            mb={"1rem"}
             _hover={{ background: "white", color: "gray" }}
             p="1rem"
             color="white"
             bg="black"
-            width={'6rem'}
+            width={"6rem"}
           >
             Add User
           </Button>
@@ -140,24 +136,25 @@ const Registration = () => {
         <Box fontWeight="bold">Mobile</Box>
         <Box fontWeight="bold">Mail</Box>
         <Box></Box> {/* Empty box for the View Details button column */}
-        {userData && userData.map((items) => (
-          <React.Fragment key={items.id}>
-            <Box>{items.name}</Box>
-            <Box>{items.mobile}</Box>
-            <Box>{items.email}</Box>
-            <Box>
-              <NavLink to={`/user/registeruserdetail/${items._id}`}>
-                <Button
-                  colorScheme="blackAlpha"
-                  backgroundColor="black"
-                  width="80%"
-                >
-                  View Detail
-                </Button>
-              </NavLink>
-            </Box>
-          </React.Fragment>
-        ))}
+        {userData &&
+          userData.map((items) => (
+            <React.Fragment key={items.id}>
+              <Box>{items.name}</Box>
+              <Box>{items.mobile}</Box>
+              <Box>{items.email}</Box>
+              <Box>
+                <NavLink to={`/user/registeruserdetail/${items._id}`}>
+                  <Button
+                    colorScheme="blackAlpha"
+                    backgroundColor="black"
+                    width="80%"
+                  >
+                    View Detail
+                  </Button>
+                </NavLink>
+              </Box>
+            </React.Fragment>
+          ))}
       </Grid>
       <div className="numbers">
           <ChevronLeftIcon />
@@ -172,6 +169,9 @@ const Registration = () => {
           ))}
           <ChevronRightIcon />
         </div>
+
+     
+      
     </>
   );
 };
