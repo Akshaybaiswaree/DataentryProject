@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 // import "./EmployeeProfileEdit.css";
 
 const NewAssignment = () => {
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
   const token = JSON.parse(localStorage.getItem("token"));
   const { email, _id } = token;
   // console.log(email, "Get Email");
@@ -40,7 +41,7 @@ const NewAssignment = () => {
     try {
       const config = {
         method: "POST",
-        url: "http://localhost:5000/user/get_assignment_details",
+        url: `${apiUrl}/user/get_assignment_details`,
         data: { email: email }, // Pass the email as part of the request body
       };
 
@@ -59,7 +60,7 @@ const NewAssignment = () => {
     try {
       const config = {
         method: "GET",
-        url: `http://localhost:5000/user/refresh_assignment_detail/${data?._id}`,
+        url: `${apiUrl}/user/refresh_assignment_detail/${data?._id}`,
       };
       const responce = await axios(config);
        console.log(responce , "Relode ");
@@ -87,7 +88,7 @@ const NewAssignment = () => {
     // console.log(inputFields);
     try {
       const response = await axios.post(
-        "http://localhost:5000/user/add_assignment",
+        `${apiUrl}/user/add_assignment`,
 
         inputFields,
         {
