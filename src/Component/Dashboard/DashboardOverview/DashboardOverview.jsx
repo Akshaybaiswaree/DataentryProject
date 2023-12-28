@@ -20,8 +20,10 @@ const DashboardOverview = () => {
   }, []);
 
   const fetchDetails = async () => {
+    
     const response = await axios.get(`${apiUrl}/user/get_all_user`);
     const totalData = response.data;
+    
     setData(totalData)
   };
 
@@ -29,24 +31,30 @@ const DashboardOverview = () => {
     const response = await axios.get(`${apiUrl}/user/user_pagination?status=Active`);
     const totalActiveUserData = response.data.totalUsers;
     setActive(totalActiveUserData)
+    console.log(totalActiveUserData,"totalActive");
+    
   };
 
   const totlalRegistrationUser = async () => {
     const response = await axios.get(`${apiUrl}/user/user_pagination?status=Registered`);
     const totalRigistraUserData = response.data.totalUsers;
     setRegisterUsers(totalRigistraUserData)
+    console.log(totalRigistraUserData,"totalRegistration");
+    
   }
 
   const totlalPendingUser = async () => {
     const response = await axios.get(`${apiUrl}/user/user_pagination?status=Pending`);
     const totalPendingUser = response.data.totalUsers;
     setPendingUsers(totalPendingUser)
+    console.log(totalPendingUser,"totalPending");
   };
 
   const totlalFrezzUser = async () => {
     const response = await axios.get(`${apiUrl}/user/user_pagination?status=Freeze`);
     const totalFrezzUser = response.data.totalUsers;
     setFrezzUsers(totalFrezzUser)
+    console.log(totalFrezzUser,"totalFrezz");
   };
 
   return (

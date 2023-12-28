@@ -45,7 +45,7 @@ function RootLayout() {
         <Box
         bg={"#f5f5f5"}
         marginLeft={'1rem'}
-        flexBasis={{ base: "100%", md: "80%" }}>
+        flexBasis={{ base: "2700%", md: "80%" }}>
           <Outlet 
           />
         </Box>
