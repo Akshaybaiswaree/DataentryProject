@@ -137,7 +137,7 @@ const RegisterUserDetail = () => {
                 name="name"
                 onChange={onChangeHandler}
                 value={inputField.name}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="text"
                 placeholder="Enter Name"
               />
@@ -150,7 +150,7 @@ const RegisterUserDetail = () => {
                 name="email"
                 value={inputField.email}
                 onChange={onChangeHandler}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="email"
                 placeholder="enter email"
               />
@@ -165,7 +165,7 @@ const RegisterUserDetail = () => {
                 name="mobile"
                 onChange={onChangeHandler}
                 value={inputField.mobile}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="number"
               />
             </FormControl>
@@ -177,7 +177,7 @@ const RegisterUserDetail = () => {
                 name="address"
                 value={inputField.address}
                 onChange={onChangeHandler}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="text"
                 placeholder="Address"
               />
@@ -192,7 +192,7 @@ const RegisterUserDetail = () => {
                 name="plan"
                 onChange={onChangeHandler}
                 value={inputField.plan}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 placeholder="Select option"
               >
                 <option value="option1">Plan 1</option>
@@ -209,7 +209,7 @@ const RegisterUserDetail = () => {
                 name="caller"
                 onChange={onChangeHandler}
                 value={inputField.caller}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 placeholder="Select option"
               >
                 <option value="option1">Caller 1</option>
@@ -221,12 +221,12 @@ const RegisterUserDetail = () => {
           </Box>
         </Stack>
 
-        <Stack direction={"row"}>
+        <Stack direction={["column", "row"]}>
           <Box>
             <FormControl className="employee-form-group">
               <FormLabel>Status</FormLabel>
               <Input
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="text"
                 name="status"
                 onChange={onChangeHandler}
@@ -238,7 +238,7 @@ const RegisterUserDetail = () => {
             <FormControl className="employee-form-group">
               <FormLabel>Login Status</FormLabel>
               <Input
-                width={"400px"}
+               width={{base:"300px",md:"400px"}}
                 type="text"
                 name="status"
                 value={inputField.status}

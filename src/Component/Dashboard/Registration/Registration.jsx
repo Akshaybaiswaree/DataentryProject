@@ -1,25 +1,28 @@
+
+
+
+import React, { useEffect, useState } from "react";
+import DataTable from "react-data-table-component";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import {
   Box,
   Button,
   Flex,
-  Grid,
   Input,
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { SearchIcon } from "@chakra-ui/icons";
-import axios from "axios";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 const Registration = () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
 
-  const [searchQuary, setSearchQuary] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [totlePage, setTotlePage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [userData, setUserData] = useState([]);
   useEffect(() => {
     fetchData();
@@ -28,53 +31,85 @@ const Registration = () => {
   const fetchData = async () => {
     try {
       const config = {
-        methode: "GET",
-        url: `${apiUrl}/user/user_pagination?page=${currentPage}&status=Registered&limit=10`,
+        method: "GET",
+        url: `${apiUrl}/user/user_pagination?page=${currentPage}`,
       };
-      const responce = await axios(config);
-      console.log(responce,"Registration");
-      setTotlePage(responce.data?.totalPages);
-      setUserData(responce?.data?.users);
+      const response = await axios(config);
+      setTotalPages(response.data?.totalPages);
+      setUserData(response?.data?.users);
     } catch (error) {
       console.log(error, "error");
     }
   };
+
   const handleSearch = () => {
-    if (searchQuary) {
+    if (searchQuery) {
       searchResponse();
       setCurrentPage(1);
-      setSearchQuary("");
+      setSearchQuery("");
     } else {
       fetchData();
     }
   };
+
   const searchResponse = async () => {
     try {
-      const handlePaylode = {
-        name: searchQuary,
-        // data: {
-        //   status: "Register",
-        // },
+      const payload = {
+        name: searchQuery,
+        data: {
+          status: "Pending",
+        },
       };
-      console.log(searchQuary, "BackEnd Search Feild");
 
       const config = {
         method: "POST",
-        url: `${apiUrl}/user/search_user_by_name?status=Registered`,
-        data: handlePaylode,
+        url: `${apiUrl}/user/search_user_by_name`,
+        data: payload,
       };
 
-      const responces = await axios(config);
-      console.log(responces, "Search Result");
-      setUserData(responces.data.users);
+      const response = await axios(config);
+      setUserData(response.data.users);
     } catch (error) {
       console.log(error, "Error");
     }
   };
 
-  const handlePaggination = (page) => {
+  const handlePagination = (page) => {
     setCurrentPage(page);
   };
+
+  const columns = [
+    {
+      name: "Name",
+      selector: "name",
+    },
+    {
+      name: "Mobile",
+      selector: "mobile",
+    },
+    {
+      name: "Email",
+      selector: "email",
+    },
+    {
+      name: "Action",
+      cell: (row) => (
+        <NavLink to={`/user/registeruserdetail/${row._id}`}>
+          <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
+            View Detail
+          </Button>
+        </NavLink>
+      ),
+    },
+  ];
+
+  const paginationOptions = {
+    rowsPerPageText: "Rows per page:",
+    rangeSeparatorText: "of",
+    selectAllRowsItem: true,
+    selectAllRowsItemText: "All",
+  };
+
   return (
     <>
       <Flex direction="column" align="center">
@@ -112,68 +147,43 @@ const Registration = () => {
           width="100%"
           type="text"
           placeholder="Search..."
-          value={searchQuary}
+          value={searchQuery}
           onChange={(e) => {
-            setSearchQuary(e.target.value);
+            setSearchQuery(e.target.value);
           }}
         />
         <Button
+          marginLeft={"1rem"}
           className="employee-btn"
           colorScheme="teal"
-          mt="4"
           onClick={handleSearch}
         >
           Search
         </Button>
       </InputGroup>
-      <Grid
-        templateColumns={["repeat(1, 1fr)", "repeat(4, 1fr)"]}
-        gap={3}
-        width={["90%", "80%"]}
-        margin="1rem auto"
-      >
-        <Box fontWeight="bold">Name</Box>
-        <Box fontWeight="bold">Mobile</Box>
-        <Box fontWeight="bold">Mail</Box>
-        <Box></Box> {/* Empty box for the View Details button column */}
-        {userData &&
-          userData.map((items) => (
-            <React.Fragment key={items.id}>
-              <Box>{items.name}</Box>
-              <Box>{items.mobile}</Box>
-              <Box>{items.email}</Box>
-              <Box>
-                <NavLink to={`/user/registeruserdetail/${items._id}`}>
-                  <Button
-                    colorScheme="blackAlpha"
-                    backgroundColor="black"
-                    width="80%"
-                  >
-                    View Detail
-                  </Button>
-                </NavLink>
-              </Box>
-            </React.Fragment>
-          ))}
-      </Grid>
-      <div className="numbers">
-          <ChevronLeftIcon />
-          {Array.from({ length: totlePage }, (_, index) => (
-            <span
-              key={index + 1}
-              className="num"
-              onClick={() => handlePaggination(index + 1)}
-            >
-              {index + 1}
-            </span>
-          ))}
-          <ChevronRightIcon />
-        </div>
-
-     
+      
+      <Box width={{ base: "81vw", md: "80vw" }} overflowX="auto" p={4}>
+      
+      <DataTable
+        title=""
+        columns={columns}
+        data={userData}
+        pagination
+        paginationServer
+        paginationTotalRows={totalPages * 10} // Assuming 10 items per page
+        onChangePage={(page) => handlePagination(page)}
+        paginationPerPage={10}
+        paginationRowsPerPageOptions={[10, 20, 30]}
+        paginationComponentOptions={paginationOptions}
+      />
+       </Box>
       
     </>
   );
 };
 
 export default Registration;
+
+
+
+

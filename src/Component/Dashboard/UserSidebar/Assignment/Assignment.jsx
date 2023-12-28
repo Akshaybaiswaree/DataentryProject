@@ -29,133 +29,151 @@ const Assignment = () => {
    
   };
   return (
-    <Flex alignItems="center">
-      {/* Total Assingment */}
-      <Flex gap="15%" textAlign="center">
-        <Box
-          backgroundColor="#ffe6ff"
-          border="#ebe9eb"
-          margin="20px"
-          padding="40px"
-          fontWeight="800"
-          borderRadius="10px"
-          width="150px"
-          height="150px"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
+    <Flex
+    direction={{base:"column" , md:"row"}}
+    align="center"
+    justify="center"
+    gap={4}
+  >
+    {/* Total Assingment */}
+    <Flex
+      textAlign="center"
+      width={{ base: "100%", md: "auto" }}
+    >
+      <Box
+        backgroundColor="#ffe6ff"
+        border="#ebe9eb"
+        margin="20px"
+        padding="40px"
+        fontWeight="800"
+        borderRadius="10px"
+        width="150px"
+        height="150px"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        ml={{base:"6rem"}}
+      >
+        <span
+          style={{
+            marginTop: "5px",
+            marginBottom: "5px",
+            height: "10px",
+            fontSize: "20px",
+            marginRight: "0%",
+          }}
         >
-          <span
-            style={{
-              marginTop: "5px",
-              marginBottom: "5px",
-              height: "10px",
-              fontSize: "20px",
-              marginRight: "0%",
-            }}
-          >
-            {data?.total}
-          </span>
-          <p
-            style={{
-              color: "gray",
-              fontWeight: "600",
-              flexDirection: "row",
-              marginLeft: "0px",
-              textAlign: "center",
-              marginTop: "10px",
-            }}
-          >
-            Total Assingment
-          </p>
-        </Box>
-      </Flex>
-
-      {/* Submitted Assingment */}
-      <Flex gap="15%" textAlign="center">
-        <Box
-          backgroundColor="#EBE9EB"
-          border="#ebe9eb"
-          margin="20px"
-          padding="40px"
-          fontWeight="800"
-          borderRadius="10px"
-          width="150px"
-          height="150px"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
+          {data?.total}
+        </span>
+        <p
+          style={{
+            color: "gray",
+            fontWeight: "600",
+            flexDirection: "row",
+            marginLeft: "0px",
+            textAlign: "center",
+            marginTop: "10px",
+          }}
         >
-          <span
-            style={{
-              marginTop: "5px",
-              marginBottom: "5px",
-              height: "10px",
-              fontSize: "20px",
-              marginRight: "0%",
-            }}
-          >
-            {data?.submitted}
-          </span>
-          <p
-            style={{
-              color: "gray",
-              fontWeight: "600",
-              flexDirection: "row",
-              marginLeft: "0px",
-              textAlign: "center",
-              marginTop: "10px",
-            }}
-          >
-            Submitted Assingment
-          </p>
-        </Box>
-      </Flex>
-
-      {/* Pending Assingment */}
-      <Flex gap="15%" textAlign="center">
-        <Box
-          backgroundColor="#e6ffe6"
-          border="#ebe9eb"
-          margin="20px"
-          padding="40px"
-          fontWeight="800"
-          borderRadius="10px"
-          width="150px"
-          height="150px"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <span
-            style={{
-              marginTop: "5px",
-              marginBottom: "5px",
-              height: "10px",
-              fontSize: "20px",
-              marginRight: "0%",
-            }}
-          >
-            {data?.pending}
-          </span>
-          <p
-            style={{
-              color: "gray",
-              fontWeight: "600",
-              flexDirection: "row",
-              marginLeft: "0px",
-              textAlign: "center",
-              marginTop: "10px",
-            }}
-          >
-            Pending Assingment
-          </p>
-        </Box>
-      </Flex>
+          Total Assingment
+        </p>
+      </Box>
     </Flex>
+  
+    {/* Submitted Assingment */}
+    <Flex
+      textAlign="center"
+      width={{ base: "100%", md: "auto" }}
+    >
+      <Box
+        backgroundColor="#EBE9EB"
+        border="#ebe9eb"
+        margin="20px"
+        padding="40px"
+        fontWeight="800"
+        borderRadius="10px"
+        width="150px"
+        height="150px"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        ml={{base:"6rem"}}
+      >
+        <span
+          style={{
+            marginTop: "5px",
+            marginBottom: "5px",
+            height: "10px",
+            fontSize: "20px",
+            marginRight: "0%",
+          }}
+        >
+          {data?.submitted}
+        </span>
+        <p
+          style={{
+            color: "gray",
+            fontWeight: "600",
+            flexDirection: "row",
+            marginLeft: "0px",
+            textAlign: "center",
+            marginTop: "10px",
+          }}
+        >
+          Submitted Assingment
+        </p>
+      </Box>
+    </Flex>
+  
+    {/* Pending Assingment */}
+    <Flex
+      textAlign="center"
+      width={{ base: "100%", md: "auto" }}
+    >
+      <Box
+        backgroundColor="#e6ffe6"
+        border="#ebe9eb"
+        margin="20px"
+        padding="40px"
+        fontWeight="800"
+        borderRadius="10px"
+        width="150px"
+        height="150px"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        ml={{base:"6rem"}}
+      >
+        <span
+          style={{
+            marginTop: "5px",
+            marginBottom: "5px",
+            height: "10px",
+            fontSize: "20px",
+            marginRight: "0%",
+          }}
+        >
+          {data?.pending}
+        </span>
+        <p
+          style={{
+            color: "gray",
+            fontWeight: "600",
+            flexDirection: "row",
+            marginLeft: "0px",
+            textAlign: "center",
+            marginTop: "10px",
+          }}
+        >
+          Pending Assingment
+        </p>
+      </Box>
+    </Flex>
+  </Flex>
+  
   );
 };
 

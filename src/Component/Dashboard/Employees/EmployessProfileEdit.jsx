@@ -1,4 +1,3 @@
-
 import {
   AlertDialog,
   AlertDialogBody,
@@ -40,7 +39,6 @@ const EmployeeProfileEdit = () => {
   useEffect(() => {
     //console.log("user",userId)
     const fetchUserDetails = async () => {
-      
       try {
         const response = await axios.get(
           `${apiUrl}/user/getemployee_by_id/${userId}`
@@ -108,9 +106,14 @@ const EmployeeProfileEdit = () => {
   };
 
   return (
-    <Box ml={"1rem"} mt={"1rem"} className="employee-form-container">
+    <Box
+      mb={"1rem"}
+      ml={"1rem"}
+      mt={"1rem"}
+      className="employee-form-container"
+    >
       <Box as="h3" fontSize="xl" mb="4">
-        Edit User Detail
+        Edit Employee Detail
       </Box>
       <form className="employee-form">
         <Stack direction={["column", "row"]}>
@@ -120,9 +123,9 @@ const EmployeeProfileEdit = () => {
               <Input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                width={"400px"}
+                width={{ base: "300px", md: "400px" }}
                 stype="text"
-                placeholder="Kaveri Kappor"
+                placeholder="Edit Name"
               />
             </FormControl>
           </Box>
@@ -132,9 +135,9 @@ const EmployeeProfileEdit = () => {
               <Input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                width={"400px"}
+                width={{ base: "300px", md: "400px" }}
                 type="email"
-                placeholder="kaveri@gmail.com"
+                placeholder=".....@gmail.com"
               />
             </FormControl>
           </Box>
@@ -147,9 +150,9 @@ const EmployeeProfileEdit = () => {
               <Input
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
-                width={"400px"}
+                width={{ base: "300px", md: "400px" }}
                 type="text"
-                placeholder="9647523148"
+                placeholder="9647*******"
               />
             </FormControl>
           </Box>
@@ -159,7 +162,7 @@ const EmployeeProfileEdit = () => {
               <Input
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                width={"400px"}
+                width={{ base: "300px", md: "400px" }}
                 type="text"
                 placeholder="Enter Address"
               />
@@ -174,9 +177,9 @@ const EmployeeProfileEdit = () => {
               <Input
                 value={salary}
                 onChange={(e) => setSalary(e.target.value)}
-                width={"400px"}
+                width={{ base: "300px", md: "400px" }}
                 type="text"
-                placeholder="10000"
+                placeholder="100000"
               />
             </FormControl>
           </Box>
@@ -186,9 +189,9 @@ const EmployeeProfileEdit = () => {
               <Input
                 value={designation}
                 onChange={(e) => setDesignation(e.target.value)}
-                width={"400px"}
+                width={{ base: "300px", md: "400px" }}
                 type="text"
-                placeholder="10000"
+                placeholder=""
               />
             </FormControl>
           </Box>
@@ -201,9 +204,9 @@ const EmployeeProfileEdit = () => {
               <Input
                 // value={salary}
                 // onChange={(e) => setSalary(e.target.value)}
-                width={"400px"}
+                width={{ base: "300px", md: "400px" }}
                 type="text"
-                placeholder="10000"
+                placeholder="97345"
               />
             </FormControl>
           </Box>
@@ -213,28 +216,16 @@ const EmployeeProfileEdit = () => {
               <Input
                 // value={designation}
                 // onChange={(e) => setDesignation(e.target.value)}
-                width={"400px"}
+                width={{ base: "300px", md: "400px" }}
                 type="password"
-                placeholder="10000"
+                placeholder=""
               />
             </FormControl>
           </Box>
         </Stack>
       </form>
 
-      {/* <Link to={`/employeeprofileedit/${userId}`}>
-        <EditIcon />
-      </Link> */}
-
-      <Link to={`/employeeprofileedit/${userId}`}>
-        <Button marginTop={"1rem"} colorScheme="blue">
-          Edit
-        </Button>
-      </Link>
-
-      {/* <DeleteIcon onClick={onOpen} /> */}
       <Button
-      ml={'1rem'}
         marginTop={"1rem"}
         _hover={{ background: "white", color: "gray" }}
         onClick={onOpen}
@@ -275,10 +266,9 @@ const EmployeeProfileEdit = () => {
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
-      <br/>
+      <br />
 
       <Button
-    
         onClick={UpdatedValue}
         className="employee-btn"
         colorScheme="teal"
@@ -286,7 +276,6 @@ const EmployeeProfileEdit = () => {
       >
         Save
       </Button>
-     
     </Box>
   );
 };
