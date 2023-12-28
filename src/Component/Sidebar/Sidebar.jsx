@@ -607,7 +607,90 @@ export default function SideBar() {
                             marginLeft="8px" // Add some margin for spacing between icon and text
                             _hover={{ textDecoration: "underline" }}
                           >
-                            Report
+                            Pending
+                          </Text>
+                        </NavLink>
+                      </ListItem>
+
+                      {/* Active User */}
+                      <ListItem
+                        className="listItem"
+                        p="5px"
+                        borderRadius="10px"
+                      >
+                        <ListIcon
+                          as={BsFileEarmarkSpreadsheet}
+                          color="gray.500"
+                          ml="10px"
+                        />
+                        <NavLink to="/user/activeUser">
+                          <Text
+                            as="span"
+                            pl="10px"
+                            fontSize={{ base: "0.6rem", md: "1rem" }}
+                            color="black"
+                          >
+                          Active User
+                          </Text>
+                        </NavLink>
+                      </ListItem>
+                          
+                      <ListItem
+                        className="listItem"
+                        p="5px"
+                        borderRadius="10px"
+                      >
+                        <ListIcon
+                          as={BsFileEarmarkSpreadsheet}
+                          color="gray.500"
+                          ml="10px"
+                        />
+                        <NavLink to="/user/frezzuser">
+                          <Text
+                            as="span"
+                            pl="10px"
+                            fontSize={{ base: "0.6rem", md: "1rem" }}
+                            color="black"
+                          >
+                            Freeze User
+                          </Text>
+                        </NavLink>
+                      </ListItem>
+                      <ListItem
+                        className="listItem"
+                        p="5px"
+                        borderRadius="10px"
+                      >
+                        <ListIcon as={CiMoneyBill} color="gray.500" ml="10px" />
+                        <NavLink to="/user/userAgreement">
+                          <Text
+                            as="span"
+                            pl="10px"
+                            fontSize={{ base: "0.6rem", md: "1rem" }}
+                            color="black"
+                          >
+                           User Agreement
+                          </Text>
+                        </NavLink>
+                      </ListItem>
+
+                      <ListItem
+                        className="listItem"
+                        p="5px"
+                        borderRadius="10px"
+                      >
+                        <ListIcon
+                          as={BsFillFileEarmarkSpreadsheetFill}
+                          ml="10px"
+                        />
+                        <NavLink to="/user/plan">
+                          <Text
+                            as="span"
+                            pl="10px"
+                            fontSize={{ base: "0.6rem", md: "1rem" }}
+                            color="black"
+                          >
+                            Plan
                           </Text>
                         </NavLink>
                       </ListItem>

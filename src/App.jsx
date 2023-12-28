@@ -55,8 +55,7 @@ const router = createBrowserRouter(
       />
       <Route path="qccheck" element={<QcCheck />} />
       <Route index element={<Login />} />
-       <Route path="/signup" element={<SignUp />} /> 
-      <Route path="/admin" element={<LoginAdmin />} />
+       <Route path="/signup" element={<SignUp />} />       <Route path="/admin" element={<LoginAdmin />} />
       <Route path="/userlogin" element={<UserLogin />} />
       <Route path="/ForgetPassword" element={<ForgetPassword />} />
       <Route path="/setPassword" element={<SetPassword />} />
@@ -72,13 +71,21 @@ const router = createBrowserRouter(
         <Route
           path="user"
           element={<ProtectedRoute element={<UserOutlet />} />}
+
         >
           <Route index element={<User />} />
+          <Route path="activeUser" element={<ActiveUser/>} />
+          <Route path="frezzuser" element={<FrezzUser/>} />
           <Route path="registration" element={<Registration />} />
           <Route path="registrationform" element={<RegistrationForm />} />
           <Route
             path="editregistration/:userId"
             element={<EditRegistration />}
+          />
+           
+          <Route
+            path="freezeuserform/:userId"
+            element={<FrezzUserForm/>}
           />
           <Route
             path="registeruserdetail/:userId"
