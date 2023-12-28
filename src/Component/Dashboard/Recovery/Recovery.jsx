@@ -8,7 +8,7 @@ import { Box, Button, Flex, Input, InputGroup, InputLeftElement } from "@chakra-
 import { SearchIcon } from '@chakra-ui/icons';
 const Recovery = () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
-
+  const [searchQuary, setSearchQuary] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotlePage] = useState(1);
   const [userData , setUserData] = useState([])
@@ -38,6 +38,40 @@ const Recovery = () => {
     setCurrentPage(page);
   };
 
+  const handleSearch = () => {
+    if(searchQuary){
+      searchResponse()
+      setCurrentPage(1);
+      setSearchQuary("")
+    }else{
+      fetchData()
+    }
+  };
+
+  const searchResponse = async () => {
+    try {
+      const handlePaylode = {
+        name: searchQuary,
+        data: {
+          status : "Success"
+        }
+      };
+      console.log(searchQuary,"BackEnd Search Feild");
+
+      const config = {
+        method: "POST",
+        url:  `${apiUrl}/user/search_user_by_name`,
+        data: handlePaylode,
+      };
+
+      const responces = await axios(config);
+      console.log(responces, "Search Result");
+      setUserData(responces.data.users);
+    } catch (error) {
+      console.log(error, "Error");
+    }
+  };
+
   return (
     <>
 
@@ -48,13 +82,32 @@ const Recovery = () => {
      fontSize={'2rem'} fontWeight={'700'}>Recovery</Box>
    
     </Flex>
-    <InputGroup>
+    <InputGroup mt="1rem" ml={["0rem", "0.5rem"]} width={["100%", "400px"]}>
         <InputLeftElement
           pointerEvents="none"
           children={<SearchIcon color="gray.300" />}
         />
-        <Input width={"400px"} type="text" placeholder="Search..." />
+        <Input
+          border="1px solid green"
+          width="100%"
+          type="text"
+          placeholder="Search..."
+          value={searchQuary}
+          onChange={(e) => {
+            setSearchQuary(e.target.value);
+          }}
+        />
+        <Button
+          className="employee-btn"
+          colorScheme="teal"
+          mt="0"
+          style={{marginLeft: '20px'}}
+          onClick={handleSearch}
+        >
+          Search
+        </Button>
       </InputGroup>
+     
     <div className="table" style={{justifyContent:"center", alignItems:'center',width:"80%", padding:"1rem"}}>
       <div className="user" style={{color:'black'}}><b>
         <h5>User Name</h5></b>
