@@ -1,12 +1,15 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
 import { Box, Flex } from "@chakra-ui/react"; // Import Box and Flex from Chakra UI
-//import {useState} from 'react'
+
+import Navbar from "../Navbar/Navbar";
+import { Outlet } from "react-router-dom";
 import SideBar from "../Sidebar/Sidebar";
+
+//import {useState} from 'react'
+
 //import UserSidebar from "../Dashboard/UserSidebar/UserSidebar"; 
 
 function RootLayout() {
-  // const [currentSidebar, setCurrentSidebar] = useState(null);
+  // const [currentSidebar, setCurrentSidebar] = useState();
 
   // const toggleSidebar = (role) => {
   //   setCurrentSidebar(role);
@@ -19,6 +22,9 @@ function RootLayout() {
   // } else if (currentSidebar === "admin") {
   //   SidebarComponent = SideBar;
   // }
+
+  
+
 
 
   return (
@@ -37,8 +43,9 @@ function RootLayout() {
 
         {/* Main Content */}
         <Box
+        bg={"#f5f5f5"}
         marginLeft={'1rem'}
-        flexBasis={{ base: "100%", md: "80%" }}>
+        flexBasis={{ base: "2700%", md: "80%" }}>
           <Outlet 
           />
         </Box>

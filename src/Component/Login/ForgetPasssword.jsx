@@ -17,11 +17,18 @@ import {
   InputGroup,
   InputRightElement,
 } from "@chakra-ui/react";
-import logo from "../../Images/logo.png";
-import { NavLink } from "react-router-dom";
+import logo from "../../Images/Group 1000004815.svg";
+import { useNavigate } from 'react-router-dom';
+import OtpInput from "react-otp-input";
+import axios from "axios";
 
 const ForgetPassword = () => {
+
+  const navigate = useNavigate();
+
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
   const [email, setEmail] = useState("");
+
   const [otp, setOtp] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -30,30 +37,75 @@ const ForgetPassword = () => {
   const handleGetOtp = () => {
     // Perform logic to send OTP to the email address
     onOpen();
+    forOtpIntegration()
   };
+const forOtpIntegration = async () => {
+  try {
+    const handlePayload = {
+      passwordResetOTP: otp,
+    };
 
-  const handleVerifyOtp = () => {
-    // Perform logic to verify the entered OTP
-    onClose();
+    const config = {
+      method: "POST",
+      url: `${apiUrl}/user/verify_otp`,
+      data: handlePayload,
+    };
+
+    const response = await axios(config);
+    // Assuming the actual OTP value is available in the response
+    const verifiedOtp = response.data.otp; // Adjust this based on your API response
+
+    setOtp(verifiedOtp);
+    onClose(); // Close the modal after OTP verification
+    navigate("/setPassword"); // Correct the navigation syntax
+    console.log(response, "For Otp ");
+  } catch (error) {
+    console.error(error);
+  }
+};
+  // function to submit email oncick
+  const submitEmail = async () => {
+
+    try{
+      const handlePaylode = {
+        email : email
+      }
+      const config = {
+        method : "POST",
+        url : `${apiUrl}/user/forgot_password`,
+        data : handlePaylode
+      }
+  
+      const responce = await axios(config)
+      setEmail(responce)
+      console.log(responce, "Yaha pr Email Show Hoga");
+      alert("Saved successfully.");
+       onOpen();
+    }
+    catch(error){
+      console.log(error);
+    }
   };
 
   return (
     <Flex
       direction={"column"}
       alignItems={"center"}
-      justifyContent={"center"}
+       justifyContent={"center"}
       height={"100vh"}
       textAlign="center"
     >
       <Flex direction="column" alignItems="center" fontFamily="Poppins">
         <Image width={"60%"} src={logo} alt="" />
-        <Heading>Forget Password</Heading>
+        <Heading
+        marginTop={'1rem'}
+        >Forget Password</Heading>
       </Flex>
 
       <Input
         marginTop={"1rem"}
         padding={"1rem"}
-        width={"30%"}
+        width={{base:"80%" , md:"30%"}}
         mx="auto"
         background="#ebe9eb"
         height="3rem"
@@ -64,69 +116,61 @@ const ForgetPassword = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <Box width={"100%"} marginTop="1rem">
-        <Button  color={'white'}
-        bg={'black'} onClick={handleGetOtp}>
+      <Box 
+      
+      width={{base:"100%",md:"100%"}}
+    
+      marginTop="1rem">
+        <Button 
+          _hover={{bg:"lightgray",color:"black"}}
+          height={{base:"3rem"}}
+        color={"white"} bg={"black"} onClick={submitEmail}>
           Get OTP
         </Button>
       </Box>
-      <Input
-        marginTop={"1rem"}
-        padding={"1rem"}
-        width={"30%"}
-        mx="auto"
-        background="#ebe9eb"
-        height="3rem"
-        type="text"
-        placeholder="Enter Passowrd"
-        onFocus={(e) => (e.target.style.outline = "none")}
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        marginTop={"1rem"}
-        padding={"1rem"}
-        width={"30%"}
-        mx="auto"
-        background="#ebe9eb"
-        height="3rem"
-        type="text"
-        placeholder="Confirm password"
-        onFocus={(e) => (e.target.style.outline = "none")}
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-    
-       
-     <Box width={"100%"} marginTop="1rem">
-        <NavLink to="/dashboard">
-        <Button colorScheme="blue" onClick={handleGetOtp}>
-          Submit
-        </Button>
-        </NavLink>
-      </Box>
-     
+
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent bg={"whitesmoke"}>
+        <ModalContent
+          bg={"whitesmoke"}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <ModalHeader>Enter OTP</ModalHeader>
           <ModalCloseButton bg={"gray"} />
-          <ModalBody>
-            <InputGroup>
-              <Input
-                type="text"
-                placeholder="Enter OTP"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-              />
-              <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={handleVerifyOtp}>
-                  Verify
-                </Button>
-              </InputRightElement>
-            </InputGroup>
+          <ModalBody
+            style={{ width: "90%", display: "flex", justifyContent: "center" }}
+          >
+            <OtpInput
+              value={otp}
+              onChange={setOtp}
+              numInputs={6}
+              renderSeparator={<span style={{ padding: "3px" }}>-</span>}
+             
+              renderInput={(props) => (
+                <input
+                  {...props}
+                  style={{
+                    width: "30px",
+                    border: "2px solid black",
+                    display: "flex",
+                    textAlign: "center",
+                  }}
+                />
+              )}
+            />
           </ModalBody>
-          <ModalFooter></ModalFooter>
+          <ModalFooter>
+            <Box width={"100%"} marginTop="1rem">
+              <Button color={"white"} bg={"black"} onClick={handleGetOtp}>
+                Verify OTP
+              </Button>
+            </Box>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </Flex>

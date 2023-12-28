@@ -1,78 +1,394 @@
-import React from "react";
+import { Box, Flex , Center} from "@chakra-ui/layout";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const DashboardOverview = () => {
-  const boxColorsSet1 = [" #ffe6ff", "#EBE9EB", "#e6ffe6", "#ffddcc"];
-  const boxColorsSet2 = ["#ffddcc", "#e6ffe6", "#EBE9EB", "#ffe6ff"];
-  const boxContentSet1 = [
-    "Total Users",
-    "Total Registration",
-    "Pending Registration",
-    "Cancel Users",
-  ];
-  const boxContentSet2 = [
-    "Active Users",
-    "Inactive Users",
-    "Today's Recovery",
-    "Total Recovery",
-  ];
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    fetchDetails();
+  }, []);
+
+  const fetchDetails = async () => {
+    const apiUrl = import.meta.env.VITE_APP_API_URL;
+    const response = await axios.get(`${apiUrl}/user/get_all_user`);
+    const totalData = response.data;
+    console.log(totalData);
+    setData(totalData);
+  };
 
   return (
-    <div style={{ width: "100%", display: "flex", gap: "0px" }}>
-      <div style={{ display: "flex", flexWrap: "wrap", padding: "20px", gap: "15%", textAlign: "center",}}>
-        {boxColorsSet1.map((color, index) => (
-          <div
-            key={index}
-            style={{
-              backgroundColor: color,
-              border: "#ebe9eb",
-              margin: "20px",
-              padding: "40px",
-              fontWeight: "800",
-              borderRadius: "10px",
-              width: "150px",
-              height: "150px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+    <>
+   
+      <Flex textAlign="center" flexBasis={{ base: "20%", md: "auto" }}>
+        {/* Total Assingment */}
+        <Box textAlign="center" flexBasis={{ base: "100%", md: "auto" }}>
+          <Box
+          marginLeft={{ md: "10rem" }}
+            backgroundColor="#ffe6ff"
+            border="#ebe9eb"
+            margin="20px"
+            padding="40px"
+            fontWeight="800"
+            borderRadius="10px"
+            width={{ base: "100px", md: "150px" }}
+            height={{ base: "100px", md: "150px" }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
           >
-            <span style={{ marginTop: "5px",marginBottom:"5px", height: "10px", fontSize: "20px", marginRight: "0%" }}>
-              100
+            <span
+              style={{
+                marginTop: "5px",
+                marginBottom: "5px",
+                height: "10px",
+                fontSize: "20px",
+                marginRight: "0%",
+              }}
+            >
+              {data?.totalUsers}
             </span>
-            <p style={{ color: "gray", fontWeight: "600", marginLeft: "0px", textAlign: "center", marginTop: "10px" }}>
-              {boxContentSet1[index]}
+            <p
+              style={{
+                color: "gray",
+                fontWeight: "600",
+                flexDirection: "row",
+                marginLeft: "0px",
+                textAlign: "center",
+                marginTop: "10px",
+              }}
+            >
+              Total User
             </p>
-          </div>
-        ))}
-      </div>
-      <div style={{ display: "flex", flexWrap: "wrap", padding: "20px", gap: "15%", textAlign: "center" }}>
-        {boxColorsSet2.map((color, index) => (
-          <div
-            key={index}
-            style={{
-              backgroundColor: color,
-              border: "#ebe9eb",
-              margin: "20px",
-              padding: "40px",
-              fontWeight: "800",
-              borderRadius: "10px",
-              width: "150px",
-              height: "150px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+          </Box>
+        </Box>
+
+        {/* Submitted Assingment */}
+        <Box
+         
+          gap="15%"
+          textAlign="center"
+          flexBasis={{ base: "100%", md: "auto" }}
+        >
+          <Box
+           marginLeft={{ md: "20rem" }}
+            backgroundColor="#EBE9EB"
+            border="#ebe9eb"
+            margin="20px"
+            padding="40px"
+            fontWeight="800"
+            borderRadius="10px"
+            width={{ base: "100px", md: "150px" }}
+            height={{ base: "100px", md: "150px" }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
           >
-            <span style={{ marginTop: "5px",  marginBottom:"5px", height: "10px", fontSize: "20px", marginRight: "0%" }}>100</span>
-            <p style={{ color: "gray", fontWeight: "600", marginLeft: "0px", textAlign: "center", marginTop: "10px" }}>
-              {boxContentSet2[index]}
+            <span
+              style={{
+                marginTop: "5px",
+                marginBottom: "5px",
+                height: "10px",
+                fontSize: "20px",
+                marginRight: "0%",
+              }}
+            >
+              {data?.tota}
+            </span>
+            <p
+              style={{
+                color: "gray",
+                fontWeight: "600",
+                flexDirection: "row",
+                marginLeft: "0px",
+                textAlign: "center",
+                marginTop: "10px",
+              }}
+            >
+              Total Registration
             </p>
-          </div>
-        ))}
-      </div>
-    </div>
+          </Box>
+        </Box>
+      </Flex>
+
+      <Flex>
+        {/* Pending Assingment */}
+        <Box textAlign="center" flexBasis={{ base: "100%", md: "auto" }}>
+          <Box
+          marginLeft={{ md: "10rem" }}
+            backgroundColor="#e6ffe6"
+            border="#ebe9eb"
+            margin="20px"
+            padding="40px"
+            fontWeight="800"
+            borderRadius="10px"
+            width={{ base: "100px", md: "150px" }}
+            height={{ base: "100px", md: "150px" }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <span
+              style={{
+                marginTop: "5px",
+                marginBottom: "5px",
+                height: "10px",
+                fontSize: "20px",
+                marginRight: "0%",
+              }}
+            >
+              {data?.pending}
+            </span>
+            <p
+              style={{
+                color: "gray",
+                fontWeight: "600",
+                flexDirection: "row",
+                marginLeft: "0px",
+                textAlign: "center",
+                marginTop: "10px",
+              }}
+            >
+              Active User
+            </p>
+          </Box>
+        </Box>
+        <Box
+          gap="15%"
+          textAlign="center"
+          flexBasis={{ base: "100%", md: "auto" }}
+        >
+          <Box
+            marginLeft={{ md: "20rem" }}
+            backgroundColor="#e6ffe6"
+            border="#ebe9eb"
+            margin="20px"
+            padding="40px"
+            fontWeight="800"
+            borderRadius="10px"
+            width={{ base: "100px", md: "150px" }}
+            height={{ base: "100px", md: "150px" }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <span
+              style={{
+                marginTop: "5px",
+                marginBottom: "5px",
+                height: "10px",
+                fontSize: "20px",
+                marginRight: "0%",
+              }}
+            >
+              {data?.pending}
+            </span>
+            <p
+              style={{
+                color: "gray",
+                fontWeight: "600",
+                flexDirection: "row",
+                marginLeft: "0px",
+                textAlign: "center",
+                marginTop: "10px",
+              }}
+            >
+              Inactive User
+            </p>
+          </Box>
+        </Box>
+      </Flex>
+
+      <Flex>
+        {/* Total Assingment */}
+        <Box
+          gap="15%"
+          textAlign="center"
+          flexBasis={{ base: "100%", md: "auto" }}
+        >
+          <Box
+          marginLeft={{ md: "10rem" }}
+            backgroundColor="#ffe6ff"
+            border="#ebe9eb"
+            margin="20px"
+            padding="40px"
+            fontWeight="800"
+            borderRadius="10px"
+            width={{ base: "100px", md: "150px" }}
+            height={{ base: "100px", md: "150px" }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <span
+              style={{
+                marginTop: "5px",
+                marginBottom: "5px",
+                height: "10px",
+                fontSize: "20px",
+                marginRight: "0%",
+              }}
+            >
+              {data?.total}
+            </span>
+            <p
+              style={{
+                color: "gray",
+                fontWeight: "600",
+                flexDirection: "row",
+                marginLeft: "0px",
+                textAlign: "center",
+                marginTop: "10px",
+              }}
+            >
+              Pending Registration
+            </p>
+          </Box>
+        </Box>
+
+        {/* Submitted Assingment */}
+        <Box
+          gap="15%"
+          textAlign="center"
+          flexBasis={{ base: "100%", md: "auto" }}
+        >
+          <Box
+            marginLeft={{ md: "20rem" }}
+            backgroundColor="#EBE9EB"
+            border="#ebe9eb"
+            margin="20px"
+            padding="40px"
+            fontWeight="800"
+            borderRadius="10px"
+            width={{ base: "100px", md: "150px" }}
+            height={{ base: "100px", md: "150px" }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <span
+              style={{
+                marginTop: "5px",
+                marginBottom: "5px",
+                height: "10px",
+                fontSize: "20px",
+                marginRight: "0%",
+              }}
+            >
+              {data?.submitted}
+            </span>
+            <p
+              style={{
+                color: "gray",
+                fontWeight: "600",
+                flexDirection: "row",
+                marginLeft: "0px",
+                textAlign: "center",
+                marginTop: "10px",
+              }}
+            >
+              Cancel User's
+            </p>
+          </Box>
+        </Box>
+      </Flex>
+      {/* Pending Assingment */}
+      <Flex flexBasis={{ base: "20%", md: "auto" }} textAlign="center">
+        <Box textAlign="center" flexBasis={{ base: "100%", md: "auto" }}>
+          <Box
+          marginLeft={{ md: "10rem" }}
+            backgroundColor="#e6ffe6"
+            border="#ebe9eb"
+            margin="20px"
+            padding="40px"
+            fontWeight="800"
+            borderRadius="10px"
+            width={{ base: "100px", md: "150px" }}
+            height={{ base: "100px", md: "150px" }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <span
+              style={{
+                marginTop: "5px",
+                marginBottom: "5px",
+                height: "10px",
+                fontSize: "20px",
+                marginRight: "0%",
+              }}
+            >
+              {data?.pending}
+            </span>
+            <p
+              style={{
+                color: "gray",
+                fontWeight: "600",
+                flexDirection: "row",
+                marginLeft: "0px",
+                textAlign: "center",
+                marginTop: "10px",
+              }}
+            >
+              Today's Recovery
+            </p>
+          </Box>
+        </Box>
+        <Box
+          gap="15%"
+          textAlign="center"
+          flexBasis={{ base: "100%", md: "auto" }}
+        >
+          <Box
+            marginLeft={{ md: "20rem" }}
+            backgroundColor="#e6ffe6"
+            border="#ebe9eb"
+            margin="20px"
+            padding="40px"
+            fontWeight="800"
+            borderRadius="10px"
+            width={{ base: "100px", md: "150px" }}
+            height={{ base: "100px", md: "150px" }}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <span
+              style={{
+                marginTop: "5px",
+                marginBottom: "5px",
+                height: "10px",
+                fontSize: "20px",
+                marginRight: "0%",
+              }}
+            >
+              {data?.pending}
+            </span>
+            <p
+              style={{
+                color: "gray",
+                fontWeight: "600",
+                flexDirection: "row",
+                marginLeft: "0px",
+                textAlign: "center",
+                marginTop: "10px",
+              }}
+            >
+              Total Recovery
+            </p>
+          </Box>
+        </Box>
+      </Flex>
+     
+  </>
   );
 };
 
