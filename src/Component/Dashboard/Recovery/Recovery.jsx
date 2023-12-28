@@ -4,7 +4,7 @@ import "../Employees/Employees.css";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { NavLink } from "react-router-dom";
-import { Box, Button, Flex, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { Box, Button, Flex, Input, InputGroup, InputLeftElement, Grid } from "@chakra-ui/react";
 import { SearchIcon } from '@chakra-ui/icons';
 const Recovery = () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
@@ -52,15 +52,12 @@ const Recovery = () => {
     try {
       const handlePaylode = {
         name: searchQuary,
-        data: {
-          status : "Success"
-        }
       };
       console.log(searchQuary,"BackEnd Search Feild");
 
       const config = {
         method: "POST",
-        url:  `${apiUrl}/user/search_user_by_name`,
+        url:  `${apiUrl}/user/search_user_recovery`,
         data: handlePaylode,
       };
 
@@ -108,24 +105,28 @@ const Recovery = () => {
         </Button>
       </InputGroup>
      
-    <div className="table" style={{justifyContent:"center", alignItems:'center',width:"80%", padding:"1rem"}}>
-      <div className="user" style={{color:'black'}}><b>
-        <h5>User Name</h5></b>
-        <b><h5>Number</h5></b>
-        <b><h5>Start Date</h5></b>
-        <b><h5>Amount</h5></b>
-      </div>
-      <div className="details">
+      <div className="table" style={{ display: 'grid', gridTemplateColumns: '1fr', justifyContent: 'center', alignItems: 'center', width: '90%', padding: '1rem' }}>
+
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+              <h5 style={{ width: '25%' }}>User Name</h5>
+              <h5 style={{ width: '25%' }}>Number</h5>
+              <h5 style={{ width: '25%' }}>Start Date</h5>
+              <h5 style={{ width: '25%' }}>Amount</h5>
+              <h5 style={{ width: '20%' }}></h5>
+            </div>
+      <div className="details" style={{width:'100%'}}>
       {userData.map((user) => (
-        <div className="user" key={user._id}>
-          <h5>{user.name}</h5>
-          <h5>{user.mobile}</h5>
-          <h5>{new Date(user.startDate).toLocaleDateString()}</h5>
-          <h5>{user.amount}</h5>
+        <div className="user" key={user._id}style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
+             <h5 style={{ width: '25%' }}>{user.name}</h5>
+              <h5 style={{ width: '25%' }}>{user.mobile}</h5>
+              <h5 style={{ width: '25%' }}>{new Date(user.startDate).toLocaleDateString()}</h5>
+              <h5 style={{ width: '25%' }}>{user.amount}</h5>
+              <div style={{ width: '25%' }}>
           <NavLink to={`/recoveryprofile/${user._id}`}>
           <button 
           style={{background:"black" , width:"8.3rem"}}>View Detail</button>
           </NavLink>
+          </div>
         </div>
       ))}
         <br />

@@ -124,7 +124,8 @@ const Registration = () => {
         <Button
           className="employee-btn"
           colorScheme="teal"
-          mt="4"
+          style={{marginLeft: '20px'}}
+          mt="0"
           onClick={handleSearch}
         >
           Search
