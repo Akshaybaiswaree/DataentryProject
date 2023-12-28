@@ -43,6 +43,7 @@ import QcCheck from "./Component/Login/QcCheck";
 import PendingDetails from "./Component/Dashboard/Pending/PendingDetails";
 import { StayPrimaryLandscape } from "@mui/icons-material";
 import SetPassword from "./Component/Login/SetPassword";
+import RecoveryProfile from "./Component/Dashboard/Recovery/RecoveryProfile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -93,6 +94,7 @@ const router = createBrowserRouter(
         <Route path="report" element={<Report />} />
         <Route path="reportform" element={<ReportForm />} />
         <Route path="recovery" element={<Recovery />} />
+        <Route path="recoveryprofile/:userId" element={<RecoveryProfile />} />
         <Route path="employees" element={<Employees />} />
         <Route
           path="employeeprofileedit/:userId"
