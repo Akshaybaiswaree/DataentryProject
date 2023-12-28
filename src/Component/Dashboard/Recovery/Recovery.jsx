@@ -50,10 +50,11 @@ const Recovery = () => {
       name: "Action",
       cell: (row) => (
         <NavLink to={`/recoveryprofile/${row._id}`}>
-          <button
+          
+          <button 
             style={{
               background: "black",
-              width: "8.3rem",
+              width: "6.3rem",
               color: "white",
               borderRadius: "0.7rem",
               height: "2rem",
@@ -75,14 +76,17 @@ const Recovery = () => {
 
   return (
     <>
-      <Box>
-        <InputGroup mb={4}>
+      <Box margin={'1rem'}>
+        <InputGroup 
+        ml={{base:"1rem"}}
+        mb={4}>
           <InputLeftElement
             pointerEvents="none"
             children={<SearchIcon color="gray.300" />}
           />
-          <Input width={"400px"} type="text" placeholder="Search..." />
+          <Input width={{base:"320px",md:"400px"}} type="text" placeholder="Search..." />
         </InputGroup>
+        <Box width={{ base: "81vw", md: "80vw" }} overflowX="auto" p={4}>
         <DataTable
           title=""
           columns={columns}
@@ -112,6 +116,7 @@ const Recovery = () => {
             onClick={() => handlePagination(currentPage + 1)}
           />
         </div> */}
+        </Box>
       </Box>
     </>
   );

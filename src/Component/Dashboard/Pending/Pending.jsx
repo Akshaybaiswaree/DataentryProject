@@ -198,7 +198,9 @@ const Pending = () => {
     try {
       const config = {
         method: "GET",
-        url: `${apiUrl}/user/user_pagination?page=${currentPage}`,
+        // url: `${apiUrl}/user/user_pagination?page=${currentPage}`,
+        url: `${apiUrl}/user/user_pagination?page=${currentPage}&status=Pending&limit=10`,
+
       };
       const response = await axios(config);
       setTotalPages(response.data?.totalPages);

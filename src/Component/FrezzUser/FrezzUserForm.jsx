@@ -130,6 +130,7 @@ const FrezzUserForm = ()=>{
     return (
         <>
       <Box
+      mb={'1rem'}
         marginLeft={"1rem"}
         marginTop={"1rem"}
         className="employee-form-container"
@@ -143,7 +144,7 @@ const FrezzUserForm = ()=>{
                   name="name"
                   onChange={onChangeHandler}
                   value={inputField.name}
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   type="text"
                   placeholder="Enter Name"
                 />
@@ -156,7 +157,7 @@ const FrezzUserForm = ()=>{
                   name="email"
                   value={inputField.email}
                   onChange={onChangeHandler}
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   type="email"
                   placeholder="enter email"
                 />
@@ -171,7 +172,7 @@ const FrezzUserForm = ()=>{
                   name="mobile"
                   onChange={onChangeHandler}
                   value={inputField.mobile}
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   type="number"
                 />
               </FormControl>
@@ -183,7 +184,7 @@ const FrezzUserForm = ()=>{
                   name="address"
                   value={inputField.address}
                   onChange={onChangeHandler}
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   type="text"
                   placeholder="Address"
                 />
@@ -198,7 +199,7 @@ const FrezzUserForm = ()=>{
                   name="plan"
                   onChange={onChangeHandler}
                   value={inputField.plan}
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   placeholder="Select option"
                 >
                   <option value="option1">Plan 1</option>
@@ -215,7 +216,7 @@ const FrezzUserForm = ()=>{
                   name="caller"
                   onChange={onChangeHandler}
                   value={inputField.caller}
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   placeholder="Select option"
                 >
                   <option value="option1">Caller 1</option>
@@ -227,12 +228,12 @@ const FrezzUserForm = ()=>{
             </Box>
           </Stack>
   
-          <Stack direction={"row"}>
+          <Stack direction={["column" ,"row"]}>
             <Box>
               <FormControl className="employee-form-group">
                 <FormLabel>Status</FormLabel>
                 <Input
-                  width={"400px"}
+                 width={{ base: "300px", md: "400px" }}
                   type="text"
                   name="status"
                   onChange={onChangeHandler}
@@ -244,7 +245,7 @@ const FrezzUserForm = ()=>{
               <FormControl className="employee-form-group">
                 <FormLabel>Login Status</FormLabel>
                 <Input
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   type="text"
                   name="status"
                   value={inputField.status}
@@ -257,7 +258,7 @@ const FrezzUserForm = ()=>{
               <FormControl className="employee-form-group">
                 <FormLabel>Amount</FormLabel>
                 <Input
-                  width={"400px"}
+                 width={{ base: "300px", md: "400px" }}
                   placeholder="Enter Your Amount"
                   type="number"
                   name="amount"

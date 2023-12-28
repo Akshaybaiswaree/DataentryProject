@@ -44,6 +44,9 @@ import PendingDetails from "./Component/Dashboard/Pending/PendingDetails";
 import { StayPrimaryLandscape } from "@mui/icons-material";
 import SetPassword from "./Component/Login/SetPassword";
 import RecoveryProfile from "./Component/Dashboard/Recovery/RecoveryProfile";
+import ActiveUser from "./Component/ActiveUser/ActiveUser";
+import FrezzUser from "./Component/FrezzUser/FrezzUser";
+import FrezzUserForm from "./Component/FrezzUser/FrezzUserForm";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -75,7 +78,7 @@ const router = createBrowserRouter(
         >
           <Route index element={<User />} />
           <Route path="activeUser" element={<ActiveUser/>} />
-          <Route path="frezzuser" element={<FrezzUser/>} />
+          <Route path="frezzuser" element={<FrezzUser />} />
           <Route path="registration" element={<Registration />} />
           <Route path="registrationform" element={<RegistrationForm />} />
           <Route
@@ -85,7 +88,7 @@ const router = createBrowserRouter(
            
           <Route
             path="freezeuserform/:userId"
-            element={<FrezzUserForm/>}
+            element={< FrezzUserForm />}
           />
           <Route
             path="registeruserdetail/:userId"
