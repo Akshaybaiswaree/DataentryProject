@@ -510,7 +510,7 @@ const Report = () => {
             <FormLabel>Start date</FormLabel>
             <Input
             
-            width={{base:"300px",md:"400px"} }
+            width={{base:"250px",md:"400px"} }
             type="date" placeholder="Kaveri Kappor" />
           </FormControl>
         </Box>{" "}
@@ -518,7 +518,7 @@ const Report = () => {
           <FormControl className="employee-form-group">
             <FormLabel>End date</FormLabel>{" "}
             <Input 
-            width={{base:"300px",md:"400px"} }
+            width={{base:"250px",md:"400px"} }
             type="date" placeholder="Kaveri Kappor" />
           </FormControl>
         </Box>
@@ -540,7 +540,7 @@ const Report = () => {
           }}
         />
         <Button
-          width={{ md: "12rem", base: "8rem" }}
+          width={{ md: "12rem", base: "6rem" }}
           marginLeft={"1rem"}
           className="employee-btn"
           colorScheme="teal"
