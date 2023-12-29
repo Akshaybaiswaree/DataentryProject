@@ -70,7 +70,7 @@ const Registration = () => {
       const response = await axios(config);
       setUserData(response.data.users);
     } catch (error) {
-      console.log(error, "Error");
+     alert("User Already Registered")
     }
   };
 

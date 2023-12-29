@@ -1,5 +1,3 @@
-
-
 // import {
 //   Box,
 //   Button,
@@ -93,14 +91,14 @@
 //         >
 //           Report
 //         </Box>
-       
+
 //       </Flex>
 //       <Flex
 //        direction="column"
 //       align="center"
 //       margin={'1rem'}>
-//       <Stack 
-     
+//       <Stack
+
 //       direction="row">
 //         <Box>
 //           <FormControl className="employee-form-group">
@@ -117,7 +115,6 @@
 //       </Stack>
 //       </Flex>
 
-      
 //       <InputGroup mt="1rem" ml={["1rem", "6.5rem"]} width={["90%", "400px"]}>
 //         <InputLeftElement
 //           pointerEvents="none"
@@ -388,9 +385,12 @@ import {
   Button,
   Center,
   Flex,
+  FormControl,
+  FormLabel,
   Input,
   InputGroup,
   InputLeftElement,
+  Stack,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
@@ -500,9 +500,30 @@ const Report = () => {
         >
           Report
         </Box>
-       
       </Flex>
-
+      <Center>
+      <Stack
+      margin={'1rem'}
+      direction={[ "column" ,"row"]}>
+        <Box>
+          <FormControl className="employee-form-group">
+            <FormLabel>Start date</FormLabel>
+            <Input
+            
+            width={{base:"300px",md:"400px"} }
+            type="date" placeholder="Kaveri Kappor" />
+          </FormControl>
+        </Box>{" "}
+        <Box>
+          <FormControl className="employee-form-group">
+            <FormLabel>End date</FormLabel>{" "}
+            <Input 
+            width={{base:"300px",md:"400px"} }
+            type="date" placeholder="Kaveri Kappor" />
+          </FormControl>
+        </Box>
+      </Stack>
+      </Center>
       <InputGroup mt="1rem" ml={["1rem", "12rem"]} width={["90%", "500px"]}>
         <InputLeftElement
           pointerEvents="none"
