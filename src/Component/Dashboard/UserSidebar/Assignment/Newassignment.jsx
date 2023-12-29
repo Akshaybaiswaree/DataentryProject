@@ -16,6 +16,11 @@ import { useNavigate } from "react-router-dom";
 
 const NewAssignment = () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 3c99fd86e4b85f3237a600c908b3cac3aa783a03
   const token = JSON.parse(localStorage.getItem("token"));
   const { email, _id } = token;
   // console.log(email, "Get Email");
@@ -41,7 +46,11 @@ const NewAssignment = () => {
     try {
       const config = {
         method: "POST",
+<<<<<<< HEAD
         url: `${apiUrl}/user/get_assignment_details`,
+=======
+        url:  `${apiUrl}/user/get_assignment_details`,
+>>>>>>> 3c99fd86e4b85f3237a600c908b3cac3aa783a03
         data: { email: email }, // Pass the email as part of the request body
       };
 
@@ -63,7 +72,7 @@ const NewAssignment = () => {
         url: `${apiUrl}/user/refresh_assignment_detail/${data?._id}`,
       };
       const responce = await axios(config);
-       console.log(responce , "Relode ");
+      console.log(responce, "Relode ");
       getDataAssignment();
     } catch (err) {
       console.log("error", err);
@@ -100,17 +109,15 @@ const NewAssignment = () => {
       // console.log(response);
       alert("Saved successfully.");
       getDataAssignment();
-      Navigate("/assignment")
+      Navigate("/assignment");
     } catch (error) {
       console.log(error);
     }
   };
 
-  
-
   return (
     <Box className="employee-form-container">
-      <Box
+      {/* <Box
         display="grid"
         gridTemplateColumns="repeat(4, 1fr)"
         gap={4}
@@ -144,7 +151,51 @@ const NewAssignment = () => {
         <Box>
           <Text fontSize="xl">Client Code : {data?.cleanCode}</Text>
         </Box>
+      </Box> */}
+      <Box
+        display="grid"
+         gridTemplateColumns={{ base: "1fr", md: "repeat(4, 1fr)" }}
+        gap={4}
+        p="7"
+        borderWidth="1px"
+        borderRadius="md"
+        mb="4"
+        color="#393e46"
+      >
+        <Box>
+          <Text fontSize={{ base: "lg", md: "xl" }}>Name: {data?.name}</Text>
+        </Box>
+        <Box>
+          <Text fontSize={{ base: "lg", md: "xl" }}>
+            Address: {data?.address}
+          </Text>
+        </Box>
+        <Box>
+          <Text fontSize={{ base: "lg", md: "xl" }}>
+            Pin Code: {data?.pinCode}
+          </Text>
+        </Box>
+        <Box>
+          <Text fontSize={{ base: "lg", md: "xl" }}>
+            Job Function: {data?.jobFunctional}
+          </Text>
+        </Box>
+
+        <Box>
+          <Text fontSize={{ base: "lg", md: "xl" }}>Mobile: {data?.phone}</Text>
+        </Box>
+        <Box>
+          <Text fontSize={{ base: "lg", md: "xl" }}>
+            Annual Revenue: {data?.annualRevenue}
+          </Text>
+        </Box>
+        <Box>
+          <Text fontSize={{ base: "lg", md: "xl" }}>
+            Client Code: {data?.cleanCode}
+          </Text>
+        </Box>
       </Box>
+
       <Box
         marginBottom={"1rem"}
         fontSize={"2rem"}
@@ -158,14 +209,14 @@ const NewAssignment = () => {
         onSubmit={handleSubmit}
         style={{ padding: "20px" }}
       >
-        <Stack direction={"row"}>
+        <Stack direction={{ md: "row", base: "column" }}>
           <Box>
             <FormControl isRequired className="employee-form-group">
               <FormLabel> Name</FormLabel>
               <Input
-                width={"400px"}
+                width={{ base: "300px", md: "400px" }}
                 type="text"
-                placeholder="Kaveri Kappor"
+                placeholder="Enter Name"
                 name="name"
                 onChange={onChangehandler}
               />
@@ -175,23 +226,23 @@ const NewAssignment = () => {
             <FormControl isRequired className="employee-form-group">
               <FormLabel>Address</FormLabel>
               <Input
-                width={"400px"}
+                width={{ base: "300px", md: "400px" }}
                 type="text"
-                placeholder="4d Apply Ridge Road"
+                placeholder="Enter Address"
                 name="address"
                 onChange={onChangehandler}
               />
             </FormControl>
           </Box>
         </Stack>
-        <Stack direction={"row"}>
+        <Stack direction={{ md: "row", base: "column" }}>
           <Box>
             <FormControl isRequired className="employee-form-group">
               <FormLabel>PinCode</FormLabel>
               <Input
-                width={"400px"}
+                width={{ base: "300px", md: "400px" }}
                 type="number"
-                placeholder="440018"
+                placeholder="Enter PInCode"
                 name="pinCode"
                 onChange={onChangehandler}
               />
@@ -201,23 +252,22 @@ const NewAssignment = () => {
             <FormControl isRequired className="employee-form-group">
               <FormLabel>Job Function</FormLabel>
               <Input
-                width={"400px"}
+               width={{ base: "300px", md: "400px" }}
                 type="text"
-                placeholder="Vice President"
+                placeholder="Enter your Job Function"
                 name="jobFunctional"
                 onChange={onChangehandler}
               />
             </FormControl>
           </Box>
         </Stack>
-        <Stack direction={"row"}>
+        <Stack direction={{ md: "row", base: "column" }}>
           <Box>
             <FormControl isRequired className="employee-form-group">
               <FormLabel>Mobile</FormLabel>
               <Input
-                width={"400px"}
-                type="number"
-                placeholder="0000000000"
+                width={{ base: "300px", md: "400px" }}
+                placeholder="Enter the Number"
                 name="phone"
                 onChange={onChangehandler}
               />
@@ -228,9 +278,9 @@ const NewAssignment = () => {
             <FormControl isRequired className="employee-form-group">
               <FormLabel>Annual Revenue</FormLabel>
               <Input
-                width={"400px"}
+                width={{ base: "300px", md: "400px" }}
                 type="text"
-                placeholder="$6 Billion"
+                placeholder="Enter Annual Revenue"
                 name="annualRevenue"
                 onChange={onChangehandler}
               />
@@ -241,42 +291,45 @@ const NewAssignment = () => {
           <FormControl isRequired className="employee-form-group">
             <FormLabel>Client Code</FormLabel>
             <Input
-              width={"400px"}
+              width={{ base: "300px", md: "400px" }}
               type="text"
-              placeholder="CD5B32r3rA9eFPH"
+              placeholder="Enter Client Code"
               name="cleanCode"
               onChange={onChangehandler}
             />
           </FormControl>
         </Box>
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "30px",
-          }}
-        >
-          <Button
-            className="employee-btn"
-            colorScheme="teal"
-            mt="4"
-           onClick={handleSubmit}
-          >
-            Submit
-          </Button>
-          <Button
-            // onClick={Previouspage}
-            className="employee-btn"
-            colorScheme="teal"
-            mt="4"
-            style={{
-              marginLeft: "50px",
-            }}
-            onClick={RelodeHandle}
-          >
-            Reload
-          </Button>
-        </Box>
+        <Stack direction={{ md: "row", base: "column" }}>
+          <Box>
+            <Button
+              className="employee-btn"
+              colorScheme="teal"
+              mt="4"
+              width={{ md: "4rem" }}
+              onClick={handleSubmit}
+              style={{
+                marginLeft: "50px",
+              }}
+            >
+              Submit
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              // onClick={Previouspage}
+              className="employee-btn"
+              colorScheme="teal"
+              mt="4"
+              width={{ md: "4rem" }}
+              style={{
+                marginLeft: "50px",
+              }}
+              onClick={RelodeHandle}
+            >
+              Reload
+            </Button>
+          </Box>
+        </Stack>
       </form>
     </Box>
   );

@@ -1,12 +1,4 @@
-
-
-
 import React, { useEffect, useState } from "react";
-import DataTable from "react-data-table-component";
-import { NavLink } from "react-router-dom";
-import axios from "axios";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import {
   Box,
   Button,
@@ -15,15 +7,20 @@ import {
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
+import DataTable from "react-data-table-component";
 import { SearchIcon } from "@chakra-ui/icons";
+import axios from "axios";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { NavLink } from "react-router-dom";
 
-const Registration = () => {
+const FreezeUser = () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
-
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [userData, setUserData] = useState([]);
+
   useEffect(() => {
     fetchData();
   }, [currentPage]);
@@ -32,9 +29,10 @@ const Registration = () => {
     try {
       const config = {
         method: "GET",
-        url: `${apiUrl}/user/user_pagination?page=${currentPage}`,
+        url: `${apiUrl}/user/user_pagination?page=${currentPage}&status=Freeze&limit=10`,
       };
       const response = await axios(config);
+      console.log(response, "Freeze User");
       setTotalPages(response.data?.totalPages);
       setUserData(response?.data?.users);
     } catch (error) {
@@ -56,21 +54,20 @@ const Registration = () => {
     try {
       const payload = {
         name: searchQuery,
-        data: {
-          status: "Pending",
-        },
       };
+      console.log(searchQuery, "BackEnd Search Field");
 
       const config = {
         method: "POST",
-        url: `${apiUrl}/user/search_user_by_name`,
+        url: `${apiUrl}/user/search_user_by_name?status=Freeze`,
         data: payload,
       };
 
       const response = await axios(config);
+      console.log(response, "Search Result");
       setUserData(response.data.users);
     } catch (error) {
-     alert("User Already Registered")
+      console.log(error, "Error");
     }
   };
 
@@ -82,19 +79,23 @@ const Registration = () => {
     {
       name: "Name",
       selector: "name",
+      sortable: true,
+      grow: 2,
     },
     {
       name: "Mobile",
       selector: "mobile",
+      sortable: true,
     },
     {
-      name: "Email",
+      name: "Mail",
       selector: "email",
+      sortable: true,
     },
     {
-      name: "Action",
+      name: "Actions",
       cell: (row) => (
-        <NavLink to={`/user/registeruserdetail/${row._id}`}>
+        <NavLink to={`/user/freezeuserform/${row._id}`}>
           <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
             View Detail
           </Button>
@@ -121,21 +122,8 @@ const Registration = () => {
           fontSize={["1.5rem", "2rem"]}
           fontWeight="700"
         >
-          Registration
+          Freeze User
         </Box>
-        <NavLink to="/user/Registrationform">
-          <Button
-            mt="1rem"
-            mb={"1rem"}
-            _hover={{ background: "white", color: "gray" }}
-            p="1rem"
-            color="white"
-            bg="black"
-            width={"6rem"}
-          >
-            Add User
-          </Button>
-        </NavLink>
       </Flex>
       <InputGroup mt="1rem" ml={["1rem", "6.5rem"]} width={["90%", "400px"]}>
         <InputLeftElement
@@ -153,22 +141,15 @@ const Registration = () => {
           }}
         />
         <Button
-          marginLeft={"1rem"}
           className="employee-btn"
           colorScheme="teal"
-<<<<<<< HEAD
-          style={{marginLeft: '20px'}}
-          mt="0"
-=======
->>>>>>> 3c99fd86e4b85f3237a600c908b3cac3aa783a03
+        ml={'1rem'}
           onClick={handleSearch}
         >
           Search
         </Button>
       </InputGroup>
-      
       <Box width={{ base: "81vw", md: "80vw" }} overflowX="auto" p={4}>
-      
       <DataTable
         title=""
         columns={columns}
@@ -181,14 +162,9 @@ const Registration = () => {
         paginationRowsPerPageOptions={[10, 20, 30]}
         paginationComponentOptions={paginationOptions}
       />
-       </Box>
-      
+      </Box>
     </>
   );
 };
 
-export default Registration;
-
-
-
-
+export default FreezeUser;

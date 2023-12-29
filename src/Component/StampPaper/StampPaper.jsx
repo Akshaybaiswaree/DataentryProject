@@ -27,8 +27,6 @@ const StampPaper = () => {
   const [photoPreview, setPhotoPreview] = useState(null);
   const [signaturePreview, setSignaturePreview] = useState(null);
 
-
-
   const handlePhotoChange = (e) => {
     const selectedPhoto = e.target.files[0];
     setPhoto(selectedPhoto);
@@ -56,9 +54,10 @@ const StampPaper = () => {
         url: `${apiUrl}/user/add_terms`,
         data: formData,
       };
-
+      // console.log(formData, "Form Data");
       const response = await axios(config);
-      console.log(response, "resp");
+      alert("Your data is Sumitted.....")
+      // console.log(response, "resp");
     } catch (err) {
       console.log("err in fetching", err);
     }
@@ -66,9 +65,7 @@ const StampPaper = () => {
 
   return (
     <>
-      <Box m={["1rem", "7rem"]} 
-      
-         >
+      <Box m={["1rem", "7rem"]}>
         <Box textAlign="center">
           <Image
             mx="auto" // Center the image horizontally
@@ -538,15 +535,17 @@ const StampPaper = () => {
                 type="file"
               />
             </Td> */}
-             <Td>
-            <Input onChange={handleSignatureChange} type="file" />
-            {signaturePreview && (
-              <Image 
-              width={'4rem'}
-              height={'4rem'}
-              src={signaturePreview} alt="Signature Preview" />
-            )}
-          </Td>
+            <Td>
+              <Input onChange={handleSignatureChange} type="file" />
+              {signaturePreview && (
+                <Image
+                  width={"4rem"}
+                  height={"4rem"}
+                  src={signaturePreview}
+                  alt="Signature Preview"
+                />
+              )}
+            </Td>
           </Tr>
           <Tr>
             <Td>Upload Your Photo</Td>
@@ -556,13 +555,17 @@ const StampPaper = () => {
                 type="file"
               />
             </Td> */}
-             <Td>
-            <Input onChange={handlePhotoChange} type="file" />
-            {photoPreview && <Image
-             width={'4rem'}
-             height={'4rem'}
-            src={photoPreview} alt="Photo Preview" />}
-          </Td>
+            <Td>
+              <Input onChange={handlePhotoChange} type="file" />
+              {photoPreview && (
+                <Image
+                  width={"4rem"}
+                  height={"4rem"}
+                  src={photoPreview}
+                  alt="Photo Preview"
+                />
+              )}
+            </Td>
           </Tr>
         </Table>
         <Button

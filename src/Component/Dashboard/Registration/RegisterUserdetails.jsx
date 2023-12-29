@@ -106,6 +106,7 @@ const RegisterUserDetail = () => {
 
   return (
     <Box
+    
       marginLeft={"1rem"}
       marginTop={"1rem"}
       className="employee-form-container"
@@ -119,7 +120,7 @@ const RegisterUserDetail = () => {
                 name="name"
                 onChange={onChangeHandler}
                 value={inputField.name}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="text"
                 placeholder="Kaveri Kappor"
               />
@@ -132,7 +133,7 @@ const RegisterUserDetail = () => {
                 name="email"
                 value={inputField.email}
                 onChange={onChangeHandler}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="email"
                 placeholder="kaveri@gmail.com"
               />
@@ -147,7 +148,7 @@ const RegisterUserDetail = () => {
                 name="mobile"
                 onChange={onChangeHandler}
                 value={inputField.mobile}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="number"
               />
             </FormControl>
@@ -159,7 +160,7 @@ const RegisterUserDetail = () => {
                 name="address"
                 value={inputField.address}
                 onChange={onChangeHandler}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="text"
                 placeholder="Address"
               />
@@ -174,7 +175,7 @@ const RegisterUserDetail = () => {
                 name="plan"
                 onChange={onChangeHandler}
                 value={inputField.plan}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 placeholder="Select option"
               >
                 <option value="option1">Plan 1</option>
@@ -191,7 +192,7 @@ const RegisterUserDetail = () => {
                 name="caller"
                 onChange={onChangeHandler}
                 value={inputField.caller}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 placeholder="Select option"
               >
                 <option value="option1">Caller 1</option>
@@ -203,12 +204,12 @@ const RegisterUserDetail = () => {
           </Box>
         </Stack>
 
-        <Stack direction={"row"}>
+        <Stack direction={["column", "row"]}>
           <Box>
             <FormControl className="employee-form-group">
               <FormLabel>Status</FormLabel>
               <Input
-                width={"400px"}
+                   width={{base:"300px",md:"400px"}}
                 type="text"
                 name="status"
                 onChange={onChangeHandler}
@@ -220,7 +221,7 @@ const RegisterUserDetail = () => {
             <FormControl className="employee-form-group">
               <FormLabel>Login Status</FormLabel>
               <Input
-                width={"400px"}
+                   width={{base:"300px",md:"400px"}}
                 type="text"
                 name="status"
                 value={inputField.status}
@@ -232,6 +233,10 @@ const RegisterUserDetail = () => {
       </form>
 
       {/* <DeleteIcon onClick={onOpen} /> */}
+      <Stack direction={"column"}>
+          <Box
+            width={{base:"15rem" , md:"30rem"}}
+          >
       <Button 
     marginTop={'1rem'}
     _hover={{ background: "white", color: "gray" }}
@@ -259,6 +264,7 @@ const RegisterUserDetail = () => {
                 Cancel
               </Button>
               <Button
+             
                 colorScheme="red"
                 onClick={() => {
                   onClose();
@@ -272,29 +278,25 @@ const RegisterUserDetail = () => {
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
+      </Box>
 
       {/* <Link to={`/user/editregistration/${userId}`}>
           <EditIcon />
         </Link> */}
+        <Box
+         width={{base:"15rem" , md:"30rem"}}
+       
+        >
+        
       <Link to={`/user/editregistration/${userId}`}>
         <Button
+        marginBottom={'1rem'}
         marginTop={'1rem'}
-        marginLeft={'1rem'}
+        height={{base:'2.3rem' , md:"2.5r em"}}
         colorScheme="blue">Edit</Button>
       </Link>
-
-      {/* <NavLink to="/user/registration">
-          <Button
-             onClick={AddUser}
-           
-            // removeinputnames()
-            className="employee-btn"
-            colorScheme="teal"
-            mt="4"
-          >
-            Save
-          </Button>
-          </NavLink> */}
+       </Box>
+      </Stack>
     </Box>
   );
 };

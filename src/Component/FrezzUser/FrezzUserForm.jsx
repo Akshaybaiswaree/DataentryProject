@@ -1,4 +1,5 @@
 
+
 import {
     Box,
     Button,
@@ -19,17 +20,13 @@ import {
     useDisclosure,
   } from "@chakra-ui/react";
   import axios from "axios";
-<<<<<<< HEAD
   // import "./EmployeeProfileEdit.css";
-=======
-
->>>>>>> 3c99fd86e4b85f3237a600c908b3cac3aa783a03
   import { useEffect, useRef, useState } from "react";
   import DeleteIcon from "@mui/icons-material/Delete";
   import EditIcon from "@mui/icons-material/Edit";
   import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
   
-  const RecoveryProfile = () => {
+const FrezzUserForm = ()=>{
     const apiUrl = import.meta.env.VITE_APP_API_URL;
     // using navigate
     const navigate = useNavigate();
@@ -45,7 +42,8 @@ import {
       plan: "",
       caller: "",
       status: "",
-      amount: "",
+      loginStatus: "",
+      amount : "",
     });
   
     // modal button
@@ -55,7 +53,6 @@ import {
     // useEffect to fetch specific user by ID
     useEffect(() => {
       const fetchUserDetails = async () => {
-        
         try {
           const response = await axios.get(
             `${apiUrl}/user/getuser_by_id/${userId}`
@@ -71,7 +68,6 @@ import {
             plan: "",
             caller: data?.User?.caller,
             status: data?.User?.status,
-            amount:data?.User?.amount,
           });
         } catch (error) {
           console.error("Error fetching user details:", error);
@@ -83,22 +79,19 @@ import {
     // form change handler
     const onChangeHandler = (e) => {
       const { name, value } = e.target;
-  
       setInputField({
-        ...prevValue,
+        ...inputField,
         [name]: value,
       });
     };
-  
+
     // delete function call
     const deleteUser = async (id) => {
       try {
         console.log(id);
-        const response = await axios.delete(
-          `${apiUrl}/user/delete_user/${id}`
-        );
+        const response = await axios.delete(`${apiUrl}/user/delete_user/${id}`);
         if (response.status === 200) {
-          navigate("/recovery");
+          navigate("/user/registration");
           alert("User Deleted Succesfully.");
         } else {
           alert("Failed to delete user.");
@@ -108,8 +101,36 @@ import {
       }
     };
   
+    const SendEmail = async (id) => {
+      
+      try {
+        const payload = {
+            amount : inputField.amount
+       }
+       console.log(inputField.amount,"inputField.amount");
+
+       const config = {
+        method : "PUT",
+        url : `${apiUrl}/user/update_endDate/${id}`,
+        data : payload
+       }
+
+        const response = await axios(config);
+        console.log(response,"response");
+        if (response.status === 200) {
+          alert("Mail Send Successfully.");
+        } else {
+          alert("Failed to send mail.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
     return (
+        <>
       <Box
+      mb={'1rem'}
         marginLeft={"1rem"}
         marginTop={"1rem"}
         className="employee-form-container"
@@ -123,9 +144,9 @@ import {
                   name="name"
                   onChange={onChangeHandler}
                   value={inputField.name}
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   type="text"
-                  placeholder="Kaveri Kappor"
+                  placeholder="Enter Name"
                 />
               </FormControl>
             </Box>
@@ -136,9 +157,9 @@ import {
                   name="email"
                   value={inputField.email}
                   onChange={onChangeHandler}
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   type="email"
-                  placeholder="kaveri@gmail.com"
+                  placeholder="enter email"
                 />
               </FormControl>
             </Box>
@@ -151,7 +172,7 @@ import {
                   name="mobile"
                   onChange={onChangeHandler}
                   value={inputField.mobile}
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   type="number"
                 />
               </FormControl>
@@ -163,7 +184,7 @@ import {
                   name="address"
                   value={inputField.address}
                   onChange={onChangeHandler}
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   type="text"
                   placeholder="Address"
                 />
@@ -178,7 +199,7 @@ import {
                   name="plan"
                   onChange={onChangeHandler}
                   value={inputField.plan}
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   placeholder="Select option"
                 >
                   <option value="option1">Plan 1</option>
@@ -195,7 +216,7 @@ import {
                   name="caller"
                   onChange={onChangeHandler}
                   value={inputField.caller}
-                  width={"400px"}
+                  width={{ base: "300px", md: "400px" }}
                   placeholder="Select option"
                 >
                   <option value="option1">Caller 1</option>
@@ -207,12 +228,12 @@ import {
             </Box>
           </Stack>
   
-          <Stack direction={"row"}>
+          <Stack direction={["column" ,"row"]}>
             <Box>
               <FormControl className="employee-form-group">
                 <FormLabel>Status</FormLabel>
                 <Input
-                  width={"400px"}
+                 width={{ base: "300px", md: "400px" }}
                   type="text"
                   name="status"
                   onChange={onChangeHandler}
@@ -222,24 +243,39 @@ import {
             </Box>
             <Box>
               <FormControl className="employee-form-group">
+                <FormLabel>Login Status</FormLabel>
+                <Input
+                  width={{ base: "300px", md: "400px" }}
+                  type="text"
+                  name="status"
+                  value={inputField.status}
+                  onChange={onChangeHandler}
+                />
+              </FormControl>
+            </Box>
+          </Stack>
+          <Box>
+              <FormControl className="employee-form-group">
                 <FormLabel>Amount</FormLabel>
                 <Input
-                  width={"400px"}
-                  type="text"
+                 width={{ base: "300px", md: "400px" }}
+                  placeholder="Enter Your Amount"
+                  type="number"
                   name="amount"
                   value={inputField.amount}
                   onChange={onChangeHandler}
                 />
               </FormControl>
             </Box>
-          </Stack>
         </form>
   
         {/* <DeleteIcon onClick={onOpen} /> */}
-        <Button 
-      marginTop={'1rem'}
-      _hover={{ background: "white", color: "gray" }}
-        onClick={onOpen} bg={'red'}>
+        <Button
+          marginTop={"1rem"}
+          _hover={{ background: "white", color: "gray" }}
+          onClick={onOpen}
+          bg={"red"}
+        >
           Delete
         </Button>
         {/* Modal Code */}
@@ -277,31 +313,16 @@ import {
           </AlertDialogOverlay>
         </AlertDialog>
   
-        {/* <Link to={`/user/editregistration/${userId}`}>
-            <EditIcon />
-          </Link> */}
-        <Link to={`/user/editregistration/${userId}`}>
-          <Button
-          marginTop={'1rem'}
-          marginLeft={'1rem'}
-          colorScheme="blue">Edit</Button>
-        </Link>
-  
-        {/* <NavLink to="/user/registration">
-            <Button
-               onClick={AddUser}
-             
-              // removeinputnames()
-              className="employee-btn"
-              colorScheme="teal"
-              mt="4"
-            >
-              Save
-            </Button>
-            </NavLink> */}
+        <Button
+          onClick={() => SendEmail(userId)}
+          marginTop={"1rem"}
+          marginLeft={"1rem"}
+          colorScheme="blue"
+        >
+          Extend
+        </Button>
       </Box>
-    );
-  };
-  
-  export default RecoveryProfile;
-  
+      </>
+)}
+
+export default FrezzUserForm;

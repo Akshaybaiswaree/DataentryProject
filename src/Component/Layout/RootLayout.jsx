@@ -37,15 +37,15 @@ function RootLayout() {
       {/* Main Content */}
       <Flex flexGrow={1}>
         {/* Sidebar */}
-        <Box flexBasis={{ base: "100%", md: "20%" }}>
+        <Box flexBasis={{ base: "60%", md: "20%" }}>
         <SideBar />
         </Box>
 
         {/* Main Content */}
         <Box
         bg={"#f5f5f5"}
-        marginLeft={'1rem'}
-        flexBasis={{ base: "2700%", md: "80%" }}>
+      
+        flexBasis={{ base: "4770%", md: "80%" }}>
           <Outlet 
           />
         </Box>

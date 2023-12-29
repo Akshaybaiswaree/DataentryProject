@@ -1,5 +1,3 @@
-
-
 import {
   Box,
   Button,
@@ -27,7 +25,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 
 const RegisterUserDetail = () => {
-
   const apiUrl = import.meta.env.VITE_APP_API_URL;
   // using navigate
   const navigate = useNavigate();
@@ -45,8 +42,6 @@ const RegisterUserDetail = () => {
     status: "",
     loginStatus: "",
   });
-  
-  
 
   // modal button
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,11 +50,9 @@ const RegisterUserDetail = () => {
   // useEffect to fetch specific user by ID
   useEffect(() => {
     const fetchUserDetails = async () => {
-     
       try {
         const response = await axios.get(
-       `${apiUrl}/user/getuser_by_id/${userId}`   
-       
+          `${apiUrl}/user/getuser_by_id/${userId}`
         );
         const data = response.data;
         console.log(data?.User.name);
@@ -94,9 +87,7 @@ const RegisterUserDetail = () => {
   const deleteUser = async (id) => {
     try {
       console.log(id);
-      const response = await axios.delete(
-        `${apiUrl}/user/delete_user/${id}`
-      );
+      const response = await axios.delete(`${apiUrl}/user/delete_user/${id}`);
       if (response.status === 200) {
         navigate("/user/registration");
         alert("User Deleted Succesfully.");
@@ -108,26 +99,28 @@ const RegisterUserDetail = () => {
     }
   };
 
+  const SendEmail = async (id) => {
+    console.log(id, "id");
+    const hostName = window.location.hostname;
+    const port = 5173;
+    const url = {url: `http://${hostName}:${port}/`};
+    console.log(url, "Responce URl");
+    try {
+      const response = await axios.post(
+        `${apiUrl}/user/sendUserInfo/${id}`,
+        url
+      );
+      console.log(response, "url mil jayega");
 
-  const SendEmail = async(id) => {
-    console.log(id ,"id")
-       try {
-         const response = await axios.post(`${apiUrl}/user/sendUserInfo/${id}`);
-
-         if (response.status === 200) {
-          
-            alert("Mail Send Successfully.");
-          } else {
-            alert("Failed to send mail.");
-          }
-       } 
-       
-       catch (error) {
-        console.log(error);
-       }
-    
-    
-  }
+      if (response.status === 200) {
+        alert("Mail Send Successfully.");
+      } else {
+        alert("Failed to send mail.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box
@@ -144,7 +137,7 @@ const RegisterUserDetail = () => {
                 name="name"
                 onChange={onChangeHandler}
                 value={inputField.name}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="text"
                 placeholder="Enter Name"
               />
@@ -157,7 +150,7 @@ const RegisterUserDetail = () => {
                 name="email"
                 value={inputField.email}
                 onChange={onChangeHandler}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="email"
                 placeholder="enter email"
               />
@@ -172,7 +165,7 @@ const RegisterUserDetail = () => {
                 name="mobile"
                 onChange={onChangeHandler}
                 value={inputField.mobile}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="number"
               />
             </FormControl>
@@ -184,7 +177,7 @@ const RegisterUserDetail = () => {
                 name="address"
                 value={inputField.address}
                 onChange={onChangeHandler}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="text"
                 placeholder="Address"
               />
@@ -199,7 +192,7 @@ const RegisterUserDetail = () => {
                 name="plan"
                 onChange={onChangeHandler}
                 value={inputField.plan}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 placeholder="Select option"
               >
                 <option value="option1">Plan 1</option>
@@ -216,7 +209,7 @@ const RegisterUserDetail = () => {
                 name="caller"
                 onChange={onChangeHandler}
                 value={inputField.caller}
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 placeholder="Select option"
               >
                 <option value="option1">Caller 1</option>
@@ -228,12 +221,12 @@ const RegisterUserDetail = () => {
           </Box>
         </Stack>
 
-        <Stack direction={"row"}>
+        <Stack direction={["column", "row"]}>
           <Box>
             <FormControl className="employee-form-group">
               <FormLabel>Status</FormLabel>
               <Input
-                width={"400px"}
+                width={{base:"300px",md:"400px"}}
                 type="text"
                 name="status"
                 onChange={onChangeHandler}
@@ -245,7 +238,7 @@ const RegisterUserDetail = () => {
             <FormControl className="employee-form-group">
               <FormLabel>Login Status</FormLabel>
               <Input
-                width={"400px"}
+               width={{base:"300px",md:"400px"}}
                 type="text"
                 name="status"
                 value={inputField.status}
@@ -300,8 +293,11 @@ const RegisterUserDetail = () => {
         </AlertDialogOverlay>
       </AlertDialog>
 
-      <Button onClick={()=>SendEmail(userId)}
-      marginTop={"1rem"} marginLeft={"1rem"} colorScheme="blue"
+      <Button
+        onClick={() => SendEmail(userId)}
+        marginTop={"1rem"}
+        marginLeft={"1rem"}
+        colorScheme="blue"
       >
         Gmail
       </Button>

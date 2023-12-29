@@ -44,6 +44,10 @@ import QcCheck from "./Component/Login/QcCheck";
 import PendingDetails from "./Component/Dashboard/Pending/PendingDetails";
 import { StayPrimaryLandscape } from "@mui/icons-material";
 import SetPassword from "./Component/Login/SetPassword";
+import RecoveryProfile from "./Component/Dashboard/Recovery/RecoveryProfile";
+import ActiveUser from "./Component/ActiveUser/ActiveUser";
+import FrezzUser from "./Component/FrezzUser/FrezzUser";
+import FrezzUserForm from "./Component/FrezzUser/FrezzUserForm";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,8 +59,7 @@ const router = createBrowserRouter(
       />
       <Route path="qccheck" element={<QcCheck />} />
       <Route index element={<Login />} />
-       <Route path="/signup" element={<SignUp />} /> 
-      <Route path="/admin" element={<LoginAdmin />} />
+       <Route path="/signup" element={<SignUp />} />       <Route path="/admin" element={<LoginAdmin />} />
       <Route path="/userlogin" element={<UserLogin />} />
       <Route path="/ForgetPassword" element={<ForgetPassword />} />
       <Route path="/setPassword" element={<SetPassword />} />
@@ -72,13 +75,21 @@ const router = createBrowserRouter(
         <Route
           path="user"
           element={<ProtectedRoute element={<UserOutlet />} />}
+
         >
           <Route index element={<User />} />
+          <Route path="activeUser" element={<ActiveUser/>} />
+          <Route path="frezzuser" element={<FrezzUser />} />
           <Route path="registration" element={<Registration />} />
           <Route path="registrationform" element={<RegistrationForm />} />
           <Route
             path="editregistration/:userId"
             element={<EditRegistration />}
+          />
+           
+          <Route
+            path="freezeuserform/:userId"
+            element={< FrezzUserForm />}
           />
           <Route
             path="registeruserdetail/:userId"
@@ -95,7 +106,10 @@ const router = createBrowserRouter(
         <Route path="reportform" element={<ReportForm />} />
         <Route path="recovery" element={<Recovery />} />
         <Route path="recoveryprofile/:userId" element={<RecoveryProfile />} />
+<<<<<<< HEAD
         
+=======
+>>>>>>> 3c99fd86e4b85f3237a600c908b3cac3aa783a03
         <Route path="employees" element={<Employees />} />
         <Route
           path="employeeprofileedit/:userId"
