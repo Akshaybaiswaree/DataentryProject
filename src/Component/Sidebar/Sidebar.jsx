@@ -160,13 +160,12 @@ export default function SideBar() {
                             <h2>
                               <AccordionButton>
                                 <AccountCircleIcon
-                                 style={{
-                                  backgroundColor:"gray",
-                                  borderRadius: "50%",
-                                  width: "2.5rem",
-                                  height: "2rem",
-                                  textAlign: "center",
-                                }}
+                                  style={{
+                                    borderRadius: "50%",
+                                    width: "3.5rem",
+                                    height: "3rem",
+                                    textAlign: "center",
+                                  }}
                                 />
                                 <Text
                                   as="span"
@@ -479,18 +478,17 @@ export default function SideBar() {
                                   <h2>
                                     <AccordionButton>
                                       <AccountCircleIcon
-                                       style={{
-                                        backgroundColor:"gray",
-                                        borderRadius: "50%",
-                                        width: "2.5rem",
-                                        height: "2rem",
-                                        textAlign: "center",
-                                      }}
+                                        style={{
+                                          borderRadius: "50%",
+                                          width: "3.5rem",
+                                          height: "3rem",
+                                          textAlign: "center",
+                                        }}
                                       />
                                       <Text
                                         as="span"
                                         color="black"
-                                        fontSize="2rem"
+                                        fontSize="1.5rem"
                                         marginLeft={"0.7rem"}
                                         // Remove the hover red color
                                       >
@@ -838,10 +836,9 @@ export default function SideBar() {
                             <AccordionButton>
                               <AccountCircleIcon
                                 style={{
-                                  backgroundColor:"gray",
                                   borderRadius: "50%",
-                                  width: "2.5rem",
-                                  height: "2rem",
+                                  width: "3.5rem",
+                                  height: "3rem",
                                   textAlign: "center",
                                 }}
                               />
@@ -960,10 +957,10 @@ export default function SideBar() {
                                     <AccordionButton>
                                       <AccountCircleIcon
                                         style={{
-                                          backgroundColor:"gray",
+                                          background: "",
                                           borderRadius: "50%",
-                                          width: "2.5rem",
-                                          height: "2rem",
+                                          width: "3.5rem",
+                                          height: "3rem",
                                           textAlign: "center",
                                         }}
                                       />
