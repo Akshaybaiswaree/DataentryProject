@@ -137,7 +137,7 @@ const Registration = () => {
           </Button>
         </NavLink>
       </Flex>
-      <InputGroup mt="1rem" ml={["1rem", "6.5rem"]} width={["90%", "400px"]}>
+      <InputGroup mt="1rem" ml={["1rem", "1.5rem"]} width={["90%", "400px"]}>
         <InputLeftElement
           pointerEvents="none"
           children={<SearchIcon color="gray.300" />}
@@ -152,7 +152,7 @@ const Registration = () => {
             setSearchQuery(e.target.value);
           }}
         />
-        <Button
+        <Button 
           marginLeft={"1rem"}
           className="employee-btn"
           colorScheme="teal"

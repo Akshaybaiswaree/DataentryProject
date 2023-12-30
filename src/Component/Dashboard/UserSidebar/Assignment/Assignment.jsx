@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import axios from "axios";
-
 const Assignment = () => {
   // for data
   const [data, setData] = useState();
@@ -14,9 +13,16 @@ const Assignment = () => {
   // fetchDetails of assingment
   const fetchDetails = async () => {
     try{
+      const id = localStorage.getItem("id");
+  
+      if (!id) {
+        console.error("User ID is missing in localStorage");
+        return;
+      }
+
       const apiUrl = import.meta.env.VITE_APP_API_URL;
       const response = await axios.get(
-        `${apiUrl}/user/get_totalAssignment`
+        `${apiUrl}/user/get_totalAssignment/${id}`
       );
       const data = response.data;
       console.log(data);

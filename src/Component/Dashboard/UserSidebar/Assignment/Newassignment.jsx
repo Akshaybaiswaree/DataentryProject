@@ -87,8 +87,14 @@ const NewAssignment = () => {
 
     // console.log(inputFields);
     try {
+      const id = localStorage.getItem("id");  
+      if (!id) {
+        console.error("User ID is missing in localStorage");
+        return;
+      }
+
       const response = await axios.post(
-        `${apiUrl}/user/add_assignment`,
+        `${apiUrl}/user/add_assignment/${id}`,
 
         inputFields,
         {
@@ -98,7 +104,7 @@ const NewAssignment = () => {
         }
       );
       // console.log(response);
-      alert("Saved successfully.");
+      alert("Assignment Saved successfully.");
       getDataAssignment();
       Navigate("/assignment");
     } catch (error) {
