@@ -704,7 +704,7 @@ export default function SideBar() {
                               marginLeft="8px" // Add some margin for spacing between icon and text
                               _hover={{ textDecoration: "underline" }}
                             >
-                              Pending
+                              Report
                             </Text>
                           </NavLink>
                         </ListItem>
