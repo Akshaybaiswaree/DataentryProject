@@ -17,11 +17,11 @@ import { useEffect, useState } from "react";
 import notri from "../../Images/notriimage.svg";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import LeaseAgreement from "../../Images/leaseagreement.jpeg"
+import LeaseAgreement from "../../Images/leaseagreement.jpeg";
 const StampPaperView = () => {
   const { userId } = useParams();
   console.log(userId, "userId");
-  const appUrl =import.meta.env.VITE_APP_API_URL;
+  const appUrl = import.meta.env.VITE_APP_API_URL;
   const [inputField, setInputField] = useState({
     name: "",
     email: "",
@@ -36,8 +36,6 @@ const StampPaperView = () => {
   const [signaturePreview, setSignaturePreview] = useState(null);
   console.log(photoPreview);
 
-
-
   const handlePhotoChange = (e) => {
     const selectedPhoto = e.target.files[0];
     setPhoto(selectedPhoto);
@@ -50,13 +48,12 @@ const StampPaperView = () => {
     setSignaturePreview(URL.createObjectURL(selectedSignature));
   };
 
-
   // useEffect to call
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/user/get_terms_by_id/${userId}`
+          `${appUrl}/user/get_terms_by_id/${userId}`
         );
         const data = response.data;
         console.log(data, "data hai ye");
@@ -70,8 +67,10 @@ const StampPaperView = () => {
           signature: data?.signature,
           photo: data?.photo,
         });
-        setPhotoPreview(data?.photo ? `${appUrl}+${data?.photo}` : null);
-        setSignaturePreview(data?.signature ? `${appUrl}${data?.signature}` : null);
+        setPhotoPreview(data?.photo ? `${appUrl}/${data?.photo}` : null);
+        setSignaturePreview(
+          data?.signature ? `${appUrl}/${data?.signature}` : null
+        );
       } catch (error) {
         console.error("Error fetching user details:", error);
       }
@@ -552,109 +551,73 @@ const StampPaperView = () => {
         </Box>
         <Box display="flex" justifyContent="space-between">
           <Box>
-        <FormControl w={["350px", "400px"]}>
-          <FormLabel>Name</FormLabel>
-          <Input
-            name="name"
-            onChange={onChangeHandler}
-            value={inputField.name}
-            type="text"
-            placeholder="Enter Name"
-            _hover={{ borderColor: "teal.500" }}
-          />
-        </FormControl>
-        <FormControl w={["350px", "400px"]}>
-          <FormLabel>Email</FormLabel>
-          <Input
-            name="email"
-            //   value={email}
-            //   onChange={(e) => setEmail(e.target.value)}
-            value={inputField.email}
-            onChange={onChangeHandler}
-            type="email"
-            placeholder="Enter Your Email "
-            _hover={{ borderColor: "teal.500" }}
-          />
-        </FormControl>
-        <FormControl w={["350px", "400px"]}>
-          <FormLabel>Address</FormLabel>
-          <Input
-            name="address"
-            value={inputField.address}
-            onChange={onChangeHandler}
-            type="text"
-            placeholder="Enter your Address"
-            _hover={{ borderColor: "teal.500" }}
-          />
-        </FormControl>
-
-       
-        {/* <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
-          <Tr>
-            <Td>Upload Signature</Td>
-            <Td>
-              {inputField.signature && (
-                <img
-                  src={`${appUrl}${inputField?.signature}`}
-                  alt="Signature Preview"
-                  style={{ maxWidth: "100px", marginTop: "10px" }}
-                />
-              )}
-            </Td>
-          </Tr>
-          <Tr>
-            <Td>Upload Your Photo</Td>
-            <Td>
-              {inputField.photo && (
-                <img
-                  src={`${appUrl}${inputField.photo}`}
-                  alt="Photo Preview"
-                  style={{
-                    maxWidth: "100px",
-                    marginTop: "10px",
-                    background: "red",
-                  }}
-                />
-              )}
-            </Td>
-          </Tr>
-        </Table> */}
-         <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
-        <Tr>
-          
-          <Td>
-           
-            {signaturePreview && (
-              <Image
-                src={signaturePreview}
-                alt="Signature Preview"
-                style={{ maxWidth: "100px", marginTop: "10px" }}
+            <FormControl w={["350px", "400px"]}>
+              <FormLabel>Name</FormLabel>
+              <Input
+                name="name"
+                onChange={onChangeHandler}
+                value={inputField.name}
+                type="text"
+                placeholder="Enter Name"
+                _hover={{ borderColor: "teal.500" }}
               />
-            )}
-          </Td>
-        </Tr>
-        <Tr>
-         
-          <Td>
-
-            {photoPreview && (
-              <Image
-                src={photoPreview}
-                alt="Photo Preview"
-                style={{
-                  maxWidth: "100px",
-                  marginTop: "10px",
-                
-                }}
+            </FormControl>
+            <FormControl w={["350px", "400px"]}>
+              <FormLabel>Email</FormLabel>
+              <Input
+                name="email"
+                //   value={email}
+                //   onChange={(e) => setEmail(e.target.value)}
+                value={inputField.email}
+                onChange={onChangeHandler}
+                type="email"
+                placeholder="Enter Your Email "
+                _hover={{ borderColor: "teal.500" }}
               />
-            )}
-          </Td>
-        </Tr>
-      </Table>
-        </Box>
-        <Box boxSize="sm">
-          <Image src={LeaseAgreement} alt="Stamp" />
-        </Box>
+            </FormControl>
+            <FormControl w={["350px", "400px"]}>
+              <FormLabel>Address</FormLabel>
+              <Input
+                name="address"
+                value={inputField.address}
+                onChange={onChangeHandler}
+                type="text"
+                placeholder="Enter your Address"
+                _hover={{ borderColor: "teal.500" }}
+              />
+            </FormControl>
+
+            <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
+              <Tr>
+                <Td>
+                  {signaturePreview && (
+                    <Image
+                      src={signaturePreview}
+                      alt="Signature Preview"
+                      style={{ maxWidth: "100px", marginTop: "10px" }}
+                    />
+                  )}
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>
+                  {photoPreview && (
+                    <Image
+                      src={photoPreview}
+                      alt="Photo Preview"
+                      style={{
+                        maxWidth: "100px",
+                        marginTop: "10px",
+                      }}
+                    />
+                  )}
+                </Td>
+              </Tr>
+            </Table>
+          </Box>
+          <Box boxSize="sm">
+            <Image src={LeaseAgreement} alt="Stamp" />
+          </Box>
         </Box>
       </Box>
     </>
