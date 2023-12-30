@@ -156,11 +156,8 @@ const Registration = () => {
           marginLeft={"1rem"}
           className="employee-btn"
           colorScheme="teal"
-<<<<<<< HEAD
           style={{marginLeft: '20px'}}
           mt="0"
-=======
->>>>>>> 3c99fd86e4b85f3237a600c908b3cac3aa783a03
           onClick={handleSearch}
         >
           Search

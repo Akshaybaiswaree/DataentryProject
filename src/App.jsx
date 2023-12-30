@@ -44,7 +44,7 @@ import QcCheck from "./Component/Login/QcCheck";
 import PendingDetails from "./Component/Dashboard/Pending/PendingDetails";
 import { StayPrimaryLandscape } from "@mui/icons-material";
 import SetPassword from "./Component/Login/SetPassword";
-import RecoveryProfile from "./Component/Dashboard/Recovery/RecoveryProfile";
+// import RecoveryProfile from "./Component/Dashboard/Recovery/RecoveryProfile";
 import ActiveUser from "./Component/ActiveUser/ActiveUser";
 import FrezzUser from "./Component/FrezzUser/FrezzUser";
 import FrezzUserForm from "./Component/FrezzUser/FrezzUserForm";
@@ -106,10 +106,7 @@ const router = createBrowserRouter(
         <Route path="reportform" element={<ReportForm />} />
         <Route path="recovery" element={<Recovery />} />
         <Route path="recoveryprofile/:userId" element={<RecoveryProfile />} />
-<<<<<<< HEAD
         
-=======
->>>>>>> 3c99fd86e4b85f3237a600c908b3cac3aa783a03
         <Route path="employees" element={<Employees />} />
         <Route
           path="employeeprofileedit/:userId"

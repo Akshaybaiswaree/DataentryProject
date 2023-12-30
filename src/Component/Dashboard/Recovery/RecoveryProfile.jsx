@@ -19,11 +19,7 @@ import {
     useDisclosure,
   } from "@chakra-ui/react";
   import axios from "axios";
-<<<<<<< HEAD
   // import "./EmployeeProfileEdit.css";
-=======
-
->>>>>>> 3c99fd86e4b85f3237a600c908b3cac3aa783a03
   import { useEffect, useRef, useState } from "react";
   import DeleteIcon from "@mui/icons-material/Delete";
   import EditIcon from "@mui/icons-material/Edit";
