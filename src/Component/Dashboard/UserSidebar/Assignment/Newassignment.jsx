@@ -16,11 +16,6 @@ import { useNavigate } from "react-router-dom";
 
 const NewAssignment = () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 3c99fd86e4b85f3237a600c908b3cac3aa783a03
   const token = JSON.parse(localStorage.getItem("token"));
   const { email, _id } = token;
   // console.log(email, "Get Email");
@@ -46,11 +41,7 @@ const NewAssignment = () => {
     try {
       const config = {
         method: "POST",
-<<<<<<< HEAD
         url: `${apiUrl}/user/get_assignment_details`,
-=======
-        url:  `${apiUrl}/user/get_assignment_details`,
->>>>>>> 3c99fd86e4b85f3237a600c908b3cac3aa783a03
         data: { email: email }, // Pass the email as part of the request body
       };
 
