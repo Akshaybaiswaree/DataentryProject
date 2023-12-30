@@ -160,12 +160,13 @@ export default function SideBar() {
                             <h2>
                               <AccordionButton>
                                 <AccountCircleIcon
-                                  style={{
-                                    borderRadius: "50%",
-                                    width: "3.5rem",
-                                    height: "3rem",
-                                    textAlign: "center",
-                                  }}
+                                 style={{
+                                  backgroundColor:"gray",
+                                  borderRadius: "50%",
+                                  width: "2.5rem",
+                                  height: "2rem",
+                                  textAlign: "center",
+                                }}
                                 />
                                 <Text
                                   as="span"
@@ -478,17 +479,18 @@ export default function SideBar() {
                                   <h2>
                                     <AccordionButton>
                                       <AccountCircleIcon
-                                        style={{
-                                          borderRadius: "50%",
-                                          width: "3.5rem",
-                                          height: "3rem",
-                                          textAlign: "center",
-                                        }}
+                                       style={{
+                                        backgroundColor:"gray",
+                                        borderRadius: "50%",
+                                        width: "2.5rem",
+                                        height: "2rem",
+                                        textAlign: "center",
+                                      }}
                                       />
                                       <Text
                                         as="span"
                                         color="black"
-                                        fontSize="1.5rem"
+                                        fontSize="2rem"
                                         marginLeft={"0.7rem"}
                                         // Remove the hover red color
                                       >
@@ -704,7 +706,7 @@ export default function SideBar() {
                               marginLeft="8px" // Add some margin for spacing between icon and text
                               _hover={{ textDecoration: "underline" }}
                             >
-                              Pending
+                              Report
                             </Text>
                           </NavLink>
                         </ListItem>
@@ -836,9 +838,10 @@ export default function SideBar() {
                             <AccordionButton>
                               <AccountCircleIcon
                                 style={{
+                                  backgroundColor:"gray",
                                   borderRadius: "50%",
-                                  width: "3.5rem",
-                                  height: "3rem",
+                                  width: "2.5rem",
+                                  height: "2rem",
                                   textAlign: "center",
                                 }}
                               />
@@ -957,10 +960,10 @@ export default function SideBar() {
                                     <AccordionButton>
                                       <AccountCircleIcon
                                         style={{
-                                          background: "",
+                                          backgroundColor:"gray",
                                           borderRadius: "50%",
-                                          width: "3.5rem",
-                                          height: "3rem",
+                                          width: "2.5rem",
+                                          height: "2rem",
                                           textAlign: "center",
                                         }}
                                       />
