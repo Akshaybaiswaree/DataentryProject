@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import notri from "../../Images/notriimage.svg";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import LeaseAgreement from "../../Images/leaseagreement.jpeg";
+import LeaseAgreement from "../../Images/notri.svg";
 const StampPaperView = () => {
   const { userId } = useParams();
   console.log(userId, "userId");
