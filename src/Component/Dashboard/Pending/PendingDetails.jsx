@@ -107,8 +107,7 @@ const RegisterUserDetail = () => {
     console.log(url, "Responce URl");
     try {
       const response = await axios.post(
-        `${apiUrl}/user/sendUserInfo/${id}`,
-        url
+        `${apiUrl}/user/sendUserInfo/${id}`
       );
       console.log(response, "url mil jayega");
 
