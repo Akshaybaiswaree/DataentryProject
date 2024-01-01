@@ -9,10 +9,11 @@ import axios from "axios";
 import logo from "../../Images/Group 1000004815.svg";
 import { jwtDecode } from "jwt-decode";
 import { useUserContext } from "../Context/UserContext";
-
+import { useToast } from '@chakra-ui/react';
 // Admin Login Page
 const LoginAdmin = () => {
   const { setUserContext } = useUserContext();
+  const toast = useToast();
 
   const [userrole , setUserrole] =useState("")
 
@@ -81,7 +82,15 @@ const LoginAdmin = () => {
         // decoding the token
         const decodedToken = jwtDecode(token);
         localStorage.setItem("token", JSON.stringify(decodedToken)); 
-        alert("Login Success....");
+        // alert("Login Success....");
+        toast({
+          title: 'Login Success',
+          // description: 'Provide Correct UserId and Password',
+          status: 'success',
+          duration: 3000, // Toast message will disappear after 3 seconds
+          isClosable: true,
+          position:"top",
+        });
         navigate("/dashboard");
       } else {
         // Handle other HTTP status codes (e.g., 401 for unauthorized)
@@ -91,10 +100,25 @@ const LoginAdmin = () => {
       console.error("Error:", error);
       // Check if the error is due to invalid credentials
       if (error.response && error.response.status === 401) {
-        alert("Invalid credentials");
+        // alert("Invalid credentials");
+        toast({
+          title: 'Invalid credentials',
+          // description: 'Provide Correct UserId and Password',
+          status: 'error',
+          duration: 3000, // Toast message will disappear after 3 seconds
+          isClosable: true,
+          position:"top",
+        });
       } else {
         // Handle other types of errors
-        alert("An error occurred. Please try again later.");
+        toast({
+          title: 'Login Failed',
+          description: 'Provide Correct UserId and Password',
+          status: 'error',
+          duration: 3000, // Toast message will disappear after 3 seconds
+          isClosable: true,
+          position:"top",
+        });
       }
     }
   };

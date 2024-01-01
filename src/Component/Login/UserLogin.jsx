@@ -14,7 +14,7 @@ import {
 import { FaEnvelope, FaLock } from "react-icons/fa"; // Icons from react-icons library
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-
+import { useToast } from '@chakra-ui/react';
 import axios from "axios";
 // import logo from "../../Images/logo.png";
 import logo from "../../Images/Group 1000004815.svg";
@@ -23,6 +23,8 @@ import { useUserContext } from "../Context/UserContext";
 
 const UserLogin = () => {
   const { setUserContext } = useUserContext();
+  const toast = useToast();
+
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_APP_API_URL;
 
@@ -84,7 +86,15 @@ const UserLogin = () => {
         localStorage.setItem("token", JSON.stringify(decodedToken));
         localStorage.setItem("id", id);
         // Optionally, display a success message
-        alert("Login successful.");
+        // alert("Login successful.");
+        toast({
+          title: 'Login Success',
+          // description: 'Provide Correct UserId and Password',
+          status: 'success',
+          duration: 3000, // Toast message will disappear after 3 seconds
+          isClosable: true,
+          position:"top",
+        });
       } else {
         alert("Invalid credentials");
       }
@@ -94,7 +104,14 @@ const UserLogin = () => {
       if (error.response && error.response.data && error.response.data.error) {
         alert(error.response.data.error);
       } else {
-        alert("An error occurred. Please try again later.");
+        toast({
+          title: 'Login Failed',
+          description: 'Provide Correct UserId and Password',
+          status: 'error',
+          duration: 3000, // Toast message will disappear after 3 seconds
+          isClosable: true,
+          position:"top",
+        });
       }
     }
   };

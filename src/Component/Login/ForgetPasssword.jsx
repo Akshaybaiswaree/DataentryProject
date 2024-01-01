@@ -101,7 +101,15 @@ const forOtpIntegration = async () => {
       const response = await axios(config);
       setEmail(response);
       console.log(response, "Email will be shown here");
-      alert("OTP Sent successfully.");
+      // alert("OTP Sent successfully.");
+      toast({
+        title: 'Otp Sent SuccessFully',
+        description: 'Provide Correct UserId and Password',
+        status: 'success',
+        duration: 3000, // Toast message will disappear after 3 seconds
+        isClosable: true,
+        position:"top",
+      });
       onOpen();
     } catch (error) {
       console.error("Error:", error);
@@ -110,7 +118,15 @@ const forOtpIntegration = async () => {
       if (error.response && error.response.data && error.response.data.error) {
         alert(error.response.data.error);
       } else {
-        alert("An error occurred. Please try again later.");
+        // alert("An error occurred. Please try again later.");
+        toast({
+          title: 'An error occurred. Please try again later.',
+          description: 'Provide Correct UserId and Password',
+          status: 'success',
+          duration: 3000, // Toast message will disappear after 3 seconds
+          isClosable: true,
+          position:"top",
+        });
       }
     }
   };
