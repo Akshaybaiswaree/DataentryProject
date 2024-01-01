@@ -24,7 +24,7 @@ const SetPassword = () => {
 
   const passwordIntegrate = async () => {
     // console.log("Click");
-    const user_id = localStorage.getItem("forgot_password_user_id");
+    const user_id = localStorage.getItem("userId");
 
     try {
       const handlePaylode = {
@@ -41,7 +41,7 @@ const SetPassword = () => {
       const responce = await axios(config);
       console.log(responce, "Forgot Password");
       if (responce.status === 200) {
-        // navigate("/userlogin");
+        navigate("/userlogin");
       } else {
         alert("Input Feild Required");
       }

@@ -52,6 +52,8 @@ const forOtpIntegration = async () => {
     const response = await axios(config);
     // Assuming the actual OTP value is available in the response
     const verifiedOtp = response.data.otp; // Adjust this based on your API response
+    const userId = response.data.id;
+    localStorage.setItem("userId",userId);
 
     setOtp(verifiedOtp);
     onClose(); // Close the modal after OTP verification

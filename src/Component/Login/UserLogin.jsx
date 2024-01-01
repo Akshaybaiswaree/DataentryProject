@@ -91,8 +91,10 @@ const UserLogin = () => {
       setUserContext(response.data.role);
       // ectracting token from response
       const token = response.data.token;
+      const id = response.data.id;
       const decodedToken = jwtDecode(token);
       localStorage.setItem("token", JSON.stringify(decodedToken));
+      localStorage.setItem("id",id);
       // alert("Login successfully.");
       //  Navigate to dahboard after login
 
