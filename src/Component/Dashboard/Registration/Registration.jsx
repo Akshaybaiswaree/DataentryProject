@@ -1,6 +1,3 @@
-
-
-
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { NavLink } from "react-router-dom";
@@ -185,7 +182,3 @@ const Registration = () => {
 };
 
 export default Registration;
-
-
-
-
