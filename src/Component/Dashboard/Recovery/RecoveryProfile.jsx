@@ -119,7 +119,7 @@ import {
                   name="name"
                   onChange={onChangeHandler}
                   value={inputField.name}
-                  width={"400px"}
+                  width={{base:"250px" ,md:"400px"}}
                   type="text"
                   placeholder="Kaveri Kappor"
                 />
@@ -132,7 +132,7 @@ import {
                   name="email"
                   value={inputField.email}
                   onChange={onChangeHandler}
-                  width={"400px"}
+                  width={{base:"250px" ,md:"400px"}}
                   type="email"
                   placeholder="kaveri@gmail.com"
                 />
@@ -147,7 +147,7 @@ import {
                   name="mobile"
                   onChange={onChangeHandler}
                   value={inputField.mobile}
-                  width={"400px"}
+                  width={{base:"250px" ,md:"400px"}}
                   type="number"
                 />
               </FormControl>
@@ -159,7 +159,7 @@ import {
                   name="address"
                   value={inputField.address}
                   onChange={onChangeHandler}
-                  width={"400px"}
+                  width={{base:"250px" ,md:"400px"}}
                   type="text"
                   placeholder="Address"
                 />
@@ -174,7 +174,7 @@ import {
                   name="plan"
                   onChange={onChangeHandler}
                   value={inputField.plan}
-                  width={"400px"}
+                  width={{base:"250px" ,md:"400px"}}
                   placeholder="Select option"
                 >
                   <option value="option1">Plan 1</option>
@@ -191,7 +191,7 @@ import {
                   name="caller"
                   onChange={onChangeHandler}
                   value={inputField.caller}
-                  width={"400px"}
+                  width={{base:"250px" ,md:"400px"}}
                   placeholder="Select option"
                 >
                   <option value="option1">Caller 1</option>
@@ -203,12 +203,13 @@ import {
             </Box>
           </Stack>
   
-          <Stack direction={"row"}>
+          <Stack direction={["column", "row"]}>
+            
             <Box>
               <FormControl className="employee-form-group">
                 <FormLabel>Status</FormLabel>
                 <Input
-                  width={"400px"}
+                     width={{base:"250px" ,md:"400px"}}
                   type="text"
                   name="status"
                   onChange={onChangeHandler}
@@ -220,7 +221,7 @@ import {
               <FormControl className="employee-form-group">
                 <FormLabel>Amount</FormLabel>
                 <Input
-                  width={"400px"}
+                     width={{base:"250px" ,md:"400px"}}
                   type="text"
                   name="amount"
                   value={inputField.amount}
@@ -278,6 +279,7 @@ import {
           </Link> */}
         <Link to={`/user/editregistration/${userId}`}>
           <Button
+          width={{base:"6rem"}}
           marginTop={'1rem'}
           marginLeft={'1rem'}
           colorScheme="blue">Edit</Button>

@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DataTable from "react-data-table-component";
+import {
+  Box,
+  Button,
+  Flex,
+  Input,
+  InputGroup,
+  InputLeftElement,
+} from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { NavLink } from "react-router-dom";
-import { Box, Button, Flex, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
 
-const Recovery = () => {
+const CustomDataTable = () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,11 +27,15 @@ const Recovery = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${apiUrl}/user/recovery_user?page=${currentPage}`);
+      const config = {
+        method: "GET",
+        url: `${apiUrl}/user/recovery_user?page=${currentPage}`,
+      };
+      const response = await axios(config);
       setTotalPage(response.data.totalPages);
       setUserData(response?.data?.users);
     } catch (error) {
-      console.error(error, "Error");
+      console.log(error, "error");
     }
   };
 
@@ -48,10 +59,13 @@ const Recovery = () => {
         name: searchQuery,
       };
 
-      const response = await axios.post(`${apiUrl}/user/search_user_recovery`, payload);
+      const response = await axios.post(
+        `${apiUrl}/user/search_user_recovery`,
+        payload
+      );
       setUserData(response.data.users);
     } catch (error) {
-      console.error(error, "Error");
+      console.log(error, "Error");
     }
   };
 
@@ -59,22 +73,27 @@ const Recovery = () => {
     {
       name: "User Name",
       selector: "name",
+      sortable: true,
     },
     {
       name: "Number",
       selector: "mobile",
+      sortable: true,
     },
     {
       name: "Start Date",
       selector: "startDate",
+      sortable: true,
       format: (row) => new Date(row.startDate).toLocaleDateString(),
     },
     {
       name: "Amount",
       selector: "amount",
+      sortable: true,
     },
     {
-      name: "Action",
+      name: "",
+      button: true,
       cell: (row) => (
         <NavLink to={`/recoveryprofile/${row._id}`}>
         <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
@@ -86,57 +105,60 @@ const Recovery = () => {
   ];
 
   const paginationOptions = {
-    rowsPerPageText: "Rows per page:",
+    rowsPerPageText: "Rows per page",
     rangeSeparatorText: "of",
     selectAllRowsItem: true,
-    selectAllRowsItemText: "All",
+    selectAllRowsText: "All",
   };
 
   return (
     <>
-      <Flex>
-        <Box fontSize="2rem" fontWeight="700">
+      <Flex direction="column" align="center" p={4}>
+        <Box fontSize={{ base: "1.5rem", md: "2rem" }} fontWeight="700">
           Recovery
         </Box>
+
+        <InputGroup mt="1rem" ml={["1rem", "12rem"]} width={["90%", "500px"]}>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<SearchIcon color="gray.300" />}
+          />
+          <Input
+            border="1px solid green"
+            width="100%"
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <Button
+          width={{ md: "12rem", base: "8rem" }}
+            colorScheme="teal"
+            mt="0"
+            style={{ marginLeft: "20px" }}
+            onClick={handleSearch}
+          >
+            Search
+          </Button>
+        </InputGroup>
+
+        <Box width={{ base: "81vw", md: "80vw" }} overflowX="auto" p={4}>
+          <DataTable
+            columns={columns}
+            data={userData}
+            pagination
+            paginationServer
+            paginationTotalRows={totalPage * 10} // Assuming 10 items per page
+            onChangePage={(page) => handlePagination(page)}
+            paginationPerPage={10}
+            paginationRowsPerPageOptions={[10, 20, 30]}
+            paginationComponentOptions={paginationOptions}
+            responsive
+          />
+        </Box>
       </Flex>
-
-      <InputGroup mt="1rem" ml={["0rem", "0.5rem"]} width={["100%", "400px"]}>
-        <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" />} />
-        <Input
-          border="1px solid green"
-          width="100%"
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <Button
-          className="employee-btn"
-          colorScheme="teal"
-          mt="0"
-          style={{ marginLeft: "20px" }}
-          onClick={handleSearch}
-        >
-          Search
-        </Button>
-      </InputGroup>
-
-      <Box width={{ base: "100%", md: "80vw" }} overflowX="auto" p={4}>
-        <DataTable
-          title=""
-          columns={columns}
-          data={userData}
-          pagination
-          paginationServer
-          paginationTotalRows={totalPage * 10} // Assuming 10 items per page
-          onChangePage={(page) => handlePagination(page)}
-          paginationPerPage={10}
-          paginationRowsPerPageOptions={[10, 20, 30]}
-          paginationComponentOptions={paginationOptions}
-        />
-      </Box>
     </>
   );
 };
 
-export default Recovery;
+export default CustomDataTable;
