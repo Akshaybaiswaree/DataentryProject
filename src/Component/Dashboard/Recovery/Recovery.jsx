@@ -1,18 +1,18 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../Employees/Employees.css";
+import DataTable from "react-data-table-component";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { NavLink } from "react-router-dom";
-import { Box, Button, Flex, Input, InputGroup, InputLeftElement, Grid } from "@chakra-ui/react";
-import { SearchIcon } from '@chakra-ui/icons';
+import { Box, Button, Flex, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+
 const Recovery = () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
-  const [searchQuery, setSearchQuery] = useState(""); // Corrected variable name
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(1); // Corrected variable name
-  const [userData , setUserData] = useState([]);
+  const [totalPage, setTotalPage] = useState(1);
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -20,17 +20,11 @@ const Recovery = () => {
 
   const fetchData = async () => {
     try {
-      const config = {
-        method: "GET", // Corrected spelling
-        url: `${apiUrl}/user/recovery_user?page=${currentPage}`,
-      };
-      const response = await axios(config);
-      setTotalPage(response.data.totalPages); // Corrected variable name
-      console.log(response.data.totalPages);
-      console.log(response);
+      const response = await axios.get(`${apiUrl}/user/recovery_user?page=${currentPage}`);
+      setTotalPage(response.data.totalPages);
       setUserData(response?.data?.users);
     } catch (error) {
-      console.log(error, "error");
+      console.error(error, "Error");
     }
   };
 
@@ -57,26 +51,57 @@ const Recovery = () => {
       const response = await axios.post(`${apiUrl}/user/search_user_recovery`, payload);
       setUserData(response.data.users);
     } catch (error) {
-      console.log(error, "Error");
+      console.error(error, "Error");
     }
   };
 
+  const columns = [
+    {
+      name: "User Name",
+      selector: "name",
+    },
+    {
+      name: "Number",
+      selector: "mobile",
+    },
+    {
+      name: "Start Date",
+      selector: "startDate",
+      format: (row) => new Date(row.startDate).toLocaleDateString(),
+    },
+    {
+      name: "Amount",
+      selector: "amount",
+    },
+    {
+      name: "Action",
+      cell: (row) => (
+        <NavLink to={`/recoveryprofile/${row._id}`}>
+        <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
+            View Detail
+          </Button>
+        </NavLink>
+      ),
+    },
+  ];
+
+  const paginationOptions = {
+    rowsPerPageText: "Rows per page:",
+    rangeSeparatorText: "of",
+    selectAllRowsItem: true,
+    selectAllRowsItemText: "All",
+  };
 
   return (
     <>
+      <Flex>
+        <Box fontSize="2rem" fontWeight="700">
+          Recovery
+        </Box>
+      </Flex>
 
-    <Flex  >
-      <Box
-    
-     
-     fontSize={'2rem'} fontWeight={'700'}>Recovery</Box>
-   
-    </Flex>
-    <InputGroup mt="1rem" ml={["0rem", "0.5rem"]} width={["100%", "400px"]}>
-        <InputLeftElement
-          pointerEvents="none"
-          children={<SearchIcon color="gray.300" />}
-        />
+      <InputGroup mt="1rem" ml={["0rem", "0.5rem"]} width={["100%", "400px"]}>
+        <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" />} />
         <Input
           border="1px solid green"
           width="100%"
@@ -89,53 +114,29 @@ const Recovery = () => {
           className="employee-btn"
           colorScheme="teal"
           mt="0"
-          style={{ marginLeft: '20px' }}
+          style={{ marginLeft: "20px" }}
           onClick={handleSearch}
         >
           Search
         </Button>
       </InputGroup>
 
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-              <h5 style={{ width: '25%' }}>User Name</h5>
-              <h5 style={{ width: '25%' }}>Number</h5>
-              <h5 style={{ width: '25%' }}>Start Date</h5>
-              <h5 style={{ width: '25%' }}>Amount</h5>
-              <h5 style={{ width: '20%' }}></h5>
-            </div>
-      <div className="details" style={{width:'100%'}}>
-      {userData.map((user) => (
-        <div className="user" key={user._id}style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px' }}>
-             <h5 style={{ width: '25%' }}>{user.name}</h5>
-              <h5 style={{ width: '25%' }}>{user.mobile}</h5>
-              <h5 style={{ width: '25%' }}>{new Date(user.startDate).toLocaleDateString()}</h5>
-              <h5 style={{ width: '25%' }}>{user.amount}</h5>
-             
-          <NavLink to={`/recoveryprofile/${user._id}`}>
-          <button 
-          style={{background:"black" , width:"8.3rem"}}>View Detail</button>
-          </NavLink>
-         
-        </div>
-      ))}
-        <br />
-        <div className="numbers">
-            <ChevronLeftIcon />
-            {Array.from({ length: totalPage }, (_, index) => (
-              <span
-                key={index + 1}
-                className="num"
-                onClick={() => handlePagination(index + 1)}
-              >
-                {index + 1}
-              </span>
-            ))}
-            <ChevronRightIcon />
-          </div>
-      </div>
+      <Box width={{ base: "100%", md: "80vw" }} overflowX="auto" p={4}>
+        <DataTable
+          title=""
+          columns={columns}
+          data={userData}
+          pagination
+          paginationServer
+          paginationTotalRows={totalPage * 10} // Assuming 10 items per page
+          onChangePage={(page) => handlePagination(page)}
+          paginationPerPage={10}
+          paginationRowsPerPageOptions={[10, 20, 30]}
+          paginationComponentOptions={paginationOptions}
+        />
+      </Box>
     </>
   );
 };
 
 export default Recovery;
-
