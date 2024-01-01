@@ -1,6 +1,3 @@
-
-
-
 import { Box, Button, Flex, Heading, Image, Input, Alert,
   AlertIcon,
   AlertTitle, } from "@chakra-ui/react";
@@ -60,7 +57,7 @@ const LoginAdmin = () => {
     e.preventDefault();
     const validate = validationForm(inputFields);
     console.log(validate);
-       if(!validate){
+    if(!validate){
       return alert("fields are not valid")
     }
     console.log(inputFields , "inputFields")
@@ -68,34 +65,37 @@ const LoginAdmin = () => {
     try {
       const apiUrl = import.meta.env.VITE_APP_API_URL;
       const response = await axios.post(
-        ` ${apiUrl}/user/adminsignin`,
-        inputFields, // Pass inputFields directly as the request body
+        `${apiUrl}/user/adminsignin`,
+        inputFields,
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      // console.log(response,"Admin Ka Email and Password");
-
-      setUserrole(response.data.role)
-      setUserContext(response.data.role);
-      console.log(response.data.role , "response.data.role")
-      // extracting token from response
-      const token = response.data.token;
-      // decodint the token
-      const decodedToken = jwtDecode(token);
-      // save the token in localstorage
-      localStorage.setItem("token", JSON.stringify(decodedToken));
-      // alert("Login successfully.");
-      //  Navigate to dahboard after login
       if (response.status === 200) {
+        setUserrole(response.data.role);
+        setUserContext(response.data.role);
+        // extracting token from response
+        const token = response.data.token;
+        // decoding the token
+        const decodedToken = jwtDecode(token);
+        localStorage.setItem("token", JSON.stringify(decodedToken)); 
+        alert("Login Success....");
         navigate("/dashboard");
       } else {
-        alert("Invalid credentials ");
+        // Handle other HTTP status codes (e.g., 401 for unauthorized)
+        alert("Invalid credentials");
       }
     } catch (error) {
-      console.log(`Error is ${error}`);
+      console.error("Error:", error);
+      // Check if the error is due to invalid credentials
+      if (error.response && error.response.status === 401) {
+        alert("Invalid credentials");
+      } else {
+        // Handle other types of errors
+        alert("An error occurred. Please try again later.");
+      }
     }
   };
   return (

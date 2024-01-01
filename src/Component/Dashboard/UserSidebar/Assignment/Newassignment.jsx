@@ -92,7 +92,12 @@ const NewAssignment = () => {
         console.error("User ID is missing in localStorage");
         return;
       }
-
+      for (const key in inputFields) {
+        if (!inputFields[key]) {
+          alert(`Please enter ${key} value.`);
+          return;
+        }
+      }
       const response = await axios.post(
         `${apiUrl}/user/add_assignment/${id}`,
 
@@ -109,6 +114,7 @@ const NewAssignment = () => {
       Navigate("/assignment");
     } catch (error) {
       console.log(error);
+      alert("An error occurred. Please try again later.");
     }
   };
 
@@ -216,6 +222,7 @@ const NewAssignment = () => {
                 placeholder="Enter Name"
                 name="name"
                 onChange={onChangehandler}
+                required
               />
             </FormControl>
           </Box>

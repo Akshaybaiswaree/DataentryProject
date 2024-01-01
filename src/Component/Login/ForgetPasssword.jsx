@@ -39,6 +39,9 @@ const ForgetPassword = () => {
   };
 const forOtpIntegration = async () => {
   try {
+    if(!otp){
+      alert('Please Enter OTP');
+    }
     const handlePayload = {
       passwordResetOTP: otp,
     };
@@ -50,40 +53,65 @@ const forOtpIntegration = async () => {
     };
 
     const response = await axios(config);
+    if (response.status === 200) {
     // Assuming the actual OTP value is available in the response
     const verifiedOtp = response.data.otp; // Adjust this based on your API response
     const userId = response.data.id;
     localStorage.setItem("userId",userId);
-
     setOtp(verifiedOtp);
+    alert('OTP verifyed Successfully...');
     onClose(); // Close the modal after OTP verification
     navigate("/setPassword"); // Correct the navigation syntax
     console.log(response, "For Otp ");
+    }else{
+      alert("Invalid OTP");
+    }
   } catch (error) {
     console.error(error);
+    alert("An error occurred. Please try again later.");
   }
 };
   // function to submit email oncick
   const submitEmail = async () => {
-
-    try{
-      const handlePaylode = {
-        email : email
+    try {
+      if (!email) {
+        // Email is empty
+        alert("Please enter your email.");
+        return;
       }
+    
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        // Incorrect email format
+        alert("Please enter a valid email address.");
+        return;
+      }
+    
+      const payload = {
+        email: email,
+      };
+    
       const config = {
-        method : "POST",
-        url : `${apiUrl}/user/forgot_password`,
-        data : handlePaylode
+        method: "POST",
+        url: `${apiUrl}/user/forgot_password`,
+        data: payload,
+      };
+    
+      const response = await axios(config);
+      setEmail(response);
+      console.log(response, "Email will be shown here");
+      alert("OTP Sent successfully.");
+      onOpen();
+    } catch (error) {
+      console.error("Error:", error);
+    
+      // Handle error appropriately, e.g., show a user-friendly error message
+      if (error.response && error.response.data && error.response.data.error) {
+        alert(error.response.data.error);
+      } else {
+        alert("An error occurred. Please try again later.");
       }
-  
-      const responce = await axios(config)
-      setEmail(responce)
-      console.log(responce, "Yaha pr Email Show Hoga");
-      alert("Saved successfully.");
-       onOpen();
-    }
-    catch(error){
-      console.log(error);
     }
   };
 
@@ -109,6 +137,7 @@ const forOtpIntegration = async () => {
         mx="auto"
         background="#ebe9eb"
         height="3rem"
+        required
         type="email"
         placeholder="Enter Email"
         onFocus={(e) => (e.target.style.outline = "none")}

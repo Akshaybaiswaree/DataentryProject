@@ -61,47 +61,41 @@ const UserLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (!validationForm()) {
-    //   return; // If validation fails, don't proceed with submission
-    // }
     try {
       const response = await axios.post(
         `${apiUrl}/user/userlogin`,
-        inputFields, // Pass inputFields directly as the request body
+        inputFields,
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      // console.log(response, "response");
+    
       if (response.data.status === "Freeze") {
         navigate("/qccheck");
-      }
-
-      
-      else if (response.status === 200) {
+      } else if (response.status === 200) {
         console.log(response);
         navigate("/assignment");
+        setUserContext(response.data.role);
+        // Extracting token and id from the response
+        const { token, id } = response.data;
+        const decodedToken = jwtDecode(token);
+        localStorage.setItem("token", JSON.stringify(decodedToken));
+        localStorage.setItem("id", id);
+        // Optionally, display a success message
+        alert("Login successful.");
       } else {
         alert("Invalid credentials");
       }
-      
-      console.log(response.data, "response.data.status");
-      setUserContext(response.data.role);
-      // ectracting token from response
-      const token = response.data.token;
-      const id = response.data.id;
-      const decodedToken = jwtDecode(token);
-      localStorage.setItem("token", JSON.stringify(decodedToken));
-      localStorage.setItem("id",id);
-      // alert("Login successfully.");
-      //  Navigate to dahboard after login
-
-     
     } catch (error) {
-      console.log(`Error is ${error}`);
+      console.error("Error:", error);
       // Handle error appropriately, e.g., show a user-friendly error message
+      if (error.response && error.response.data && error.response.data.error) {
+        alert(error.response.data.error);
+      } else {
+        alert("An error occurred. Please try again later.");
+      }
     }
   };
   return (
@@ -172,6 +166,7 @@ const UserLogin = () => {
               placeholder="Password"
               style={inputStyle}
               onFocus={(e) => (e.target.style.outline = "none")}
+              required
               value={inputFields.password}
               onChange={onChangeHandler}
             />
