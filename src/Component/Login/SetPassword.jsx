@@ -20,37 +20,53 @@ const SetPassword = () => {
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_APP_API_URL;
   const [password, setPassword] = useState("");
-  const [conformPassword, setConformPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // Changed from conformPassword to confirmPassword
 
   const passwordIntegrate = async () => {
-    // console.log("Click");
-    const user_id = localStorage.getItem("userId");
+    const userId = localStorage.getItem("userId"); // Changed from user_id to userId
 
     try {
-      const handlePaylode = {
-        newPassword: password,
-        confirmPassword: conformPassword,
+      if (!password || !confirmPassword) {
+        alert('Please enter both new and confirm passwords.');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match. Please enter the same password in both fields.');
+        return;
+      }
+
+      const payload = {
+        newPassword: password, // Changed from newPassword to password
+        confirmPassword: confirmPassword,
       };
 
       const config = {
         method: "PUT",
-        url: `${apiUrl}/user/submit_password/${user_id}`,
-        data: handlePaylode,
+        url: `${apiUrl}/user/submit_password/${userId}`, // Changed from user_id to userId
+        data: payload,
       };
 
-      const responce = await axios(config);
-      console.log(responce, "Forgot Password");
-      if (responce.status === 200) {
+      const response = await axios(config);
+
+      if (response.status === 200) {
+        alert('Password saved successfully.');
         navigate("/userlogin");
       } else {
-        alert("Input Feild Required");
+        alert("Failed to save password. Please try again.");
       }
-      //   setPassword(responce);
-      //   setConformPassword(responce);
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
+
+      // Handle error appropriately, e.g., show a user-friendly error message
+      if (error.response && error.response.data && error.response.data.error) {
+        alert(error.response.data.error);
+      } else {
+        alert("An error occurred. Please try again later.");
+      }
     }
   };
+
   return (
     <>
       <Center height="100vh">
@@ -76,8 +92,8 @@ const SetPassword = () => {
             <Input
               type="password"
               placeholder="Confirm your password"
-              value={conformPassword}
-              onChange={(e) => setConformPassword(e.target.value)}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </FormControl>
           <Button
