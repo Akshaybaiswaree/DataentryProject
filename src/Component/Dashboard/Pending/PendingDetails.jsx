@@ -99,15 +99,15 @@ const RegisterUserDetail = () => {
     }
   };
 
-  const SendEmail = async (id) => {
-    console.log(id, "id");
+  const SendEmail = async (userId) => {
+    console.log(userId, "id");
     const hostName = window.location.hostname;
     const port = 5173;
     const url = {url: `http://${hostName}:${port}/`};
     console.log(url, "Responce URl");
     try {
       const response = await axios.post(
-        `${apiUrl}/user/sendUserInfo/${id}`
+        `${apiUrl}/user/sendUserInfo/${userId}`
       );
       console.log(response, "url mil jayega");
 

@@ -13,13 +13,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import React from "react";
 // import "./EmployeeProfileEdit.css";
-
+import { useToast } from '@chakra-ui/react';
 const NewAssignment = () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
   const token = JSON.parse(localStorage.getItem("token"));
   const { email, _id } = token;
   // console.log(email, "Get Email");
   // console.log(_id, "Get ID");
+  const toast = useToast();
+
   const Navigate = useNavigate();
   // state hook to take input from form
   const [data, setData] = useState("");
@@ -66,7 +68,8 @@ const NewAssignment = () => {
       console.log(responce, "Relode ");
       getDataAssignment();
     } catch (err) {
-      console.log("error", err);
+      // console.log("error", err);
+      alert("error occured")
     }
   };
 
@@ -109,12 +112,28 @@ const NewAssignment = () => {
         }
       );
       // console.log(response);
-      alert("Assignment Saved successfully.");
+      // alert("Assignment Saved successfully.");
+      toast({
+        title: 'Assignment Saved successfully',
+        // description: 'Provide Correct UserId and Password',
+        status: 'success',
+        duration: 3000, // Toast message will disappear after 3 seconds
+        isClosable: true,
+        position:"top",
+      });
       getDataAssignment();
       Navigate("/assignment");
     } catch (error) {
       console.log(error);
-      alert("An error occurred. Please try again later.");
+      // alert("An error occurred. Please try again later.");
+      toast({
+        title: 'An error occurred. Please try again later.',
+        // description: 'Provide Correct UserId and Password',
+        status: 'success',
+        duration: 3000, // Toast message will disappear after 3 seconds
+        isClosable: true,
+        position:"top",
+      });
     }
   };
 
@@ -276,7 +295,7 @@ const NewAssignment = () => {
                 onChange={onChangehandler}
               />
             </FormControl>
-            Expand All
+           
           </Box>
           <Box>
             <FormControl isRequired className="employee-form-group">
