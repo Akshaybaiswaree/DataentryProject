@@ -14,6 +14,9 @@ import { useForm, Controller } from "react-hook-form"
 import { useToast } from '@chakra-ui/react';
 
 const RegistrationForm = () => {
+
+
+  
   const apiUrl = import.meta.env.VITE_APP_API_URL;
   const { handleSubmit, register, control, reset, formState: { errors } } = useForm();
   const toast = useToast();
@@ -44,7 +47,14 @@ const RegistrationForm = () => {
       navigate('/user/registration')
       
     } catch (err) {
-      console.log(err);
+      toast({
+        title: 'Email has Already been used',
+        //description: 'Open Your Gmail',
+        status: 'error',
+        duration: 3000, // Toast message will disappear after 3 seconds
+        isClosable: true,
+        position:"top",
+      });
     }
   };
 
@@ -85,11 +95,15 @@ const RegistrationForm = () => {
               type="number"
               id="mobile"
               name="mobile"
-              {...register("mobile", { required: "Mobile number is required" })}
+              {...register("mobile", { 
+                required: "Mobile number is required",
+                min: { value: 1000000000, message: "Mobile number should be at least 10 digits" },
+                max: { value: 9999999999, message: "Mobile number should not exceed 10 digits" },
+              })}
               placeholder="Enter Mobile No"
               _hover={{ borderColor: "teal.500" }}
             />
-            {errors.number && <Box color="red">{errors.number.message}</Box>}
+            {errors.mobile && <Box color="red">{errors.mobile.message}</Box>}
           </FormControl>
           <FormControl>
             <FormLabel>Address</FormLabel>
