@@ -11,11 +11,12 @@ import {
 import {useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useForm, Controller } from "react-hook-form"
-
+import { useToast } from '@chakra-ui/react';
 
 const RegistrationForm = () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
   const { handleSubmit, register, control, reset, formState: { errors } } = useForm();
+  const toast = useToast();
 
   const navigate = useNavigate();
 
@@ -32,7 +33,16 @@ const RegistrationForm = () => {
       const AdduserApiResponse = await axios(config);
       console.log("add", AdduserApiResponse);
       reset(); 
+      toast({
+        title: 'Mail Sent Successfully',
+        description: 'Open Your Gmail',
+        status: 'success',
+        duration: 3000, // Toast message will disappear after 3 seconds
+        isClosable: true,
+        position:"top",
+      });
       navigate('/user/registration')
+      
     } catch (err) {
       console.log(err);
     }

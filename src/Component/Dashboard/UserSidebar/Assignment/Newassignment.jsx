@@ -295,7 +295,7 @@ const NewAssignment = () => {
                 onChange={onChangehandler}
               />
             </FormControl>
-            Expand All
+           
           </Box>
           <Box>
             <FormControl isRequired className="employee-form-group">

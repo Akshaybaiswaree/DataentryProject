@@ -42,7 +42,7 @@ const StampPaperView = () => {
   const [loader, setLoader] = useState(false);
 
   const downlodePDF = () => {
-    console.log(downlodePDF, "downlodePD")
+    console.log(downlodePDF, "downlodePD");
     const capture = document.querySelector(".downLodeBox");
     setLoader(true);
 
@@ -596,39 +596,16 @@ const StampPaperView = () => {
         <Box display="flex" justifyContent="space-between">
           <Box>
             <FormControl w={["350px", "400px"]}>
-              <FormLabel>Name</FormLabel>
-              <Input
-                name="name"
-                onChange={onChangeHandler}
-                value={inputField.name}
-                type="text"
-                placeholder="Enter Name"
-                _hover={{ borderColor: "teal.500" }}
-              />
+              <Text>Name : {inputField.name}</Text>
+             
             </FormControl>
             <FormControl w={["350px", "400px"]}>
-              <FormLabel>Email</FormLabel>
-              <Input
-                name="email"
-                //   value={email}
-                //   onChange={(e) => setEmail(e.target.value)}
-                value={inputField.email}
-                onChange={onChangeHandler}
-                type="email"
-                placeholder="Enter Your Email "
-                _hover={{ borderColor: "teal.500" }}
-              />
+             
+              <Text> Email: {inputField.email}</Text>
             </FormControl>
             <FormControl w={["350px", "400px"]}>
-              <FormLabel>Address</FormLabel>
-              <Input
-                name="address"
-                value={inputField.address}
-                onChange={onChangeHandler}
-                type="text"
-                placeholder="Enter your Address"
-                _hover={{ borderColor: "teal.500" }}
-              />
+             
+              <Text> Address : {inputField.address}</Text>
             </FormControl>
 
             <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
@@ -663,7 +640,7 @@ const StampPaperView = () => {
               </Tr>
             </Table>
             <Button
-            marginBottom={'1rem'}
+              marginBottom={"1rem"}
               onClick={downlodePDF}
               disabled={!(loader === false)}
               mt={"1rem"}
@@ -671,7 +648,11 @@ const StampPaperView = () => {
               bg={"lightgreen"}
               _hover={{ background: "gray", color: "white" }}
             >
-              {loader ? <span>Downloading</span> : <span>Download Your Agreement</span>}
+              {loader ? (
+                <span>Downloading</span>
+              ) : (
+                <span>Download Your Agreement</span>
+              )}
             </Button>
           </Box>
         </Box>
