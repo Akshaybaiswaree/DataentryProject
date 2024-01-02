@@ -18,6 +18,9 @@ import notri from "../../Images/notriimage.svg";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import LeaseAgreement from "../../Images/notri.svg";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+
 const StampPaperView = () => {
   const { id } = useParams();
   console.log(id, "userId");
@@ -35,6 +38,46 @@ const StampPaperView = () => {
   const [photoPreview, setPhotoPreview] = useState(null);
   const [signaturePreview, setSignaturePreview] = useState(null);
   console.log(photoPreview);
+
+  const [loader, setLoader] = useState(false);
+
+  const downlodePDF = () => {
+    const capture = document.querySelector(".downLodeBox");
+    setLoader(true);
+
+    html2canvas(capture).then((canvas) => {
+      const imgData = canvas.toDataURL("img/png");
+      const doc = new jsPDF("p", "mm", "a4");
+
+      const marginLeft = 10; // Adjust as needed
+      const marginTop = 10; // Adjust as needed
+      const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
+      const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
+
+      // Calculate the aspect ratio of the content
+      const aspectRatio = canvas.width / canvas.height;
+
+      // Calculate the width and height based on the aspect ratio
+      let imgWidth = contentWidth;
+      let imgHeight = contentWidth / aspectRatio;
+
+      // If the image height exceeds the content height, adjust accordingly
+      if (imgHeight > contentHeight) {
+        imgHeight = contentHeight;
+        imgWidth = contentHeight * aspectRatio;
+      }
+
+      // Calculate the center position for the image
+      const imgX = marginLeft + (contentWidth - imgWidth) / 2;
+      const imgY = marginTop + (contentHeight - imgHeight) / 2;
+
+      // Add the image to the PDF with adjusted position and dimensions
+      doc.addImage(imgData, "PNG", imgX, imgY, imgWidth, imgHeight);
+
+      setLoader(false);
+      doc.save("receipt.pdf");
+    });
+  };
 
   const handlePhotoChange = (e) => {
     const selectedPhoto = e.target.files[0];
@@ -109,7 +152,7 @@ const StampPaperView = () => {
   return (
     <>
       <Box m={["1rem", "7rem"]}>
-      <Box display="flex" flexDirection="column" textAlign="center">
+        <Box display="flex" flexDirection="column" textAlign="center">
           <Box
             mx="auto"
             boxSize={{ base: "100%" }}
@@ -590,40 +633,50 @@ const StampPaperView = () => {
             <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
               <Tr>
                 <Td>
-                  <Box  onChange={handleSignatureChange} >
-                  {signaturePreview && (
-                    <Image
-                      src={signaturePreview}
-                      alt="Signature Preview"
-                      style={{ maxWidth: "100px", marginTop: "10px" }}
-                    />
-                  )}
+                  <Box onChange={handleSignatureChange}>
+                    {signaturePreview && (
+                      <Image
+                        src={signaturePreview}
+                        alt="Signature Preview"
+                        style={{ maxWidth: "100px", marginTop: "10px" }}
+                      />
+                    )}
                   </Box>
                 </Td>
               </Tr>
               <Tr>
                 <Td>
-                  <Box  onChange={handlePhotoChange}>
-                  {photoPreview && (
-                    <Image
-                      src={photoPreview}
-                      alt="Photo Preview"
-                      style={{
-                        maxWidth: "100px",
-                        marginTop: "10px",
-                      }}
-
-                    />
-                  )}
+                  <Box onChange={handlePhotoChange}>
+                    {photoPreview && (
+                      <Image
+                        src={photoPreview}
+                        alt="Photo Preview"
+                        style={{
+                          maxWidth: "100px",
+                          marginTop: "10px",
+                        }}
+                      />
+                    )}
                   </Box>
                 </Td>
               </Tr>
             </Table>
+            <Button
+            marginBottom={'1rem'}
+              onClick={downlodePDF}
+              disabled={!(loader === false)}
+              mt={"1rem"}
+              ml={"1.6rem"}
+              bg={"lightgreen"}
+              _hover={{ background: "gray", color: "white" }}
+            >
+              {loader ? <span>Downloading</span> : <span>Download Your Agreement</span>}
+            </Button>
           </Box>
         </Box>
-          <Box boxSize="sm">
-            <Image src={LeaseAgreement} alt="Stamp" />
-          </Box>
+        <Box boxSize="sm">
+          <Image src={LeaseAgreement} alt="Stamp" />
+        </Box>
       </Box>
     </>
   );
