@@ -54,7 +54,7 @@ const router = createBrowserRouter(
     <Route>
       <Route path="/employmentform" element={<StampPaper />} />
       <Route
-        path="employmentformdetails/:userId"
+        path="employmentformdetails/:id"
         element={<StampPaperView />}
       />
       <Route path="qccheck" element={<QcCheck />} />

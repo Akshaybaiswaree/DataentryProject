@@ -19,8 +19,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import LeaseAgreement from "../../Images/notri.svg";
 const StampPaperView = () => {
-  const { userId } = useParams();
-  console.log(userId, "userId");
+  const { id } = useParams();
+  console.log(id, "userId");
   const appUrl = import.meta.env.VITE_APP_API_URL;
   const [inputField, setInputField] = useState({
     name: "",
@@ -53,7 +53,7 @@ const StampPaperView = () => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `${appUrl}/user/get_terms_by_id/${userId}`
+          `${appUrl}/user/get_terms_by_id/${id}`
         );
         const data = response.data;
         console.log(data, "data hai ye");
@@ -77,7 +77,7 @@ const StampPaperView = () => {
     };
 
     fetchUserDetails();
-  }, [userId]);
+  }, [id]);
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
