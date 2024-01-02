@@ -21,6 +21,7 @@ const Registration = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [userData, setUserData] = useState([]);
+
   useEffect(() => {
     fetchData();
   }, [currentPage]);
@@ -35,7 +36,7 @@ const Registration = () => {
       setTotalPages(response.data?.totalPages);
       setUserData(response?.data?.users);
     } catch (error) {
-      console.log(error, "error");
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -67,10 +68,9 @@ const Registration = () => {
       const response = await axios(config);
       setUserData(response.data.users);
     } catch (error) {
-     alert("User Already Registered")
+      alert("Error searching users or user already registered.");
     }
   };
-
   const handlePagination = (page) => {
     setCurrentPage(page);
   };
@@ -145,6 +145,7 @@ const Registration = () => {
           type="text"
           placeholder="Search..."
           value={searchQuery}
+          required
           onChange={(e) => {
             setSearchQuery(e.target.value);
           }}
