@@ -42,6 +42,7 @@ const StampPaperView = () => {
   const [loader, setLoader] = useState(false);
 
   const downlodePDF = () => {
+    console.log(downlodePDF, "downlodePD")
     const capture = document.querySelector(".downLodeBox");
     setLoader(true);
 
@@ -151,7 +152,7 @@ const StampPaperView = () => {
 
   return (
     <>
-      <Box m={["1rem", "7rem"]}>
+      <Box m={["1rem", "7rem"]} className="downLodeBox">
         <Box display="flex" flexDirection="column" textAlign="center">
           <Box
             mx="auto"
