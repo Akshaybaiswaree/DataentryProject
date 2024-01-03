@@ -27,21 +27,34 @@ const Report = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [userData, setUserData] = useState([]);
+
   useEffect(() => {
     fetchData();
   }, [currentPage]);
 
   const fetchData = async () => {
     try {
+
       const config = {
         method: "GET",
         url: `${apiUrl}/user/get_successOrfreeze_user?page=${currentPage}`,
       };
       const response = await axios(config);
+
+      const response = await axios.get(`${apiUrl}/user/get_successOrfreeze_user`, {
+        params: {
+          page: currentPage,
+          limit: 10,
+          status: ["Success", "Freeze"],
+        },
+      });
+
+
       setTotalPages(response.data?.totalPages);
       setUserData(response?.data?.users);
+      console.log( "response", response)
     } catch (error) {
-      console.log(error, "error");
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -64,16 +77,11 @@ const Report = () => {
         },
       };
 
-      const config = {
-        method: "POST",
-        url: `${apiUrl}/user/search_employee`,
-        data: payload,
-      };
+      const response = await axios.post(`${apiUrl}/user/search_employee`, payload);
 
-      const response = await axios(config);
       setUserData(response.data.users);
     } catch (error) {
-      console.log(error, "Error");
+      console.error("Error searching data:", error);
     }
   };
 
@@ -97,7 +105,11 @@ const Report = () => {
     {
       name: "Action",
       cell: (row) => (
+
         <NavLink to={`/reportform/${row._id}`}>
+
+        <NavLink to={`/user/get_report_by_id/${row._id}`}>
+
           <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
             View Detail
           </Button>
