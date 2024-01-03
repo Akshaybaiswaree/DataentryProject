@@ -25,9 +25,9 @@ import {
       startdate: "",
       enddate: "",
       totalform: "",
-      filledform: "",
-      rightform: "",
-      incorrectform: "",
+      filledform: "0",
+      rightform: "0",
+      incorrectform: "0",
     });
   
     useEffect(() => {
@@ -47,7 +47,7 @@ import {
               mobile: data.user.mobile || "",
               caller: data.user.caller || "",
               startdate: data.user.startDate || "",
-              enddate: data.user.endDate,
+              enddate: data.user.endDate||"",
               totalform: data.user.totalAssingment || "",
               filledform: data.user.submitdAssingment || "",
               rightform: data.user.correctAssignment || "",
@@ -136,7 +136,7 @@ import {
           <Box>
           <FormControl className="employee-form-group">
             <FormLabel>End Date</FormLabel>
-            <Input width={"400px"} type="number" placeholder="End Date" onChange={onChangeHandler}
+            <Input width={"400px"} type="text" placeholder="End Date" onChange={onChangeHandler}
                   value={inputField.enddate} />
           </FormControl>
           </Box>
@@ -154,7 +154,7 @@ import {
           <FormControl className="employee-form-group">
             <FormLabel>Filled Form</FormLabel>
             <Input width={"400px"} type="number" placeholder="Filled Form" onChange={onChangeHandler}
-                  value={inputField.filledform} />
+                  value={inputField.filledform} defaultValue="0" />
           </FormControl>
           </Box>
           </Stack>
