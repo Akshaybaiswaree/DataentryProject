@@ -103,7 +103,7 @@ const router = createBrowserRouter(
         </Route>
         <Route path="blockeduser" element={<BlockedUser />} />
         <Route path="report" element={<Report />} />
-        <Route path="reportform" element={<ReportForm />} />
+        <Route path="reportform/:userId" element={<ReportForm />} />
         <Route path="recovery" element={<Recovery />} />
         <Route path="recoveryprofile/:userId" element={<RecoveryProfile />} />
         

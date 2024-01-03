@@ -35,7 +35,7 @@ const Report = () => {
     try {
       const config = {
         method: "GET",
-        url: `${apiUrl}/user/user_pagination?page=${currentPage}`,
+        url: `${apiUrl}/user/get_successOrfreeze_user?page=${currentPage}`,
       };
       const response = await axios(config);
       setTotalPages(response.data?.totalPages);
@@ -60,7 +60,7 @@ const Report = () => {
       const payload = {
         name: searchQuery,
         data: {
-          status: "Pending",
+          status: "Success",
         },
       };
 
@@ -97,7 +97,7 @@ const Report = () => {
     {
       name: "Action",
       cell: (row) => (
-        <NavLink to={`/employeeprofileedit/${row._id}`}>
+        <NavLink to={`/reportform/${row._id}`}>
           <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
             View Detail
           </Button>
