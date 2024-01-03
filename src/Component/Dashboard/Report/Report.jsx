@@ -34,6 +34,13 @@ const Report = () => {
 
   const fetchData = async () => {
     try {
+
+      const config = {
+        method: "GET",
+        url: `${apiUrl}/user/get_successOrfreeze_user?page=${currentPage}`,
+      };
+      const response = await axios(config);
+
       const response = await axios.get(`${apiUrl}/user/get_successOrfreeze_user`, {
         params: {
           page: currentPage,
@@ -41,6 +48,7 @@ const Report = () => {
           status: ["Success", "Freeze"],
         },
       });
+
 
       setTotalPages(response.data?.totalPages);
       setUserData(response?.data?.users);
@@ -65,7 +73,7 @@ const Report = () => {
       const payload = {
         name: searchQuery,
         data: {
-          status: "Pending",
+          status: "Success",
         },
       };
 
@@ -97,7 +105,11 @@ const Report = () => {
     {
       name: "Action",
       cell: (row) => (
+
+        <NavLink to={`/reportform/${row._id}`}>
+
         <NavLink to={`/user/get_report_by_id/${row._id}`}>
+
           <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
             View Detail
           </Button>
