@@ -177,7 +177,7 @@ const ReportForm = () => {
       // Save PDF
       pdf.save(`Zemix Services: ${inputField.name} `);
     } catch (error) {
-      alert("For downloading You have to Complete all");
+      alert("User has not Complete all the Forms");
     }
   };
 
@@ -321,16 +321,9 @@ const ReportForm = () => {
         </Stack>
       </form>
 
+     
       <Button
-        onClick={handlelogout}
-        className="employee-btn"
-        colorScheme="teal"
-        mt="4"
-      >
-        Save
-      </Button>
-      <Button
-        marginLeft={"1rem"}
+        
         className="employee-btn"
         colorScheme="teal"
         mt="4"
