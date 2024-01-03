@@ -13,8 +13,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import jsPDF from "jspdf";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { useToast } from '@chakra-ui/react';
 const ReportForm = () => {
+  const toast = useToast();
+
   const apiUrl = import.meta.env.VITE_APP_API_URL;
   const { userId } = useParams();
   const [inputField, setInputField] = useState({
@@ -177,7 +179,14 @@ const ReportForm = () => {
       // Save PDF
       pdf.save(`Zemix Services: ${inputField.name} `);
     } catch (error) {
-      alert("User has not Complete all the Forms");
+      toast({
+        title: 'User has not filled all the forms',
+        // description: 'Provide Correct UserId and Password',
+        status: 'error',
+        duration: 3000, // Toast message will disappear after 3 seconds
+        isClosable: true,
+        position:"top",
+      });
     }
   };
 
