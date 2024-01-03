@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { NavLink } from "react-router-dom";
@@ -34,25 +32,13 @@ const Report = () => {
 
   const fetchData = async () => {
     try {
-
-      const config = {
-        method: "GET",
-        url: `${apiUrl}/user/get_successOrfreeze_user?page=${currentPage}`,
-      };
-      const response = await axios(config);
-
-      const response = await axios.get(`${apiUrl}/user/get_successOrfreeze_user`, {
-        params: {
-          page: currentPage,
-          limit: 10,
-          status: ["Success", "Freeze"],
-        },
-      });
-
+      const response = await axios.get(
+        `${apiUrl}/user/get_successOrfreeze_user?page=${currentPage}`
+      );
 
       setTotalPages(response.data?.totalPages);
       setUserData(response?.data?.users);
-      console.log( "response", response)
+      console.log("response", response);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -105,11 +91,7 @@ const Report = () => {
     {
       name: "Action",
       cell: (row) => (
-
         <NavLink to={`/reportform/${row._id}`}>
-
-        <NavLink to={`/user/get_report_by_id/${row._id}`}>
-
           <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
             View Detail
           </Button>
@@ -140,42 +122,30 @@ const Report = () => {
         </Box>
       </Flex>
       <Center>
-      <Stack
-      margin={'1rem'}
-      direction={[ "column" ,"row"]}>
-        <Box>
-          <FormControl className="employee-form-group">
-            <FormLabel>Start date</FormLabel>
-            <Input
-            
-            width={{base:"250px",md:"400px"} }
-            type="date" placeholder="Kaveri Kappor" />
-          </FormControl>
-        </Box>{" "}
-        <Box>
-          <FormControl className="employee-form-group">
-            <FormLabel>End date</FormLabel>{" "}
-            <Input 
-            width={{base:"250px",md:"400px"} }
-            type="date" placeholder="Kaveri Kappor" />
-          </FormControl>
-        </Box>
-      </Stack>
+        <Stack margin={"1rem"} direction={["column", "row"]}>
+          <Box>
+            <FormControl className="employee-form-group">
+              <FormLabel>Start date</FormLabel>
+              <Input width={{ base: "250px", md: "400px" }} type="date" placeholder="Kaveri Kappor" />
+            </FormControl>
+          </Box>{" "}
+          <Box>
+            <FormControl className="employee-form-group">
+              <FormLabel>End date</FormLabel>{" "}
+              <Input width={{ base: "250px", md: "400px" }} type="date" placeholder="Kaveri Kappor" />
+            </FormControl>
+          </Box>
+        </Stack>
       </Center>
       <InputGroup mt="1rem" ml={["1rem", "12rem"]} width={["90%", "500px"]}>
-        <InputLeftElement
-          pointerEvents="none"
-          children={<SearchIcon color="gray.300" />}
-        />
+        <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" />} />
         <Input
           border="1px solid green"
           width="100%"
           type="text"
           placeholder="Search..."
           value={searchQuery}
-          onChange={(e) => {
-            setSearchQuery(e.target.value);
-          }}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <Button
           width={{ md: "12rem", base: "6rem" }}
