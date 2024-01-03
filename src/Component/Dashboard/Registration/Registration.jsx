@@ -32,8 +32,9 @@ const Registration = () => {
         url: `${apiUrl}/user/user_pagination?page=${currentPage}`,
       };
       const response = await axios(config);
-      setTotalPages(response.data?.totalPages);
-      setUserData(response?.data?.users);
+       setTotalPages(response.data?.totalPages);
+      console.log("response" , response)
+       setUserData(response?.data?.users);
     } catch (error) {
       console.log(error, "error");
     }

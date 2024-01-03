@@ -27,7 +27,7 @@ import RecoveryProfile from "./Component/Dashboard/Recovery/RecoveryProfile";
 import Registration from "./Component/Dashboard/Registration/Registration";
 import RegistrationForm from "./Component/Dashboard/Registration/RegistrationForm";
 import Report from "./Component/Dashboard/Report/Report";
-import ReportForm from "./Component/Dashboard/Report/ReportForm";
+//import ReportForm from "./Component/Dashboard/Report/ReportForm";
 import RootLayout from "./Component/Layout/RootLayout";
 import SignUp from "./Component/Login/SignUP";
 import User from "./Component/Dashboard/User/User";
@@ -103,7 +103,7 @@ const router = createBrowserRouter(
         </Route>
         <Route path="blockeduser" element={<BlockedUser />} />
         <Route path="report" element={<Report />} />
-        <Route path="reportform" element={<ReportForm />} />
+        {/* <Route path="reportform" element={<ReportForm />} /> */}
         <Route path="recovery" element={<Recovery />} />
         <Route path="recoveryprofile/:userId" element={<RecoveryProfile />} />
         

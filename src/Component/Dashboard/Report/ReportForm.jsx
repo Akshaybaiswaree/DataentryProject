@@ -1,123 +1,81 @@
-import {
-    Box,
-    Button,
-    Flex,
-    FormControl,
-    FormLabel,
-    Input,
-    Stack,
-    StackDivider,
-  } from "@chakra-ui/react";
-  import React from "react";
-  // import "./EmployeeProfileEdit.css";
+// import React, { useEffect, useRef, useState } from "react";
+// import axios from "axios";
+// import {
+//   Box,
+//   FormControl,
+//   FormLabel,
+//   Input,
+//   Select,
+//   Stack,
+// } from "@chakra-ui/react";
+// import { useParams } from "react-router-dom";
 
+// const ReportForm = () => {
+//   const apiUrl = import.meta.env.VITE_APP_API_URL;
+//   const { userId } = useParams();
 
-  import { useNavigate } from "react-router-dom";
-  
-  const ReportForm= () => {
+//   const [inputField, setInputField] = useState({
+//     name: "",
+//     email: "",
+//     mobile: "",
+//     address: "",
+//     plan: "",
+//     caller: "",
+//   });
 
-  const Navigate=useNavigate()
+//   useEffect(() => {
+//     const fetchUserDetails = async () => {
+//       try {
+//         const response = await axios.get(`${apiUrl}/user/get_report_by_id/${userId}`);
+//         const data = response.data;
 
-  const handlelogout=()=>{
-    Navigate("/report");
-  }
+//         setInputField({
+//           name: data?.user?.name || "",
+//           email: data?.user?.email || "",
+//           mobile: data?.user?.mobile || "",
+//           address: data?.user?.address || "",
+//           plan: "",
+//           caller: data?.user?.caller || "",
+//         });
+//       } catch (error) {
+//         console.error("Error fetching user details:", error);
+//       }
+//     };
+//     fetchUserDetails();
+//   }, [userId]);
 
-    return (
-      <Box className="employee-form-container">
-       
-        <form className="employee-form">
-          <Stack direction={"row"}>
-            <Box>
-              <FormControl className="employee-form-group">
-                <FormLabel>Name</FormLabel>
-                <Input width={"400px"} type="text" placeholder="Kaveri Kappor" />
-              </FormControl>
-            </Box>
-            <Box>
-              <FormControl className="employee-form-group">
-                <FormLabel>Mobile</FormLabel>
-                <Input
-                  width={"400px"}
-                  type="number"
-                  placeholder="kaveri@gmail.com"
-                />
-              </FormControl>
-            </Box>
-          </Stack>
-          <Stack direction={"row"}>
-            <Box>
-              <FormControl className="employee-form-group">
-                <FormLabel>Email</FormLabel>
-                <Input
-                  width={"400px"}
-                  type="email"
-                  placeholder="kaveri@2023"
-                />
-              </FormControl>
-            </Box>
-            <Box>
-              <FormControl className="employee-form-group">
-                <FormLabel>Address</FormLabel>
-                <Input width={"400px"} type="text" placeholder="Caller" />
-              </FormControl>
-            </Box>
-          </Stack>
-          <Stack direction={"row"}>
-            <Box>
-          <FormControl className="employee-form-group">
-            <FormLabel>Start Date</FormLabel>
-            <Input width={"400px"} type="text" placeholder="start date" />
-          </FormControl>
-          </Box>
-          <Box>
-          <FormControl className="employee-form-group">
-            <FormLabel>End Date</FormLabel>
-            <Input width={"400px"} type="number" placeholder="End Date" />
-          </FormControl>
-          </Box>
-          </Stack>
+//   const onChangeHandler = (e) => {
+//     const { name, value } = e.target;
 
-          <Stack direction={"row"}>
-            <Box>
-          <FormControl className="employee-form-group">
-            <FormLabel>Total Form</FormLabel>
-            <Input width={"400px"} type="number" placeholder="start date" />
-          </FormControl>
-          </Box>
-          <Box>
-          <FormControl className="employee-form-group">
-            <FormLabel>Filled Form</FormLabel>
-            <Input width={"400px"} type="number" placeholder="End Date" />
-          </FormControl>
-          </Box>
-          </Stack>
+//     setInputField({
+//       ...inputField,
+//       [name]: value,
+//     });
+//   };
 
-          <Stack direction={"row"}>
-            <Box>
-          <FormControl className="employee-form-group">
-            <FormLabel>Right Form</FormLabel>
-            <Input width={"400px"} type="number" placeholder="start date" />
-          </FormControl>
-          </Box>
-          <Box>
-          <FormControl className="employee-form-group">
-            <FormLabel>Filled Form</FormLabel>
-            <Input width={"400px"} type="number" placeholder="End Date" />
-          </FormControl>
-          </Box>
-          </Stack>
-         
-         
-        </form>
-        
-        <Button 
-        onClick={handlelogout}
-        className="employee-btn" colorScheme="teal" mt="4">
-          Save
-        </Button>
-      </Box>
-    );
-  };
-  
-  export default ReportForm;
-  
+//   return (
+//     <Box marginLeft="1rem" marginTop="1rem" className="employee-form-container">
+//       <form className="employee-form">
+//         {/* Your existing form fields */}
+//         <Stack direction={["column", "row"]}>
+//           <Box>
+//             <FormControl className="employee-form-group">
+//               <FormLabel>Name</FormLabel>
+//               <Input
+//                 name="name"
+//                 onChange={onChangeHandler}
+//                 value={inputField.name}
+//                 width={{ base: "300px", md: "400px" }}
+//                 type="text"
+//                 placeholder="Kaveri Kappor"
+//               />
+//             </FormControl>
+//           </Box>
+//           {/* Add other form fields similarly */}
+//         </Stack>
+//       </form>
+//     </Box>
+//   );
+// };
+
+// export default ReportForm;
