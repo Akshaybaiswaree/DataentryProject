@@ -293,7 +293,7 @@ const RegisterUserDetail = () => {
         width={{md:"5rem"}}
         marginBottom={'1rem'}
         marginTop={'1rem'}
-        height={{base:'2.3rem' , md:"2.5r em"}}
+        height={{base:'3.3rem' , md:"2.5r em"}}
         colorScheme="blue">Edit</Button>
       </Link>
        </Box>
