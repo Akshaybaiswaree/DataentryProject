@@ -564,7 +564,7 @@ const StampPaper = () => {
             type="email"
             placeholder="Enter Your Email "
             _hover={{ borderColor: "teal.500" }}
-          />
+          /> 
         </FormControl>
         <FormControl w={["350px", "400px"]}>
           <FormLabel>Address</FormLabel>

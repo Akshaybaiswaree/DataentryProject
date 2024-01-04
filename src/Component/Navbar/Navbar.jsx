@@ -28,7 +28,7 @@ export default function Navbar() {
           fontSize={{ base: "2xl", md: "5xl" }}
           marginLeft={{ base: "1rem", md: "7rem" }}
         >
-          Dashboard
+          Zemix Services
         </Heading>
       </Box>
       <Box>
