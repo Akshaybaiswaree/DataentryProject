@@ -28,7 +28,7 @@ const StampPaperView = () => {
   const [inputField, setInputField] = useState({
     name: "",
     email: "",
-
+    startdate:"",
     address: "",
 
     photo: "",
@@ -106,7 +106,7 @@ const StampPaperView = () => {
         setInputField({
           name: data?.name,
           email: data?.email,
-
+          startdate:data?.startdate,
           address: data?.address,
           signature: data?.signature,
           photo: data?.photo,
@@ -164,7 +164,7 @@ const StampPaperView = () => {
           </Box>
         </Box>
 
-        <Box display="flex" justifyContent="space-evenly">
+        {/* <Box display="flex" justifyContent="space-evenly">
           <Box mb={{ base: "2", lg: "0" }}>
             <Image
               w={{ base: "100%", lg: "150px" }}
@@ -203,6 +203,49 @@ const StampPaperView = () => {
               <strong>(The "Employee")</strong>
             </Text>
             <Text ml={{ base: "0", lg: "10%" }}>OF THE SECOND PARTY</Text>
+          </Box>
+        </Box> */}
+            <Box display="flex" justifyContent="space-evenly">
+          <Box mb={{ base: "2", lg: "0" }}>
+            <Image
+              w={{ base: "100%", lg: "150px" }}
+              h={{ base: "auto", lg: "350px" }}
+              src={notri}
+              alt="Dan Abramov"
+            />
+          </Box>
+          <Box textAlign="center">
+            <Heading fontSize={{base:"1rem" , md:"2rem"}} mb={{ base: "2", lg: "4" }}>
+              Legal Employment Contract 2023
+            </Heading>
+
+            <Text fontSize={{base:"0.8rem" , md:"1rem"}}>
+              THIS DIGITAL EMPLOYMENT CONTRACT (this "Agreement") Valid Till
+              Eleven Months From 2023-11-30 BETWEEN:
+            </Text>
+
+            <Text >
+              <Heading fontSize={{base:"1rem" , md:"2rem"}}>Zemix Services</Heading>
+            </Text>
+            <Text fontSize={{base:"0.8rem" , md:"1rem"}}>
+              KASTURI WADI INDRA BAZAR GHANSHAM APARTMENT JAIPUR, RAJASTHAN
+              (RJ), INDIA(IN), 302031 of
+            </Text>
+
+            {/* <Text fontSize={"1.5rem"}>
+              <strong>(The "Employer")</strong>
+            </Text> */}
+             <Text >
+              <Heading fontSize={{base:"1rem" , md:"2rem"}}>The "Employer"</Heading>
+            </Text>
+            <Text fontSize={{base:"0.8rem" , md:"1rem"}}>OF THE FIRST PARTY </Text>
+
+            <Text fontSize={{base:"0.8rem" , md:"1rem"}}>-AND-</Text>
+            <Text>
+              S/O &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;...
+              <strong>(The "Employee")</strong>
+            </Text>
+            <Text fontSize={{base:"0.8rem" , md:"1rem"}}>OF THE SECOND PARTY</Text>
           </Box>
         </Box>
 
@@ -603,10 +646,17 @@ const StampPaperView = () => {
              
               <Text> Email: {inputField.email}</Text>
             </FormControl>
-            {/* <FormControl w={["350px", "400px"]}>
-             
-              <Text> Address : {inputField.address}</Text>
-            </FormControl> */}
+            <FormControl w={["350px", "400px"]}>
+          
+          {/* <Input
+            value={date}
+            onChange={(e) =>setDate(e.target.value)}
+            type="date"
+            placeholder="Enter the Date"
+            _hover={{ borderColor: "teal.500" }}
+          /> */}
+             <Text> Start-Date: {inputField.startdate}</Text>
+        </FormControl>
 
             <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
               <Tr>
