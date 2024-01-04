@@ -129,10 +129,8 @@ const RegistrationForm = () => {
                   placeholder="Select option"
                   _hover={{ borderColor: "teal.500" }}
                 >
-                  <option value="option1">Plan 1</option>
-                  <option value="option2">Plan 2</option>
-                  <option value="option3">Plan 3</option>
-                  <option value="option4">Plan 4</option>
+                  <option value="option1">520</option>
+                 
                 </Select>
               )}
             />

@@ -178,10 +178,8 @@ const RegisterUserDetail = () => {
                 width={{base:"300px",md:"400px"}}
                 placeholder="Select option"
               >
-                <option value="option1">Plan 1</option>
-                <option value="option2">Plan 2</option>
-                <option value="option3">Plan 3</option>
-                <option value="option3">Plan 4</option>
+                <option value="option1">520</option>
+              
               </Select>
             </FormControl>
           </Box>

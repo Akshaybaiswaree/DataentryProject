@@ -595,18 +595,18 @@ const StampPaperView = () => {
         </Box>
         <Box display="flex" justifyContent="space-between">
           <Box>
-            <FormControl w={["350px", "400px"]}>
+            {/* <FormControl w={["350px", "400px"]}>
               <Text>Name : {inputField.name}</Text>
              
-            </FormControl>
+            </FormControl> */}
             <FormControl w={["350px", "400px"]}>
              
               <Text> Email: {inputField.email}</Text>
             </FormControl>
-            <FormControl w={["350px", "400px"]}>
+            {/* <FormControl w={["350px", "400px"]}>
              
               <Text> Address : {inputField.address}</Text>
-            </FormControl>
+            </FormControl> */}
 
             <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
               <Tr>

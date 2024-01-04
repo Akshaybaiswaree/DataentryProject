@@ -25,11 +25,13 @@ import {
   import DeleteIcon from "@mui/icons-material/Delete";
   import EditIcon from "@mui/icons-material/Edit";
   import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
+  import { useToast } from '@chakra-ui/react';
   
 const FrezzUserForm = ()=>{
     const apiUrl = import.meta.env.VITE_APP_API_URL;
     // using navigate
     const navigate = useNavigate();
+    const toast = useToast();
     // userId of the user
     const { userId } = useParams();
   
@@ -118,9 +120,18 @@ const FrezzUserForm = ()=>{
         const response = await axios(config);
         console.log(response,"response");
         if (response.status === 200) {
-          alert("Mail Send Successfully.");
+          // alert("User Status Update Successfully....");
+          toast({
+            title: 'User Status Update Successfully....',
+            // description: 'Provide Correct UserId and Password',
+            status: 'success',
+            duration: 3000, // Toast message will disappear after 3 seconds
+            isClosable: true,
+            position:"top",
+          });
+          navigate("/user/frezzuser");
         } else {
-          alert("Failed to send mail.");
+          alert("Failed to Update User Status");
         }
       } catch (error) {
         console.log(error);
