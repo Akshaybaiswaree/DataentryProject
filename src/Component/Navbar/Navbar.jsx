@@ -1,7 +1,7 @@
 import { Avatar, Box, Flex, Heading, Image } from "@chakra-ui/react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // import Dataentry from "../../Images/logo.png";
-import Dataentry from "../../Images/Group 1000004815.svg";
+import Dataentry from "../../Images/ZEMEX LOGO.PNG";
 
 export default function Navbar() {
   return (
@@ -19,14 +19,14 @@ export default function Navbar() {
       >
         <Image
           marginLeft={{ base: "0", md: "0rem" }}
-          boxSize={{ base: "70px", md: "100px" }}
-          objectFit="cover"
+          boxSize={{ base: "60px", md: "120px" }}
+         
           src={Dataentry}
           // width="20px"
         />
         <Heading
           fontSize={{ base: "2xl", md: "5xl" }}
-          marginLeft={{ base: "1rem", md: "7rem" }}
+          marginLeft={{ base: "1rem", md: "10rem" }}
         >
           Zemix Services
         </Heading>
