@@ -1,7 +1,7 @@
 import { Avatar, Box, Flex, Heading, Image } from "@chakra-ui/react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // import Dataentry from "../../Images/logo.png";
-import Dataentry from "../../Images/ZEMEX LOGO.PNG";
+import Dataentry from "../../Images/ZEMEX LOGO.png";
 
 export default function Navbar() {
   return (
