@@ -19,7 +19,7 @@ export default function Navbar() {
       >
         <Image
           marginLeft={{ base: "0", md: "0rem" }}
-          boxSize={{ base: "60px", md: "120px" }}
+          boxSize={{ base: "70px", md: "120px" }}
          
           src={Dataentry}
           // width="20px"
