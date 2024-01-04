@@ -114,13 +114,12 @@ const FrezzUserForm = ()=>{
         url : `${apiUrl}/user/update_endDate/${id}`,
         data : payload
        }
-
         const response = await axios(config);
         console.log(response,"response");
         if (response.status === 200) {
-          alert("Mail Send Successfully.");
+          alert("User Status Update Successfully....");
         } else {
-          alert("Failed to send mail.");
+          alert("Failed to Update User Status");
         }
       } catch (error) {
         console.log(error);
