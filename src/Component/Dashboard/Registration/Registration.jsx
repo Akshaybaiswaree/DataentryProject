@@ -101,8 +101,8 @@ const Registration = () => {
     },
     {
       name:"Agreement",
-      cell: (row) => (
-         <NavLink to={`https://joyful-profiterole-a7568b.netlify.app/`}>
+      cell: () => (
+         <NavLink to="https://grand-taiyaki-def709.netlify.app/">
           <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
             Fill Agreement
           </Button>
