@@ -247,21 +247,21 @@ const UserAgreemen = () => {
   };
 
   const columns = [
-    {
-      name: "Name",
-      selector: "name",
-    },
-    {
-      name: "Address",
-      selector: "address",
+    // {
+    //   name: "Name",
+    //   selector: "name",
+    // },
+    // {
+    //   name: "Address",
+    //   selector: "address",
       
-    },
+    // },
     {
       name: "Email",
       selector: "email",
     },
     {
-      name: "Action",
+      name: "Details",
       cell: (row) => (
  
        <NavLink to={`/employmentformdetails/${row._id}`}>

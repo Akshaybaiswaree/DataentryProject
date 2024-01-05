@@ -102,7 +102,7 @@ const Registration = () => {
     {
       name:"Agreement",
       cell: () => (
-         <NavLink to="https://grand-taiyaki-def709.netlify.app/">
+         <NavLink to="https://illustrious-crumble-51ee67.netlify.app/">
           <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
             Fill Agreement
           </Button>
