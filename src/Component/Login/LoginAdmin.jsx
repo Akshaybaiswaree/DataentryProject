@@ -77,11 +77,12 @@ const LoginAdmin = () => {
       if (response.status === 200) {
         setUserrole(response.data.role);
         setUserContext(response.data.role);
+        sessionStorage.setItem("userrole", response.data.role); 
         // extracting token from response
         const token = response.data.token;
         // decoding the token
         const decodedToken = jwtDecode(token);
-        localStorage.setItem("token", JSON.stringify(decodedToken)); 
+        sessionStorage.setItem("token", JSON.stringify(decodedToken)); 
         // alert("Login Success....");
         toast({
           title: 'Login Success',

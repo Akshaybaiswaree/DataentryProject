@@ -48,6 +48,7 @@ import SetPassword from "./Component/Login/SetPassword";
 import ActiveUser from "./Component/ActiveUser/ActiveUser";
 import FrezzUser from "./Component/FrezzUser/FrezzUser";
 import FrezzUserForm from "./Component/FrezzUser/FrezzUserForm";
+import { useEffect } from "react";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -70,7 +71,7 @@ const router = createBrowserRouter(
           element={<ProtectedRoute element={<Dashboard />} />}  //OUTLET
         >
           <Route index element={<DashboardOverview />} /> 
-        </Route>
+        </Route> 
 
         <Route
           path="user"
@@ -131,6 +132,19 @@ const router = createBrowserRouter(
 );
 
 function App() {
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      const message = "Are you sure you want to leave?";
+      event.returnValue = message; // Standard for most browsers
+      return message; // For some older browsers
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
   return (
     <>
       <RouterProvider router={router} />

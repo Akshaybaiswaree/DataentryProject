@@ -66,14 +66,15 @@ export default function SideBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
   const { getUser } = useUserContext();
-  const userRole = getUser();
+  // const userRole = getUser();
+  const userRole = sessionStorage.getItem("userrole")
   console.log(userRole);
   const isAdmin = userRole === "Admin";
   const isUser = userRole === "User";
   console.log(isAdmin, isUser);
   const toast = useToast();
   const navigate = useNavigate();
-
+console.log(isMobileView , onOpen , "ismobileview")
   useEffect(() => {
     const handleResize = () => {
       setIsMobileView(window.innerWidth <= 768);
