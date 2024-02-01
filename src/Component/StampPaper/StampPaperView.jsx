@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import notri from "../../Images/notriimage.svg";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import LeaseAgreement from "../../Images/notri.svg";
+import LeaseAgreement from "../../Images/SIGN 6.svg";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
@@ -30,7 +30,6 @@ const StampPaperView = () => {
     email: "",
     startdate:"",
     address: "",
-
     photo: "",
     signature: "",
   });
@@ -40,95 +39,100 @@ const StampPaperView = () => {
   console.log(photoPreview);
 
   const [loader, setLoader] = useState(false);
-// download pdf logic
-  // const downlodePDF = () => {
-  //   console.log(downlodePDF, "downlodePD");
-  //   const capture = document.querySelector(".downLodeBox");
-  //   setLoader(true);
-
-  //   html2canvas(capture).then((canvas) => {
-  //     const imgData = canvas.toDataURL("img/png");
-  //     const doc = new jsPDF("p", "mm", "a4");
-
-  //     const marginLeft = 10; // Adjust as needed
-  //     const marginTop = 10; // Adjust as needed
-  //     const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
-  //     const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
-
-  //     // Calculate the aspect ratio of the content
-  //     const aspectRatio = canvas.width / canvas.height;
-
-  //     // Calculate the width and height based on the aspect ratio
-  //     let imgWidth = contentWidth;
-  //     let imgHeight = contentWidth / aspectRatio;
-
-  //     // If the image height exceeds the content height, adjust accordingly
-  //     if (imgHeight > contentHeight) {
-  //       imgHeight = contentHeight;
-  //       imgWidth = contentHeight * aspectRatio;
-  //     }
-
-  //     // Calculate the center position for the image
-  //     const imgX = marginLeft + (contentWidth - imgWidth) / 2;
-  //     const imgY = marginTop + (contentHeight - imgHeight) / 2;
-
-  //     // Add the image to the PDF with adjusted position and dimensions
-  //     doc.addImage(imgData, "PNG", imgX, imgY, imgWidth, imgHeight);
-
-  //     setLoader(false);
-  //     doc.save("Agreement.pdf");
-  //   });
-  // };
+//download pdf logic
   const downlodePDF = () => {
     console.log(downlodePDF, "downlodePD");
     const capture = document.querySelector(".downLodeBox");
     setLoader(true);
-  
+
     html2canvas(capture).then((canvas) => {
-      const imgData = canvas.toDataURL("img/png");
-      const doc = new jsPDF("p", "cm", "a4");
-  
-      // Set dimensions based on screen size
-      let contentWidth, contentHeight, marginLeft, marginTop;
-  
-      if (window.innerWidth < 600) {
-        // For mobile view
-      
-        marginTop = 5;
-        contentWidth = doc.internal.pageSize.getWidth() - 2 ;
-        contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
-      } else {
-        // For laptop view
-        // marginLeft = 10;
-        marginTop = 10;
-        contentWidth = doc.internal.pageSize.getWidth() - 2 ;
-        contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop
-      }
-  
+      const imgData = canvas.toDataURL("image/png");
+      // const imgData = canvas.toDataURL("img/png");
+      const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: [canvas.width, canvas.height],
+      });
+
+      const marginLeft = 0; // Adjust as needed
+      const marginTop = 0; // Adjust as needed
+      const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
+      const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
+
       // Calculate the aspect ratio of the content
       const aspectRatio = canvas.width / canvas.height;
-  
+
       // Calculate the width and height based on the aspect ratio
       let imgWidth = contentWidth;
       let imgHeight = contentWidth / aspectRatio;
-  
+
       // If the image height exceeds the content height, adjust accordingly
       if (imgHeight > contentHeight) {
         imgHeight = contentHeight;
         imgWidth = contentHeight * aspectRatio;
       }
-  
+
       // Calculate the center position for the image
       const imgX = marginLeft + (contentWidth - imgWidth) / 2;
       const imgY = marginTop + (contentHeight - imgHeight) / 2;
-  
       // Add the image to the PDF with adjusted position and dimensions
       doc.addImage(imgData, "PNG", imgX, imgY, imgWidth, imgHeight);
-  
+
       setLoader(false);
       doc.save("Agreement.pdf");
     });
   };
+  
+
+  // const downlodePDF = () => {
+  //   console.log(downlodePDF, "downlodePD");
+  //   const capture = document.querySelector(".downLodeBox");
+  //   setLoader(true);
+  
+  //   html2canvas(capture).then((canvas) => {
+  //     const imgData = canvas.toDataURL("img/png");
+  //     const doc = new jsPDF("p", "cm", "a4");
+  
+  //     // Set dimensions based on screen size
+  //     let contentWidth, contentHeight, marginLeft, marginTop;
+  
+  //     if (window.innerWidth < 600) {
+  //       // For mobile view
+  //       marginTop = 5;
+  //       contentWidth = doc.internal.pageSize.getWidth() - 2 ;
+  //       contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
+  //     } else {
+  //       // For laptop view
+  //       // marginLeft = 10;
+  //       marginTop = 10;
+  //       contentWidth = doc.internal.pageSize.getWidth() - 2 ;
+  //       contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop
+  //     }
+  
+  //     // Calculate the aspect ratio of the content
+  //     const aspectRatio = canvas.width / canvas.height;
+  
+  //     // Calculate the width and height based on the aspect ratio
+  //     let imgWidth = contentWidth;
+  //     let imgHeight = contentWidth / aspectRatio;
+  
+  //     // If the image height exceeds the content height, adjust accordingly
+  //     if (imgHeight > contentHeight) {
+  //       imgHeight = contentHeight;
+  //       imgWidth = contentHeight * aspectRatio;
+  //     }
+  
+  //     // Calculate the center position for the image
+  //     const imgX = marginLeft + (contentWidth - imgWidth) / 2;
+  //     const imgY = marginTop + (contentHeight - imgHeight) / 2;
+  
+  //     // Add the image to the PDF with adjusted position and dimensions
+  //     doc.addImage(imgData, "PNG", imgX, imgY, imgWidth, imgHeight);
+  
+  //     setLoader(false);
+  //     doc.save("Agreement.pdf");
+  //   });
+  // };
   
 
   const handlePhotoChange = (e) => {
