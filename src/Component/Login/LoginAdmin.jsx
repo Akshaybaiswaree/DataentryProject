@@ -20,7 +20,7 @@ const LoginAdmin = () => {
   const [errors , setErrors] = useState({})
   const navigate = useNavigate();
   const [inputFields, setInputFields] = useState({
-    email: "",       
+    username: "",       
     password: "",
   });
   
@@ -35,19 +35,19 @@ const LoginAdmin = () => {
     });
   };
  
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
+  // const emailRegex = /^[a-zA-Z]/;
+  // const passwordRegex =/^[a-zA-Z0-9]+$/   
   
   const validationForm = (inputFields) => {
     // console.log(inputFields);
     const newError = {};
-    if (!inputFields.email.match(emailRegex)) {
-      newError.email = "Invalid Email Address";
-    }
+    // if (!inputFields.email.match(emailRegex)) {
+    //   newError.email = "Invalid Email Address";
+    // }
     // console.log("email success");
-    if(!inputFields.password.match(passwordRegex)){
-      newError.password = "Invalid Password "
-    }
+    // if(!inputFields.password.match(passwordRegex)){
+    //   newError.password = "Invalid Password "
+    // }
     setErrors(newError);
     // console.log(" success");
     return true;
@@ -56,16 +56,18 @@ const LoginAdmin = () => {
   const handleSubmit = async (e) => {
     console.log("called");
     e.preventDefault();
-    const validate = validationForm(inputFields);
-    console.log(validate);
-    if(!validate){
-      return alert("fields are not valid")
-    }
-    console.log(inputFields , "inputFields")
+    // const validate = validationForm(inputFields);
+    // console.log(validate);
+    // if(!validate){
+    //   return alert("fields are not valid")
+    // }
+    // console.log(inputFields , "inputFields")
  
     try {
       const apiUrl = import.meta.env.VITE_APP_API_URL;
+      console.log(inputFields ,"input")
       const response = await axios.post(
+        
         `${apiUrl}/user/adminsignin`,
         inputFields,
         {
@@ -158,21 +160,21 @@ const LoginAdmin = () => {
           <Flex alignItems="center" bg="white" borderRadius="30px" p="10px">
             <FaEnvelope style={{ width: "4%", marginLeft: "20px" }} />
             <Input
-              name="email"
+              name="username"
               type="text"
               placeholder="UserID"
               style={inputStyle}
               onFocus={(e) => (e.target.style.outline = "none")}
               required
               onChange={onChangeHandler}
-              value={inputFields.email}
+              value={inputFields.username}
             />
           </Flex>
         </Flex>
-        {errors.email && (
+        {errors.username && (
           <Alert width="20%" status='error'>
             <AlertIcon />
-            <AlertTitle> {errors.email}</AlertTitle>
+            <AlertTitle> {errors.username}</AlertTitle>
           </Alert>
         )}
         <Flex
