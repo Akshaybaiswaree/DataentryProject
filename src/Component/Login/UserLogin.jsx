@@ -80,11 +80,13 @@ const UserLogin = () => {
         console.log(response);
         navigate("/assignment");
         setUserContext(response.data.role);
+        sessionStorage.setItem("userrole", response.data.role); 
         // Extracting token and id from the response
         const { token, id } = response.data;
         const decodedToken = jwtDecode(token);
-        localStorage.setItem("token", JSON.stringify(decodedToken));
-        localStorage.setItem("id", id);
+        // localStorage.setItem("token", JSON.stringify(decodedToken));
+        sessionStorage.setItem("token", JSON.stringify(decodedToken)); 
+        sessionStorage.setItem("id", id);
         // Optionally, display a success message
         // alert("Login successful.");
         toast({

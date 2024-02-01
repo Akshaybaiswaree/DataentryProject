@@ -669,6 +669,7 @@ const StampPaperView = () => {
                         style={{ maxWidth: "100px", marginTop: "10px" }}
                       />
                     )}
+                    {console.log(signaturePreview , "signaturePreview")}
                   </Box>
                 </Td>
               </Tr>
