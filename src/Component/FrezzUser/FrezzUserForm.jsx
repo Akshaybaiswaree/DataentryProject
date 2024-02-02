@@ -116,7 +116,6 @@ const FrezzUserForm = ()=>{
         url : `${apiUrl}/user/update_endDate/${id}`,
         data : payload
        }
-
         const response = await axios(config);
         console.log(response,"response");
         if (response.status === 200) {
