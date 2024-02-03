@@ -489,11 +489,11 @@ const downlodePDF = async (photoPreview, signaturePreview) => {
 
         {/* Conflict of Interest Section */}
         <Box>
-          <Heading as="h3" mb={4}>
+          <Heading as="h3" mb={4}>+
             3. Conflict of Interest
           </Heading>
           <Text>
-            3.1. Application Fee(s): The Registration Amount Of 5400/- INR. Will
+            3.1. Application Fee(s): The Registration Amount Of 6800/- INR. Will
             Be Deducted From The Salary If Generated, And If The Salary Is Not
             Generated i.e If The Employee Fails To Complete The Work, Then
             <br />
