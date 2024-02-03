@@ -1,6 +1,14 @@
-import { Box, Button, Flex, Heading, Image, Input, Alert,
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Input,
+  Alert,
   AlertIcon,
-  AlertTitle, } from "@chakra-ui/react";
+  AlertTitle,
+} from "@chakra-ui/react";
 import { FaEnvelope, FaLock } from "react-icons/fa"; // Icons from react-icons library
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
@@ -9,21 +17,20 @@ import axios from "axios";
 import logo from "../../Images/Group 1000004815.svg";
 import { jwtDecode } from "jwt-decode";
 import { useUserContext } from "../Context/UserContext";
-import { useToast } from '@chakra-ui/react';
+import { useToast } from "@chakra-ui/react";
 // Admin Login Page
 const LoginAdmin = () => {
   const { setUserContext } = useUserContext();
   const toast = useToast();
 
-  const [userrole , setUserrole] =useState("")
+  const [userrole, setUserrole] = useState("");
 
-  const [errors , setErrors] = useState({})
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const [inputFields, setInputFields] = useState({
-    username: "",       
+    username: "",
     password: "",
   });
-  
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -34,10 +41,10 @@ const LoginAdmin = () => {
       };
     });
   };
- 
+
   // const emailRegex = /^[a-zA-Z]/;
-  // const passwordRegex =/^[a-zA-Z0-9]+$/   
-  
+  // const passwordRegex =/^[a-zA-Z0-9]+$/
+
   const validationForm = (inputFields) => {
     // console.log(inputFields);
     const newError = {};
@@ -62,12 +69,11 @@ const LoginAdmin = () => {
     //   return alert("fields are not valid")
     // }
     // console.log(inputFields , "inputFields")
- 
+
     try {
       const apiUrl = import.meta.env.VITE_APP_API_URL;
-      console.log(inputFields ,"input")
+      console.log(inputFields, "input");
       const response = await axios.post(
-        
         `${apiUrl}/user/adminsignin`,
         inputFields,
         {
@@ -79,20 +85,20 @@ const LoginAdmin = () => {
       if (response.status === 200) {
         setUserrole(response.data.role);
         setUserContext(response.data.role);
-        sessionStorage.setItem("userrole", response.data.role); 
+        sessionStorage.setItem("userrole", response.data.role);
         // extracting token from response
         const token = response.data.token;
         // decoding the token
         const decodedToken = jwtDecode(token);
-        sessionStorage.setItem("token", JSON.stringify(decodedToken)); 
+        sessionStorage.setItem("token", JSON.stringify(decodedToken));
         // alert("Login Success....");
         toast({
-          title: 'Login Success',
+          title: "Login Success",
           // description: 'Provide Correct UserId and Password',
-          status: 'success',
+          status: "success",
           duration: 3000, // Toast message will disappear after 3 seconds
           isClosable: true,
-          position:"top",
+          position: "top",
         });
         navigate("/dashboard");
       } else {
@@ -105,28 +111,28 @@ const LoginAdmin = () => {
       if (error.response && error.response.status === 401) {
         // alert("Invalid credentials");
         toast({
-          title: 'Invalid credentials',
+          title: "Invalid credentials",
           // description: 'Provide Correct UserId and Password',
-          status: 'error',
+          status: "error",
           duration: 3000, // Toast message will disappear after 3 seconds
           isClosable: true,
-          position:"top",
+          position: "top",
         });
       } else {
         // Handle other types of errors
         toast({
-          title: 'Login Failed',
-          description: 'Provide Correct UserId and Password',
-          status: 'error',
+          title: "Login Failed",
+          description: "Provide Correct UserId and Password",
+          status: "error",
           duration: 3000, // Toast message will disappear after 3 seconds
           isClosable: true,
-          position:"top",
+          position: "top",
         });
       }
     }
   };
   return (
-    <form >
+    <form>
       <Box
         width={{ base: "100%", md: "100%", lg: "100%", xl: "100%" }} // Adjust width based on screen size
         marginX="auto" // Center horizontally
@@ -146,17 +152,16 @@ const LoginAdmin = () => {
         >
           <Image width={"13rem"} src={logo} alt="" />
           <Heading
-        marginTop={'1rem'}
-          color="#000" fontFamily="Poppins, serif" size="lg">
+            marginTop={"1rem"}
+            color="#000"
+            fontFamily="Poppins, serif"
+            size="lg"
+          >
             Admin Login
           </Heading>
         </Box>
 
-        <Flex
-          direction="column"
-          width={["90%", "70%", "50%", "40%"]}
-         
-        >
+        <Flex direction="column" width={["90%", "70%", "50%", "40%"]}>
           <Flex alignItems="center" bg="white" borderRadius="30px" p="10px">
             <FaEnvelope style={{ width: "4%", marginLeft: "20px" }} />
             <Input
@@ -172,7 +177,7 @@ const LoginAdmin = () => {
           </Flex>
         </Flex>
         {errors.username && (
-          <Alert width="20%" status='error'>
+          <Alert width="20%" status="error">
             <AlertIcon />
             <AlertTitle> {errors.username}</AlertTitle>
           </Alert>
@@ -196,7 +201,7 @@ const LoginAdmin = () => {
           </Flex>
         </Flex>
         {errors.email && (
-          <Alert width="20%" status='error'>
+          <Alert width="20%" status="error">
             <AlertIcon />
             <AlertTitle>{errors.password}</AlertTitle>
           </Alert>
@@ -215,9 +220,15 @@ const LoginAdmin = () => {
               Forget the password?
             </NavLink>
           </Box>
-          <Button height={"3rem"} style={buttonStyle} type="submit" onClick={handleSubmit}>
+          <Button
+           
+            height={"3rem"}
+            style={buttonStyle}
+            type="submit"
+            onClick={handleSubmit}
+            _hover={{ background: "FloralWhite", color: "black" }}
+          >
             Login
-            {/* </Link> */}
           </Button>
         </Flex>
       </Box>
@@ -248,7 +259,12 @@ const buttonStyle = {
   background: "black",
   fontWeight: "700",
   fontFamily: '"Poppins", sans-serif',
+  transition: "background 0.3s, color 0.3s",  // Adding transition for a smooth effect
+
+  ":hover": {
+    background: "FloralWhite",
+    color: "black",
+  },
 };
 
 export default LoginAdmin;
-
