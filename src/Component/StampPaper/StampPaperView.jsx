@@ -29,7 +29,7 @@ const StampPaperView = () => {
   const [inputField, setInputField] = useState({
     name: "",
     email: "",
-    startdate:"",
+    startdate: "",
     address: "",
     photo: "",
     signature: "",
@@ -73,17 +73,17 @@ const downlodePDF = async (photoPreview, signaturePreview) => {
       format: [canvas.width, canvas.height],
     });
 
-    const marginLeft = 0; // Adjust as needed
-    const marginTop = 0; // Adjust as needed
-    const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
-    const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
+      const marginLeft = 0; // Adjust as needed
+      const marginTop = 0; // Adjust as needed
+      const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
+      const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
 
-    // Calculate the aspect ratio of the content
-    const aspectRatio = canvas.width / canvas.height;
+      // Calculate the aspect ratio of the content
+      const aspectRatio = canvas.width / canvas.height;
 
-    // Calculate the width and height based on the aspect ratio
-    let imgWidth = contentWidth;
-    let imgHeight = contentWidth / aspectRatio;
+      // Calculate the width and height based on the aspect ratio
+      let imgWidth = contentWidth;
+      let imgHeight = contentWidth / aspectRatio;
 
     // If the image height exceeds the content height, adjust accordingly
     if (imgHeight > contentHeight) {
@@ -118,14 +118,14 @@ const downlodePDF = async (photoPreview, signaturePreview) => {
   //   console.log(downlodePDF, "downlodePD");
   //   const capture = document.querySelector(".downLodeBox");
   //   setLoader(true);
-  
+
   //   html2canvas(capture).then((canvas) => {
   //     const imgData = canvas.toDataURL("img/png");
   //     const doc = new jsPDF("p", "cm", "a4");
-  
+
   //     // Set dimensions based on screen size
   //     let contentWidth, contentHeight, marginLeft, marginTop;
-  
+
   //     if (window.innerWidth < 600) {
   //       // For mobile view
   //       marginTop = 5;
@@ -138,32 +138,31 @@ const downlodePDF = async (photoPreview, signaturePreview) => {
   //       contentWidth = doc.internal.pageSize.getWidth() - 2 ;
   //       contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop
   //     }
-  
+
   //     // Calculate the aspect ratio of the content
   //     const aspectRatio = canvas.width / canvas.height;
-  
+
   //     // Calculate the width and height based on the aspect ratio
   //     let imgWidth = contentWidth;
   //     let imgHeight = contentWidth / aspectRatio;
-  
+
   //     // If the image height exceeds the content height, adjust accordingly
   //     if (imgHeight > contentHeight) {
   //       imgHeight = contentHeight;
   //       imgWidth = contentHeight * aspectRatio;
   //     }
-  
+
   //     // Calculate the center position for the image
   //     const imgX = marginLeft + (contentWidth - imgWidth) / 2;
   //     const imgY = marginTop + (contentHeight - imgHeight) / 2;
-  
+
   //     // Add the image to the PDF with adjusted position and dimensions
   //     doc.addImage(imgData, "PNG", imgX, imgY, imgWidth, imgHeight);
-  
+
   //     setLoader(false);
   //     doc.save("Agreement.pdf");
   //   });
   // };
-  
 
   const handlePhotoChange = (e) => {
     const selectedPhoto = e.target.files[0];
@@ -191,7 +190,7 @@ const downlodePDF = async (photoPreview, signaturePreview) => {
         setInputField({
           name: data?.name,
           email: data?.email,
-          startdate:data?.startdate,
+          startdate: data?.startdate,
           address: data?.address,
           signature: data?.signature,
           photo: data?.photo,
@@ -290,7 +289,7 @@ const downlodePDF = async (photoPreview, signaturePreview) => {
             <Text ml={{ base: "0", lg: "10%" }}>OF THE SECOND PARTY</Text>
           </Box>
         </Box> */}
-            <Box display="flex" justifyContent="space-evenly">
+        <Box display="flex" justifyContent="space-evenly">
           <Box mb={{ base: "2", lg: "0" }}>
             <Image
               w={{ base: "100%", lg: "150px" }}
@@ -300,19 +299,24 @@ const downlodePDF = async (photoPreview, signaturePreview) => {
             />
           </Box>
           <Box textAlign="center">
-            <Heading fontSize={{base:"1rem" , md:"2rem"}} mb={{ base: "2", lg: "4" }}>
+            <Heading
+              fontSize={{ base: "1rem", md: "2rem" }}
+              mb={{ base: "2", lg: "4" }}
+            >
               Legal Employment Contract 2023
             </Heading>
 
-            <Text fontSize={{base:"0.8rem" , md:"1rem"}}>
+            <Text fontSize={{ base: "0.8rem", md: "1rem" }}>
               THIS DIGITAL EMPLOYMENT CONTRACT (this "Agreement") Valid Till
               Eleven Months From 2023-11-30 BETWEEN:
             </Text>
 
-            <Text >
-              <Heading fontSize={{base:"1rem" , md:"2rem"}}>Zemix Services</Heading>
+            <Text>
+              <Heading fontSize={{ base: "1rem", md: "2rem" }}>
+                Zemix Services
+              </Heading>
             </Text>
-            <Text fontSize={{base:"0.8rem" , md:"1rem"}}>
+            <Text fontSize={{ base: "0.8rem", md: "1rem" }}>
               KASTURI WADI INDRA BAZAR GHANSHAM APARTMENT JAIPUR, RAJASTHAN
               (RJ), INDIA(IN), 302031 of
             </Text>
@@ -320,17 +324,23 @@ const downlodePDF = async (photoPreview, signaturePreview) => {
             {/* <Text fontSize={"1.5rem"}>
               <strong>(The "Employer")</strong>
             </Text> */}
-             <Text >
-              <Heading fontSize={{base:"1rem" , md:"2rem"}}>The "Employer"</Heading>
+            <Text>
+              <Heading fontSize={{ base: "1rem", md: "2rem" }}>
+                The "Employer"
+              </Heading>
             </Text>
-            <Text fontSize={{base:"0.8rem" , md:"1rem"}}>OF THE FIRST PARTY </Text>
+            <Text fontSize={{ base: "0.8rem", md: "1rem" }}>
+              OF THE FIRST PARTY{" "}
+            </Text>
 
-            <Text fontSize={{base:"0.8rem" , md:"1rem"}}>-AND-</Text>
+            <Text fontSize={{ base: "0.8rem", md: "1rem" }}>-AND-</Text>
             <Text>
               S/O &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;...
               <strong>(The "Employee")</strong>
             </Text>
-            <Text fontSize={{base:"0.8rem" , md:"1rem"}}>OF THE SECOND PARTY</Text>
+            <Text fontSize={{ base: "0.8rem", md: "1rem" }}>
+              OF THE SECOND PARTY
+            </Text>
           </Box>
         </Box>
 
@@ -486,12 +496,15 @@ const downlodePDF = async (photoPreview, signaturePreview) => {
         {/* Conflict of Interest Section */}
         <Box>
           <Heading as="h3" mb={4}>
-            3. Conflict of Interest
+            + 3. Conflict of Interest
           </Heading>
           <Text>
-            3.1. Application Fee(s): The Registration Amount Of 5400/- INR. Will
+            3.1. Application Fee(s): The Registration Amount Of 6800/- INR. Will
             Be Deducted From The Salary If Generated, And If The Salary Is Not
-            Generated i.e If The Employee Fails To Complete The Work, Then
+            Generated i.e If The Employee Fails To Complete The Work, Then You
+            are required to work for 5 days. If you fail to commence your work
+            after accepting it or choose to cancel it, you will be obligated to
+            pay the registration amount.
             <br />
             <br />
             He/She Is Liable Pay The Same Registration Amount On Their Own. The
@@ -728,20 +741,18 @@ const downlodePDF = async (photoPreview, signaturePreview) => {
              
             </FormControl> */}
             <FormControl w={["350px", "400px"]}>
-             
               <Text> Email: {inputField.email}</Text>
             </FormControl>
             <FormControl w={["350px", "400px"]}>
-          
-          {/* <Input
+              {/* <Input
             value={date}
             onChange={(e) =>setDate(e.target.value)}
             type="date"
             placeholder="Enter the Date"
             _hover={{ borderColor: "teal.500" }}
           /> */}
-             <Text> Start-Date: {inputField.startdate}</Text>
-        </FormControl>
+              <Text> Start-Date: {inputField.startdate}</Text>
+            </FormControl>
 
             <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
               <Tr>
@@ -754,7 +765,7 @@ const downlodePDF = async (photoPreview, signaturePreview) => {
                         style={{ maxWidth: "100px", marginTop: "10px" }}
                       />
                     )}
-                    {console.log(signaturePreview , "signaturePreview")}
+                    {console.log(signaturePreview, "signaturePreview")}
                   </Box>
                 </Td>
               </Tr>
