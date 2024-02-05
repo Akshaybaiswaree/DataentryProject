@@ -73,17 +73,17 @@ const downlodePDF = async (photoPreview, signaturePreview) => {
       format: [canvas.width, canvas.height],
     });
 
-      const marginLeft = 0; // Adjust as needed
-      const marginTop = 0; // Adjust as needed
-      const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
-      const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
+    const marginLeft = 0; // Adjust as needed
+    const marginTop = 0; // Adjust as needed
+    const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
+    const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
 
-      // Calculate the aspect ratio of the content
-      const aspectRatio = canvas.width / canvas.height;
+    // Calculate the aspect ratio of the content
+    const aspectRatio = canvas.width / canvas.height;
 
-      // Calculate the width and height based on the aspect ratio
-      let imgWidth = contentWidth;
-      let imgHeight = contentWidth / aspectRatio;
+    // Calculate the width and height based on the aspect ratio
+    let imgWidth = contentWidth;
+    let imgHeight = contentWidth / aspectRatio;
 
     // If the image height exceeds the content height, adjust accordingly
     if (imgHeight > contentHeight) {
