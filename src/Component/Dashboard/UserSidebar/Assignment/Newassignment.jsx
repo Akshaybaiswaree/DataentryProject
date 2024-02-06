@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from '@chakra-ui/react';
 const NewAssignment = () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = JSON.parse(sessionStorage.getItem("token"));
   const { email, _id } = token;
   // console.log(email, "Get Email");
   // console.log(_id, "Get ID");
@@ -90,28 +90,29 @@ const NewAssignment = () => {
 
     // console.log(inputFields);
     try {
-      const id = localStorage.getItem("id");  
+      const id = sessionStorage.getItem("id");  
+      console.log(id ,"id")
       if (!id) {
-        console.error("User ID is missing in localStorage");
+        console.error("User ID is missing in sessionStorage");
         return;
       }
-      for (const key in inputFields) {
-        if (!inputFields[key]) {
-          alert(`Please enter ${key} value.`);
-          return;
-        }
-      }
+      // for (const key in inputFields) {
+      //   if (!inputFields[key]) {
+      //     alert(`Please enter ${key} value.`);
+      //     return;
+      //   }
+      // }
       const response = await axios.post(
         `${apiUrl}/user/add_assignment/${id}`,
-
-        inputFields,
+        // body : JSON.stringify(inputFields), 
+         inputFields,
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       );
-      // console.log(response);
+       console.log(response ,"response") ;
       // alert("Assignment Saved successfully.");
       toast({
         title: 'Assignment Saved successfully',

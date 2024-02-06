@@ -13,10 +13,10 @@ const Assignment = () => {
   // fetchDetails of assingment
   const fetchDetails = async () => {
     try{
-      const id = localStorage.getItem("id");
+      const id = sessionStorage.getItem("id");
   
       if (!id) {
-        console.error("User ID is missing in localStorage");
+        console.error("User ID is missing in sessionStorage");
         return;
       }
 
