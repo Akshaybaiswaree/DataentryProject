@@ -302,7 +302,7 @@ console.log(isMobileView , onOpen , "ismobileview")
                                 </NavLink>
                               </ListItem>
 
-                              <ListItem
+                              {/* <ListItem
                                 className="listItem"
                                 p="5px"
                                 borderRadius="10px"
@@ -321,7 +321,7 @@ console.log(isMobileView , onOpen , "ismobileview")
                                     Plan
                                   </Text>
                                 </NavLink>
-                              </ListItem>
+                              </ListItem> */}
 
                               <Divider borderWidth="1px" borderColor={"gray"} />
                             </AccordionPanel>
@@ -635,7 +635,7 @@ console.log(isMobileView , onOpen , "ismobileview")
                                       </NavLink>
                                     </ListItem>
 
-                                    <ListItem
+                                    {/* <ListItem
                                       className="listItem"
                                       p="5px"
                                       borderRadius="10px"
@@ -657,7 +657,7 @@ console.log(isMobileView , onOpen , "ismobileview")
                                           Plan
                                         </Text>
                                       </NavLink>
-                                    </ListItem>
+                                    </ListItem> */}
 
                                     <Divider
                                       borderWidth="1px"
