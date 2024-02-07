@@ -184,7 +184,7 @@ const NewAssignment = () => {
         borderRadius="md"
         mb="4"
         color="#393e46"
-        fontStyle="italic" 
+        style={{ fontFamily: 'BILLY ARGEL FONT', fontStyle: 'italic' , fontWeight:"bold" }}
       >
         <Box>
           <Text fontSize={{ base: "lg", md: "xl" }}>Name: {data?.name}</Text>

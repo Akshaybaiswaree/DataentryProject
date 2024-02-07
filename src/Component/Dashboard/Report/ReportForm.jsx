@@ -202,7 +202,7 @@ const ReportForm = () => {
               <Input
                 width={["300px", "400px"]}
                 type="text"
-                placeholder="Kaveri Kappor"
+                placeholder="Enter Name"
                 onChange={onChangeHandler}
                 value={inputField.name}
               />
@@ -228,7 +228,7 @@ const ReportForm = () => {
               <Input
                 width={["300px", "400px"]}
                 type="email"
-                placeholder="kaveri@2023"
+                placeholder=".........i@2023"
                 onChange={onChangeHandler}
                 value={inputField.email}
               />

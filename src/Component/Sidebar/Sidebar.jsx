@@ -880,7 +880,7 @@ console.log(isMobileView , onOpen , "ismobileview")
                                 </Text>
                               </NavLink>
                             </ListItem>
-
+{/* 
                             <ListItem
                               className="listItem"
                               p="5px"
@@ -900,7 +900,7 @@ console.log(isMobileView , onOpen , "ismobileview")
                               >
                                 Filled Assignment
                               </Text>
-                            </ListItem>
+                            </ListItem> */}
 
                             <Divider borderWidth="1px" borderColor={"gray"} />
                           </AccordionPanel>
@@ -1017,7 +1017,7 @@ console.log(isMobileView , onOpen , "ismobileview")
                                     </NavLink>
                                   </ListItem>
 
-                                  <ListItem
+                                  {/* <ListItem
                                     className="listItem"
                                     p="5px"
                                     borderRadius="10px"
@@ -1039,7 +1039,7 @@ console.log(isMobileView , onOpen , "ismobileview")
                                     >
                                       Filled Assignment
                                     </Text>
-                                  </ListItem>
+                                  </ListItem> */}
 
                                   <Divider
                                     borderWidth="1px"

@@ -26,6 +26,7 @@ const StampPaperView = () => {
   const { id } = useParams();
   console.log(id, "userId");
   const appUrl = import.meta.env.VITE_APP_API_URL;
+  const [doc , setDoc] = useState(null);
   const [inputField, setInputField] = useState({
     name: "",
     email: "",
@@ -112,59 +113,118 @@ const StampPaperView = () => {
   //     doc.save("Agreement.pdf");
   //   });
   // };
+  // const downlodePDF = async (photoPreview, signaturePreview) => {
+  //   console.log(downlodePDF, "downlodePD");
+  //   const capture = document.querySelector(".downLodeBox");
+  //   setLoader(true);
+  //   const pdfBlob = doc.output('blob');
+  //   const pdfUrl = URL.createObjectURL(pdfBlob);
+  //   window.open(pdfUrl, '_blank');
+
+  //   html2canvas(capture).then((canvas) => {
+      
+  //     const imgData = canvas.toDataURL("image/png");
+  //     // const imgData = canvas.toDataURL("img/png");
+  //     const doc = new jsPDF({
+  //       orientation: "portrait",
+  //       unit: "mm",
+  //       format: [canvas.width, canvas.height],
+  //     });
+
+  //   const marginLeft = 0; // Adjust as needed
+  //   const marginTop = 0; // Adjust as needed
+  //   const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
+  //   const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
+
+  //   // Calculate the aspect ratio of the content
+  //   const aspectRatio = canvas.width / canvas.height;
+
+  //   // Calculate the width and height based on the aspect ratio
+  //   let imgWidth = contentWidth;
+  //   let imgHeight = contentWidth / aspectRatio;
+
+  //     // If the image height exceeds the content height, adjust accordingly
+  //     if (imgHeight > contentHeight) {
+  //       imgHeight = contentHeight;
+  //       imgWidth = contentHeight * aspectRatio;
+  //     }
+  //     // Calculate the center position for the image
+  //     const imgX = marginLeft + (contentWidth - imgWidth) / 2;
+  //     const imgY = marginTop + (contentHeight - imgHeight) / 2;
+  //     // Add the image to the PDF with adjusted position and dimensions
+  //     doc.addImage(imgData, "PNG", imgX, imgY, imgWidth, imgHeight);
+  //     const photoX = marginLeft + 420; // Adjust as needed
+  //     const photoY = doc.internal.pageSize.getHeight() - 480; // Adjust as needed
+  //     // Add the photoPreview image to the PDF
+  //     if (photoPreview) {
+  //       doc.addImage(photoPreview, "JPEG", photoX, photoY, 170, 205);
+  //     }
+  //     // Calculate the position for signaturePreview at the end of the content
+  //     const signatureX = marginLeft + 750; // Adjust as needed
+  //     const signatureY = doc.internal.pageSize.getHeight() - 480; // Adjust as needed
+  //     // Add the signaturePreview image to the PDFsss
+  //     if (signaturePreview) {
+  //       doc.addImage(signaturePreview, "PNG", signatureX, signatureY, 170, 205);
+  //     }
+  //     setLoader(false);
+  //     doc.save("Agreement.pdf");
+  //   });
+  // };
+
   const downlodePDF = async (photoPreview, signaturePreview) => {
-    console.log(downlodePDF, "downlodePD");
     const capture = document.querySelector(".downLodeBox");
     setLoader(true);
 
     html2canvas(capture).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      // const imgData = canvas.toDataURL("img/png");
-      const doc = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: [canvas.width, canvas.height],
-      });
+        const imgData = canvas.toDataURL("image/png");
+        const doc = new jsPDF({
+            orientation: "portrait",
+            unit: "mm",
+            format: [canvas.width, canvas.height],
+        });
 
-    const marginLeft = 0; // Adjust as needed
-    const marginTop = 0; // Adjust as needed
-    const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
-    const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
+        const marginLeft = 0;
+        const marginTop = 0;
+        const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
+        const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
 
-    // Calculate the aspect ratio of the content
-    const aspectRatio = canvas.width / canvas.height;
+        const aspectRatio = canvas.width / canvas.height;
+        let imgWidth = contentWidth;
+        let imgHeight = contentWidth / aspectRatio;
 
-    // Calculate the width and height based on the aspect ratio
-    let imgWidth = contentWidth;
-    let imgHeight = contentWidth / aspectRatio;
+        if (imgHeight > contentHeight) {
+            imgHeight = contentHeight;
+            imgWidth = contentHeight * aspectRatio;
+        }
 
-      // If the image height exceeds the content height, adjust accordingly
-      if (imgHeight > contentHeight) {
-        imgHeight = contentHeight;
-        imgWidth = contentHeight * aspectRatio;
-      }
-      // Calculate the center position for the image
-      const imgX = marginLeft + (contentWidth - imgWidth) / 2;
-      const imgY = marginTop + (contentHeight - imgHeight) / 2;
-      // Add the image to the PDF with adjusted position and dimensions
-      doc.addImage(imgData, "PNG", imgX, imgY, imgWidth, imgHeight);
-      const photoX = marginLeft + 420; // Adjust as needed
-      const photoY = doc.internal.pageSize.getHeight() - 480; // Adjust as needed
-      // Add the photoPreview image to the PDF
-      if (photoPreview) {
-        doc.addImage(photoPreview, "JPEG", photoX, photoY, 170, 205);
-      }
-      // Calculate the position for signaturePreview at the end of the content
-      const signatureX = marginLeft + 750; // Adjust as needed
-      const signatureY = doc.internal.pageSize.getHeight() - 480; // Adjust as needed
-      // Add the signaturePreview image to the PDFsss
-      if (signaturePreview) {
-        doc.addImage(signaturePreview, "PNG", signatureX, signatureY, 170, 205);
-      }
-      setLoader(false);
-      doc.save("Agreement.pdf");
+        const imgX = marginLeft + (contentWidth - imgWidth) / 2;
+        const imgY = marginTop + (contentHeight - imgHeight) / 2;
+
+        doc.addImage(imgData, "PNG", imgX, imgY, imgWidth, imgHeight);
+
+        const photoX = marginLeft + 420;
+        const photoY = doc.internal.pageSize.getHeight() - 480;
+        if (photoPreview) {
+            doc.addImage(photoPreview, "JPEG", photoX, photoY, 170, 205);
+        }
+
+        const signatureX = marginLeft + 750;
+        const signatureY = doc.internal.pageSize.getHeight() - 480;
+        if (signaturePreview) {
+            doc.addImage(signaturePreview, "PNG", signatureX, signatureY, 170, 205);
+        }
+
+        // Save the PDF and open it in a new tab
+        doc.save("Agreement.pdf");
+        setLoader(false);
+ console.log("pdfffff",   doc.save("Agreement.pdf"))
+        // Open the PDF in a new tab
+        // const pdfBlob = doc.output('blob');
+        // const pdfUrl = URL.createObjectURL(pdfBlob);
+        // window.open(pdfUrl, '_blank');
     });
-  };
+};
+
 
   const handlePhotoChange = (e) => {
     const selectedPhoto = e.target.files[0];
@@ -197,9 +257,9 @@ const StampPaperView = () => {
           signature: data?.signature,
           photo: data?.photo,
         });
-        setPhotoPreview(data?.photo ? `${appUrl}/${data?.photo}` : null);
+        setPhotoPreview(data?.photo);
         setSignaturePreview(
-          data?.signature ? `${appUrl}/${data?.signature}` : null
+          data?.signature
         );
       } catch (error) {
         console.error("Error fetching user details:", error);
@@ -790,7 +850,14 @@ const StampPaperView = () => {
             </Table>
             <Button
               marginBottom={"1rem"}
-              onClick={() => downlodePDF(photoPreview, signaturePreview)}
+               onClick={() => downlodePDF(photoPreview, signaturePreview)}
+              // onClick={() => {
+              //   console.log("clicked");
+              //   window.open(
+              //     // useData?.employee?.bankDetailPhoto,
+              //     "_blank"
+              //   );
+              // }}
               disabled={!(loader === false)}
               mt={"1rem"}
               ml={"1.6rem"}

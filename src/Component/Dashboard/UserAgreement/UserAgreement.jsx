@@ -268,7 +268,7 @@ const UserAgreemen = () => {
           <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
             View Detail
           </Button>
-        </NavLink>
+        </NavLink>  
       ),
     },
   ];
