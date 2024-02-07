@@ -341,7 +341,7 @@ const Registration = () => {
     {
       name: "Agreement",
       cell: () => (
-        <NavLink to="https://stamppaper.netlify.app">
+        <NavLink to="https://stamppapers.netlify.app/">
           <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
             Fill Agreement
           </Button>
