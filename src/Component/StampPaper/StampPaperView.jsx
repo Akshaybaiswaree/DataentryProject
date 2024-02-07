@@ -185,7 +185,8 @@ const StampPaperView = () => {
 
         const marginLeft = 0;
         const marginTop = 0;
-        const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
+         const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
+
         const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
 
         const aspectRatio = canvas.width / canvas.height;
@@ -205,13 +206,13 @@ const StampPaperView = () => {
         const photoX = marginLeft + 420;
         const photoY = doc.internal.pageSize.getHeight() - 480;
         if (photoPreview) {
-            doc.addImage(photoPreview, "JPEG", photoX, photoY, 170, 205);
+            doc.addImage(photoPreview, "JPEG", photoX, photoY, 35, 75);
         }
 
-        const signatureX = marginLeft + 750;
+        const signatureX = marginLeft + 480;
         const signatureY = doc.internal.pageSize.getHeight() - 480;
         if (signaturePreview) {
-            doc.addImage(signaturePreview, "PNG", signatureX, signatureY, 170, 205);
+            doc.addImage(signaturePreview, "PNG", signatureX, signatureY, 35, 75);
         }
 
         // Save the PDF and open it in a new tab
