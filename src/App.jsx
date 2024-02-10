@@ -39,7 +39,7 @@ import EditRegistration from "./Component/Dashboard/Registration/EditRegistratio
 import RegisterUserDetail from "./Component/Dashboard/Registration/RegisterUserdetails";
 import StampPaper from "./Component/StampPaper/StampPaper";
 import UserAgreement from "./Component/Dashboard/UserAgreement/UserAgreement";
-import StampPaperView from "./Component/StampPaper/StampPaperView";
+import StampPaperView from "./Component/StampPaper/StampPaperView123";
 import QcCheck from "./Component/Login/QcCheck";
 import PendingDetails from "./Component/Dashboard/Pending/PendingDetails";
 import { StayPrimaryLandscape } from "@mui/icons-material";
