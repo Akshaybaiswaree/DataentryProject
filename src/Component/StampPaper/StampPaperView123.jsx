@@ -25,7 +25,7 @@ import html2canvas from "html2canvas";
 import { usePDF } from "react-to-pdf";
 
 const StampPaperView = () => {
-  const { toPDF, targetRef } = usePDF({ filename: "agreement.pdf" });
+  const { toPDF, targetRef } = usePDF({ filename: "Agreement.pdf" });
   const { id } = useParams();
   console.log(id, "userId");
   const appUrl = import.meta.env.VITE_APP_API_URL;
