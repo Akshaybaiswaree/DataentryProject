@@ -641,15 +641,17 @@ const StampPaperView = () => {
           <Heading as="h3" mb={4} size="md">
             3. Conflict of Interest
           </Heading>
-          <Text fontSize="md">
+          <Text color="red" fontSize="md">
             3.1. Application Fee(s): The Registration Amount Of 6800/- INR. Will
             Be Deducted From The Salary If Generated, And If The Salary Is Not
             Generated i.e If The Employee Fails To Complete The Work, Then You
             are required to work for 5 days. If you fail to commence your work
             after accepting it or choose to cancel it, you will be obligated to
             pay the registration amount.
+            </Text>
+          
             <br />
-            <br />
+            <Text>
             He/She Is Liable Pay The Same Registration Amount On Their Own. The
             Employee Must Start & Complete His/her Work Of Form-Filling Assigned
             To Them By The Employer From The Date Of Starting The Project
@@ -906,7 +908,7 @@ const StampPaperView = () => {
                       <Image
                         src={signaturePreview}
                         alt="Signature Preview"
-                        w="20%"
+                        w="25%"
                         // style={{ maxWidth: "100px", marginTop: "10px",}}
                       />
                     )}
@@ -914,7 +916,9 @@ const StampPaperView = () => {
                   </Box>
                 </Td>
                 <Td>
-                  <Box onChange={handlePhotoChange}>
+                  <Box
+                   ml={"-10rem"} 
+                  onChange={handlePhotoChange}>
                     <Text mb={'10px'}>Photo</Text>
                     {photoPreview && (
                       <Image
@@ -933,12 +937,14 @@ const StampPaperView = () => {
             </Table>
           </Box>
         </Box>
-        <Box boxSize="sm">
-          <Image src={LeaseAgreement} alt="Stamp" w="50%" />
+        <Flex>
+        <Box mt={'1rem'} boxSize="sm">
+          <Image src={LeaseAgreement} alt="Stamp" w={["60%" , "40%"]} />
         </Box>
-        <Box mt={"-10rem"} boxSize="sm">
-          <Image src={sign} alt="Stamp" w="45%" />
+        <Box mr={"4rem"} mt={"1.3bhai rem"} boxSize="sm">
+          <Image src={sign} alt="Stamp" w="70%" />
         </Box>
+        </Flex>
       </Box>
       <Box>
         <Button
