@@ -199,7 +199,7 @@ const UserLogin = () => {
         )}
         <Flex direction="column" width={["90%", "70%", "50%", "40%"]}>
           <Box marginBottom={"0.6rem"} display="flex" justifyContent="flex-end">
-            <NavLink
+            {/* <NavLink
               to="/ForgetPassword"
               style={{
                 fontSize: "16px",
@@ -209,7 +209,7 @@ const UserLogin = () => {
               }}
             >
               Forget the password?
-            </NavLink>
+            </NavLink> */}
           </Box>
           <Button
             height={"3rem"}
