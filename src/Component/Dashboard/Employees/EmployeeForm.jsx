@@ -46,7 +46,7 @@ const Employeeform = () => {
     } catch (err) {
       toast({
         title: "Email has Already been used",
-        //description: 'Open Your Gmail',
+        
         status: "error",
         duration: 3000, // Toast message will disappear after 3 seconds
         isClosable: true,
