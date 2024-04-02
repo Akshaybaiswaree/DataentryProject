@@ -30,6 +30,7 @@ const RegisterUserDetail = () => {
   const navigate = useNavigate();
   // userId of the user
   const { userId } = useParams();
+  const [loading , setLoading] = useState(false)
 
   // input fields for all inputs
   const [inputField, setInputField] = useState({
@@ -50,11 +51,13 @@ const RegisterUserDetail = () => {
   // useEffect to fetch specific user by ID
   useEffect(() => {
     const fetchUserDetails = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `${apiUrl}/user/getuser_by_id/${userId}`
         );
         const data = response.data;
+          setLoading(false)
         console.log(data?.User.name);
         console.log(data?.User);
         setInputField({
@@ -67,6 +70,7 @@ const RegisterUserDetail = () => {
           status: data?.User?.status,
         });
       } catch (error) {
+        setLoading(false)
         console.error("Error fetching user details:", error);
       }
     };
@@ -122,6 +126,10 @@ const RegisterUserDetail = () => {
   };
 
   return (
+    <>
+    {loading ? <>
+      <h1>Loading...</h1>
+      </> : 
     <Box
       marginLeft={"1rem"}
       marginTop={"1rem"}
@@ -301,6 +309,8 @@ const RegisterUserDetail = () => {
         Gmail
       </Button>
     </Box>
+  }
+  </>
   );
 };
 

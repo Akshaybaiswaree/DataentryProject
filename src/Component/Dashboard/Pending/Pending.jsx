@@ -190,11 +190,14 @@ const Pending = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [userData, setUserData] = useState([]);
+  const [loading , setLoading] = useState(false)
+
   useEffect(() => {
     fetchData();
   }, [currentPage]);
 
   const fetchData = async () => {
+    setLoading(true);
     try {
       const config = {
         method: "GET",
@@ -203,9 +206,11 @@ const Pending = () => {
 
       };
       const response = await axios(config);
+      setLoading(false);
       setTotalPages(response.data?.totalPages);
       setUserData(response?.data?.users);
     } catch (error) {
+      setLoading(false);
       console.log(error, "error");
     }
   };
@@ -221,6 +226,7 @@ const Pending = () => {
   };
 
   const searchResponse = async () => {
+    setLoading(true)
     try {
       const payload = {
         name: searchQuery,
@@ -236,8 +242,10 @@ const Pending = () => {
       };
 
       const response = await axios(config);
+      setLoading(false)
       setUserData(response.data.users);
     } catch (error) {
+      setLoading(false)
       console.log(error, "Error");
     }
   };
@@ -279,63 +287,68 @@ const Pending = () => {
   };
 
   return (
-    <>
-      <Flex direction="column" align="center">
-        <Box
-          color="#DD372D"
-          ml={["1rem", "0rem"]}
-          mt={["1rem", "0"]}
-          mb="1rem"
-          fontSize={["1.5rem", "2rem"]}
-          fontWeight="700"
-        >
-          Pending
-        </Box>
-        <NavLink to="/user/Registrationform">
+    <>{loading 
+      ? <h1>loading .....</h1> 
+      :
+      <>
+        <Flex direction="column" align="center">
+          <Box
+            color="#DD372D"
+            ml={["1rem", "0rem"]}
+            mt={["1rem", "0"]}
+            mb="1rem"
+            fontSize={["1.5rem", "2rem"]}
+            fontWeight="700"
+          >
+            Pending
+          </Box>
+          <NavLink to="/user/Registrationform">
+          
+          </NavLink>
+        </Flex>
+        <InputGroup mt="1rem" ml={["1rem", "6.5rem"]} width={["90%", "400px"]}>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<SearchIcon color="gray.300" />}
+          />
+          <Input
+            border="1px solid green"
+            width="100%"
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+            }}
+          />
+          <Button
+            marginLeft={"1rem"}
+            className="employee-btn"
+            colorScheme="teal"
+            onClick={handleSearch}
+          >
+            Search
+          </Button>
+        </InputGroup>
         
-        </NavLink>
-      </Flex>
-      <InputGroup mt="1rem" ml={["1rem", "6.5rem"]} width={["90%", "400px"]}>
-        <InputLeftElement
-          pointerEvents="none"
-          children={<SearchIcon color="gray.300" />}
+        <Box width={{ base: "81vw", md: "80vw" }} overflowX="auto" p={4}>
+        
+        <DataTable
+          title=""
+          columns={columns}
+          data={userData}
+          pagination
+          paginationServer
+          paginationTotalRows={totalPages * 10} // Assuming 10 items per page
+          onChangePage={(page) => handlePagination(page)}
+          paginationPerPage={10}
+          paginationRowsPerPageOptions={[10, 20, 30]}
+          paginationComponentOptions={paginationOptions}
         />
-        <Input
-          border="1px solid green"
-          width="100%"
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={(e) => {
-            setSearchQuery(e.target.value);
-          }}
-        />
-        <Button
-          marginLeft={"1rem"}
-          className="employee-btn"
-          colorScheme="teal"
-          onClick={handleSearch}
-        >
-          Search
-        </Button>
-      </InputGroup>
-      
-      <Box width={{ base: "81vw", md: "80vw" }} overflowX="auto" p={4}>
-      
-      <DataTable
-        title=""
-        columns={columns}
-        data={userData}
-        pagination
-        paginationServer
-        paginationTotalRows={totalPages * 10} // Assuming 10 items per page
-        onChangePage={(page) => handlePagination(page)}
-        paginationPerPage={10}
-        paginationRowsPerPageOptions={[10, 20, 30]}
-        paginationComponentOptions={paginationOptions}
-      />
-       </Box>
-      
+        </Box>
+        
+      </>
+      }
     </>
   );
 };
