@@ -23,6 +23,7 @@ import sign from "../../Images/SIGN 6.svg";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { usePDF } from "react-to-pdf";
+import generatePDF, { Resolution, Margin } from 'react-to-pdf';
 
 const StampPaperView = () => {
   const { toPDF, targetRef } = usePDF({ filename: "Agreement.pdf" });
@@ -45,233 +46,37 @@ const StampPaperView = () => {
 
   const [loader, setLoader] = useState(false);
 
-  // const loadImage = async (src) => {
-  //   if (typeof window !== 'undefined') {
-  //     // Browser environment
-  //     const response = await fetch(src);
-  //     const blob = await response.blob();
-  //     return createImageBitmap(blob);
-  //   } else {
-  //     // Node.js environment
-  //     const { createCanvas, loadImage } = require('canvas');
-  //     const image = await loadImage(src);
-  //     const canvas = createCanvas(image.width, image.height);
-  //     const ctx = canvas.getContext('2d');
-  //     ctx.drawImage(image, 0, 0);
-  //     return canvas;
-  //   }
-  // };
-
-  //download pdf logic
-  // const downlodePDF = async (photoPreview, signaturePreview) => {
-  //   console.log(downlodePDF, "downlodePD");
-  //   const capture = document.querySelector(".downLodeBox");
-  //   setLoader(true);
-
-  //   html2canvas(capture).then((canvas) => {
-  //     const imgData = canvas.toDataURL("image/png");
-  //     // const imgData = canvas.toDataURL("img/png");
-  //     const doc = new jsPDF({
-  //       orientation: "portrait",
-  //       unit: "mm",
-  //       format: [canvas.width, canvas.height],
-  //     });
-
-  //       const marginLeft = 0; // Adjust as needed
-  //       const marginTop = 0; // Adjust as needed
-  //       const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
-  //       const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
-
-  //       // Calculate the aspect ratio of the content
-  //       const aspectRatio = canvas.width / canvas.height;
-
-  //       // Calculate the width and height based on the aspect ratio
-  //       let imgWidth = contentWidth;
-  //       let imgHeight = contentWidth / aspectRatio;
-
-  //     // If the image height exceeds the content height, adjust accordingly
-  //     if (imgHeight > contentHeight) {
-  //       imgHeight = contentHeight;
-  //       imgWidth = contentHeight * aspectRatio;
-  //     }
-  //     // Calculate the center position for the image
-  //     const imgX = marginLeft + (contentWidth - imgWidth) / 2;
-  //     const imgY = marginTop + (contentHeight - imgHeight) / 2;
-  //     // Add the image to the PDF with adjusted position and dimensions
-  //     doc.addImage(imgData, "PNG", imgX, imgY, imgWidth, imgHeight);
-  //     const photoX = marginLeft + 420; // Adjust as needed
-  //     const photoY = doc.internal.pageSize.getHeight() - 480; // Adjust as needed
-  //     // Add the photoPreview image to the PDF
-  //     if (photoPreview) {
-  //         doc.addImage(photoPreview, "JPEG", photoX, photoY, 170, 205);
-  //     }
-  //     // Calculate the position for signaturePreview at the end of the content
-  //     const signatureX = marginLeft + 750; // Adjust as needed
-  //     const signatureY = doc.internal.pageSize.getHeight() - 480; // Adjust as needed
-  //     // Add the signaturePreview image to the PDFsss
-  //     if (signaturePreview) {
-  //         doc.addImage(signaturePreview, "PNG", signatureX, signatureY, 170,205);
-  //     }
-  //     setLoader(false);
-  //     doc.save("Agreement.pdf");
-  //   });
-  // };
-  // const downlodePDF = async (photoPreview, signaturePreview) => {
-  //   console.log(downlodePDF, "downlodePD");
-  //   const capture = document.querySelector(".downLodeBox");
-  //   setLoader(true);
-  //   const pdfBlob = doc.output('blob');
-  //   const pdfUrl = URL.createObjectURL(pdfBlob);
-  //   window.open(pdfUrl, '_blank');
-
-  //   html2canvas(capture).then((canvas) => {
-
-  //     const imgData = canvas.toDataURL("image/png");
-  //     // const imgData = canvas.toDataURL("img/png");
-  //     const doc = new jsPDF({
-  //       orientation: "portrait",
-  //       unit: "mm",
-  //       format: [canvas.width, canvas.height],
-  //     });
-
-  //   const marginLeft = 0; // Adjust as needed
-  //   const marginTop = 0; // Adjust as needed
-  //   const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
-  //   const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
-
-  //   // Calculate the aspect ratio of the content
-  //   const aspectRatio = canvas.width / canvas.height;
-
-  //   // Calculate the width and height based on the aspect ratio
-  //   let imgWidth = contentWidth;
-  //   let imgHeight = contentWidth / aspectRatio;
-
-  //     // If the image height exceeds the content height, adjust accordingly
-  //     if (imgHeight > contentHeight) {
-  //       imgHeight = contentHeight;
-  //       imgWidth = contentHeight * aspectRatio;
-  //     }
-  //     // Calculate the center position for the image
-  //     const imgX = marginLeft + (contentWidth - imgWidth) / 2;
-  //     const imgY = marginTop + (contentHeight - imgHeight) / 2;
-  //     // Add the image to the PDF with adjusted position and dimensions
-  //     doc.addImage(imgData, "PNG", imgX, imgY, imgWidth, imgHeight);
-  //     const photoX = marginLeft + 420; // Adjust as needed
-  //     const photoY = doc.internal.pageSize.getHeight() - 480; // Adjust as needed
-  //     // Add the photoPreview image to the PDF
-  //     if (photoPreview) {
-  //       doc.addImage(photoPreview, "JPEG", photoX, photoY, 170, 205);
-  //     }
-  //     // Calculate the position for signaturePreview at the end of the content
-  //     const signatureX = marginLeft + 750; // Adjust as needed
-  //     const signatureY = doc.internal.pageSize.getHeight() - 480; // Adjust as needed
-  //     // Add the signaturePreview image to the PDFsss
-  //     if (signaturePreview) {
-  //       doc.addImage(signaturePreview, "PNG", signatureX, signatureY, 170, 205);
-  //     }
-  //     setLoader(false);
-  //     doc.save("Agreement.pdf");
-  //   });
-  // };
-
-  //   const downlodePDF = async (photoPreview, signaturePreview) => {
-  //     const capture = document.querySelector(".downLodeBox");
-  //     setLoader(true);
-
-  //     html2canvas(capture).then((canvas) => {
-  //         const imgData = canvas.toDataURL("image/png");
-  //         const doc = new jsPDF({
-  //             orientation: "portrait",
-  //             unit: "mm",
-  //             format: [canvas.width, canvas.height],
-  //         });
-
-  //         const marginLeft = 0;
-  //         const marginTop = 0;
-  //          const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
-
-  //         const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
-
-  //         const aspectRatio = canvas.width / canvas.height;
-  //         let imgWidth = contentWidth;
-  //         let imgHeight = contentWidth / aspectRatio;
-
-  //         if (imgHeight > contentHeight) {
-  //             imgHeight = contentHeight;
-  //             imgWidth = contentHeight * aspectRatio;
-  //         }
-
-  //         const imgX = marginLeft + (contentWidth - imgWidth) / 2;
-  //         const imgY = marginTop + (contentHeight - imgHeight) / 2;
-
-  //         doc.addImage(imgData, "PNG", imgX, imgY, imgWidth, imgHeight);
-
-  //         const photoX = marginLeft + 420;
-  //         const photoY = doc.internal.pageSize.getHeight() - 480;
-  //         if (photoPreview) {
-  //             doc.addImage(photoPreview, "JPEG", photoX, photoY, 35, 75);
-  //         }
-
-  //         const signatureX = marginLeft + 480;
-  //         const signatureY = doc.internal.pageSize.getHeight() - 480;
-  //         if (signaturePreview) {
-  //             doc.addImage(signaturePreview, "PNG", signatureX, signatureY, 35, 75);
-  //         }
-
-  //         // Save the PDF and open it in a new tab
-  //         doc.save("Agreement.pdf");
-  //         setLoader(false);
-  //  console.log("pdfffff",   doc.save("Agreement.pdf"))
-  //         // Open the PDF in a new tab
-  //         // const pdfBlob = doc.output('blob');
-  //         // const pdfUrl = URL.createObjectURL(pdfBlob);
-  //         // window.open(pdfUrl, '_blank');
-  //     });
-  // };
-  const downlodePDF = async (photoPreview, signaturePreview) => {
-    const capture = document.querySelector(".downLodeBox");
+ 
+  const downloadPDF = async (photoPreview, signaturePreview) => {
+    const capture = document.querySelector(".downLoadBox");
     setLoader(true);
-
-    html2canvas(capture).then((canvas) => {
+  
+    html2canvas(capture).then(async (canvas) => {
       const imgData = canvas.toDataURL("image/png");
       const doc = new jsPDF({
         orientation: "portrait",
         unit: "mm",
         format: [canvas.width, canvas.height],
       });
-
+  
       const marginLeft = 0;
       const marginTop = 0;
       const contentWidth = doc.internal.pageSize.getWidth() - 2 * marginLeft;
-
       const contentHeight = doc.internal.pageSize.getHeight() - 2 * marginTop;
-
       const aspectRatio = canvas.width / canvas.height;
       let imgWidth = contentWidth;
       let imgHeight = contentWidth / aspectRatio;
-
+  
       if (imgHeight > contentHeight) {
         imgHeight = contentHeight;
         imgWidth = contentHeight * aspectRatio;
       }
-
+  
       const imgX = marginLeft + (contentWidth - imgWidth) / 2;
       const imgY = marginTop + (contentHeight - imgHeight) / 2;
-
+  
       doc.addImage(imgData, "PNG", imgX, imgY, imgWidth, imgHeight);
-
-      // const photoX = marginLeft + 420;
-      // const photoY = doc.internal.pageSize.getHeight() - 480;
-      // if (photoPreview) {
-      //     doc.addImage(photoPreview, "JPEG", photoX, photoY, 35, 75);
-      // }
-
-      // const signatureX = marginLeft + 480;
-      // const signatureY = doc.internal.pageSize.getHeight() - 480;
-      // if (signaturePreview) {
-      //     doc.addImage(signaturePreview, "PNG", signatureX, signatureY, 35, 75);
-      // }
-
+  
       const photoWidth = 0.05 * contentWidth;
       const photoHeight = photoWidth / aspectRatio / 3;
       const photoX = marginLeft + 0.2 * contentWidth;
@@ -281,18 +86,25 @@ const StampPaperView = () => {
         0.05 * contentHeight -
         photoHeight -
         photoTopMargin;
-
+  
       if (photoPreview) {
-        doc.addImage(
-          photoPreview,
-          "JPEG",
-          photoX,
-          photoY,
-          photoWidth,
-          photoHeight
-        );
+        await new Promise((resolve) => {
+          const image = new Image();
+          image.onload = function () {
+            doc.addImage(
+              this,
+              "JPEG",
+              photoX,
+              photoY,
+              photoWidth,
+              photoHeight
+            );
+            resolve();
+          };
+          image.src = photoPreview;
+        });
       }
-
+  
       const signatureWidth = 0.05 * contentWidth;
       const signatureHeight = signatureWidth / aspectRatio / 3;
       const signatureX = marginLeft + 0.2 * contentWidth;
@@ -302,28 +114,31 @@ const StampPaperView = () => {
         0.25 * contentHeight -
         signatureHeight -
         signatureTopMargin;
-
+  
       if (signaturePreview) {
-        doc.addImage(
-          signaturePreview,
-          "PNG",
-          signatureX,
-          signatureY,
-          signatureWidth,
-          signatureHeight
-        );
+        await new Promise((resolve) => {
+          const image = new Image();
+          image.onload = function () {
+            doc.addImage(
+              this,
+              "PNG",
+              signatureX,
+              signatureY,
+              signatureWidth,
+              signatureHeight
+            );
+            resolve();
+          };
+          image.src = signaturePreview;
+        });
       }
-
+  
       // Save the PDF and open it in a new tab
       doc.save("Agreement.pdf");
       setLoader(false);
-
-      // Open the PDF in a new tab
-      // const pdfBlob = doc.output('blob');
-      // const pdfUrl = URL.createObjectURL(pdfBlob);
-      // window.open(pdfUrl, '_blank');
     });
   };
+  
 
   const handlePhotoChange = (e) => {
     const selectedPhoto = e.target.files[0];
@@ -393,9 +208,48 @@ const StampPaperView = () => {
     }
   };
 
+  const options = {
+    // default is `save`
+    method: 'open',
+    // default is Resolution.MEDIUM = 3, which should be enough, higher values
+    // increases the image quality but also the size of the PDF, so be careful
+    // using values higher than 10 when having multiple pages generated, it
+    // might cause the page to crash or hang.
+    resolution: Resolution.HIGH,
+    page: {
+       // margin is in MM, default is Margin.NONE = 0
+       margin: Margin.SMALL,
+       // default is 'A4'
+       format: 'letter',
+       // default is 'portrait'
+       orientation: 'landscape',
+    },
+    canvas: {
+       // default is 'image/jpeg' for better size performance
+       mimeType: 'image/png',
+       qualityRatio: 1
+    },
+    // Customize any value passed to the jsPDF instance and html2canvas
+    // function. You probably will not need this and things can break, 
+    // so use with caution.
+    overrides: {
+       // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
+       pdf: {
+          compress: true
+       },
+       // see https://html2canvas.hertzen.com/configuration for more options
+       canvas: {
+          useCORS: true
+       }
+    },
+ };
+
+ // you can use a function to return the target element besides using React refs
+const getTargetElement = () => document.getElementById('content-id');
+
   return (
     <Box>
-      <Box ref={targetRef} p="20px">
+      <Box ref={targetRef} p="20px" id="content-id" className="downLoadBox">
         <Box width="100%" m="auto">
           <Box mx="auto" w="100%" overflow="hidden">
             <Image
@@ -407,47 +261,7 @@ const StampPaperView = () => {
           </Box>
         </Box>
 
-        {/* <Box display="flex" justifyContent="space-evenly">
-          <Box mb={{ base: "2", lg: "0" }}>
-            <Image
-              w={{ base: "100%", lg: "150px" }}
-              h={{ base: "auto", lg: "350px" }}
-              src={notri}
-              alt="Dan Abramov"
-            />
-          </Box>
-          <Box textAlign="center">
-            <Heading as="h2" mb={{ base: "2", lg: "4" }}>
-              Legal Employment Contract 2023
-            </Heading>
-
-            <Text>
-              THIS DIGITAL EMPLOYMENT CONTRACT (this "Agreement") Valid Till
-              Eleven Months From 2023-11-30 BETWEEN:
-            </Text>
-
-            <Text fontSize={"1.5rem"}>
-              <strong>Zemex Service of </strong>
-            </Text>
-            <Text>
-              KASTURI WADI INDRA BAZAR GHANSHAM APARTMENT JAIPUR, RAJASTHAN
-              (RJ), INDIA(IN), 302031 of
-            </Text>
-
-            <Text fontSize={"1.5rem"}>
-              <strong>(The "Employer")</strong>
-            </Text>
-
-            <Text ml={{ base: "0", lg: "10%" }}>OF THE FIRST PARTY </Text>
-
-            <Text>-AND-</Text>
-            <Text>
-              S/O &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;...
-              <strong>(The "Employee")</strong>
-            </Text>
-            <Text ml={{ base: "0", lg: "10%" }}>OF THE SECOND PARTY</Text>
-          </Box>
-        </Box> */}
+      
         <Box display="flex" justifyContent="space-evenly">
           <Box>
             <Image w="150px" h="350px" src={notri} alt="Dan Abramov" />
@@ -883,10 +697,10 @@ const StampPaperView = () => {
               <Text>Name : {inputField.name}</Text>
              
             </FormControl> */}
-            <FormControl w="400px">
+            <FormControl w="200px">
               <Text fontSize="md"> Email: {inputField.email}</Text>
             </FormControl>
-            <FormControl w="400px">
+            <FormControl w="200px">
               {/* <Input
             value={date}
             onChange={(e) =>setDate(e.target.value)}
@@ -897,7 +711,7 @@ const StampPaperView = () => {
               <Text fontSize="md"> Start-Date: {inputField.startdate}</Text>
             </FormControl>
 
-            <Table w="700px" style={{ marginTop: "20px" }}>
+            <Table w="400px" style={{ marginTop: "20px" }}>
               <Tr>
                 <Td>
                   <Box onChange={handleSignatureChange}>
@@ -934,7 +748,7 @@ const StampPaperView = () => {
           </Box>
         </Box>
         <Box boxSize="sm">
-          <Image src={LeaseAgreement} alt="Stamp" w="50%" />
+          <Image src={LeaseAgreement} alt="Stamp" w={{base:"30%", md:"50%"}} />
         </Box>
         <Box mt={"-10rem"} boxSize="sm">
           <Image src={sign} alt="Stamp" w="45%" />
@@ -950,6 +764,7 @@ const StampPaperView = () => {
         >
           Download PDF
         </Button>
+        <Button onClick={() => downloadPDF()}>Generate PDF</Button>
       </Box>
     </Box>
   );

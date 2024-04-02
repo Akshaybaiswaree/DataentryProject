@@ -43,6 +43,7 @@ const RegisterUserDetail = () => {
     caller: "",
     status: "",
     loginStatus: "",
+    password:"",
   });
 
   // modal button
@@ -68,6 +69,7 @@ const RegisterUserDetail = () => {
           plan: "",
           caller: data?.User?.caller,
           status: data?.User?.status,
+          password:data?.User?.password,
         });
       } catch (error) {
         console.error("Error fetching user details:", error);
@@ -98,6 +100,30 @@ const RegisterUserDetail = () => {
         alert("User Deleted Succesfully.");
       } else {
         alert("Failed to delete user.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  //send mail again
+  const SendEmail = async (userId) => {
+    console.log(userId, "id");
+    const hostName = window.location.hostname;
+    const port = 5173;
+    const url = {url: `http://${hostName}:${port}/`};
+    console.log(url, "Responce URl");
+    try {
+      const response = await axios.post(
+        `${apiUrl}/user/sendUserInfo/${userId}`
+      );
+      console.log(response, "url mil jayega");
+
+      if (response.status === 200) {
+        alert("Mail Send Successfully.");
+      } else {
+        alert("Failed to send mail.");
       }
     } catch (error) {
       console.log(error);
@@ -228,6 +254,33 @@ const RegisterUserDetail = () => {
             </FormControl>
           </Box>
         </Stack>
+
+        <Stack direction={["column", "row"]}>
+          <Box>
+            <FormControl className="employee-form-group">
+              <FormLabel>User Id</FormLabel>
+              <Input
+                   width={{base:"300px",md:"400px"}}
+                type="text"
+                name="status"
+                onChange={onChangeHandler}
+                value={inputField.email}
+              />
+            </FormControl>
+          </Box>
+          <Box>
+            <FormControl className="employee-form-group">
+              <FormLabel>Password</FormLabel>
+              <Input
+                   width={{base:"300px",md:"400px"}}
+                type="text"
+                name="status"
+                value={inputField.password}
+                onChange={onChangeHandler}
+              />
+            </FormControl>
+          </Box>
+        </Stack>
       </form>
 
       {/* <DeleteIcon onClick={onOpen} /> */}
@@ -294,6 +347,15 @@ const RegisterUserDetail = () => {
         height={{base:'3.3rem' , md:"2.5r em"}}
         colorScheme="blue">Edit</Button>
       </Link>
+
+      <Button
+        onClick={() => SendEmail(userId)}
+        height={{base:'3.3rem' , md:"2.5r em"}}
+        marginLeft={"1rem"}
+        colorScheme="red"
+      >
+       Send Work Mail
+      </Button>
        </Box>
       </Stack>
     </Box>
