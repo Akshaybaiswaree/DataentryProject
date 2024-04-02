@@ -751,14 +751,9 @@ const getTargetElement = () => document.getElementById('content-id');
             </Table>
           </Box>
         </Box>
-<<<<<<< HEAD
-        <Box boxSize="sm">
-          <Image src={LeaseAgreement} alt="Stamp" w={{base:"30%", md:"50%"}} />
-=======
         <Flex>
         <Box mt={'1rem'} boxSize="sm">
           <Image src={LeaseAgreement} alt="Stamp" w={["60%" , "40%"]} />
->>>>>>> 1f9ab7dce7bf6bc88fe47bc9c5861f8289e60976
         </Box>
         <Box mr={"4rem"} mt={"1.3bhai rem"} boxSize="sm">
           <Image src={sign} alt="Stamp" w="70%" />
