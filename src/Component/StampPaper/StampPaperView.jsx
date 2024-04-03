@@ -10,6 +10,7 @@ import {
   Button,
   FormControl,
   FormLabel,
+  Flex,
 } from "@chakra-ui/react";
 // import image from "./SVG STAM.svg";
 import image from "../../Images/SVG STAM.svg";
@@ -24,7 +25,7 @@ import html2canvas from "html2canvas";
 import { usePDF } from "react-to-pdf";
 
 const StampPaperView = () => {
-  const { toPDF, targetRef } = usePDF({ filename: "agreement.pdf" });
+  const { toPDF, targetRef } = usePDF({ filename: "Agreement.pdf" });
   const { id } = useParams();
   console.log(id, "userId");
   const appUrl = import.meta.env.VITE_APP_API_URL;
@@ -393,17 +394,16 @@ const StampPaperView = () => {
   };
 
   return (
-    <>
-      <Box ref={targetRef} m={["1rem", "7rem"]} className="downLodeBox">
-        <Box display="flex" flexDirection="column" textAlign="center">
-          <Box
-            mx="auto"
-            boxSize={{ base: "100%", md: "auto" }} // Adjusted to "auto" for non-base screen sizes
-            objectFit="contain"
-            mb={{ base: "2", lg: "0" }}
-            maxWidth="100%" // Added maxWidth property
-          >
-            <Image src={image} alt="Description of the image" />
+    <Box>
+      <Box ref={targetRef} p="20px">
+        <Box width="100%" m="auto">
+          <Box mx="auto" w="100%" overflow="hidden">
+            <Image
+              mx="auto"
+              src={image}
+              alt="Description of the image"
+              maxW="100%"
+            />
           </Box>
         </Box>
 
@@ -449,34 +449,23 @@ const StampPaperView = () => {
           </Box>
         </Box> */}
         <Box display="flex" justifyContent="space-evenly">
-          <Box mb={{ base: "2", lg: "0" }}>
-            <Image
-            
-             
-              h={{ base: "auto", lg: "350px" }}
-              src={notri}
-              alt="Dan Abramov"
-            />
+          <Box>
+            <Image w="150px" h="350px" src={notri} alt="Dan Abramov" />
           </Box>
           <Box textAlign="center">
-            <Heading
-              fontSize={{ base: "1rem", md: "2rem" }}
-              mb={{ base: "2", lg: "4" }}
-            >
-              Legal Employment Contract 2023
+            <Heading fontSize="1.2rem" mb="4">
+              Legal Employment Contract 2024
             </Heading>
 
-            <Text fontSize={{ base: "0.8rem", md: "1rem" }}>
+            <Text fontSize="1rem">
               THIS DIGITAL EMPLOYMENT CONTRACT (this "Agreement") Valid Till
               Eleven Months From 2023-11-30 BETWEEN:
             </Text>
 
             <Text>
-              <Heading fontSize={{ base: "1rem", md: "2rem" }}>
-                Zemix Services
-              </Heading>
+              <Heading fontSize="1.2rem">Zemix Services</Heading>
             </Text>
-            <Text fontSize={{ base: "0.8rem", md: "1rem" }}>
+            <Text fontSize="1rem">
               KASTURI WADI INDRA BAZAR GHANSHAM APARTMENT JAIPUR, RAJASTHAN
               (RJ), INDIA(IN), 302031 of
             </Text>
@@ -485,30 +474,24 @@ const StampPaperView = () => {
               <strong>(The "Employer")</strong>
             </Text> */}
             <Text>
-              <Heading fontSize={{ base: "1rem", md: "2rem" }}>
-                The "Employer"
-              </Heading>
+              <Heading fontSize="1rem">The "Employer"</Heading>
             </Text>
-            <Text fontSize={{ base: "0.8rem", md: "1rem" }}>
-              OF THE FIRST PARTY{" "}
-            </Text>
+            <Text fontSize="1rem">OF THE FIRST PARTY </Text>
 
-            <Text fontSize={{ base: "0.8rem", md: "1rem" }}>-AND-</Text>
+            <Text fontSize="1rem">-AND-</Text>
             <Text>
               S/O &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;... &nbsp;...
               <strong>(The "Employee")</strong>
             </Text>
-            <Text fontSize={{ base: "0.8rem", md: "1rem" }}>
-              OF THE SECOND PARTY
-            </Text>
+            <Text fontSize="1rem">OF THE SECOND PARTY</Text>
           </Box>
         </Box>
 
         <Box>
-          <Heading as="h3" mb={4}>
+          <Heading as="h3" mb={4} size="md">
             Background
           </Heading>
-          <Text>
+          <Text fontSize="md">
             A. The Employer Is Of The Opinion That The Employee Has The
             Necessary Qualifications, Experience, And Abilities To Assist And
             Benefit The Employer In Requisiting Skills And Infrastructure For
@@ -520,7 +503,7 @@ const StampPaperView = () => {
             Conditions Set Out In This Agreement.
             {/* ... (rest of the Background section) */}
           </Text>
-          <Text>
+          <Text fontSize="md">
             <br />
             Presently It Is In A Position To Procure The Business For Form
             Filling More Meaningfully Described In The Column Scope Of Work,
@@ -540,11 +523,11 @@ const StampPaperView = () => {
 
         {/* Commencement Date and Term Section */}
         <Box>
-          <Heading as="h3" mb={4}>
+          <Heading as="h3" mb={4} size="md">
             <br />
             Commencement Date and Term
           </Heading>
-          <Text>
+          <Text fontSize="md">
             Scope Of Work: The Employee Will Commence Employment With The
             Employer On 2023-11-30 (the "Commencement Date") Extending Till
             2023-12-04 (End Of "Term Date").
@@ -561,11 +544,11 @@ const StampPaperView = () => {
 
         {/* Job Title and Description Section */}
         <Box>
-          <Heading as="h3" mb={4}>
+          <Heading as="h3" mb={4} size="md">
             <br />
             1. Job Title and Description
           </Heading>
-          <Text>
+          <Text fontSize="md">
             1.1. The Initial Job Duties The Employee Will Be Expected To Perform
             Will Be Consisted Of Filling Of The Forms (Data Entry) As Per The
             Information And Data Given The Online Portal.
@@ -598,11 +581,11 @@ const StampPaperView = () => {
 
         {/* Employee Remuneration Section */}
         <Box>
-          <Heading as="h3" mb={4}>
+          <Heading as="h3" mb={4} size="md">
             <br />
             2. Employee Remuneration
           </Heading>
-          <Text>
+          <Text fontSize="md">
             2.1. Remuneration: - For The Form Filling Services Rendered By The
             Employee, The Employee Shall Be Entitled For Payment Of Price 40Rs.
             (INR) Max Per Form For The Salary May Vary From 20800/- INR To
@@ -655,18 +638,20 @@ const StampPaperView = () => {
 
         {/* Conflict of Interest Section */}
         <Box>
-          <Heading as="h3" mb={4}>
-            + 3. Conflict of Interest
+          <Heading as="h3" mb={4} size="md">
+            3. Conflict of Interest
           </Heading>
-          <Text>
+          <Text color="red" fontSize="md">
             3.1. Application Fee(s): The Registration Amount Of 6800/- INR. Will
             Be Deducted From The Salary If Generated, And If The Salary Is Not
             Generated i.e If The Employee Fails To Complete The Work, Then You
             are required to work for 5 days. If you fail to commence your work
             after accepting it or choose to cancel it, you will be obligated to
             pay the registration amount.
+            </Text>
+          
             <br />
-            <br />
+            <Text>
             He/She Is Liable Pay The Same Registration Amount On Their Own. The
             Employee Must Start & Complete His/her Work Of Form-Filling Assigned
             To Them By The Employer From The Date Of Starting The Project
@@ -731,11 +716,11 @@ const StampPaperView = () => {
 
         {/* Termination of Employment Section */}
         <Box>
-          <Heading as="h3" mb={4}>
+          <Heading as="h3" mb={4} size="md">
             <br />
             4. Termination of Employment
           </Heading>
-          <Text>
+          <Text fontSize="md">
             4.1. Termination: - If Employee Fails To Submit Data On Time Or, If
             Employee Fails To Give Accuracy In Output Files.
             <br />
@@ -767,10 +752,10 @@ const StampPaperView = () => {
 
         {/* Non-Solicitation Section */}
         <Box>
-          <Heading as="h3" mb={4}>
+          <Heading as="h3" mb={4} size="md">
             5. Non-Solicitation
           </Heading>
-          <Text>
+          <Text fontSize="md">
             5.1. The Employee Understands And Agrees That Any Attempt On The
             Part Of The Employee To Induce Other Employees Or Contractors To
             Leave The Employers Employ Would Be Harmful And Damaging To The
@@ -800,10 +785,10 @@ const StampPaperView = () => {
 
         {/* Confidential Information Section */}
         <Box>
-          <Heading as="h3" mb={4}>
+          <Heading as="h3" mb={4} size="md">
             6. Confidential Information
           </Heading>
-          <Text>
+          <Text fontSize="md">
             6.1. The Employee Acknowledges That, In Any Position The Employee
             May Hold, In And As A Result Of The Employees Employment By The
             Employer, The Employee Will, Or May, Be Making Use Of, Acquiring Or
@@ -826,10 +811,10 @@ const StampPaperView = () => {
 
         {/* Severability Section */}
         <Box>
-          <Heading as="h3" mb={4}>
+          <Heading as="h3" mb={4} size="md">
             7. Severability
           </Heading>
-          <Text>
+          <Text fontSize="md">
             7.1.The Employer And The Employee Acknowledge That This Agreement Is
             Reasonable, Valid And Enforceable. However, If Any Term, Covenant,
             Condition Or Provision Of This Agreement Is Held By A Court Of
@@ -872,38 +857,38 @@ const StampPaperView = () => {
           </Text>
         </Box>
         <Box>
-          <Text fontSize={"1.3rem"} fontWeight="bold">
+          <Text fontSize="md" fontWeight="bold">
             IN WITNESS WHEREOF
           </Text>
-          <Text>
+          <Text fontSize="md">
             The Parties Hereto Have Executed These Presents On the Date Herein
             Before Written :-
           </Text>
 
-          <Text fontWeight={"500"} fontSize={"1.5rem"} mt="4">
+          <Text fontWeight={"500"} fontSize="1xl" mt="4">
             A. Employer : -
           </Text>
-          <Text>
+          <Text fontSize="md">
             Name : Zemex Service <br />
             Email : helplinezxservicewww@gmail.com <br />
             Address : KASTURI WADI INDRA BAZAR GHANSHAM APARTMENT JAIPUR,
             RAJASTHAN(RJ), INDIA(IN) 302031
           </Text>
 
-          <Text fontWeight={"500"} fontSize={"1.5rem"} mt="4">
+          <Text fontWeight={"500"} mt="4" fontSize="1 xl">
             B. Employee : -
           </Text>
         </Box>
         <Box display="flex" justifyContent="space-between">
           <Box>
-            {/* <FormControl w={["350px", "400px"]}>
+            {/* <FormControl w="400px">
               <Text>Name : {inputField.name}</Text>
              
             </FormControl> */}
-            <FormControl w={["350px", "400px"]}>
-              <Text> Email: {inputField.email}</Text>
+            <FormControl w="400px">
+              <Text fontSize="md"> Email: {inputField.email}</Text>
             </FormControl>
-            <FormControl w={["350px", "400px"]}>
+            <FormControl w="400px">
               {/* <Input
             value={date}
             onChange={(e) =>setDate(e.target.value)}
@@ -911,84 +896,68 @@ const StampPaperView = () => {
             placeholder="Enter the Date"
             _hover={{ borderColor: "teal.500" }}
           /> */}
-              <Text> Start-Date: {inputField.startdate}</Text>
+              <Text fontSize="md"> Start-Date: {inputField.startdate}</Text>
             </FormControl>
 
-            <Table w={["300px", "700px"]} style={{ marginTop: "20px" }}>
+            <Table w="700px" style={{ marginTop: "20px" }}>
               <Tr>
                 <Td>
                   <Box onChange={handleSignatureChange}>
+                    <Text mb={'10px'}>Signature</Text>
                     {signaturePreview && (
                       <Image
                         src={signaturePreview}
                         alt="Signature Preview"
-                        style={{ maxWidth: "100px", marginTop: "10px" }}
+                        w="25%"
+                        // style={{ maxWidth: "100px", marginTop: "10px",}}
                       />
                     )}
                     {console.log(signaturePreview, "signaturePreview")}
                   </Box>
                 </Td>
-              </Tr>
-              <Tr>
                 <Td>
-                  <Box onChange={handlePhotoChange}>
+                  <Box
+                   ml={"-10rem"} 
+                  onChange={handlePhotoChange}>
+                    <Text mb={'10px'}>Photo</Text>
                     {photoPreview && (
                       <Image
                         src={photoPreview}
                         alt="Photo Preview"
-                        style={{
-                          maxWidth: "100px",
-                          marginTop: "10px",
-                        }}
+                        w="20%"
+                        // style={{
+                        //   maxWidth: "100px",
+                        //   marginTop: "10px",
+                        // }}
                       />
                     )}
                   </Box>
                 </Td>
               </Tr>
             </Table>
-            {/* <Button
-              marginBottom={"1rem"}
-               onClick={() => downlodePDF(photoPreview, signaturePreview)}
-              // onClick={() => {
-              //   console.log("clicked");
-              //   window.open(
-              //     // useData?.employee?.bankDetailPhoto,
-              //     "_blank"
-              //   );
-              // }}
-              disabled={!(loader === false)}
-              mt={"1rem"}
-              ml={"1.6rem"}
-              bg={"lightgreen"}
-              _hover={{ background: "gray", color: "white" }}
-            >
-              {loader ? (
-                <span>Downloading</span>
-              ) : (
-                <span>Download Your Agreement</span>
-              )}
-            </Button> */}
           </Box>
         </Box>
-        <Box boxSize="sm">
-          <Image src={LeaseAgreement} alt="Stamp" />
+        <Flex>
+        <Box mt={'1rem'} boxSize="sm">
+          <Image src={LeaseAgreement} alt="Stamp" w={["60%" , "40%"]} />
         </Box>
-        <Box mt={"-10rem"} boxSize="sm">
-          <Image src={sign} alt="Stamp" />
+        <Box mr={"4rem"} mt={"1.3bhai rem"} boxSize="sm">
+          <Image src={sign} alt="Stamp" w="70%" />
         </Box>
+        </Flex>
       </Box>
       <Box>
         <Button
           ml={"2rem"}
-          mt={"-35rem"}
+          mt={"-30rem"}
           bg={"lightgreen"}
           _hover={{ background: "gray", color: "white" }}
           onClick={() => toPDF()}
         >
-          Download PDFe
+          Download PDF
         </Button>
       </Box>
-    </>
+    </Box>
   );
 };
 
