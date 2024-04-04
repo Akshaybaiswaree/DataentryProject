@@ -268,12 +268,12 @@ const getTargetElement = () => document.getElementById('content-id');
           </Box>
           <Box textAlign="center">
             <Heading fontSize="1.2rem" mb="4">
-              Legal Employment Contract 2023
+              Legal Employment Contract 2024
             </Heading>
 
             <Text fontSize="1rem">
               THIS DIGITAL EMPLOYMENT CONTRACT (this "Agreement") Valid Till
-              Eleven Months From 2023-11-30 BETWEEN:
+              Eleven Months From 2024-01-01 BETWEEN:
             </Text>
 
             <Text>
@@ -343,8 +343,8 @@ const getTargetElement = () => document.getElementById('content-id');
           </Heading>
           <Text fontSize="md">
             Scope Of Work: The Employee Will Commence Employment With The
-            Employer On 2023-11-30 (the "Commencement Date") Extending Till
-            2023-12-04 (End Of "Term Date").
+            Employer On 2024-01-01 (the "Commencement Date") Extending Till
+            2024-11-01 (End Of "Term Date").
             <br />
             <br />
             Subject To The Probationary Period And Subject To Termination As
