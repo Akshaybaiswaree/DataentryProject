@@ -191,6 +191,8 @@ const Pending = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [userData, setUserData] = useState([]);
   const [loading , setLoading] = useState(false)
+  const [filter, setFilter] = useState([]);
+  const [search, SetSearch] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -209,6 +211,7 @@ const Pending = () => {
       setLoading(false);
       setTotalPages(response.data?.totalPages);
       setUserData(response?.data?.users);
+      setFilter(response?.data?.users);
     } catch (error) {
       setLoading(false);
       console.log(error, "error");
@@ -253,6 +256,16 @@ const Pending = () => {
   const handlePagination = (page) => {
     setCurrentPage(page);
   };
+
+
+  useEffect(() => {
+    const result = userData?.filter(
+      (item) =>
+        item?.name.toLowerCase().includes(search.toLowerCase()) 
+    );
+    console.log(result);
+    setFilter(result);
+  }, [search, userData,]);
 
   const columns = [
     {
@@ -311,7 +324,7 @@ const Pending = () => {
             pointerEvents="none"
             children={<SearchIcon color="gray.300" />}
           />
-          <Input
+          {/* <Input
             border="1px solid green"
             width="100%"
             type="text"
@@ -320,15 +333,15 @@ const Pending = () => {
             onChange={(e) => {
               setSearchQuery(e.target.value);
             }}
-          />
-          <Button
+          /> */}
+          {/* <Button
             marginLeft={"1rem"}
             className="employee-btn"
             colorScheme="teal"
             onClick={handleSearch}
           >
             Search
-          </Button>
+          </Button> */}
         </InputGroup>
         
         <Box width={{ base: "81vw", md: "80vw" }} overflowX="auto" p={4}>
@@ -336,7 +349,7 @@ const Pending = () => {
         <DataTable
           title=""
           columns={columns}
-          data={userData}
+          data={filter}
           pagination
           paginationServer
           paginationTotalRows={totalPages * 10} // Assuming 10 items per page
@@ -344,6 +357,22 @@ const Pending = () => {
           paginationPerPage={10}
           paginationRowsPerPageOptions={[10, 20, 30]}
           paginationComponentOptions={paginationOptions}
+          subHeader
+          subHeaderComponent={
+            <input
+              type="text"
+              placeholder="Search..."
+              value={search}
+              onChange={(e) => SetSearch(e.target.value)}
+              style={{
+                border: "1px solid gray",
+                borderRadius: "15px",
+                padding: "10px",
+                paddingLeft: "15px",
+                width: "100%",
+              }}
+            />
+          }
         />
         </Box>
         

@@ -34,7 +34,7 @@ const StampPaperView = () => {
   const [inputField, setInputField] = useState({
     name: "",
     email: "",
-    startdate: "",
+    startDate: "",
     address: "",
     photo: "",
     signature: "",
@@ -161,18 +161,20 @@ const StampPaperView = () => {
         );
         const data = response.data;
         console.log(data, "data hai ye");
-        console.log(data?.User);
+        console.log(data?.results);
+        console.log(data?.userData);
         console.log(`${appUrl} / data?.signature`);
         setInputField({
-          name: data?.name,
-          email: data?.email,
-          startdate: data?.startdate,
-          address: data?.address,
-          signature: data?.signature,
-          photo: data?.photo,
+          name: data?.userData?.name,
+          email: data?.userData?.email,
+          startDate: data?.userData?.startDate,
+          endDate:data?.userData?.endDate,
+          address: data?.userData?.address,
+          signature: data?.results?.signature,
+          photo: data?.results?.photo,
         });
-        setPhotoPreview(data?.photo);
-        setSignaturePreview(data?.signature);
+        setPhotoPreview(data?.results?.photo);
+        setSignaturePreview(data?.results?.signature);
       } catch (error) {
         console.error("Error fetching user details:", error);
       }
@@ -246,6 +248,16 @@ const StampPaperView = () => {
 
  // you can use a function to return the target element besides using React refs
 const getTargetElement = () => document.getElementById('content-id');
+
+
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Zero-pad month
+  const day = String(date.getDate()).padStart(2, '0');   // Zero-pad day
+  return `${year}-${month}-${day}`; // Formatted date YYYY-MM-DD
+};
 
   return (
     <Box>
@@ -699,8 +711,10 @@ const getTargetElement = () => document.getElementById('content-id');
               <Text>Name : {inputField.name}</Text>
              
             </FormControl> */}
-            <FormControl w="200px">
+            <FormControl minW="400px">
+            <Text fontSize="md"> Name: {inputField.name}</Text>
               <Text fontSize="md"> Email: {inputField.email}</Text>
+              <Text fontSize="md"> Address: {inputField.address}</Text>
             </FormControl>
             <FormControl w="200px">
               {/* <Input
@@ -710,10 +724,11 @@ const getTargetElement = () => document.getElementById('content-id');
             placeholder="Enter the Date"
             _hover={{ borderColor: "teal.500" }}
           /> */}
-              <Text fontSize="md"> Start-Date: {inputField.startdate}</Text>
+              <Text fontSize="md">  Start-Date: {inputField.startDate ? formatDate(inputField.startDate) : 'No Start Date'}</Text>
+             
             </FormControl>
             <FormControl w="200px">
-              <Text fontSize="md"> End-Date: {inputField.enddate}</Text>
+              <Text fontSize="md"> End-Date: {inputField.endDate ? formatDate(inputField.endDate) : 'No End Date'}</Text>
             </FormControl>
 
             <Table w="400px" style={{ marginTop: "20px" }}>
