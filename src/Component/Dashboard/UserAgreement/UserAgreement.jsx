@@ -180,6 +180,8 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
@@ -247,15 +249,6 @@ const UserAgreemen = () => {
   };
 
   const columns = [
-    // {
-    //   name: "Name",
-    //   selector: "name",
-    // },
-    // {
-    //   name: "Address",
-    //   selector: "address",
-      
-    // },
     {
       name: "Email",
       selector: "email",
@@ -271,6 +264,20 @@ const UserAgreemen = () => {
         </NavLink>  
       ),
     },
+    {
+      name: "Action",
+      cell: (row) => (
+ 
+      <Wrap spacing={4}>
+         <WrapItem>
+            <Button  sm colorScheme="blackAlpha" backgroundColor="red" width="80%" onClick={() => handleDelete(row._id)}>
+              Delete User
+            </Button>
+          </WrapItem>
+      </Wrap>
+        
+      ),
+    },
   ];
 
   const paginationOptions = {
@@ -278,6 +285,27 @@ const UserAgreemen = () => {
     rangeSeparatorText: "of",
     selectAllRowsItem: true,
     selectAllRowsItemText: "All",
+  };
+
+  const handleDelete = async (id) => {
+    console.log(id, "delete")
+    try {
+      const response = await fetch(`${apiUrl}/user/deleteAgreement/${id}`, {
+        method: 'POST',
+      });
+
+      if (response.ok) {
+        console.log('Agreement deleted successfully!');
+        alert("Deleted successfully!");
+        fetchData();
+      } else {
+        console.error('Error deleting user:', await response.text());
+        // Handle API errors appropriately (e.g., display error message)
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle network errors appropriately (e.g., display error message)
+    }
   };
 
   return (

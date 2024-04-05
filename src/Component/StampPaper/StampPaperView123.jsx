@@ -712,6 +712,9 @@ const getTargetElement = () => document.getElementById('content-id');
           /> */}
               <Text fontSize="md"> Start-Date: {inputField.startdate}</Text>
             </FormControl>
+            <FormControl w="200px">
+              <Text fontSize="md"> End-Date: {inputField.enddate}</Text>
+            </FormControl>
 
             <Table w="400px" style={{ marginTop: "20px" }}>
               <Tr>
