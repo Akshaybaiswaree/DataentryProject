@@ -24,6 +24,7 @@ const Registration = () => {
   }, [currentPage]);
 
   const todaysRegistrations = async () => {
+    console.log("todaysRegistrations called")
     try {
       const start = new Date();
       start.setHours(0, 0, 0, 0);
