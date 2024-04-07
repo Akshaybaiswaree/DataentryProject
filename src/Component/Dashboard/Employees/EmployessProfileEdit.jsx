@@ -93,13 +93,13 @@ const EmployeeProfileEdit = () => {
     try {
       // const apiresponse
       //console.log(id)
-      const response = await axios.delete(
-        `http://localhost:5000/user/delete_employee/${id}`
+      const response = await axios.post(
+        `${apiUrl}/user/delete_employee/${id}`
       );
       console.log("res", response);
 
       navigate("/employees");
-      alert("User Deleted Succesfully.");
+      alert("Employee Deleted Succesfully.");
     } catch (err) {
       console.log("fetching error", err);
     }

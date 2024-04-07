@@ -1,4 +1,4 @@
-
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -8,24 +8,28 @@ import {
   Select,
   Stack,
 } from "@chakra-ui/react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useForm, Controller } from "react-hook-form"
-import { useToast } from '@chakra-ui/react';
+import { useForm, Controller } from "react-hook-form";
+import { useToast } from "@chakra-ui/react";
 
 const RegistrationForm = () => {
-
-
-  
   const apiUrl = import.meta.env.VITE_APP_API_URL;
-  const { handleSubmit, register, control, reset, formState: { errors } } = useForm();
+  const {
+    handleSubmit,
+    register,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const [employeeData, setEmployeeData] = useState([]);
   const toast = useToast();
 
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
-      const userDataPayload = {...data};
+      const userDataPayload = { ...data };
 
       const config = {
         method: "POST",
@@ -35,32 +39,53 @@ const RegistrationForm = () => {
 
       const AdduserApiResponse = await axios(config);
       console.log("add", AdduserApiResponse);
-      reset(); 
+      reset();
       toast({
-        title: 'Mail Sent Successfully',
-        description: 'Open Your Gmail',
-        status: 'success',
+        title: "Mail Sent Successfully",
+        description: "Open Your Gmail",
+        status: "success",
         duration: 3000, // Toast message will disappear after 3 seconds
         isClosable: true,
-        position:"top",
+        position: "top",
       });
-      navigate('/user/registration')
-      
+      navigate("/user/registration");
     } catch (err) {
       toast({
-        title: 'Email has Already been used',
-        //description: 'Open Your Gmail',
-        status: 'error',
+        title: "Email has Already been used",
+        status: "error",
         duration: 3000, // Toast message will disappear after 3 seconds
         isClosable: true,
-        position:"top",
+        position: "top",
       });
+    }
+  };
+
+  useEffect(() => {
+    fetchEmployeeData()
+  },[])
+
+  const fetchEmployeeData = async () => {
+    try {
+      const config = {
+        method: "GET",
+        url: `${apiUrl}/user/get_all_employee`,
+      };
+      const response = await axios(config);
+      setEmployeeData(response.data.allemployee);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error, "error");
     }
   };
 
   return (
     <Box mt="8" mx="auto" width={["90%", "50%"]}>
-      <Box color="#DD372D" mb="1rem" fontSize={["1.5rem", "2rem"]} fontWeight="700">
+      <Box
+        color="#DD372D"
+        mb="1rem"
+        fontSize={["1.5rem", "2rem"]}
+        fontWeight="700"
+      >
         Add User
       </Box>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -68,10 +93,13 @@ const RegistrationForm = () => {
           <FormControl>
             <FormLabel>Name</FormLabel>
             <Input
-            name="name"
-            id="name"
-            type="text"
-              {...register("name", { required: 'Name is Requird',message: "invalid input", })}
+              name="name"
+              id="name"
+              type="text"
+              {...register("name", {
+                required: "Name is Required",
+                message: "invalid input",
+              })}
               placeholder="Enter Name"
               _hover={{ borderColor: "teal.500" }}
             />
@@ -82,7 +110,7 @@ const RegistrationForm = () => {
             <Input
               id="email"
               type="email"
-              name='email'
+              name="email"
               {...register("email", { required: "Email is required" })}
               placeholder=".......@gmail.com"
               _hover={{ borderColor: "teal.500" }}
@@ -95,10 +123,16 @@ const RegistrationForm = () => {
               type="number"
               id="mobile"
               name="mobile"
-              {...register("mobile", { 
+              {...register("mobile", {
                 required: "Mobile number is required",
-                min: { value: 1000000000, message: "Mobile number should be at least 10 digits" },
-                max: { value: 9999999999, message: "Mobile number should not exceed 10 digits" },
+                min: {
+                  value: 1000000000,
+                  message: "Mobile number should be at least 10 digits",
+                },
+                max: {
+                  value: 9999999999,
+                  message: "Mobile number should not exceed 10 digits",
+                },
               })}
               placeholder="Enter Mobile No"
               _hover={{ borderColor: "teal.500" }}
@@ -122,7 +156,7 @@ const RegistrationForm = () => {
             <Controller
               control={control}
               name="plan"
-              rules={{ required: 'Plan is required' }}
+              rules={{ required: "Plan is required" }}
               render={({ field }) => (
                 <Select
                   {...field}
@@ -130,7 +164,6 @@ const RegistrationForm = () => {
                   _hover={{ borderColor: "teal.500" }}
                 >
                   <option value="option1">520</option>
-                 
                 </Select>
               )}
             />
@@ -140,45 +173,43 @@ const RegistrationForm = () => {
             <Controller
               control={control}
               name="caller"
-              rules={{ required: 'Caller is required' }}
+              rules={{ required: "Caller is required" }}
               render={({ field }) => (
                 <Select
                   {...field}
                   placeholder="Select option"
                   _hover={{ borderColor: "teal.500" }}
                 >
-                  <option value="option1">Caller 1</option>
-                  <option value="option2">Caller 2</option>
-                  <option value="option3">Caller 3</option>
-                  <option value="option4">Caller 4</option>
+                  {employeeData.map((employee, index) => (
+                    <option key={index} value={employee._id}>
+                      {employee.name}
+                    </option>
+                  ))}
                 </Select>
               )}
             />
           </FormControl>
         </Stack>
 
-        
-          <Button
-            type="submit"
-            colorScheme="teal"
-            mt="4"
-            mx="auto"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            _hover={{ bgColor: "teal.600" }}
-            fontSize="lg"
-            fontWeight="bold"
-            p={4}
-            width="100%" // Set the width to 100% for mobile view
-          >
-            Save
-          </Button>
-        
+        <Button
+          type="submit"
+          colorScheme="teal"
+          mt="4"
+          mx="auto"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          _hover={{ bgColor: "teal.600" }}
+          fontSize="lg"
+          fontWeight="bold"
+          p={4}
+          width="100%" // Set the width to 100% for mobile view
+        >
+          Save
+        </Button>
       </form>
     </Box>
   );
 };
 
 export default RegistrationForm;
-
