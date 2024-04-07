@@ -51,7 +51,7 @@ const SetPassword = () => {
 
       if (response.status === 200) {
         alert('Password saved successfully.');
-        navigate("/userlogin");
+        navigate("/admin");
       } else {
         alert("Failed to save password. Please try again.");
       }
