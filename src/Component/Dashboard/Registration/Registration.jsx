@@ -105,6 +105,51 @@ const Registration = () => {
     setFilter(result);
   }, [search, userData,]);
 
+  //export Button
+  const Export = ({ onExport }) => <Button onClick={e => onExport(e.target.value)}>Export</Button>;
+
+  function convertArrayOfObjectsToCSV(array) {
+    let result;
+  
+    const columnDelimiter = ',';
+    const lineDelimiter = '\n';
+    const keys = Object.keys(userData[0]);
+  
+    result = '';
+    result += keys.join(columnDelimiter);
+    result += lineDelimiter;
+  
+    array.forEach(item => {
+      let ctr = 0;
+      keys.forEach(key => {
+        if (ctr > 0) result += columnDelimiter;
+  
+        result += item[key];
+        
+        ctr++;
+      });
+      result += lineDelimiter;
+    });
+  
+    return result;
+  }
+
+  function downloadCSV(array) {
+    const link = document.createElement('a');
+    let csv = convertArrayOfObjectsToCSV(array);
+    if (csv == null) return;
+  
+    const filename = 'export.csv';
+  
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = `data:text/csv;charset=utf-8,${csv}`;
+    }
+  
+    link.setAttribute('href', encodeURI(csv));
+    link.setAttribute('download', filename);
+    link.click();
+  }
+
   const columns = [
     {
       name: "Name",
@@ -147,6 +192,8 @@ const Registration = () => {
     selectAllRowsItemText: "All",
   };
 
+  const actionsMemo = React.useMemo(() => <Export onExport={() => downloadCSV(userData)} />, []);
+
   return (
     <>
       <Flex direction="column" align="center">
@@ -179,7 +226,10 @@ const Registration = () => {
           >
             Add User
           </Button>
+
+         
         </NavLink>
+        
       </Flex>
       <InputGroup mt="1rem" ml={["1rem", "1.5rem"]} width={["90%", "400px"]}>
         <InputLeftElement pointerEvents="none">
@@ -205,12 +255,13 @@ const Registration = () => {
           {/* Search
         </Button> */}
       </InputGroup>
-
+     
       <Box width={{ base: "81vw", md: "80vw" }} overflowX="auto" p={4}>
         <DataTable
           title=""
           columns={columns}
           data={filter}
+          actions={actionsMemo}
           pagination
           paginationServer
           paginationTotalRows={totalPages * 10} // Assuming 10 items per page
