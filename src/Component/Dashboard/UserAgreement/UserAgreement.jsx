@@ -192,6 +192,10 @@ const UserAgreemen = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [userData, setUserData] = useState([]);
+  const [filter, setFilter] = useState([]);
+  const [search, SetSearch] = useState("");
+
+
   useEffect(() => {
     fetchData();
   }, [currentPage]);
@@ -205,6 +209,7 @@ const UserAgreemen = () => {
       const response = await axios(config);
       setTotalPages(response.data?.totalPages);
       setUserData(response?.data?.allAgreements);
+      setFilter(response?.data?.allAgreements);
        console.log(response);
     } catch (error) {
       console.log(error, "error");
@@ -248,6 +253,15 @@ const UserAgreemen = () => {
     setCurrentPage(page);
   };
 
+  useEffect(() => {
+    const result = userData?.filter(
+      (item) =>
+        item?.email.toLowerCase().includes(search.toLowerCase()) 
+    );
+    console.log(result);
+    setFilter(result);
+  }, [search, userData,]);
+
   const columns = [
     {
       name: "Email",
@@ -280,12 +294,7 @@ const UserAgreemen = () => {
     },
   ];
 
-  const paginationOptions = {
-    rowsPerPageText: "Rows per page:",
-    rangeSeparatorText: "of",
-    selectAllRowsItem: true,
-    selectAllRowsItemText: "All",
-  };
+
 
   const handleDelete = async (id) => {
     console.log(id, "delete")
@@ -316,24 +325,7 @@ const UserAgreemen = () => {
           pointerEvents="none"
           children={<SearchIcon color="gray.300" />}
         />
-        <Input
-          border="1px solid green"
-          width="100%"
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={(e) => {
-            setSearchQuery(e.target.value);
-          }}
-        />
-        <Button
-          marginLeft={"1rem"}
-          className="employee-btn"
-          colorScheme="teal"
-          onClick={handleSearch}
-        >
-          Search
-        </Button>
+       
       </InputGroup>
       
       <Box width={{ base: "81vw", md: "80vw" }} overflowX="auto" p={4}>
@@ -341,14 +333,24 @@ const UserAgreemen = () => {
       <DataTable
         title=""
         columns={columns}
-        data={userData}
+        data={filter}
         pagination
-        paginationServer
-        paginationTotalRows={totalPages * 10} // Assuming 10 items per page
-        onChangePage={(page) => handlePagination(page)}
-        paginationPerPage={10}
-        paginationRowsPerPageOptions={[10, 20, 30]}
-        paginationComponentOptions={paginationOptions}
+        subHeader
+        subHeaderComponent={
+          <input
+            type="text"
+            placeholder="Search..."
+            value={search}
+            onChange={(e) => SetSearch(e.target.value)}
+            style={{
+              border: "1px solid gray",
+              borderRadius: "15px",
+              padding: "10px",
+              paddingLeft: "15px",
+              width: "100%",
+            }}
+            />
+          }
       />
        </Box>
       
