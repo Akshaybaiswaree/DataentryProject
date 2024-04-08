@@ -44,6 +44,8 @@ const RegisterUserDetail = () => {
     status: "",
     loginStatus: "",
     password:"",
+    startDate:"",
+    endDate:"",
   });
 
   // modal button
@@ -70,6 +72,8 @@ const RegisterUserDetail = () => {
           caller: data?.User?.caller,
           status: data?.User?.status,
           password:data?.User?.password,
+          startDate:data?.User?.startDate,
+          endDate:data?.User?.endDate,
         });
       } catch (error) {
         console.error("Error fetching user details:", error);
@@ -276,6 +280,33 @@ const RegisterUserDetail = () => {
                 type="text"
                 name="status"
                 value={inputField.password}
+                onChange={onChangeHandler}
+              />
+            </FormControl>
+          </Box>
+        </Stack>
+
+        <Stack direction={["column", "row"]}>
+          <Box>
+            <FormControl className="employee-form-group">
+              <FormLabel>Start Date</FormLabel>
+              <Input
+                   width={{base:"300px",md:"400px"}}
+                type="text"
+                name="status"
+                onChange={onChangeHandler}
+                value={inputField.startDate.split("T")[0]}
+              />
+            </FormControl>
+          </Box>
+          <Box>
+            <FormControl className="employee-form-group">
+              <FormLabel>End Date</FormLabel>
+              <Input
+                   width={{base:"300px",md:"400px"}}
+                type="text"
+                name="status"
+                value={inputField.endDate.split("T")[0]}
                 onChange={onChangeHandler}
               />
             </FormControl>
