@@ -243,7 +243,7 @@ const NewAssignment = () => {
                 placeholder="Enter Name"
                 name="name"
                 onChange={onChangehandler}
-                required
+              
               />
             </FormControl>
           </Box>
@@ -262,7 +262,7 @@ const NewAssignment = () => {
         </Stack>
         <Stack direction={{ md: "row", base: "column" }}>
           <Box>
-            <FormControl isRequired className="employee-form-group">
+            <FormControl  className="employee-form-group">
               <FormLabel>PinCode</FormLabel>
               <Input
                 width={{ base: "300px", md: "400px" }}
@@ -274,7 +274,7 @@ const NewAssignment = () => {
             </FormControl>
           </Box>
           <Box>
-            <FormControl isRequired className="employee-form-group">
+            <FormControl  className="employee-form-group">
               <FormLabel>Job Function</FormLabel>
               <Input
                width={{ base: "300px", md: "400px" }}
@@ -288,7 +288,7 @@ const NewAssignment = () => {
         </Stack>
         <Stack direction={{ md: "row", base: "column" }}>
           <Box>
-            <FormControl isRequired className="employee-form-group">
+            <FormControl  className="employee-form-group">
               <FormLabel>Mobile</FormLabel>
               <Input
                 width={{ base: "300px", md: "400px" }}
@@ -300,7 +300,7 @@ const NewAssignment = () => {
            
           </Box>
           <Box>
-            <FormControl isRequired className="employee-form-group">
+            <FormControl  className="employee-form-group">
               <FormLabel>Annual Revenue</FormLabel>
               <Input
                 width={{ base: "300px", md: "400px" }}
@@ -313,7 +313,7 @@ const NewAssignment = () => {
           </Box>
         </Stack>
         <Box>
-          <FormControl isRequired className="employee-form-group">
+          <FormControl  className="employee-form-group">
             <FormLabel>Client Code</FormLabel>
             <Input
               width={{ base: "300px", md: "400px" }}

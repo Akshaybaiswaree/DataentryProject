@@ -31,29 +31,35 @@ export default function Navbar() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  const userRole = sessionStorage.getItem("userrole")
+  console.log(userRole);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(userRole,"called");
+  
     if (newPassword !== confirmPassword) {
       setErrorMessage("Passwords do not match");
       return;
     }
-
+  
     try {
-      const response = await axios    .post(`${apiUrl}/user/changePassword`, {
+      const response = await axios.post(`${apiUrl}/user/changePassword`, {
         newPassword,
+        userRole
       });
-
+  
       setSuccessMessage(response.data.message);
       setNewPassword("");
       setConfirmPassword("");
       setErrorMessage("");
-      console.log(response , "response")
+      console.log(response, "response");
     } catch (error) {
       console.error(error);
       setErrorMessage("Error changing password");
     }
   };
+  
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -112,18 +118,20 @@ export default function Navbar() {
           marginRight="1.5"
         />
       </Box> */}
-      <Box onClick={handleOpenModal} cursor="pointer">
-        <Avatar
-          marginTop={"1rem"}
-          borderRadius="50%"
-          width={{ base: "2.5rem", md: "3.5rem" }}
-          height={{ base: "2.4rem", md: "3rem" }}
-          bg={"gray"}
-          border={"6px solid lightgray"}
-          // src="Avatarimage.jpg"
-          marginRight="1.5"
-        />
-      </Box>
+      { userRole === "Admin" &&
+        <Box onClick={handleOpenModal} cursor="pointer">
+          <Avatar
+            marginTop={"1rem"}
+            borderRadius="50%"
+            width={{ base: "2.5rem", md: "3.5rem" }}
+            height={{ base: "2.4rem", md: "3rem" }}
+            bg={"gray"}
+            border={"6px solid lightgray"}
+            // src="Avatarimage.jpg"
+            marginRight="1.5"
+          />
+        </Box>
+      }
 
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
         <ModalOverlay />
