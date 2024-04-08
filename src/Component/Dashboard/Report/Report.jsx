@@ -25,6 +25,8 @@ const Report = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [userData, setUserData] = useState([]);
+  const [filter, setFilter] = useState([]);
+  const [search, SetSearch] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -38,11 +40,21 @@ const Report = () => {
 
       setTotalPages(response.data?.totalPages);
       setUserData(response?.data?.users);
+      setFilter(response?.data?.users);
       console.log("response", response);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+
+  useEffect(() => {
+    const result = userData?.filter(
+      (item) =>
+        item?.email.toLowerCase().includes(search.toLowerCase()) || item?.mobile.toLowerCase().includes(search.toLowerCase()) 
+    );
+    console.log(result);
+    setFilter(result);
+  }, [search, userData,]);
 
   const handleSearch = () => {
     if (searchQuery) {
@@ -139,7 +151,7 @@ const Report = () => {
       </Center>
       <InputGroup mt="1rem" ml={["1rem", "12rem"]} width={["90%", "500px"]}>
         <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" />} />
-        <Input
+        {/* <Input
           border="1px solid green"
           width="100%"
           type="text"
@@ -155,14 +167,14 @@ const Report = () => {
           onClick={handleSearch}
         >
           Search
-        </Button>
+        </Button> */}
       </InputGroup>
 
       <Box width={{ base: "81vw", md: "80vw" }} overflowX="auto" p={4}>
         <DataTable
           title=""
           columns={columns}
-          data={userData}
+          data={filter}
           pagination
           paginationServer
           paginationTotalRows={totalPages * 10} // Assuming 10 items per page
@@ -170,6 +182,22 @@ const Report = () => {
           paginationPerPage={10}
           paginationRowsPerPageOptions={[10, 20, 30]}
           paginationComponentOptions={paginationOptions}
+          subHeader
+        subHeaderComponent={
+          <input
+            type="text"
+            placeholder="Search..."
+            value={search}
+            onChange={(e) => SetSearch(e.target.value)}
+            style={{
+              border: "1px solid gray",
+              borderRadius: "15px",
+              padding: "10px",
+              paddingLeft: "15px",
+              width: "100%",
+            }}
+            />
+          }
         />
       </Box>
     </>

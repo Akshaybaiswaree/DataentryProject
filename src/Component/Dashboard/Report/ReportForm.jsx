@@ -180,7 +180,7 @@ const ReportForm = () => {
       pdf.save(`Zemix Services: ${inputField.name} `);
     } catch (error) {
       toast({
-        title: 'User has not filled all the forms',
+        title: 'Data not available',
         // description: 'Provide Correct UserId and Password',
         status: 'error',
         duration: 3000, // Toast message will disappear after 3 seconds
@@ -256,7 +256,7 @@ const ReportForm = () => {
                 type="text"
                 placeholder="start date"
                 onChange={onChangeHandler}
-                value={inputField.startdate}
+                value={inputField.startdate.split("T")[0]}
               />
             </FormControl>
           </Box>
@@ -268,7 +268,7 @@ const ReportForm = () => {
                 type="text"
                 placeholder="End Date"
                 onChange={onChangeHandler}
-                value={inputField.enddate}
+                value={inputField.enddate.split("T")[0]}
               />
             </FormControl>
           </Box>
