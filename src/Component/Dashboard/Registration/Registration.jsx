@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { Box, Button, Flex, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import $ from "jquery";
 
 const Registration = () => {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
@@ -17,6 +18,7 @@ const Registration = () => {
   const [registrationsCount, setRegistrationsCount] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -24,7 +26,7 @@ const Registration = () => {
   }, [currentPage]);
 
   const todaysRegistrations = async () => {
-    console.log("todaysRegistrations called")
+   
     try {
       const start = new Date();
       start.setHours(0, 0, 0, 0);
@@ -38,7 +40,7 @@ const Registration = () => {
       };
       const registrationsResponse = await axios(registrationsConfig);
       setRegistrationsCount(registrationsResponse.data);
-    console.log(registrationsResponse ,"registrationsResponse")
+   
     } catch (error) {
       console.error("Error fetching today's registrations:", error);
     }
@@ -48,60 +50,28 @@ const Registration = () => {
     try {
       const config = {
         method: "GET",
-        url: `${apiUrl}/user/user_pagination?page=${currentPage}`,
+        url: `${apiUrl}/user/get_all_user`,
       };
       const response = await axios(config);
       setTotalPages(response.data?.totalPages);
-      setUserData(response?.data?.users);
-      setFilter(response?.data?.users);
-      console.log(response?.data?.users)
+      setUserData(response?.data?.allUsers);
+      setFilter(response?.data?.allUsers);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  const handleSearch = () => {
-    if (searchQuery) {
-      searchResponse();
-      setCurrentPage(1);
-      setSearchQuery("");
-    } else {
-      fetchData();
-    }
-  };
 
-  const searchResponse = async () => {userData
-    try {
-      const payload = {
-        name: searchQuery,
-        data: {
-          status: "Pending",
-        },
-      };
+  
 
-      const config = {
-        method: "POST",
-        url: `${apiUrl}/user/search_user_by_name`,
-        data: payload,
-      };
-
-      const response = await axios(config);
-      setUserData(response.data.users);
-    } catch (error) {
-      alert("Error searching users or user already registered.");
-    }
-  };
-
-  const handlePagination = (page) => {
-    setCurrentPage(page);
-  };
+ 
 
   useEffect(() => {
     const result = userData?.filter(
       (item) =>
-        item?.name.toLowerCase().includes(search.toLowerCase()) 
+        item?.name.toLowerCase().includes(search.toLowerCase()) ||  item?.mobile.toLowerCase().includes(search.toLowerCase())
     );
-    console.log(result);
+   
     setFilter(result);
   }, [search, userData,]);
 
@@ -177,7 +147,7 @@ const Registration = () => {
       name: "Agreement",
       cell: () => (
         <NavLink to="https://stamppaper-zemix.netlify.app/">
-          <Button colorScheme="blackAlpha" backgroundColor="black" width="80%">
+          <Button colorScheme="Red" backgroundColor="black" width="80%">
             Fill Agreement
           </Button>
         </NavLink>
@@ -185,14 +155,11 @@ const Registration = () => {
     },
   ];
 
-  const paginationOptions = {
-    rowsPerPageText: "Rows per page:",
-    rangeSeparatorText: "of",
-    selectAllRowsItem: true,
-    selectAllRowsItemText: "All",
-  };
+
 
   const actionsMemo = React.useMemo(() => <Export onExport={() => downloadCSV(userData)} />, []);
+
+
 
   return (
     <>
@@ -235,43 +202,21 @@ const Registration = () => {
         <InputLeftElement pointerEvents="none">
           <SearchIcon color="gray.300" />
         </InputLeftElement>
-        {/* <Input
-          border="1px solid green"
-          width="100%"
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          required
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <Button
-          marginLeft={"1rem"}
-          className="employee-btn"
-          colorScheme="teal"
-          style={{ marginLeft: "20px" }}
-          mt="0"
-          onClick={handleSearch}
-        > */}
-          {/* Search
-        </Button> */}
       </InputGroup>
      
       <Box width={{ base: "81vw", md: "80vw" }} overflowX="auto" p={4}>
         <DataTable
+        id="myTable"
           title=""
           columns={columns}
           data={filter}
           actions={actionsMemo}
           pagination
-          paginationServer
-          paginationTotalRows={totalPages * 10} // Assuming 10 items per page
-          onChangePage={(page) => handlePagination(page)}
-          paginationPerPage={10}
-          paginationRowsPerPageOptions={[10, 20, 30]}
-          paginationComponentOptions={paginationOptions}
+         
           subHeader
           subHeaderComponent={
             <input
+            id="myInpuTextField"
               type="text"
               placeholder="Search..."
               value={search}
