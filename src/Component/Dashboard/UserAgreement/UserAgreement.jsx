@@ -204,7 +204,7 @@ const UserAgreemen = () => {
     try {
       const config = {
         method: "GET",
-        url: `${apiUrl}/user/get_terms?page=${currentPage}`,
+        url: `${apiUrl}/user/get_terms`,
       };
       const response = await axios(config);
       setTotalPages(response.data?.totalPages);
