@@ -20,6 +20,14 @@ const Registration = () => {
   const [error, setError] = useState(null);
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 
+  const callers = {'66124f906eb6102e7e68e772':"caller 1",
+'66124f986eb6102e7e68e775':"caller 2",
+'66124fa06eb6102e7e68e778':"caller 3",
+'66125cb1076a6663d19e3c07':"caller 4",
+'66125cfc076a6663d19e3c16':"caller 5",
+'66125d26076a6663d19e3c21':"caller 6",
+'66125d4f076a6663d19e3c2d':"caller 7"}
+
   useEffect(() => {
     fetchData();
     todaysRegistrations();
@@ -147,10 +155,10 @@ const Registration = () => {
         return endDate;
       },
     },
-    // {
-    //   name: "Caller",
-    //   selector: "caller",
-    // },
+    {
+      name: "Caller",
+      selector:"caller"
+    },
     {
       name: "Action",
       cell: (row) => (
