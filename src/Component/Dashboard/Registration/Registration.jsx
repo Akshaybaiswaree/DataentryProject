@@ -136,17 +136,21 @@ const Registration = () => {
     {
       name: "Start Date",
       cell: (row) => {
-        const startDate = row.startDate.split('T')[0]; // Extract date part only
+        const startDate = row?.startDate?.split('T')[0]; // Extract date part only
         return startDate;
       },
     },
     {
       name: "End Date",
       cell: (row) => {
-        const endDate = row.endDate.split('T')[0]; // Extract date part only
+        const endDate = row?.endDate?.split('T')[0]; // Extract date part only
         return endDate;
       },
     },
+    // {
+    //   name: "Caller",
+    //   selector: "caller",
+    // },
     {
       name: "Action",
       cell: (row) => (

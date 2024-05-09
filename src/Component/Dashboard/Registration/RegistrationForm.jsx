@@ -181,7 +181,7 @@ const RegistrationForm = () => {
                   _hover={{ borderColor: "teal.500" }}
                 >
                   {employeeData.map((employee, index) => (
-                    <option key={index} value={employee._id}>
+                    <option key={index} value={employee.name}>
                       {employee.name}
                     </option>
                   ))}
