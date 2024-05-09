@@ -134,6 +134,20 @@ const Registration = () => {
       selector: "email",
     },
     {
+      name: "Start Date",
+      cell: (row) => {
+        const startDate = row.startDate.split('T')[0]; // Extract date part only
+        return startDate;
+      },
+    },
+    {
+      name: "End Date",
+      cell: (row) => {
+        const endDate = row.endDate.split('T')[0]; // Extract date part only
+        return endDate;
+      },
+    },
+    {
       name: "Action",
       cell: (row) => (
         <NavLink to={`/user/registeruserdetail/${row._id}`}>
