@@ -61,8 +61,8 @@ const RegisterUserDetail = () => {
           `${apiUrl}/user/getuser_by_id/${userId}`
         );
         const data = response.data;
-        console.log(data?.User.name);
-        console.log(data?.User);
+        // console.log(data?.User.name);
+        // console.log(data?.User);
         setInputField({
           name: data?.User?.name,
           email: data?.User?.email,
@@ -95,7 +95,7 @@ const RegisterUserDetail = () => {
   // delete function call
   const deleteUser = async (id) => {
     try {
-      console.log(id);
+      // console.log(id);
       const response = await axios.delete(
         `${apiUrl}/user/delete_user/${id}`
       );
@@ -113,16 +113,16 @@ const RegisterUserDetail = () => {
 
   //send mail again
   const SendEmail = async (userId) => {
-    console.log(userId, "id");
+    // console.log(userId, "id");
     const hostName = window.location.hostname;
     const port = 5173;
     const url = {url: `http://${hostName}:${port}/`};
-    console.log(url, "Responce URl");
+    // console.log(url, "Responce URl");
     try {
       const response = await axios.post(
         `${apiUrl}/user/sendUserInfo/${userId}`
       );
-      console.log(response, "url mil jayega");
+      // console.log(response, "url mil jayega");
 
       if (response.status === 200) {
         alert("Mail Send Successfully.");

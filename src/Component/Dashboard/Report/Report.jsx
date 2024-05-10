@@ -41,7 +41,7 @@ const Report = () => {
       setTotalPages(response.data?.totalPages);
       setUserData(response?.data?.users);
       setFilter(response?.data?.users);
-      console.log("response", response);
+      // console.log("response", response);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -52,7 +52,7 @@ const Report = () => {
       (item) =>
         item?.email.toLowerCase().includes(search.toLowerCase()) || item?.mobile.toLowerCase().includes(search.toLowerCase()) 
     );
-    console.log(result);
+    // console.log(result);
     setFilter(result);
   }, [search, userData,]);
 

@@ -25,7 +25,7 @@ const DashboardOverview = () => {
     const apiUrl = import.meta.env.VITE_APP_API_URL;
     const response = await axios.get(`${apiUrl}/user/get_all_user`);
     const totalData = response?.data?.allUsers;
-    console.log(totalData);
+    // console.log(totalData);
     setData(totalData);
   };
 
@@ -34,7 +34,7 @@ const DashboardOverview = () => {
         const response = await axios.get(`${apiUrl}/user/user_pagination?status=Active`);
         const totalActiveUserData =  response?.data?.users.length;
         setActive(totalActiveUserData)
-        console.log(totalActiveUserData,"totalActive");
+        // console.log(totalActiveUserData,"totalActive");
         
       };
     
@@ -42,7 +42,7 @@ const DashboardOverview = () => {
         const response = await axios.get(`${apiUrl}/user/user_pagination?status=Registered`);
         const totalRigistraUserData = response?.data?.users.length;
         setRegisterUsers(totalRigistraUserData)
-        console.log(response?.data?.users.length,"totalRegistration");
+        // console.log(response?.data?.users.length,"totalRegistration");
         
       }
     
@@ -50,14 +50,14 @@ const DashboardOverview = () => {
         const response = await axios.get(`${apiUrl}/user/user_pagination?status=Pending`);
         const totalPendingUser =  response?.data?.users.length;
         setPendingUsers(totalPendingUser)
-        console.log(totalPendingUser,"totalPending");
+        // console.log(totalPendingUser,"totalPending");
       };
     
       const totlalFrezzUser = async () => {
         const response = await axios.get(`${apiUrl}/user/user_pagination?status=Freeze`);
         const totalFrezzUser = response.data.totalUsers;
         setFrezzUsers(totalFrezzUser)
-        console.log(totalFrezzUser,"totalFrezz");
+        // console.log(totalFrezzUser,"totalFrezz");
       };
 
   return (
