@@ -64,6 +64,7 @@ const Registration = () => {
       setTotalPages(response.data?.totalPages);
       setUserData(response?.data?.allUsers);
       setFilter(response?.data?.allUsers);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -191,8 +192,8 @@ const Registration = () => {
     <>
       <Flex direction="column" align="center">
         <div>
-          {/* {loading && <p>Loading...</p>}
-          {error && <p>{error}</p>} */}
+          {loading && <p>Loading...</p>}
+          {/* {error && <p>{error}</p>} */}
           {registrationsCount !== null && (
             <Box    fontSize={["1.3rem", "1.5rem"]}  mt ={"1rem"} fontWeight={"700"} color={'green'}>Today's Registrations: {registrationsCount}</Box>
           )}
