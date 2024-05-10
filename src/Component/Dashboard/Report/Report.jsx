@@ -75,7 +75,7 @@ const Report = () => {
         },
       };
 
-      const response = await axios.post(`${apiUrl}/user/search_employee`, payload);
+      const response = await axios.post(`${apiUrl}/user/search_user_by_name`, payload);
 
       setUserData(response.data.users);
     } catch (error) {
@@ -149,9 +149,9 @@ const Report = () => {
           </Box>
         </Stack>
       </Center>
-      <InputGroup mt="1rem" ml={["1rem", "12rem"]} width={["90%", "500px"]}>
+      {/* <InputGroup mt="1rem" ml={["1rem", "12rem"]} width={["90%", "500px"]}>
         <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" />} />
-        {/* <Input
+        <Input
           border="1px solid green"
           width="100%"
           type="text"
@@ -167,8 +167,8 @@ const Report = () => {
           onClick={handleSearch}
         >
           Search
-        </Button> */}
-      </InputGroup>
+        </Button>
+      </InputGroup> */}
 
       <Box width={{ base: "81vw", md: "80vw" }} overflowX="auto" p={4}>
         <DataTable
@@ -176,12 +176,12 @@ const Report = () => {
           columns={columns}
           data={filter}
           pagination
-          paginationServer
-          paginationTotalRows={totalPages * 10} // Assuming 10 items per page
-          onChangePage={(page) => handlePagination(page)}
-          paginationPerPage={10}
-          paginationRowsPerPageOptions={[10, 20, 30]}
-          paginationComponentOptions={paginationOptions}
+          // paginationServer
+          // paginationTotalRows={totalPages * 10} // Assuming 10 items per page
+          // onChangePage={(page) => handlePagination(page)}
+          // paginationPerPage={10}
+          // paginationRowsPerPageOptions={[10, 20, 30]}
+          // paginationComponentOptions={paginationOptions}
           subHeader
         subHeaderComponent={
           <input
